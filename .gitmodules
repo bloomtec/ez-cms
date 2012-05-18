@@ -1,0 +1,9 @@
+[submodule "app/Console/Templates/bloom"]
+	path = app/Console/Templates/bloom
+	url = git@github.com:/bloomtec/template-bloom
+[submodule "app/Console/Templates/users"]
+	path = app/Console/Templates/users
+	url = git@github.com:/bloomtec/template-users
+[submodule "app/webroot/js/bjs"]
+	path = app/webroot/js/bjs
+	url = git@github.com:/bloomtec/js-bjs
