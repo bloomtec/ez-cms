@@ -7,3 +7,6 @@
 [submodule "app/webroot/js/bjs"]
 	path = app/webroot/js/bjs
 	url = git@github.com:/bloomtec/js-bjs
+[submodule "app/Plugin/Ez"]
+	path = app/Plugin/Ez
+	url = git@github.com:/bloomtec/plugin-ez.git
