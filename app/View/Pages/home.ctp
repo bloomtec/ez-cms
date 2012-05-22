@@ -32,7 +32,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		?>
 		<style type="text/css">
 			h1 {
-				background-image: url(/img/ez/bloom_en_construccion.png);
+				background-image: url(/Ez/img/bloom_en_construccion.png);
 				background-repeat: no-repeat;
 				width: 495px;
 				height: 46px;
@@ -50,6 +50,6 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	</head>
 	<body>
 		<h1></h1>
-		<a href="http://www.bloomweb.co"  target="_blank"><img width="216px" src="../img/ez/logo-bloom.jpg"></a>
+		<a href="http://www.bloomweb.co"  target="_blank"><img width="216px" src="/Ez/img/bloom/logo1.jpg"></a>
 	</body>
 </html>
