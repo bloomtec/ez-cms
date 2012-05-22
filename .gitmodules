@@ -4,3 +4,6 @@
 [submodule "app/Plugin/Ez"]
 	path = app/Plugin/Ez
 	url = git@github.com:/bloomtec/plugin-ez.git
+[submodule "app/Plugin/UserControl"]
+	path = app/Plugin/UserControl
+	url = git@github.com:/bloomtec/plugin-users
