@@ -32,4 +32,23 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	public $cacheAction = true;
+
+	public $components = array(
+		'Auth',
+		'Acl',
+		'Session'
+	);
+	
+	public function beforeFilter() {
+		$this -> Auth -> loginAction = array(
+			'controller' => 'Users',
+			'action' => 'login',
+			'plugin' => 'UserControl',
+			'admin' => false
+		);
+		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
+	}
+	
 }
