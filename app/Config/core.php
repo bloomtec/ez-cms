@@ -20,7 +20,7 @@
  */
  
 /**
- * MailCHimp API Key
+ * MailChimp API Key
  */
  	Configure::write('MailchimpAPIKey', '10ff84b8d0d8994d53ea12f9a3ececb4-us5');
 
