@@ -18,6 +18,11 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+ 
+/**
+ * MailCHimp API Key
+ */
+ 	Configure::write('MailchimpAPIKey', '10ff84b8d0d8994d53ea12f9a3ececb4-us5');
 
 /**
  * CakePHP Debug Level:
