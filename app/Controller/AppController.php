@@ -42,13 +42,20 @@ class AppController extends Controller {
 	);
 	
 	public function beforeFilter() {
+		$this -> Auth -> authorize = array(
+			'Actions' => array(
+				'actionPath' => 'controllers'
+			)
+		);
 		$this -> Auth -> loginAction = array(
-			'controller' => 'Users',
+			'controller' => 'users',
 			'action' => 'login',
-			'plugin' => 'UserControl',
+			'plugin' => 'user_control',
 			'admin' => false
 		);
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
+		$this -> Auth -> loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home');
+		$this -> Auth -> logoutRedirect = array('controller' => 'users', 'action' => 'login');
 	}
 	
 }
