@@ -63,9 +63,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'ez_priceshoes',
+		'login' => 'bloomweb',
+		'password' => 'rr40r900343',
+		'database' => 'ez-cms',
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
