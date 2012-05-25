@@ -4,8 +4,7 @@ $(function() {
 		en : 'Value mismatch with corresponding field',
 		es : 'El valor difiere al del campo correspondiente'
 	}, function(el, value) {
-		var compare = $('[name="' + el.attr('data-equals') + '"]').val();
-		return compare == value ? true : false;
+		return $('[name="' + el.attr('data-equals') + '"]').val() == value ? true : false;
 	});
 
 	$.tools.validator.localize("es", {
