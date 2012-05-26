@@ -56,6 +56,22 @@ class AppController extends Controller {
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
 		$this -> Auth -> loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home', 'plugin' => null);
 		$this -> Auth -> logoutRedirect = array('controller' => 'users', 'action' => 'login');
+		$this -> Auth -> allow('verifyUserAccess');
+	}
+	
+	/**
+	 * Vericar el acceso de un usuario a una función mediante ACL
+	 */
+	public function verifyUserAccess() {
+		// Armar la ruta
+		$ruta = '';
+		for ($i = 0; $i < count($this -> params['ruta']); $i++) {
+			$ruta .= $this -> params['ruta'][$i];
+			if ($i != count($this -> params['ruta']) - 1) {
+				$ruta .= '/';
+			}
+		}
+		return $this -> Acl -> check($this -> Auth -> user('username'), $ruta);
 	}
 	
 }
