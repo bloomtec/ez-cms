@@ -38,10 +38,16 @@ class AppController extends Controller {
 	public $components = array(
 		'Auth',
 		'Acl',
-		'Session'
+		'Session',
+		'Cookie'
 	);
 	
 	public function beforeFilter() {
+		$this -> beforeFilterAuthConfig();
+		$this -> beforeFilterCookieConfig();
+	}
+	
+	private function beforeFilterAuthConfig() {
 		$this -> Auth -> authorize = array(
 			'Actions' => array(
 				'actionPath' => 'controllers'
@@ -57,6 +63,30 @@ class AppController extends Controller {
 		$this -> Auth -> loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home', 'plugin' => null);
 		$this -> Auth -> logoutRedirect = array('controller' => 'users', 'action' => 'login');
 		$this -> Auth -> allow('verifyUserAccess');
+	}
+	
+	private function beforeFilterCookieConfig() {
+		if(isset($this -> Cookie -> name) && !empty($this -> Cookie -> name)) {
+			$this -> Cookie -> name = 'PriceShoes';
+		}
+		if(isset($this -> Cookie -> time) && !empty($this -> Cookie -> time)) {
+			$this -> Cookie -> time = 1800;  // 3600 = '1 hour'
+		}
+		if(isset($this -> Cookie -> path) && !empty($this -> Cookie -> path)) {
+			$this -> Cookie -> path = '/';
+		}
+		if(isset($this -> Cookie -> domain) && !empty($this -> Cookie -> domain)) {
+			$this -> Cookie -> domain = 'priceshoes.com.co';
+		}
+		if(isset($this -> Cookie -> secure) && !empty($this -> Cookie -> secure)) {
+			$this -> Cookie -> secure = true;  // i.e. only sent if using secure HTTPS
+		}
+		if(isset($this -> Cookie -> key) && !empty($this -> Cookie -> key)) {
+			$this -> Cookie -> key = 'qSI2Web32qs*&BlsXOoomw!';
+		}
+		if(isset($this -> Cookie -> httpOnly) && !empty($this -> Cookie -> httpOnly)) {
+			$this -> Cookie -> httpOnly = true;
+		}
 	}
 	
 	/**
