@@ -30,16 +30,17 @@
 	
 			echo $this->Html->css('front');
 			echo $this->Html->script("http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js");
-			echo $this->Html->script("jquery-ui.js");
+			
 			echo $this->Html->script("front.js");
 			echo $this->Html->script("http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js");
+			echo $this->Html->script("jquery-ui.js");
 			//echo $this->Html->script("https://getfirebug.com/firebug-lite.js");
 			echo $scripts_for_layout;
 		?>
 	</head>
 	<body>
 		<div id="container">	
-			  <?php echo $this->element("header");?>			
+			  <?php echo $this->element("header_virtual");?>			
 			<div id="content">
 				<?php echo $this->Session->flash(); ?>
 			   <?php echo $content_for_layout; ?>
@@ -50,7 +51,7 @@
 		</div>
 		<div id="footer">
 			<div class="wrap">
-			   <?php echo $this->element("footer");?>
+			   <?php echo $this->element("footer_virtual");?>
 			   <div style="clear:both"></div>
 			 </div>
 		</div>
