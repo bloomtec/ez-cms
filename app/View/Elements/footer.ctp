@@ -1,4 +1,4 @@
-<div id="footer">
+<div id="footer"  class="black-wrapper">
 	<div class='wrapper'>
 		<div id="info-wrapper">
 			<div class="registrar">
