@@ -82,6 +82,9 @@ class PagesController extends AppController {
 	}
 
 	public function home() {
+		
+	}
+	public function construccion() {
 		$this -> layout = 'ajax';
 	}
 

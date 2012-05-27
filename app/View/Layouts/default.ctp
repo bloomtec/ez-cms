@@ -1,59 +1,62 @@
 <?php
 /**
  *
- * PHP versions 4 and 5
+ * PHP 5
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright 2005-2010, Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright 2005-2012, Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
- * @package       cake
- * @subpackage    cake.cake.libs.view.templates.layouts
+ * @package       Cake.View.Layouts
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
+
+$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-		<?php echo $this->Html->charset(); ?>
-		<title>
-			<?php __('Priceshoes Virtual'); ?>
-			<?php echo $title_for_layout; ?>
-		</title>
-		<?php
-			echo $this->Html->meta('icon');
-	
-			echo $this->Html->css('front');
-			echo $this->Html->script("http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js");
-			echo $this->Html->script("jquery-ui.js");
-			echo $this->Html->script("front.js");
-			echo $this->Html->script("http://cdn.jquerytools.org/1.2.5/full/jquery.tools.min.js");
-			//echo $this->Html->script("https://getfirebug.com/firebug-lite.js");
-			echo $scripts_for_layout;
-		?>
-	</head>
-	<body>
-		<div id="container">	
-			  <?php echo $this->element("header");?>			
-			<div id="content">
-				<?php echo $this->Session->flash(); ?>
-			   <?php echo $content_for_layout; ?>
-			 
-			 <div style="clear:both"></div>
-			</div>
-			
+	<?php echo $this->Html->charset(); ?>
+	<title>
+		<?php echo 'PirceShoes'?> :: 
+		<?php echo $title_for_layout; ?>
+	</title>
+	<?php
+		echo $this->Html->meta('icon');
+		
+		echo $this->Html->css('reset');
+		//echo $this->Html->css('ie');
+		echo $this->Html->css('styles');
+		
+		echo $this->Html->Script('jquery.min');
+		echo $this->Html->Script('jquery.tools.min');
+		echo $this->Html->Script('cufon');
+		//echo $this->Html->Script('HelveticaNeueLT_LightExt2_400-HelveticaNeueLT_LightExt2_400.font');
+		echo $this->fetch('meta');
+		echo $this->fetch('css');
+		echo $this->fetch('script');
+	?>
+<script type="text/javascript"> 
+	/*Cufon.now(); 
+	Cufon.set('fontFamily', 'HelveticaNeueLT LightExt2').replace('body');*/
+</script>
+</head>
+<body>
+	<div id="container">
+		<?php echo $this -> element('header');?>
+		<div id="content">
+
+			<?php echo $this->Session->flash(); ?>
+
+			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
-			<div class="wrap">
-			   <?php echo $this->element("footer");?>
-			   <div style="clear:both"></div>
-			 </div>
-		</div>
-		<?php echo $this->element('sql_dump'); ?>
-	</body>
+	</div>
+	<?php echo $this -> element('footer');?>
+	<?php echo $this->element('sql_dump'); ?>
+</body>
 </html>
