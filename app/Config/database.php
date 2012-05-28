@@ -63,8 +63,8 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
+		'login' => 'bloomweb',
+		'password' => 'rr40r900343',
 		'database' => 'ez-cms',
 		'prefix' => '',
 		'encoding' => 'utf8',
@@ -78,7 +78,7 @@ class DATABASE_CONFIG {
 		'password' => 'password',
 		'database' => 'test_database_name',
 		'prefix' => '',
-		//'encoding' => 'utf8',
+		'encoding' => 'utf8',
 	);
 
 }
