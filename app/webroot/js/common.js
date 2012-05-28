@@ -18,4 +18,11 @@ $(function() {
 		'[required]' : 'Este campo es requerido'
 	});
 
+	$.tools.dateinput.localize("es",  {
+	   months: 'Enero,Febrero,Marzo,Abril,Mayo,Junio,Julio,Agosto,Septiembre,Octubre,Noviembre,Diciembre',
+	   shortMonths:  'Ene,Feb,Mar,Abr,May,Jun,Jul,Ago,Sep,Oct,Nov,Dic',
+	   days:         'Domingo,Lunes,Martes,Miércoles,Jueves,Viernes,Sábado',
+	   shortDays:    'Dom,Lun,Mar,Mie,Jue,Vie,Sab'	   
+   });
+
 });

@@ -29,9 +29,15 @@ body{
 	background-attachment: fixed;
 	font-family:"HelveticaNeueLT LightExt",Helvetica,sans-serif;
 	color: white;
+	font-weight: normal;
 }
 h1,h2,h3,h4{
 font-weight:normal;
+}
+h1{
+	font-size:21px;
+	font-weight:normal;
+	margin-bottom: 15px;
 }
 h2{
 	font-size:24px;
@@ -216,6 +222,10 @@ a{
 	text-align: center;
 	padding:20px 0;
 }
+
+.form{
+	padding:40px;
+}
 .black-wrapper{
 	background: url("../img/trama-footer.png") repeat;
 }
@@ -254,12 +264,68 @@ input{
 	-moz-border-radius: 3px;
 	-webkit-border-radius:3px;
 	border-radius: 3px;
-	width: 350px;
+	width: 340px;
 	margin-bottom: 10px;
 	height: 30px;
+	paddin: 2px 5px;
 }
 
+
+input.invalid{
+	border: solid red 1px;
+	color: red;
+}
+.error{
+	color:#e6db30;
+	font-size:12px;
+	font-family:arial;
+	margin:0;
+}
+.error p{
+	display:inline;
+}
+.submit input, .button{
+background: url("../img/trama.png") repeat-x;
+font-family:"HelveticaNeueLT LightExt",Helvetica,sans-serif;
+color: white;
+font-weight: normal;
+font-size: 13px;
+width: 80px;
+height: 28px;
+line-height: 28px;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+-webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+-moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+}
+.submit {
+	display:inline;
+}
+.submit input:hover, .button:hover,.big-button:hover{
+	color:black;
+}
+.submit input.big-button,.big-button{
+	font-size:18px;
+	width: 180px;
+	height: 50px;
+	font-family:"HelveticaNeueLT LightExt",Helvetica,sans-serif;
+	background: url("../img/trama-contacto.png") repeat-x;
+}
+/*FIN FORMULARIOS*/
 /*REGISTRO*/
+.caltrigger {
+background: url("../img/calendar.png") no-repeat scroll 0 0 
+transparent;
+border-radius: 3px 3px 3px 3px;
+display: block;
+float: left;
+height: 48px;
+margin-top: -8px;
+width: 48px;
+margin-left: 10px;
+}
 .form.registro select{
 	width:100%;
 	height:34px;
@@ -271,15 +337,16 @@ input{
 }
 .form.registro .sexo{
 	float:left;
-	width:15%;
+	width:10%;
 }
 .form.registro .calendario{
 	float:left;
-	width:20%;
-	margin-left:45px;
+	width:28%;
+	margin-left:15px;
 }
 .form.registro .calendario input{
-	width:100%;
+	width:70%;
+	float:left;
 }
 .form.registro fieldset input{
 	float: left;
@@ -300,21 +367,13 @@ input{
 	font-size: 14px;
 	margin-bottom: 10px;
 }
-/*fin registro*/
-.submit input, .button{
-background: url("../img/trama.png") repeat-x;
-font-family: "PF Tempesta Seven",Helvetica,sans-serif;
-color: white;
-font-weight: normal;
-font-size: 13px;
-width: 80px;
-height: 28px;
-line-height: 28px;
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
--webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
--moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+.form.registro .submit{
+	float:left;
+	margin-top:99px;
+	margin-left:40px;
 }
-/*FIN FORMULARIOS*/
+.captcha{
+	float:left;
+	margin:20px 0 0 33px;
+}
+/*fin registro*/

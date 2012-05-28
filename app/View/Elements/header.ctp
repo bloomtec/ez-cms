@@ -10,7 +10,7 @@
 		<ul class="opciones">
 			<li>
 				<?php 
-				echo $this -> Html->link("Mi Cuenta",array("controller"=>"users","action"=>"login"));
+				echo $this -> Html->link("Mi Cuenta",array("controller"=>"users","action"=>"login",'plugin'=>'user_control'));
 				?>
 			</li>
 		    <li>
