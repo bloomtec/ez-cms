@@ -63,9 +63,6 @@ class AppController extends Controller {
 		$this -> Auth -> loginRedirect = array('controller' => 'pages', 'action' => 'display', 'home', 'plugin' => null);
 		$this -> Auth -> logoutRedirect = array('controller' => 'users', 'action' => 'login');
 		$this -> Auth -> allow('verifyUserAccess');
-		if(substr($this -> action,0,3)!="admin"){
-			$this -> Auth -> allow($this -> action);
-		}
 	}
 	
 	private function beforeFilterCookieConfig() {

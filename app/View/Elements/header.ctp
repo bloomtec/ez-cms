@@ -18,8 +18,8 @@
             	if(!$this -> Session->read("Auth.User.id")){
             		echo $this -> Html->link("Registro","/registro");
 				}else{
-					 echo $this -> Html->link("Salir",array("controller"=>"users","action"=>"logout"));
-				}		
+					 echo $this -> Html->link("Salir",array("controller"=>"users","action"=>"logout", 'admin'=>false));
+				}
 			?>
 		    </li>
 		</ul>
