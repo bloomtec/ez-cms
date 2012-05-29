@@ -223,13 +223,30 @@ a{
 	text-align: center;
 	padding:20px 0;
 }
-
+#left-col, 
+#rigth-col{
+	float:left;
+	min-height:300px;
+}
+#left-col{
+	width:270px;
+}
+#rigth-col{
+		float: left;
+	width: 670px;
+	min-height: 864px;
+	max-height: 864px;
+	margin-left: 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 .form{
 	padding:40px;
 }
 .black-wrapper{
 	background: url("../img/trama-footer.png") repeat;
 }
+
 /*FIN ESTILOS DEL LAYOUT*/
 
 
@@ -276,11 +293,15 @@ input.invalid{
 	border: solid red 1px;
 	color: red;
 }
-.error{
+.error, .message{
 	color:#e6db30;
 	font-size:12px;
 	font-family:arial;
 	margin:0;
+}
+.message{
+	margin-bottom:5px;
+	font-size:15px;
 }
 .error p{
 	display:inline;
@@ -420,3 +441,61 @@ margin-left: 10px;
 .login  .izquierda p{
 	margin-bottom:135px;
 }
+/*PROFILE*/
+/* root element for tabs  */
+ul.css-tabs {
+    margin:0 !important;
+    padding:0;
+    height:30px;
+}
+
+/* single tab */
+ul.css-tabs li {
+    float:left;
+    padding:0;
+    margin:0;
+    list-style-type:none;
+	
+}
+
+/* link inside the tab. uses a background image */
+ul.css-tabs a {
+    float:left;
+    font-size:13px;
+    display:block;
+    padding:5px 30px;
+    text-decoration:none;
+    border:none;
+    height:18px;
+    background-color:#efefef;
+	margin-right:2px;
+    position:relative;
+    top:2px;
+    outline:0;
+	-moz-border-radius:4px 4px 0 0;
+	-webkit-border-radius:4px 4px 0 0;
+	border-radius: 5px  5px 0 0;
+	 color:#333;
+    
+}
+
+ul.css-tabs a:hover {
+    background-color:#F7F7F7;
+    color:#333;
+}
+
+/* selected tab */
+ul.css-tabs a.current {
+	background: url("../img/trama-footer.png") repeat;
+    color:white;
+	font-size:16px;
+    cursor:default;
+}
+/* tab pane */
+.css-panes div {
+    display:none;
+    min-height:150px;
+    padding:15px 20px;
+	background: url("../img/trama-footer.png") repeat;
+}
+/*END PROFILE*/

@@ -23,7 +23,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo 'PirceShoes'?> :: 
+		<?php echo 'PriceShoes'?> :: 
 		<?php echo $title_for_layout; ?>
 	</title>
 	<?php
@@ -47,13 +47,12 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	Cufon.set('fontFamily', 'HelveticaNeueLT LightExt2').replace('body');*/
 </script>
 </head>
-<body>
+<body class="<?php echo $this -> action;?>">
 	<div id="container">
 		<?php echo $this -> element('header');?>
 		<div id="content">
 
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	</div>
