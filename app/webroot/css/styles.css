@@ -224,21 +224,21 @@ a{
 	padding:20px 0;
 }
 #left-col, 
-#rigth-col{
+#right-col{
 	float:left;
 	min-height:300px;
 }
 #left-col{
 	width:270px;
 }
-#rigth-col{
-		float: left;
-	width: 670px;
+#right-col{
+	float: left;
+	width: 630px;
 	min-height: 864px;
-	max-height: 864px;
 	margin-left: 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
+	padding:20px;
 }
 .form{
 	padding:40px;
@@ -285,7 +285,7 @@ input{
 	width: 340px;
 	margin-bottom: 10px;
 	height: 30px;
-	paddin: 2px 5px;
+	padding: 2px 5px;
 }
 
 
@@ -442,60 +442,56 @@ margin-left: 10px;
 	margin-bottom:135px;
 }
 /*PROFILE*/
-/* root element for tabs  */
-ul.css-tabs {
-    margin:0 !important;
-    padding:0;
-    height:30px;
+#profile-menu{
+	text-align:right;
+}
+#profile-menu li{
+	display: inline;
+	border-top: solid 1px #E62B7C;
+	border-bottom: solid 1px #E62B7C;
+	padding:5px;
+}
+#profile-menu a{
+	color:#E62B7C;
+}
+#profile-menu li:hover,
+.profile #profile-menu  li.profile,
+.edit #profile-menu   li.edit,
+.addresses #profile-menu   li.addresses,
+.orders  #profile-menu  li.orders{
+	border-color:white;
+}
+#profile-menu li:hover a,
+.profile #profile-menu  li.profile a,
+.edit #profile-menu   li.edit a,
+.addresses #profile-menu   li.addresses a,
+.orders  #profile-menu  li.orders a{
+	color:white;
 }
 
-/* single tab */
-ul.css-tabs li {
-    float:left;
-    padding:0;
-    margin:0;
-    list-style-type:none;
-	
+#right-col .content{
+	margin-top:20px;
 }
-
-/* link inside the tab. uses a background image */
-ul.css-tabs a {
-    float:left;
-    font-size:13px;
-    display:block;
-    padding:5px 30px;
-    text-decoration:none;
-    border:none;
-    height:18px;
-    background-color:#efefef;
+#right-col .content h3{
+	margin-top:10px;
+}
+.address{
+	float:left;
+	width:135px;
+	margin:5px;
+	border: solid #E62B7C 1px;
+	padding:5px;
+}
+.address a{
+	float:right;
 	margin-right:2px;
-    position:relative;
-    top:2px;
-    outline:0;
-	-moz-border-radius:4px 4px 0 0;
-	-webkit-border-radius:4px 4px 0 0;
-	border-radius: 5px  5px 0 0;
-	 color:#333;
-    
 }
-
-ul.css-tabs a:hover {
-    background-color:#F7F7F7;
-    color:#333;
+#profile .input input, 
+#profile select,
+#profile .password input{
+	width:240px;
 }
-
-/* selected tab */
-ul.css-tabs a.current {
-	background: url("../img/trama-footer.png") repeat;
-    color:white;
-	font-size:16px;
-    cursor:default;
-}
-/* tab pane */
-.css-panes div {
-    display:none;
-    min-height:150px;
-    padding:15px 20px;
-	background: url("../img/trama-footer.png") repeat;
+#profile .input , #profile .password{
+	width:50%;
 }
 /*END PROFILE*/
