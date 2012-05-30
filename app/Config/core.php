@@ -1,4 +1,8 @@
 <?php
+	Configure::write('site_domain', 'priceshoes.com.co');
+	Configure::write('site_name', 'PriceShoes');
+	Configure::write('email', 'servicioalcliente@priceshoes.com.co');
+	Configure::write('email_password', 'servicio911');
 /**
  * This is core configuration file.
  *
