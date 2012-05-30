@@ -62,7 +62,6 @@ class AppController extends Controller {
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
 		$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile');
 		$this -> Auth -> logoutRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login');
-		$this -> Auth -> allow('verifyUserAccess');
 	}
 	
 	private function beforeFilterCookieConfig() {
@@ -87,21 +86,6 @@ class AppController extends Controller {
 		if(isset($this -> Cookie -> httpOnly) && !empty($this -> Cookie -> httpOnly)) {
 			$this -> Cookie -> httpOnly = true;
 		}
-	}
-	
-	/**
-	 * Vericar el acceso de un usuario a una función mediante ACL
-	 */
-	public function verifyUserAccess() {
-		// Armar la ruta
-		$ruta = '';
-		for ($i = 0; $i < count($this -> params['ruta']); $i++) {
-			$ruta .= $this -> params['ruta'][$i];
-			if ($i != count($this -> params['ruta']) - 1) {
-				$ruta .= '/';
-			}
-		}
-		return $this -> Acl -> check($this -> Auth -> user('username'), $ruta);
 	}
 	
 }

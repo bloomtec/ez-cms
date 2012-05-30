@@ -67,7 +67,7 @@
 
 /* year/month selector */
 #caltitle select {
-	font-size:10px;	
+	font-size:10px;	max-width:75px;
 }
 
 /* names of the days */

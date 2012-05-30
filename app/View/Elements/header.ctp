@@ -10,17 +10,21 @@
 		<ul class="opciones">
 			<li>
 				<?php 
-				echo $this -> Html->link("Mi Cuenta",array("controller"=>"users","action"=>"login",'plugin'=>'user_control'));
+	            	if(!$this -> Session->read("Auth.User.id")){
+	            		echo $this -> Html->link("Mi Cuenta",array("controller"=>"users","action"=>"login",'plugin'=>'user_control'));
+					}else{
+						echo $this -> Html->link("Mi Cuenta",array("controller"=>"users","action"=>"profile",'plugin'=>'user_control'));
+					}
 				?>
 			</li>
 		    <li>
 		        <?php 
-            	if(!$this -> Session->read("Auth.User.id")){
-            		echo $this -> Html->link("Registro","/registro");
-				}else{
-					 echo $this -> Html->link("Salir",array("controller"=>"users","action"=>"logout", 'admin'=>false));
-				}
-			?>
+	            	if(!$this -> Session->read("Auth.User.id")){
+	            		echo $this -> Html->link("Registro","/registro");
+					}else{
+						echo $this -> Html->link("Salir",array("controller"=>"users","action"=>"logout", 'admin'=>false));
+					}
+				?>
 		    </li>
 		</ul>
 	</div>

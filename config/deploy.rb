@@ -36,8 +36,8 @@ namespace :deploy do
     # run "chmod 666 /home/embalao/priceshoes.bloomweb.co/app/config/database.php"
     # run "cp /home/embalao/priceshoes.bloomweb.co/app/config/database.php.srvr /home/embalao/priceshoes.bloomweb.co/app/config/database.php"
     run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/tmp/ -R"
-    run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/img/uploads/ -R"
-    run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/files/uploads/ -R"
+    # run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/img/uploads/ -R"
+    # run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/files/uploads/ -R"
   end
   
 end
