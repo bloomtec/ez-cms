@@ -17,6 +17,16 @@
 					}
 				?>
 			</li>
+			<li>
+				<?php echo $this -> Html->link("Mi Carrito",array("controller"=>"carts","action"=>"view",'plugin'=>'bcommerce'),array('class'=>'cart')); ?>
+			</li>
+			<li>
+				<?php 
+	            	if($this -> Session->read("Auth.User.id")){
+	            		echo $this -> Html->link("Mis Favoritos",array("controller"=>"favorites","action"=>"index",'plugin'=>'bcommerce'));
+					}
+				?>
+			</li>
 		    <li>
 		        <?php 
 	            	if(!$this -> Session->read("Auth.User.id")){
@@ -26,6 +36,7 @@
 					}
 				?>
 		    </li>
+			
 		</ul>
 	</div>
 	<div style="clear:both;"></div>	
@@ -41,7 +52,8 @@
 	    </li>
 	    <li>
 	        <?php echo $this -> Html->link("Tienda Virtual","/tienda-virtual")?>
-	    </li>
+			<?php echo $this -> element('menu-categorias');?>
+	   </li>
 	   	<li>
 			<?php echo $this -> Html->link("Franquicias",array("controller"=>"pages","action"=>"view","franquicias"))?>
 		</li>
