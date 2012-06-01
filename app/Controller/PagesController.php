@@ -30,7 +30,7 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class PagesController extends AppController {
-	
+
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this -> Auth -> allow('display', 'home', 'construccion');
@@ -55,7 +55,7 @@ class PagesController extends AppController {
 	 *
 	 * @var array
 	 */
-	public $uses = array();
+	//public $uses = array();
 
 	/**
 	 * Displays a view
@@ -92,6 +92,92 @@ class PagesController extends AppController {
 
 	public function construccion() {
 		$this -> layout = 'ajax';
+	}
+	
+	/**
+	 * index method
+	 *
+	 * @return void
+	 */
+	public function admin_index() {
+		$this -> Page -> recursive = 0;
+		$this -> set('pages', $this -> paginate());
+	}
+
+	/**
+	 * view method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_view($id = null) {
+		$this -> Page -> id = $id;
+		if (!$this -> Page -> exists()) {
+			throw new NotFoundException(__('Invalid page'));
+		}
+		$this -> set('page', $this -> Page -> read(null, $id));
+	}
+
+	/**
+	 * add method
+	 *
+	 * @return void
+	 */
+	public function admin_add() {
+		if ($this -> request -> is('post')) {
+			$this -> Page -> create();
+			if ($this -> Page -> save($this -> request -> data)) {
+				$this -> Session -> setFlash(__('The page has been saved'));
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('The page could not be saved. Please, try again.'));
+			}
+		}
+	}
+
+	/**
+	 * edit method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_edit($id = null) {
+		$this -> Page -> id = $id;
+		if (!$this -> Page -> exists()) {
+			throw new NotFoundException(__('Invalid page'));
+		}
+		if ($this -> request -> is('post') || $this -> request -> is('put')) {
+			if ($this -> Page -> save($this -> request -> data)) {
+				$this -> Session -> setFlash(__('The page has been saved'));
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('The page could not be saved. Please, try again.'));
+			}
+		} else {
+			$this -> request -> data = $this -> Page -> read(null, $id);
+		}
+	}
+
+	/**
+	 * delete method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_delete($id = null) {
+		if (!$this -> request -> is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this -> Page -> id = $id;
+		if (!$this -> Page -> exists()) {
+			throw new NotFoundException(__('Invalid page'));
+		}
+		if ($this -> Page -> delete()) {
+			$this -> Session -> setFlash(__('Page deleted'));
+			$this -> redirect(array('action' => 'index'));
+		}
+		$this -> Session -> setFlash(__('Page was not deleted'));
+		$this -> redirect(array('action' => 'index'));
 	}
 
 }
