@@ -62,9 +62,5 @@ class Menu extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
-
-	public function beforeSave(){
-
-	}
+	
 }

@@ -1,25 +1,41 @@
 <div class="pages form">
 <?php echo $this->Form->create('Page');?>
 	<fieldset>
-		<legend><?php echo __('Admin Edit Page'); ?></legend>
+		<legend><?php echo __('Modificar Página'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
-		echo $this->Form->input('name');
-		echo $this->Form->input('description');
-		echo $this->Form->input('content');
-		echo $this->Form->input('left_content');
-		echo $this->Form->input('right_content');
-		echo $this->Form->input('keywords');
-		echo $this->Form->input('is_active');
+		echo $this->Form->input('name', array('label' => 'Nombre'));
+		echo $this->Form->input('description', array('label' => 'Descripción'));
+		echo $this->Form->input('content', array('label' => 'Contenido'));
+		echo $this->Form->input('left_content', array('label' => 'Contenido Izquierdo'));
+		echo $this->Form->input('right_content', array('label' => 'Contenido Derecho'));
+		echo $this->Form->input('keywords', array('label' => 'Palabras Clave'));
+		echo $this->Form->input('is_active', array('label' => 'Página Activa'));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit'));?>
+<?php echo $this->Form->end(__('Enviar'));?>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Page.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Page.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Pages'), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index'));?></li>
 	</ul>
 </div>
+<?php echo $this -> Html -> script('Ez.ckeditor/ckeditor'); ?>
+<script type="text/javascript">
+	CKEDITOR.replace('data[Page][content]', {
+		filebrowserUploadUrl : '/upload.php',
+		filebrowserBrowseUrl : '/admin/pages/wysiwyg',
+	});
+</script>
+<script type="text/javascript">
+	CKEDITOR.replace('data[Page][left_content]', {
+		filebrowserUploadUrl : '/upload.php',
+		filebrowserBrowseUrl : '/admin/pages/wysiwyg',
+	});
+</script>
+<script type="text/javascript">
+	CKEDITOR.replace('data[Page][right_content]', {
+		filebrowserUploadUrl : '/upload.php',
+		filebrowserBrowseUrl : '/admin/pages/wysiwyg',
+	});
+</script>

@@ -6,17 +6,19 @@ App::uses('AppModel', 'Model');
  * @property Menu $Menu
  */
 class MenuItem extends AppModel {
-/**
- * Display field
- *
- * @var string
- */
+	
+	/**
+	 * Display field
+	 *
+	 * @var string
+	 */
 	public $displayField = 'name';
-/**
- * Validation rules
- *
- * @var array
- */
+	
+	/**
+	 * Validation rules
+	 *
+	 * @var array
+	 */
 	public $validate = array(
 		'position' => array(
 			'numeric' => array(
@@ -62,11 +64,11 @@ class MenuItem extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Menu' => array(
 			'className' => 'Menu',
@@ -76,4 +78,5 @@ class MenuItem extends AppModel {
 			'order' => ''
 		)
 	);
+	
 }

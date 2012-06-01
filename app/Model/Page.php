@@ -5,17 +5,19 @@ App::uses('AppModel', 'Model');
  *
  */
 class Page extends AppModel {
-/**
- * Display field
- *
- * @var string
- */
+	
+	/**
+	 * Display field
+	 *
+	 * @var string
+	 */
 	public $displayField = 'name';
-/**
- * Validation rules
- *
- * @var array
- */
+	
+	/**
+	 * Validation rules
+	 *
+	 * @var array
+	 */
 	public $validate = array(
 		'name' => array(
 			'notempty' => array(
