@@ -5,9 +5,6 @@
 			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
 			<th><?php echo $this->Paginator->sort('description');?></th>
-			<th><?php echo $this->Paginator->sort('content');?></th>
-			<th><?php echo $this->Paginator->sort('left_content');?></th>
-			<th><?php echo $this->Paginator->sort('right_content');?></th>
 			<th><?php echo $this->Paginator->sort('keywords');?></th>
 			<th><?php echo $this->Paginator->sort('is_active');?></th>
 			<th><?php echo $this->Paginator->sort('created');?></th>
@@ -20,9 +17,6 @@
 		<td><?php echo h($page['Page']['id']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['name']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['description']); ?>&nbsp;</td>
-		<td><?php echo h($page['Page']['content']); ?>&nbsp;</td>
-		<td><?php echo h($page['Page']['left_content']); ?>&nbsp;</td>
-		<td><?php echo h($page['Page']['right_content']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['keywords']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['is_active']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['created']); ?>&nbsp;</td>
