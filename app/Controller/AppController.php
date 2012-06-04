@@ -45,6 +45,9 @@ class AppController extends Controller {
 	public function beforeFilter() {
 		$this -> beforeFilterAuthConfig();
 		$this -> beforeFilterCookieConfig();
+		if (isset($this -> params["prefix"]) && $prefix == "admin") {
+				$this -> layout="Ez/default"
+		}
 	}
 	
 	private function beforeFilterAuthConfig() {
