@@ -1,5 +1,7 @@
 /app/Config
 /app/Config/database.php
+/Documentacion
+/Documentacion/*
 /app/tmp
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
