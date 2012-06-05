@@ -125,27 +125,29 @@ class AppController extends Controller {
 	 * @return void
 	 */
 	protected function aclVerification() {
-		$this -> loadModel('Role');
-		$roles = $this -> Role -> find('all');
-		foreach ($roles as $key => $role) {
-			if($role['Role']['role'] != 'Administrador') {
+		if($this -> Auth -> user()) {
+			$this -> loadModel('Role');
+			$roles = $this -> Role -> find('all');
+			foreach ($roles as $key => $role) {
+				if($role['Role']['role'] != 'Administrador') {
+						
+					// Permitir acceso total en ciertos controladores inicialmente si no se es admin
+					$this -> Acl -> allow($role['Role']['role'], $this -> name);
 					
-				// Permitir acceso total en ciertos controladores inicialmente si no se es admin
-				$this -> Acl -> allow($role['Role']['role'], $this -> name);
-				
-				// Negar acceso a los siguientes métodos administrativos
-				foreach($this -> methods as $key => $method) {
-					if((!strstr($method, 'admin_')) && (!strstr($method, 'aclVerification'))  && (!strstr($method, 'verifyUserAccess'))) {
-						if(!$this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
-							$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
-						}
-					} elseif(strstr($method, 'admin_')) {
-						if($this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
-							$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
+					// Negar acceso a los siguientes métodos administrativos
+					foreach($this -> methods as $key => $method) {
+						if((!strstr($method, 'admin_')) && (!strstr($method, 'aclVerification'))  && (!strstr($method, 'verifyUserAccess'))) {
+							if(!$this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
+								$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
+							}
+						} elseif(strstr($method, 'admin_')) {
+							if($this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
+								$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
+							}
 						}
 					}
+					
 				}
-				
 			}
 		}
 	}
