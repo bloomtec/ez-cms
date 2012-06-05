@@ -33,7 +33,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('display', 'home', 'construccion');
+		$this -> Auth -> allow('display', 'home', 'construccion','view','contacto');
 	}
 
 	/**
@@ -85,9 +85,19 @@ class PagesController extends AppController {
 		$this -> render(implode('/', $path));
 
 	}
-
+	public function view($id = null) {
+		$this -> layout = "pages";
+		$this -> Page -> id = $id;
+		if (!$this -> Page -> exists()) {
+			throw new NotFoundException(__('Invalid page'));
+		}
+		$this -> set('page', $this -> Page -> read(null, $id));
+	}
 	public function home() {
 
+	}
+	public function contacto(){
+		$this -> layout='pages';
 	}
 
 	public function construccion() {

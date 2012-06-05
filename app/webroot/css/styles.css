@@ -259,7 +259,7 @@ a{
 #right-col{
 	float: left;
 	width: 630px;
-	min-height: 864px;
+	min-height: 347px;
 	margin-left: 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -301,7 +301,7 @@ input{
 	display:block;
 	margin-bottom: 10px;
 }
-.form input, .form select{
+.form input, .form select, .form textarea{
 	display:block;
 	border: 0;
 	-moz-border-radius: 3px;
@@ -312,7 +312,9 @@ input{
 	height: 30px;
 	padding: 2px 5px;
 }
-
+.form textarea{
+	height:100px;
+}
 
 input.invalid{
 	border: solid red 1px;
@@ -376,6 +378,37 @@ box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 .cuadro-formularios .submit,
 .cuadro-formularios .button{
 	float:right;
+}
+.form #contacto  .input{
+	float:left;
+	width:30%;
+	margin:0;
+	margin-right:4.5%;
+}
+.form #contacto  .input.last{
+	margin-right:0;
+}
+.form #contacto  .input.textarea{
+	width:100%;
+	
+	margin:auto 0;
+	margin-top:15px;
+	clear:both;
+}
+.form #contacto textarea{
+	width:100%;
+	margin:0;
+	padding:0;
+	margin-bottom:15px;
+}
+.form #contacto   .input label, .form #contacto   .input input{
+	display:block;
+	text-align:left;
+	width:100%;
+	
+}
+ .form #contacto   .input input{
+margin: auto 0;
 }
 /*FIN FORMULARIOS*/
 /*REGISTRO*/
@@ -520,3 +553,38 @@ margin-left: 10px;
 	width:50%;
 }
 /*END PROFILE*/
+/*PAGES*/
+.caja-producto-lateral{
+	border: 1px solid white;
+}
+.caja-producto-lateral .titulo {
+	background: url("../img/trama-encuesta.png") repeat-x;
+	text-align: center;
+	height: 60px;
+	margin-bottom: 15px;
+}
+.caja-producto-lateral .titulo h1 {
+	line-height: 60px;
+	color: white;
+}
+.caja-producto-lateral .button{
+	display:block;
+	margin: 20px auto;
+}
+#promocion {
+	color: white;
+	float: left;
+	width: 100%;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#promocion p {
+	font-size: 16px;
+	margin: 5px 0;
+	text-align:center;
+}
+#promocion p.precio {
+	font-weight: bold;
+}
+
+/**END PAGES/

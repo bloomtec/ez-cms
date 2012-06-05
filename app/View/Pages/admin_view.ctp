@@ -26,9 +26,7 @@
 			<?php echo h($page['Page']['left_content']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Right Content'); ?></dt>
 		
-		<dt><?php echo __('Keywords'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['keywords']); ?>
 			&nbsp;
