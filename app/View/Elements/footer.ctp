@@ -3,18 +3,16 @@
 		<div id="info-wrapper">
 			<div class="registrar">
 			<h2>Regístra tu correo</h2>
-				<form id="mail" action='http://madmimi.com/signups/subscribe/34704' method='post'>
+				<?php echo $this -> Form -> create('User', array('action' => 'registerEmail')); ?>
+				<form id="mail" accept-charset="utf-8" method="post" controller="users" action="/user_control/users/registerEmail">
 					<div>
-						<div class="input text">
-							<input id='signup_email' class='layout' name='signup[email]' type='text' />
-						</div>
-						<input name='commit' class='button' type='submit' value='Enviar' />
+						<?php echo $this -> Form -> input('email', array('label' => false)); ?>
+						<?php echo $this -> Form -> submit('Enviar'); ?>
 					</div>
-				</form>
+				<?php echo $this -> Form -> end(); ?>
 				<p>
 					Al registrar mi dirección de correo electrónico, certifico que la información que proporciono es correcta y que soy mayor de edad.
 				</p>
-
 			</div>	
 			<div class="paginas-inferior">
 				<h3>Priceshoes On-line</h3>
