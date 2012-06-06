@@ -7,7 +7,7 @@
 		<?php
 		echo $this -> Form -> input('id');
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
-		echo $this -> Form -> input('content', array('label' => 'Contenido', 'class' => 'ckeditor'));
+		echo $this -> Form -> input('content', array('label' => 'Contenido', 'class' => 'editor'));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>

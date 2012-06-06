@@ -586,5 +586,10 @@ margin-left: 10px;
 #promocion p.precio {
 	font-weight: bold;
 }
-
+.banner{
+	margin-bottom:15px;
+	-webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+}
 /**END PAGES/
