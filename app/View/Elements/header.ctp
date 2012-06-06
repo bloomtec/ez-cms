@@ -58,7 +58,7 @@
 			<?php echo $this -> Html->link("Franquicias",array("controller"=>"pages","action"=>"view","franquicias"))?>
 		</li>
 		<li>
-			<?php echo $this -> Html->link("Contacto",array("controller"=>"pages","action"=>"contacto"))?>
+			<?php echo $this -> Html->link("Contacto",array("controller"=>"pages","action"=>"contacto", 'plugin' => false))?>
 		</li>
 	 </ul>
 </div>
