@@ -6,6 +6,29 @@ App::uses('AppController', 'Controller');
  * @property MenuItem $MenuItem
  */
 class MenuItemsController extends AppController {
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('reOrder');
+	}
+	
+	public function reOrder() {
+		$this -> autoRender = false;
+		$success = true;
+		$this -> MenuItem -> recursive = -1;
+		foreach($this -> request -> data['MenuItem'] as $menu_item_id => $position) {
+			$menu_item = $this -> MenuItem -> findById($menu_item_id);
+			$menu_item['MenuItem']['position'] = $position;
+			if(!$this -> MenuItem -> save($menu_item)) {
+				$success = false;
+			}
+		}
+		if($success) {
+			echo 'yes';
+		} else {
+			echo 'no';
+		}
+	}
 
 	/**
 	 * admin_index method

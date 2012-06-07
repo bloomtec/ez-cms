@@ -54,7 +54,7 @@ class Menu extends AppModel {
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
-			'order' => '',
+			'order' => 'position ASC',
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',
