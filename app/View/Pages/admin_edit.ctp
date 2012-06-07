@@ -1,17 +1,4 @@
 <div class="pages form">
-<style id="styles" type="text/css">
-
-		.cke_button_myDialogCmd .cke_icon
-		{
-			display: none !important;
-		}
-
-		.cke_button_myDialogCmd .cke_label
-		{
-			display: inline !important;
-		}
-
-	</style>
 <?php echo $this->Form->create('Page');?>
 	<fieldset>
 		<legend><?php echo __('Modificar Página'); ?></legend>
