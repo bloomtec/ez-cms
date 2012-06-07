@@ -61,6 +61,14 @@ class MenuItem extends AppModel {
 			),
 		),
 	);
+	
+	public function afterSave($created) {
+		if($created) {
+			$menu_item_count = $this -> find('count', array('conditions' => array('MenuItem.menu_id' => $this -> data['MenuItem']['menu_id'])));
+			$this -> data['MenuItem']['position'] = $menu_item_count;
+			$this -> save($this -> data);
+		}
+	}
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

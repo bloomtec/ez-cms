@@ -1,12 +1,7 @@
 <div class="menuItems view">
 <h2><?php  echo __('Menu Item');?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($menuItem['MenuItem']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Position'); ?></dt>
+		<dt><?php echo __('Posición'); ?></dt>
 		<dd>
 			<?php echo h($menuItem['MenuItem']['position']); ?>
 			&nbsp;
@@ -16,22 +11,22 @@
 			<?php echo $this->Html->link($menuItem['Menu']['name'], array('controller' => 'menus', 'action' => 'view', $menuItem['Menu']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Name'); ?></dt>
+		<dt><?php echo __('Nombre'); ?></dt>
 		<dd>
 			<?php echo h($menuItem['MenuItem']['name']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Link'); ?></dt>
+		<dt><?php echo __('Enlace'); ?></dt>
 		<dd>
 			<?php echo h($menuItem['MenuItem']['link']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Created'); ?></dt>
+		<dt><?php echo __('Creado'); ?></dt>
 		<dd>
 			<?php echo h($menuItem['MenuItem']['created']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Updated'); ?></dt>
+		<dt><?php echo __('Modificado'); ?></dt>
 		<dd>
 			<?php echo h($menuItem['MenuItem']['updated']); ?>
 			&nbsp;
@@ -39,13 +34,13 @@
 	</dl>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Menu Item'), array('action' => 'edit', $menuItem['MenuItem']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Menu Item'), array('action' => 'delete', $menuItem['MenuItem']['id']), null, __('Are you sure you want to delete # %s?', $menuItem['MenuItem']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Menu Items'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Menu Item'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Menus'), array('controller' => 'menus', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Menu'), array('controller' => 'menus', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Modificar Ítem De Menú'), array('action' => 'edit', $menuItem['MenuItem']['id'])); ?> </li>
+		<li><?php echo $this->Form->postLink(__('Eliminar Ítem De Menú'), array('action' => 'delete', $menuItem['MenuItem']['id']), null, __('¿Seguro desea eliminar %s?', $menuItem['MenuItem']['name'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Ver Ítems De Menú'), array('action' => 'index')); ?> </li>
+		<li><?php echo $this->Html->link(__('Agregar Ítem De Menú'), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Ver Menús'), array('controller' => 'menus', 'action' => 'index')); ?> </li>
+		<!--<li><?php echo $this->Html->link(__('New Menu'), array('controller' => 'menus', 'action' => 'add')); ?> </li>-->
 	</ul>
 </div>

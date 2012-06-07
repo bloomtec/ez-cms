@@ -1,26 +1,10 @@
 <ul>
+	<?php
+		$menu_items = $this -> requestAction('/menus/getMenuItems/paginas-inferior');
+		foreach ($menu_items as $key => $menu_item) :
+	?>
 	<li>
-		<?php echo $this -> Html->link("Registro","/registro");
-				?>
+		<a href="<?php echo $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
 	</li>
-	<li>
-		<?php echo $this -> Html->link("Ver Carrito","/carrito")
-		?>
-	</li>
-	<li>
-		<?php echo $this -> Html->link("Ayuda",array("controller"=>"pages","action"=>"view","ayuda"))
-			?>
-	</li>
-	<li>
-		<?php echo $this -> Html->link("Registro","/registro");
-				?>
-	</li>
-	<li>
-		<?php echo $this -> Html->link("Ver Carrito","/carrito")
-		?>
-	</li>
-	<li>
-		<?php echo $this -> Html->link("Ayuda",array("controller"=>"pages","action"=>"view","ayuda"))
-			?>
-	</li>
+	<?php endforeach; ?>
 </ul>

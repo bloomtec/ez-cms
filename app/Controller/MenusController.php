@@ -6,6 +6,47 @@ App::uses('AppController', 'Controller');
  * @property Menu $Menu
  */
 class MenusController extends AppController {
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('getMenuItems');
+	}
+	
+	/**
+	 * Obtener los items del menu
+	 * 
+	 * @param string $menu Nombre del menú
+	 * @return Arreglo con la información de los menuItems
+	 */
+	public function getMenuItems($menu) {
+		if(isset($menu) && strlen($menu) >= 1) {
+			$this -> Menu -> recursive = -1;
+			$menu = $this -> Menu -> findByName($menu);
+			if($menu) {
+				$menu_items = $this -> Menu -> MenuItem -> find(
+					'all',
+					array(
+						'conditions' => array(
+							'MenuItem.menu_id' => $menu['Menu']['id']
+						),
+						'recursive' => -1,
+						'order' => array(
+							'MenuItem.position' => 'ASC'					
+						)
+					)
+				);
+				if($menu_items) {
+					return $menu_items;
+				} else {
+					return array();
+				}
+			} else {
+				return array();
+			}
+		} else {
+			return array();
+		}
+	}
 
 	/**
 	 * index method
@@ -36,6 +77,7 @@ class MenusController extends AppController {
 	 *
 	 * @return void
 	 */
+	/**
 	public function admin_add() {
 		if ($this -> request -> is('post')) {
 			$this -> Menu -> create();
@@ -47,6 +89,7 @@ class MenusController extends AppController {
 			}
 		}
 	}
+	 */
 
 	/**
 	 * edit method
@@ -54,6 +97,7 @@ class MenusController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
+	/**
 	public function admin_edit($id = null) {
 		$this -> Menu -> id = $id;
 		if (!$this -> Menu -> exists()) {
@@ -70,6 +114,7 @@ class MenusController extends AppController {
 			$this -> request -> data = $this -> Menu -> read(null, $id);
 		}
 	}
+	 */
 
 	/**
 	 * delete method
@@ -77,6 +122,7 @@ class MenusController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
+	/**
 	public function admin_delete($id = null) {
 		if (!$this -> request -> is('post')) {
 			throw new MethodNotAllowedException();
@@ -92,5 +138,6 @@ class MenusController extends AppController {
 		$this -> Session -> setFlash(__('Menu was not deleted'));
 		$this -> redirect(array('action' => 'index'));
 	}
+	 */
 
 }
