@@ -28,7 +28,7 @@
 		echo $this->Form->input('is_active', array('label' => 'Página Activa'));
 	?>
 	</fieldset>
-<?php echo $this -> Html -> link('Vista previa',"#");?>
+<?php echo $this -> Html -> link('Vista previa',array('controller'=>'pages','action'=>'preview','admin'=>true),array('target'=>'_blank','class'=>'preview'));?>
 <?php echo $this->Form->end(__('Guardar'));?>
 </div>
 <div class="actions">
@@ -36,3 +36,14 @@
 		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index'));?></li>
 	</ul>
 </div>
+<script>
+	$('a.preview').click(function(e){
+		e.preventDefault();
+		var href= $(this).attr('href');
+		BJS.post('/admin/pages/beforePrev',{left_content:$('.editor2').val(),content:$('.editor').val()},function(data){
+			if(data){
+				window.open(href,'','toolbars=no,scrollbars=yes,location=no,statusbars=no,menubars=no,height=600,width=1000,');
+			}
+		});
+	});
+</script>

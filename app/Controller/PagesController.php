@@ -94,7 +94,22 @@ class PagesController extends AppController {
 		}
 		$this -> set('page', $this -> Page -> read(null, $id));
 	}
-
+	public function admin_beforePrev(){
+		$this -> Session -> write('left_content',$_POST['left_content']);
+		$this -> Session -> write('content',$_POST['content']);
+		echo true;
+		exit(0);
+	}
+	public function admin_preview(){
+	$this -> layout = "pages";
+		$page=array(
+			'Page'=>array(
+				'left_content' => $this -> Session->read('left_content'),
+				'content' =>  $this -> Session->read('content')
+			)
+		);
+		$this -> set(compact('page'));
+	}
 	public function home() {
 
 	}
