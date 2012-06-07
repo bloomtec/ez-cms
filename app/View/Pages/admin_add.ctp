@@ -18,6 +18,6 @@
 </div>
 <div class="actions">
 	<ul>
-		<li><?php echo $this->Html->link(__('Volver'), array('action' => 'index'));?></li>
+		<li><?php echo $this->Html->link(__('Ver Páginas'), array('action' => 'index'));?></li>
 	</ul>
 </div>

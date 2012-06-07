@@ -94,55 +94,41 @@ class PagesController extends AppController {
 		}
 		$this -> set('page', $this -> Page -> read(null, $id));
 	}
-	public function admin_beforePrev(){
-		$this -> Session -> write('left_content',$_POST['left_content']);
-		$this -> Session -> write('content',$_POST['content']);
+
+	public function admin_beforePrev() {
+		$this -> Session -> write('left_content', $_POST['left_content']);
+		$this -> Session -> write('content', $_POST['content']);
 		echo true;
 		exit(0);
 	}
-	public function admin_preview(){
-	$this -> layout = "pages";
-		$page=array(
-			'Page'=>array(
-				'left_content' => $this -> Session->read('left_content'),
-				'content' =>  $this -> Session->read('content')
-			)
-		);
+
+	public function admin_preview() {
+		$this -> layout = "pages";
+		$page = array('Page' => array('left_content' => $this -> Session -> read('left_content'), 'content' => $this -> Session -> read('content')));
 		$this -> set(compact('page'));
 	}
+
 	public function home() {
 
 	}
 
 	public function contacto() {
 		$this -> layout = 'pages';
-		if($this -> request -> is('post') || $this -> request -> is('put')) {
+		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			$email_address = Configure::read('email');
 			$email_password = Configure::read('email_password');
 			$site_name = Configure::read('site_name');
-			$gmail = array(
-				'host' => 'ssl://smtp.gmail.com',
-				'port' => 465,
-				'username' => $email_address,
-				'password' => $email_password,
-				'transport' => 'Smtp'
-			);
+			$gmail = array('host' => 'ssl://smtp.gmail.com', 'port' => 465, 'username' => $email_address, 'password' => $email_password, 'transport' => 'Smtp');
 			App::uses('CakeEmail', 'Network/Email');
 			$email = new CakeEmail($gmail);
 			$email -> from(array($email_address => $site_name));
 			$email -> to($email_address);
 			$email -> subject('Contacto :: ' . $site_name . ' :: ' . $this -> request -> data['Page']['nombre_contacto']);
-			$email -> send(
-				'' . '
-				' .
-				'Nombre: ' . $this -> request -> data['Page']['nombre_contacto'] . '
-				' .
-				'Correo: ' . $this -> request -> data['Page']['email'] . '
-				' .
-				'Comentario:
-				' .
-				$this -> request -> data['Page']['comentario']
-			);
+			$email -> send('' . '
+				' . 'Nombre: ' . $this -> request -> data['Page']['nombre_contacto'] . '
+				' . 'Correo: ' . $this -> request -> data['Page']['email'] . '
+				' . 'Comentario:
+				' . $this -> request -> data['Page']['comentario']);
 			$this -> Session -> setFlash('Se ha enviado la información. Gracias por contactarnos.', 'crud/success');
 			$this -> redirect($this -> referer());
 		}
