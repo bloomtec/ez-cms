@@ -38,6 +38,8 @@ class MenuItemsController extends AppController {
 	public function admin_index() {
 		$this -> MenuItem -> recursive = 0;
 		$this -> set('menuItems', $this -> paginate());
+		$this -> loadModel('Page');
+		$this -> set('pages', $this -> Page -> find('list'));
 	}
 
 	/**
@@ -71,6 +73,8 @@ class MenuItemsController extends AppController {
 		}
 		$menus = $this -> MenuItem -> Menu -> find('list');
 		$this -> set(compact('menus'));
+		$this -> loadModel('Page');
+		$this -> set('pages', $this -> Page -> find('list'));
 	}
 
 	/**
@@ -96,6 +100,8 @@ class MenuItemsController extends AppController {
 		}
 		$menus = $this -> MenuItem -> Menu -> find('list');
 		$this -> set(compact('menus'));
+		$this -> loadModel('Page');
+		$this -> set('pages', $this -> Page -> find('list'));
 	}
 
 	/**

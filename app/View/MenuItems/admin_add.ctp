@@ -8,7 +8,7 @@
 		//echo $this -> Form -> input('position');
 		echo $this -> Form -> input('menu_id', array('label' => 'Menú'));
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
-		echo $this -> Form -> input('link', array('label' => 'Enlace'));
+		echo $this -> Form -> input('link', array('label' => 'Enlace', 'type' => 'select', 'options' => $pages, 'empty' => 'Seleccione...'));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Crear')); ?>
