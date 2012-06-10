@@ -4,7 +4,7 @@
 		foreach ($menu_items as $key => $menu_item) :
 	?>
 	<li>
-		<a href="<?php echo $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
+		<a href="<?php echo '/pages/view/' . $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
 	</li>
 	<?php endforeach; ?>
 </ul>

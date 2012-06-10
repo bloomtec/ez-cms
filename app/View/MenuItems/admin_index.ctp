@@ -20,7 +20,7 @@
 		</td>
 		<td><?php echo h($menuItem['MenuItem']['name']); ?>&nbsp;</td>
 		<td><?php echo h($menuItem['MenuItem']['position']); ?>&nbsp;</td>
-		<td><?php echo h($menuItem['MenuItem']['link']); ?>&nbsp;</td>
+		<td><?php echo h($pages[$menuItem['MenuItem']['link']]); // h($menuItem['MenuItem']['link']); ?>&nbsp;</td>
 		<td><?php echo h($menuItem['MenuItem']['created']); ?>&nbsp;</td>
 		<td><?php echo h($menuItem['MenuItem']['updated']); ?>&nbsp;</td>
 		<td class="actions">

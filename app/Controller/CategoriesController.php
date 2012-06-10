@@ -1,0 +1,96 @@
+<?php
+App::uses('AppController', 'Controller');
+/**
+ * Categories Controller
+ *
+ * @property Category $Category
+ */
+class CategoriesController extends AppController {
+
+	/**
+	 * admin_index method
+	 *
+	 * @return void
+	 */
+	public function admin_index() {
+		$this -> Category -> recursive = 0;
+		$this -> set('categories', $this -> paginate());
+	}
+
+	/**
+	 * admin_view method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_view($id = null) {
+		$this -> Category -> id = $id;
+		if (!$this -> Category -> exists()) {
+			throw new NotFoundException(__('Categoría no válida'));
+		}
+		$this -> set('category', $this -> Category -> read(null, $id));
+	}
+
+	/**
+	 * admin_add method
+	 *
+	 * @return void
+	 */
+	public function admin_add() {
+		if ($this -> request -> is('post')) {
+			$this -> Category -> create();
+			if ($this -> Category -> save($this -> request -> data)) {
+				$this -> Session -> setFlash(__('Se guardó la categoría'));
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'));
+			}
+		}
+	}
+
+	/**
+	 * admin_edit method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_edit($id = null) {
+		$this -> Category -> id = $id;
+		if (!$this -> Category -> exists()) {
+			throw new NotFoundException(__('Categoría no válida'));
+		}
+		if ($this -> request -> is('post') || $this -> request -> is('put')) {
+			if ($this -> Category -> save($this -> request -> data)) {
+				$this -> Session -> setFlash(__('Se guardó la categoría'));
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'));
+			}
+		} else {
+			$this -> request -> data = $this -> Category -> read(null, $id);
+		}
+	}
+
+	/**
+	 * admin_delete method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_delete($id = null) {
+		if (!$this -> request -> is('post')) {
+			throw new MethodNotAllowedException();
+		}
+		$this -> Category -> id = $id;
+		if (!$this -> Category -> exists()) {
+			throw new NotFoundException(__('Categoría no válida'));
+		}
+		if ($this -> Category -> delete()) {
+			$this -> Session -> setFlash(__('Se elminó la categoría'));
+			$this -> redirect(array('action' => 'index'));
+		}
+		$this -> Session -> setFlash(__('No se eliminó la categoría'));
+		$this -> redirect(array('action' => 'index'));
+	}
+
+}
