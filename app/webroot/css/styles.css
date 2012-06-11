@@ -147,21 +147,26 @@ a{
 }
 #main-nav #menu-categorias{
 	position:absolute;
-	background:black;
+	left:-159px;
+	top:0px;	
+	z-index:1;
+	display:none;
+	
+}
+#main-nav li:hover #menu-categorias{
+	display:block;
+}
+#menu-categorias .container{
+	margin-top:40px;
 	width:450px;
 	height:150px;
 	padding:20px;
-	left:-159px;
-	top:35px;	
 	background:#E62B7C;
-	
-	z-index:1;
 	text-align:left;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	border: solid 2px white;
 	border-radius:5px;
-	
 }
 #menu-categorias .foto-categoria{
 
@@ -181,8 +186,8 @@ a{
 }
 #menu-categorias ul img{
 	position:absolute;
-	left:20px; /*este valor debe ser igual al padding de #menu-categorias*/
-	top:20px; /*este valor debe ser igual al padding de #menu-categorias*/
+	left:20px; /*este valor debe ser igual al padding de #menu-categorias  .container*/
+	top:60px; /*este valor debe ser igual al padding de #menu-categorias  .container mas el margin-top*/
 	display:none;
 	
 }
