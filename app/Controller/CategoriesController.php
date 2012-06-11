@@ -6,6 +6,24 @@ App::uses('AppController', 'Controller');
  * @property Category $Category
  */
 class CategoriesController extends AppController {
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('view');
+	}
+
+	/**
+	 * admin_index method
+	 *
+	 * @return void
+	 */
+	public function view($id=null) {
+		$this -> Category -> id = $id;
+		if (!$this -> Category -> exists()) {
+			throw new NotFoundException(__('Categoría no válida'));
+		}
+		$this -> set('category', $this -> Category -> read(null, $id));
+	}
 
 	/**
 	 * admin_index method

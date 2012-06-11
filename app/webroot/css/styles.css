@@ -148,7 +148,7 @@ a{
 #main-nav #menu-categorias{
 	position:absolute;
 	left:-159px;
-	top:0px;	
+	top:13px;	
 	z-index:1;
 	display:none;
 	
@@ -157,7 +157,7 @@ a{
 	display:block;
 }
 #menu-categorias .container{
-	margin-top:40px;
+	margin-top:20px;
 	width:450px;
 	height:150px;
 	padding:20px;
@@ -187,7 +187,7 @@ a{
 #menu-categorias ul img{
 	position:absolute;
 	left:20px; /*este valor debe ser igual al padding de #menu-categorias  .container*/
-	top:60px; /*este valor debe ser igual al padding de #menu-categorias  .container mas el margin-top*/
+	top:40px; /*este valor debe ser igual al padding de #menu-categorias  .container mas el margin-top*/
 	display:none;
 	
 }
@@ -313,6 +313,7 @@ a{
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding:20px;
+	margin-right:0;
 }
 .form{
 	padding:40px;
@@ -642,3 +643,13 @@ margin-left: 10px;
 	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
 }
 /**END PAGES/
+/*CATALOG*/
+.cat-description{
+	padding:20px;
+	border: solid 1px white;
+	margin-bottom:20px;
+}
+.cat-description h3{
+	text-transform:uppercase;
+}
+/*END CATALOG*/

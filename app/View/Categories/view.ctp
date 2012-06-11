@@ -1,115 +1,23 @@
-<div class="categories view">
-<h2><?php  echo __('Category');?></h2>
-	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Name'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Description'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['description']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Image'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['image']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Is Promoted'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['is_promoted']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Order'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['order']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Updated'); ?></dt>
-		<dd>
-			<?php echo h($category['Category']['updated']); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Category'), array('action' => 'edit', $category['Category']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Category'), array('action' => 'delete', $category['Category']['id']), null, __('Are you sure you want to delete # %s?', $category['Category']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Categories'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Category'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Products'), array('controller' => 'products', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Product'), array('controller' => 'products', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
-<div class="related">
-	<h3><?php echo __('Related Products');?></h3>
-	<?php if (!empty($category['Product'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Category Id'); ?></th>
-		<th><?php echo __('Name'); ?></th>
-		<th><?php echo __('Reference'); ?></th>
-		<th><?php echo __('Price'); ?></th>
-		<th><?php echo __('Tax Base'); ?></th>
-		<th><?php echo __('Tax Value'); ?></th>
-		<th><?php echo __('Description'); ?></th>
-		<th><?php echo __('Order'); ?></th>
-		<th><?php echo __('Is Active'); ?></th>
-		<th><?php echo __('Is Promoted'); ?></th>
-		<th><?php echo __('Is Novelty'); ?></th>
-		<th><?php echo __('Is Top Seller'); ?></th>
-		<th><?php echo __('Image'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Updated'); ?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($category['Product'] as $product): ?>
-		<tr>
-			<td><?php echo $product['id'];?></td>
-			<td><?php echo $product['category_id'];?></td>
-			<td><?php echo $product['name'];?></td>
-			<td><?php echo $product['reference'];?></td>
-			<td><?php echo $product['price'];?></td>
-			<td><?php echo $product['tax_base'];?></td>
-			<td><?php echo $product['tax_value'];?></td>
-			<td><?php echo $product['description'];?></td>
-			<td><?php echo $product['order'];?></td>
-			<td><?php echo $product['is_active'];?></td>
-			<td><?php echo $product['is_promoted'];?></td>
-			<td><?php echo $product['is_novelty'];?></td>
-			<td><?php echo $product['is_top_seller'];?></td>
-			<td><?php echo $product['image'];?></td>
-			<td><?php echo $product['created'];?></td>
-			<td><?php echo $product['updated'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'products', 'action' => 'view', $product['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'products', 'action' => 'edit', $product['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'products', 'action' => 'delete', $product['id']), null, __('Are you sure you want to delete # %s?', $product['id'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Product'), array('controller' => 'products', 'action' => 'add'));?> </li>
-		</ul>
+
+<div class="categories view">
+	<?php if(isset($category['Category']['banner']) && !empty($category['Category']['banner'])):?>
+	<div class="banner">
+		<?php echo $category['Category']['banner'];?>
 	</div>
+	<?php endif;?>
+	<div id="left-col">
+		<?php echo $this -> element('novedad'); ?>
+		<?php echo $this -> element('mas-vendidos'); ?>
+	</div>
+	<div id="right-col" style="padding-top:0; padding-right:0; width:650px;">
+		<div class='black-wrapper cat-description'>
+			<h3><?php echo $category['Category']['name'];?></h3>
+			<p>
+			<?php echo $category['Category']['description'];?>
+			</p>
+		</div> 
+		<?php echo $category['Category']['name'];?>
+	</div>
+	<div style="clear:both;"></div>
 </div>
