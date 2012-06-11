@@ -145,8 +145,48 @@ a{
 #main-nav  a:hover{
 	color:black;
 }
-#main-nav ul{
+#main-nav #menu-categorias{
 	position:absolute;
+	background:black;
+	width:450px;
+	height:150px;
+	padding:20px;
+	left:-159px;
+	top:35px;	
+	background:#E62B7C;
+	
+	z-index:1;
+	text-align:left;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border: solid 2px white;
+	border-radius:5px;
+	
+}
+#menu-categorias .foto-categoria{
+
+	width:150px;
+	height:150px;
+	float:left;
+}
+#menu-categorias ul{
+
+}
+#menu-categorias ul li{
+	position:inherit;
+}
+#menu-categorias ul img{
+	position:absolute;
+	left:20px; /*este valor debe ser igual al padding de #menu-categorias*/
+	top:20px; /*este valor debe ser igual al padding de #menu-categorias*/
+	display:none;
+	
+}
+#menu-categorias ul li:hover img{
+	display:block;
+	width:150px;
+	height:150px;
+	z-index:2;
 }
 #content{
 	min-height:400px;
