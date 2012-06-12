@@ -1,3 +1,4 @@
+<?php echo $this -> Html -> css('uploadify'); ?>
 <?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
 <?php echo $this -> Html -> script('upload'); ?>
 <div class="products form">
