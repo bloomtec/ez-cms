@@ -1,3 +1,5 @@
+<?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
+<?php echo $this -> Html -> script('upload'); ?>
 <div class="products form">
 	<?php echo $this -> Form -> create('Product'); ?>
 	<fieldset>
@@ -17,10 +19,15 @@
 		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
 		echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
 		echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-		echo $this -> Form -> input('image', array('label' => 'Imagen'));
+		echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field'));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Crear')); ?>
+</div>
+<div class="images">
+	<h2>Imagen</h2>
+	<div class="preview"></div>
+	<div id="single-upload" controller="products"></div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
@@ -38,7 +45,7 @@
 			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?>
 		</li>
 		<!--<li>
-			<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
+		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
 		</li>-->
 	</ul>
 </div>
