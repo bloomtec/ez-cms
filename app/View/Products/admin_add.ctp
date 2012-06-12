@@ -7,6 +7,7 @@
 		<legend>
 			<?php echo __('Crear Producto'); ?>
 		</legend>
+		<div class="datos">
 		<?php
 		echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
@@ -22,6 +23,12 @@
 		echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
 		echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field'));
 		?>
+		</div>
+		<div class="tallas">
+		<?php
+		echo $this -> Form -> input('ProductSize.size', array('label' => 'Tallas', 'type' => 'select', 'multiple' => 'checkbox'));
+		?>
+		</div>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Crear')); ?>
 </div>

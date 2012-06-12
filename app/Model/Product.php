@@ -16,6 +16,15 @@ class Product extends AppModel {
 	public $displayField = 'name';
 	
 	/**
+	 * Virtual fields
+	 * 
+	 * @var array
+	 */
+	public $virtualFields = array(
+		//'inventory' => 'SELECT * FROM inventories WHERE inventories.product_id = id'
+	);
+	
+	/**
 	 * Validation rules
 	 *
 	 * @var array
@@ -138,7 +147,7 @@ class Product extends AppModel {
 	 *
 	 * @var array
 	 */
-	public $hasOne = array(
+	public $hasMany = array(
 		'Inventory' => array(
 			'className' => 'Inventory',
 			'foreignKey' => 'product_id',

@@ -21,7 +21,9 @@
 			<th class="actions"><?php echo __('Acciones');?></th>
 	</tr>
 	<?php
-	foreach ($products as $product): ?>
+		//debug($products);
+		foreach ($products as $product):
+	?>
 	<tr>
 		<!--<td><?php echo h($product['Product']['id']); ?>&nbsp;</td>-->
 		<td>

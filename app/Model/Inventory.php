@@ -7,11 +7,21 @@ App::uses('AppModel', 'Model');
  * @property ProductSize $ProductSize
  */
 class Inventory extends AppModel {
-/**
- * Validation rules
- *
- * @var array
- */
+	
+	/**
+	 * Virtual Fields
+	 * 
+	 * @var array
+	 */
+	public $virtualFields = array(
+		'size' => 'SELECT product_sizes.name FROM product_sizes WHERE product_sizes.id = Inventory.product_size_id'
+	);
+	
+	/**
+	 * Validation rules
+	 *
+	 * @var array
+	 */
 	public $validate = array(
 		'product_id' => array(
 			'numeric' => array(
@@ -47,11 +57,11 @@ class Inventory extends AppModel {
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
-/**
- * belongsTo associations
- *
- * @var array
- */
+	/**
+	 * belongsTo associations
+	 *
+	 * @var array
+	 */
 	public $belongsTo = array(
 		'Product' => array(
 			'className' => 'Product',

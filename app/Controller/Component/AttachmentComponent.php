@@ -192,7 +192,7 @@ class AttachmentComponent extends Component {
 	 * newHeight: the max height or crop height
 	 * quality: the quality of the image
 	 */
-	function resize_image($cType = 'resize', $tmpfile, $dst_folder, $dstname = false, $newWidth = false, $newHeight = false, $quality = 75) {
+	function resize_image($cType = 'resize', $tmpfile, $dst_folder, $dstname = false, $newWidth = false, $newHeight = false, $quality = 100) {
 		$srcimg = $tmpfile;
 		list($oldWidth, $oldHeight, $type) = getimagesize($srcimg);
 		$ext = $this -> image_type_to_extension($type);

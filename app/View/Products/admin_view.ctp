@@ -124,36 +124,27 @@
 		<!--<li><?php echo $this->Html->link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?> </li>-->
 	</ul>
 </div>
-	<!--<div class="related">
-		<h3><?php echo __('Related Inventories');?></h3>
-	<?php if (!empty($product['Inventory'])):?>
-		<dl>
-			<dt><?php echo __('Id');?></dt>
-		<dd>
-	<?php echo $product['Inventory']['id'];?>
-&nbsp;</dd>
-		<dt><?php echo __('Product Id');?></dt>
-		<dd>
-	<?php echo $product['Inventory']['product_id'];?>
-&nbsp;</dd>
-		<dt><?php echo __('Quantity');?></dt>
-		<dd>
-	<?php echo $product['Inventory']['quantity'];?>
-&nbsp;</dd>
-		<dt><?php echo __('Created');?></dt>
-		<dd>
-	<?php echo $product['Inventory']['created'];?>
-&nbsp;</dd>
-		<dt><?php echo __('Updated');?></dt>
-		<dd>
-	<?php echo $product['Inventory']['updated'];?>
-&nbsp;</dd>
-		</dl>
+<div class="related">
+	<h3><?php echo __('Inventario De Producto'); ?></h3>
+	<?php if (!empty($product['Inventory'])): ?>
+	<table id="sortable" cellpadding="0" cellspacing="0" controller="menu_items">
+		<tbody>
+			<tr class="ui-state-disabled">
+				<th><?php echo __('Talla'); ?></th>
+				<th><?php echo __('Cantidad'); ?></th>
+				<th class="actions"><?php echo __('Acciones'); ?></th>
+			</tr>
+			<?php $i = 0; foreach ($product['Inventory'] as $inventory):	?>
+			<tr id="<?php echo $inventory['id']?>" class="ui-state-default">
+				<td><?php echo $inventory['size']; ?></td>
+				<td><?php echo $inventory['quantity']; ?></td>
+				<td class="actions">
+					<?php echo $this -> Html -> link(__('Modificar'), array('controller' => 'inventories', 'action' => 'edit', $inventory['id'])); ?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php endif; ?>
-		<div class="actions">
-			<ul>
-				<li><?php echo $this->Html->link(__('Edit Inventory'), array('controller' => 'inventories', 'action' => 'edit', $product['Inventory']['id'])); ?></li>
-			</ul>
-		</div>
-	</div>-->
+</div>
 	

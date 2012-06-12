@@ -133,7 +133,20 @@ class ProductsController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> Product -> create();
 			if ($this -> Product -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se guardó el producto'));
+				$inventory_errors = false;
+				
+				/** Crear inventarios */
+				foreach($this -> request -> data['ProductSize']['size'] as $key => $product_size_id) {
+					if(!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $product_size_id)) {
+						$inventory_errors = true;	
+					}
+				}
+				
+				if(!$inventory_errors) {
+					$this -> Session -> setFlash(__('Se guardó el producto'));
+				} else {
+					$this -> Session -> setFlash(__('Se guardó el producto. Error al iniciar inventarios seleccionados'));
+				}
 				$this -> redirect(array('action' => 'index'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
@@ -141,6 +154,9 @@ class ProductsController extends AppController {
 		}
 		$categories = $this -> Product -> Category -> find('list');
 		$this -> set(compact('categories'));
+		$this -> loadModel('ProductSize');
+		$sizes = $this -> ProductSize -> find('list');
+		$this -> set(compact('sizes'));
 	}
 
 	/**
@@ -163,6 +179,21 @@ class ProductsController extends AppController {
 			}
 		} else {
 			$this -> request -> data = $this -> Product -> read(null, $id);
+			//debug($this -> request -> data);
+			$product_sizes = array();
+			foreach($this -> request -> data['Inventory'] as $key => $inventory) {
+				$product_sizes[] = $inventory['product_size_id'];
+			}
+			$this -> loadModel('ProductSize');
+			$sizes = $this -> ProductSize -> find(
+				'list',
+				array(
+					'conditions' => array(
+						'ProductSize.id NOT' => $product_sizes
+					)
+				)
+			);
+			$this -> set(compact('sizes'));
 		}
 		$categories = $this -> Product -> Category -> find('list');
 		$this -> set(compact('categories'));
