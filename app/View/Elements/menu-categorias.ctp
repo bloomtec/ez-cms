@@ -1,7 +1,7 @@
 <div id="menu-categorias">
 	<div class="container">
 		<div class="foto-categoria">
-			
+			<?php echo $this -> Html -> image('logo_borde.png');?>
 		</div>
 		<ul>
 			<?php

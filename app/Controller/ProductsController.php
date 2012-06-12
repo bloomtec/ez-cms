@@ -6,14 +6,50 @@ App::uses('AppController', 'Controller');
  * @property Product $Product
  */
 class ProductsController extends AppController {
-	
+
 	public $components = array('Attachment');
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('uploadify_add');
+		$this -> Auth -> allow('uploadify_add', 'view', 'getNovelty', 'getTopSeller');
 	}
-
+	
+	/**
+	 * getNovedad method
+	 *
+	 * @return Array
+	 */
+	public function getNovelty(){
+		$this -> Product -> recursive=-1;
+		$product = $this -> Product -> find('first',array(
+			'conditions'=>array(
+				'is_novelty'=>true, 
+				/*CONDICION QUE TENGA INGENTARIO*/
+				), 
+			'order'=>'RAND()'
+			)
+		);
+		return $product;
+	}
+	
+	/**
+	 * getTopSeller method
+	 *
+	 * @return Array
+	 */
+	public function getTopSeller(){
+		$this -> Product -> recursive=-1;
+		$product = $this -> Product -> find('first',array(
+			'conditions'=>array(
+				'is_top_seller'=>true, 
+				/*CONDICION QUE TENGA INGENTARIO*/
+				), 
+			'order'=>'RAND()'
+			)
+		);
+		return $product;
+	}
+	
 	/**
 	 * index method
 	 *
