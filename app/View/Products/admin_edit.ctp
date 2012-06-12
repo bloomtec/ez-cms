@@ -26,7 +26,7 @@
 <div class="images">
 	<h2>Imagen</h2>
 	<div class="preview">
-		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['imagen'], array("width" => 200)); ?>
+		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['image'], array("width" => 200)); ?>
 	</div>
 	<div id="single-upload" controller="products"></div>
 </div>

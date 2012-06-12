@@ -6,6 +6,13 @@ App::uses('AppController', 'Controller');
  * @property Product $Product
  */
 class ProductsController extends AppController {
+	
+	public $components = array('Attachment');
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('uploadify_add');
+	}
 
 	/**
 	 * index method
@@ -119,6 +126,28 @@ class ProductsController extends AppController {
 		}
 		$this -> Session -> setFlash(__('No se eliminó el producto'));
 		$this -> redirect(array('action' => 'index'));
+	}
+	
+	function uploadify_add(){
+		if($_POST["name"]&&$_POST["folder"]){
+			$devolver=true;
+			$this->Attachment->resize_image("resize","img/".$_POST["folder"]."/".$_POST["name"],"img/".$_POST["folder"]."/360x360",$_POST["name"],360,360);
+			$this->Attachment->resize_image("resize","img/".$_POST["folder"]."/".$_POST["name"],"img/".$_POST["folder"]."/200x200",$_POST["name"],200,200);
+			$this->Attachment->resize_image("resize","img/".$_POST["folder"]."/".$_POST["name"],"img/".$_POST["folder"]."/100x100",$_POST["name"],100,100);
+			if(isset($_POST["galeriaId"])){
+				$imagen["Image"]["gallery_id"]=$_POST["galeriaId"];
+				$imagen["Image"]["path"]=$_POST["name"];
+				$this->Image->create();
+				$this->Image->save($imagen);
+				$devolver=$this->Image->id;
+			}
+			echo $devolver;
+		}else{
+			echo false;
+		}
+		Configure::write("debug",0);
+		$this->autoRender=false;
+		exit(0);
 	}
 
 }
