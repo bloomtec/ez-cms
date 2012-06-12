@@ -318,8 +318,7 @@ a{
 	/*width: 630px;*/
 	min-height: 347px;
 	margin-left: 20px;
-	overflow-x: hidden;
-	overflow-y: auto;
+	overflow:visible;
 	padding:20px;
 	margin-right:0;
 	padding-top:0; 
@@ -799,5 +798,113 @@ margin-left: 10px;
 }
 .galeria .control div.reset {
 	background: url("../img/b_reset_inac.png") no-repeat;
+}
+	/*End Gallery*/
+.caracteristicas{
+	float:right;
+	width:280px;
+}
+a.boton-favoritos {
+	background: url("../img/bfav.png") no-repeat;
+	display: block;
+	float: left;
+	height: 32px;
+	line-height: 30px;
+	padding-left: 37px;
+}
+a.boton-carrito {
+	background: url("../img/bcar.png") no-repeat;
+	display: block;
+	float: left;
+	height: 32px;
+	line-height: 30px;
+	padding-left: 37px;
+}
+a.boton-facebook {
+	background: url("../img/bface.png") no-repeat;
+	display: block;
+	float: left;
+	height: 32px;
+	line-height: 30px;
+	padding-left: 37px;
+	font-size:14px;
+}
+a.boton-twitter {
+	background: url("../img/btwitter.png") no-repeat;
+	display: block;
+	float: left;
+	height: 32px;
+	line-height: 30px;
+	padding-left: 37px;
+	font-size:14px;
+	cursor:pointer;
+}
+ul.botones-caracteristicas {
+	margin: 10px 0;
+}
+ul.botones-caracteristicas li {
+	clear:left;
+	margin:5px 0;
+}
+ul.botones-caracteristicas li.social{
+	margin:15px 0;
+}
+ul.botones-caracteristicas a:link, ul.botones-caracteristicas a:active, ul.botones-caracteristicas a:visited {
+	color:white;
+	font-size: 14px;
+}
+ul.botones-caracteristicas a:hover {
+	color: #E62B7C;
+	font-size: 14px;
+}
+.caracteristicas p.precio {
+	font-size:17px;
+	font-weight: bold;
+	margin:5px 0 10px 0;
+}
+
+.tallas {
+	margin:5px 0;
+	font-size:15px;
+	position:absolute;
+	bottom:-100px;
+	display:none;
+	left:0;
+}
+ul.cuadros-colores li.selected  .tallas {
+	display:block;
+}
+ul.cuadros-tallas {
+	height: 25px;
+	margin-top:12px;
+}
+ul.cuadros-tallas li:first-child {
+	margin: 0;
+}
+ul.cuadros-tallas li {
+	border: 1px solid #fff;
+	width: 25px;
+	height: 25px;
+	display: block;
+	float:left;
+	list-style: none;
+	margin-left: 15px;
+	cursor: pointer;
+	text-align: center;
+	line-height: 26px;
+}
+ul.cuadros-tallas li.selected, ul.cuadros-colores li.selected {
+	border: 2px solid #E62B7C;
+}
+.add-confirm, .add-cart{
+	display:none;
+}
+#promocion h1 img.carrito{
+	width:33px; 
+	line-height:60px; 
+	box-shadow:none; 
+	-moz-box-shadow:none;
+	-webkit-box-shadow:none;
+	vertical-align:middle;
 }
 /*END CATALOG*/

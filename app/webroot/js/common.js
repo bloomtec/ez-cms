@@ -24,5 +24,9 @@ $(function() {
 	   days:         'Domingo,Lunes,Martes,Miércoles,Jueves,Viernes,Sábado',
 	   shortDays:    'Dom,Lun,Mar,Mie,Jue,Vie,Sab'	   
    });
+   //CARRITO
+   $('.boton-favoritos').click(function(){
+		
+   });
 
 });
