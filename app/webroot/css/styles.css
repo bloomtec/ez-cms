@@ -307,17 +307,20 @@ a{
 	min-height:300px;
 }
 #left-col{
-	width:270px;
+	width:240px;
 }
 #right-col{
 	float: left;
-	width: 630px;
+	/*width: 630px;*/
 	min-height: 347px;
 	margin-left: 20px;
 	overflow-x: hidden;
 	overflow-y: auto;
 	padding:20px;
 	margin-right:0;
+	padding-top:0; 
+	padding-right:0; 
+	width:680px;
 }
 .form{
 	padding:40px;
@@ -623,7 +626,7 @@ margin-left: 10px;
 }
 .caja-producto-lateral .button{
 	display:block;
-	margin: 20px auto;
+	margin: 15px auto;
 }
 #promocion {
 	color: white;
@@ -631,6 +634,12 @@ margin-left: 10px;
 	width: 100%;
 	margin-bottom: 20px;
 	text-align: center;
+}
+#promocion img{
+	-moz-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	width:215px;
 }
 #promocion p {
 	font-size: 16px;
@@ -652,7 +661,7 @@ margin-left: 10px;
 	padding:5px;
 	border: solid 1px white;
 	margin-bottom:20px;
-	height:100px;
+	height:130px;
 }
 .cat-description h3{
 	text-transform:uppercase;
@@ -660,11 +669,11 @@ margin-left: 10px;
 .catalogo-productos li{
 	display: block;
 	float: left;
-	width: 200px;
+	width: 215px;
 	color: white;
 	text-align: center;
 	margin-bottom: 15px;
-	margin-right:25px;
+	margin-right:17px;
 }
 .catalogo-productos li.last{
 	margin-right:0;
@@ -673,12 +682,12 @@ margin-left: 10px;
 	-moz-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
 	-webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
 	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	width:215px;
 }
 .catalogo-productos a{
 	display:block;
 	font-size: 16px;
-	margin-top:10px;
-	margin-bottom:5px;
+	margin:10px 0;
 }
 .catalogo-productos a:hover{
 	color:#E62B7C;
@@ -686,5 +695,105 @@ margin-left: 10px;
 .catalogo-productos span.price{
 	font-size: 16px;
 	font-weight:bold;
+}
+.paginado{
+	clear:both;
+	margin-top: 20px;
+}
+.paginado p{
+	float:left;
+	margin:0;
+	margin-top:5px;
+}
+.paging {
+	float:right;
+	color: #ccc;
+	
+}
+.paging .current, .paging .disabled, .paging a {
+	text-decoration: none;
+	padding: 5px 8px;
+	display: inline-block
+}
+.paging > span {
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-left: 0;
+}
+.paging > span:hover {
+	
+}
+.paging .prev {
+	border-left: 1px solid #ccc;
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+.paging .next {
+	-moz-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	border-radius: 0 4px 4px 0;
+}
+.paging .first{
+	border-right: none;
+	border-left: 1px solid #ccc;
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+}
+.next.last{
+
+}
+.paging .disabled {
+	color: #ddd;
+}
+.paging .disabled:hover {
+	background: transparent;
+}
+.paging .current {
+	font-weight:bold;
+	color:#E62B7C;
+}
+
+	/*Galeria*/
+.galeria {
+	float: left;
+	width: 360px;
+}
+.galeria .imagen-container {
+	width: 360px;
+	height: 360px;
+	position: relative;
+	overflow: hidden;
+	box-shadow: 6px 6px 6px 	rgba(0, 0, 0, 0.6);
+}
+.galeria .imagen-container img {
+	left: 0;
+	top: 0;
+	position: absolute;
+	width: 360px;
+	height: 360px;
+}
+.galeria .control {
+	margin: 15px auto;
+	width: 150px;
+}
+.botones {
+	cursor: pointer;
+	float: left;
+	width: 43px;
+	height: 43px;
+	text-indent: -999px;
+}
+
+.galeria .control div.zoom-in {
+	background: url("../img/b_zoom_in_inac.png") no-repeat;
+}
+.galeria .control div.zoom-out {
+	background: url("../img/b_zoom_out_inac.png") no-repeat;
+	margin: 0 10px;
+}
+.galeria .control div.reset {
+	background: url("../img/b_reset_inac.png") no-repeat;
 }
 /*END CATALOG*/
