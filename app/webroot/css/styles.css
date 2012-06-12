@@ -147,11 +147,15 @@ a{
 }
 #main-nav #menu-categorias{
 	position:absolute;
-	left:-159px;
+	left:-175px;
 	top:13px;	
 	z-index:1;
 	display:none;
-	
+}
+#menu-categorias .detalle-submenu{
+	position:absolute;
+	left:50%;
+	margin-left:-23px;
 }
 #main-nav li:hover #menu-categorias{
 	display:block;
