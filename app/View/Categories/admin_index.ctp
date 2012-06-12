@@ -1,5 +1,5 @@
 <div class="categories index">
-	<h2><?php echo __('Categories');?></h2>
+	<h2><?php echo __('Categorías');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<!--<th><?php echo $this->Paginator->sort('id');?></th>-->

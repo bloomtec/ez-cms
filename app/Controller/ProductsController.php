@@ -16,11 +16,24 @@ class ProductsController extends AppController {
 			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
 			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
 		}
+		if(!$this -> checkIfCategoryExists()) {
+			$this -> Session -> setFlash('No hay categorías creadas, cree al menos una categoría.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'categories', 'action' => 'index'));
+		}
 	}
 	
 	private function checkIfSizeExists() {
 		$this -> loadModel('ProductSize');
 		if($this -> ProductSize -> find('count')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	private function checkIfCategoryExists() {
+		$this -> loadModel('Category');
+		if($this -> Category -> find('count')) {
 			return true;
 		} else {
 			return false;

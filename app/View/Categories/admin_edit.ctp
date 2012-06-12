@@ -1,3 +1,6 @@
+<?php echo $this -> Html -> css('uploadify'); ?>
+<?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
+<?php echo $this -> Html -> script('upload'); ?>
 <div class="categories form">
 	<?php echo $this -> Form -> create('Category'); ?>
 	<fieldset>
@@ -8,12 +11,20 @@
 		echo $this -> Form -> input('id');
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
 		echo $this -> Form -> input('description', array('label' => 'Descripción'));
-		echo $this -> Form -> input('image', array('label' => 'Imagen'));
+		echo $this -> Form -> input('banner', array('label' => 'Banner', 'class' => 'editor'));
+		echo $this -> Form -> hidden('image', array('label' => 'Imagen', "value" => $this -> data["Category"]["image"]));
 		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionada'));
 		//echo $this -> Form -> input('order', array('label' => 'Posición'));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
+</div>
+<div class="images">
+	<h2>Imagen</h2>
+	<div class="preview">
+		<?php echo $this -> Html -> image("uploads/" . $this -> data['Category']['image'], array("width" => 200)); ?>
+	</div>
+	<div id="single-upload" controller="products"></div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>

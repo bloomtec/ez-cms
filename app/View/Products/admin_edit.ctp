@@ -1,3 +1,6 @@
+<?php echo $this -> Html -> css('uploadify'); ?>
+<?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
+<?php echo $this -> Html -> script('upload'); ?>
 <div class="products form">
 	<?php echo $this -> Form -> create('Product'); //debug($this -> data); ?>
 	<fieldset>
@@ -30,9 +33,6 @@
 	</div>
 	<div id="single-upload" controller="products"></div>
 </div>
-<?php echo $this -> Html -> css('uploadify'); ?>
-<?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
-<?php echo $this -> Html -> script('upload'); ?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
