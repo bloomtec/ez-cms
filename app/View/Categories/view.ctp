@@ -17,7 +17,25 @@
 			<?php echo $category['Category']['description'];?>
 			</p>
 		</div> 
-		<?php echo $category['Category']['name'];?>
+		<?php 
+			$product=array(
+				"reference"=>"161220",
+				"image"=>"http://priceshoes.com.co/img/uploads/200x200/7612205391311285939421453.jpg",
+				"price"=>"50000",
+				"id"=>"1",
+				"name"=>"prueba"
+			);
+		?>
+		<ul class="catalogo-productos">
+			<?php for($i=1;$i<10;):?>
+			<li <?php if($i%3 == 0) echo "class='last'"?> > 
+				<?php echo $this -> Html -> link($this -> Html -> image($product['image']),array("controller"=>"products","action"=>"view",$product['id']),array('escape'=>false));?>
+				<?php echo $this -> Html -> link($product['name'],array("controller"=>"products","action"=>"view",$product['id'])); ?>
+				<span class="price"><?php echo "$".number_format($product['price'], 0, ' ', '.'); ?></span>
+			</li>
+			<?php $i+=1; ?>
+			<?php endfor;?>
+		</ul>
 	</div>
 	<div style="clear:both;"></div>
 </div>

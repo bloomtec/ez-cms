@@ -645,11 +645,42 @@ margin-left: 10px;
 /**END PAGES/
 /*CATALOG*/
 .cat-description{
-	padding:20px;
+	padding:5px;
 	border: solid 1px white;
 	margin-bottom:20px;
+	height:100px;
 }
 .cat-description h3{
 	text-transform:uppercase;
+}
+.catalogo-productos li{
+	display: block;
+	float: left;
+	width: 200px;
+	color: white;
+	text-align: center;
+	margin-bottom: 15px;
+	margin-right:25px;
+}
+.catalogo-productos li.last{
+	margin-right:0;
+}
+.catalogo-productos img{
+	-moz-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+	box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+}
+.catalogo-productos a{
+	display:block;
+	font-size: 16px;
+	margin-top:10px;
+	margin-bottom:5px;
+}
+.catalogo-productos a:hover{
+	color:#E62B7C;
+}
+.catalogo-productos span.price{
+	font-size: 16px;
+	font-weight:bold;
 }
 /*END CATALOG*/
