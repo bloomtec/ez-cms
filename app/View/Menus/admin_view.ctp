@@ -40,8 +40,7 @@
 				<th><?php echo __('Modificado'); ?></th>
 				<th class="actions"><?php echo __('Acciones'); ?></th>
 			</tr>
-			<?php $i = 0; foreach ($menu['MenuItem'] as $menuItem):
-			?>
+			<?php $i = 0; foreach ($menu['MenuItem'] as $menuItem):	?>
 			<tr id="<?php echo $menuItem['id']?>" class="ui-state-default">
 				<td class="position"><?php echo $menuItem['position']; ?></td>
 				<td><?php echo $menuItem['name']; ?></td>

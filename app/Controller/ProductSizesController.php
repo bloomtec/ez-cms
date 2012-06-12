@@ -37,6 +37,10 @@ class ProductSizesController extends AppController {
 	 */
 	public function admin_index() {
 		$this -> ProductSize -> recursive = 0;
+		$this -> paginate = array(
+			'order' => array('ProductSize.order' => 'ASC'),
+			'limit' => 1000
+		);
 		$this -> set('productSizes', $this -> paginate());
 	}
 
@@ -49,10 +53,10 @@ class ProductSizesController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> ProductSize -> create();
 			if ($this -> ProductSize -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The product size has been saved'));
+				$this -> Session -> setFlash(__('Se agregó la talla'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The product size could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'));
 			}
 		}
 	}
@@ -70,10 +74,10 @@ class ProductSizesController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> ProductSize -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The product size has been saved'));
+				$this -> Session -> setFlash(__('Se agregó la talla'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The product size could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'));
 			}
 		} else {
 			$this -> request -> data = $this -> ProductSize -> read(null, $id);
