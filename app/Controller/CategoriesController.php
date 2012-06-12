@@ -22,7 +22,10 @@ class CategoriesController extends AppController {
 		if (!$this -> Category -> exists()) {
 			throw new NotFoundException(__('Categoría no válida'));
 		}
-		$this -> set('category', $this -> Category -> read(null, $id));
+		$products = $this -> paginate('Product',array('conditions'=>array('Product.category_id'=>$id)));
+		$this -> Category -> recursive = -1;
+		$category= $this -> Category -> read(null, $id);
+		$this -> set(compact('category','products'));
 	}
 
 	/**
