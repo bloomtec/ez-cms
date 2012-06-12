@@ -12,6 +12,19 @@ class ProductsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this -> Auth -> allow('uploadify_add', 'view', 'getNovelty', 'getTopSeller');
+		if(!$this -> checkIfSizeExists()) {
+			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
+		}
+	}
+	
+	private function checkIfSizeExists() {
+		$this -> loadModel('ProductSize');
+		if($this -> ProductSize -> find('count')) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**

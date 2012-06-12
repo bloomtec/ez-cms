@@ -4,6 +4,7 @@ App::uses('AppModel', 'Model');
  * Inventory Model
  *
  * @property Product $Product
+ * @property ProductSize $ProductSize
  */
 class Inventory extends AppModel {
 /**
@@ -13,6 +14,16 @@ class Inventory extends AppModel {
  */
 	public $validate = array(
 		'product_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'product_size_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -45,6 +56,13 @@ class Inventory extends AppModel {
 		'Product' => array(
 			'className' => 'Product',
 			'foreignKey' => 'product_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'ProductSize' => array(
+			'className' => 'ProductSize',
+			'foreignKey' => 'product_size_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
