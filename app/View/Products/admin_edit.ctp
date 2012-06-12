@@ -1,5 +1,5 @@
 <div class="products form">
-	<?php echo $this -> Form -> create('Product'); ?>
+	<?php echo $this -> Form -> create('Product'); //debug($this -> data); ?>
 	<fieldset>
 		<legend>
 			<?php echo __('Modificar Producto'); ?>
@@ -18,11 +18,21 @@
 		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
 		echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
 		echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-		echo $this -> Form -> input('image', array('label' => 'Imagen'));
+		echo $this -> Form -> hidden('image', array('label' => 'Imagen', "value" => $this -> data["Product"]["image"]));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
+<div class="images">
+	<h2>Imagen</h2>
+	<div class="preview">
+		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['imagen'], array("width" => 200)); ?>
+	</div>
+	<div id="single-upload" controller="products"></div>
+</div>
+<?php echo $this -> Html -> css('uploadify'); ?>
+<?php echo $this -> Html -> script('jquery.uploadify.min'); ?>
+<?php echo $this -> Html -> script('upload'); ?>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -42,7 +52,7 @@
 			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?>
 		</li>
 		<!--<li>
-			<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
+		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
 		</li>-->
 	</ul>
 </div>
