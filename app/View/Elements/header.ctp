@@ -1,3 +1,4 @@
+<?php debug($this -> requestAction('/b_cart/shopping_carts/get')); ?>
 <div id="header">
 	<h1 class='logo'><a href="/"> PRICE SHOES </a></h1>
 	<div class="left">

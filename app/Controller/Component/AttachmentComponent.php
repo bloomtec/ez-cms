@@ -193,154 +193,160 @@ class AttachmentComponent extends Component {
 	 * quality: the quality of the image
 	 */
 	function resize_image($cType = 'resize', $tmpfile, $dst_folder, $dstname = false, $newWidth = false, $newHeight = false, $quality = 100) {
-		$srcimg = $tmpfile;
-		list($oldWidth, $oldHeight, $type) = getimagesize($srcimg);
-		$ext = $this -> image_type_to_extension($type);
-
-		// If file is writeable, create destination (tmp) image
-		if (is_writeable($dst_folder)) {
-			$dstimg = $dst_folder . DS . $dstname;
-		} else {
-			// if dst_folder not writeable, let developer know
-			debug('You must allow proper permissions for image processing. And the folder has to be writable.');
-			debug("Run 'chmod 755 $dst_folder', and make sure the web server is it's owner.");
-			return $this -> log_cakephp_error_and_return('No write permissions on attachments folder.');
-		}
-
-		/* Check if something is requested, otherwise do not resize */
-		if ($newWidth or $newHeight) {
-			/* Delete tmp file if it exists */
-			if (file_exists($dstimg)) {
-				unlink($dstimg);
+		$srcimg = IMAGES . $tmpfile;
+		
+		if(file_exists($srcimg)) {
+			list($oldWidth, $oldHeight, $type) = getimagesize($srcimg);
+			$ext = $this -> image_type_to_extension($type);
+	
+			// If file is writeable, create destination (tmp) image
+			if (is_writeable($dst_folder)) {
+				$dstimg = $dst_folder . DS . $dstname;
 			} else {
-				switch ($cType) {
-					default :
-					case 'resize' :
-						// Maintains the aspect ratio of the image and makes sure
-						// that it fits within the maxW and maxH
-						$widthScale = 2;
-						$heightScale = 2;
-
-						/* Check if we're overresizing (or set new scale) */
-						if ($newWidth) {
+				// if dst_folder not writeable, let developer know
+				debug('You must allow proper permissions for image processing. And the folder has to be writable.');
+				debug("Run 'chmod 755 $dst_folder', and make sure the web server is it's owner.");
+				return $this -> log_cakephp_error_and_return('No write permissions on attachments folder.');
+			}
+	
+			/* Check if something is requested, otherwise do not resize */
+			if ($newWidth or $newHeight) {
+				/* Delete tmp file if it exists */
+				if (file_exists($dstimg)) {
+					unlink($dstimg);
+				} else {
+					switch ($cType) {
+						default :
+						case 'resize' :
+							// Maintains the aspect ratio of the image and makes sure
+							// that it fits within the maxW and maxH
+							$widthScale = 2;
+							$heightScale = 2;
+	
+							/* Check if we're overresizing (or set new scale) */
+							if ($newWidth) {
+								if ($newWidth > $oldWidth)
+									$newWidth = $oldWidth;
+								$widthScale = $newWidth / $oldWidth;
+							}
+							if ($newHeight) {
+								if ($newHeight > $oldHeight)
+									$newHeight = $oldHeight;
+								$heightScale = $newHeight / $oldHeight;
+							}
+							if ($widthScale < $heightScale) {
+								$maxWidth = $newWidth;
+								$maxHeight = false;
+							} elseif ($widthScale > $heightScale) {
+								$maxHeight = $newHeight;
+								$maxWidth = false;
+							} else {
+								$maxHeight = $newHeight;
+								$maxWidth = $newWidth;
+							}
+	
+							if ($maxWidth > $maxHeight) {
+								$applyWidth = $maxWidth;
+								$applyHeight = ($oldHeight * $applyWidth) / $oldWidth;
+							} elseif ($maxHeight > $maxWidth) {
+								$applyHeight = $maxHeight;
+								$applyWidth = ($applyHeight * $oldWidth) / $oldHeight;
+							} else {
+								$applyWidth = $maxWidth;
+								$applyHeight = $maxHeight;
+							}
+							$startX = 0;
+							$startY = 0;
+							break;
+	
+						case 'resizeCrop' :
+							/* Check if we're overresizing (or set new scale) */
+							/* resize to max, then crop to center */
 							if ($newWidth > $oldWidth)
 								$newWidth = $oldWidth;
-							$widthScale = $newWidth / $oldWidth;
-						}
-						if ($newHeight) {
+							$ratioX = $newWidth / $oldWidth;
+	
 							if ($newHeight > $oldHeight)
 								$newHeight = $oldHeight;
-							$heightScale = $newHeight / $oldHeight;
-						}
-						if ($widthScale < $heightScale) {
-							$maxWidth = $newWidth;
-							$maxHeight = false;
-						} elseif ($widthScale > $heightScale) {
-							$maxHeight = $newHeight;
-							$maxWidth = false;
-						} else {
-							$maxHeight = $newHeight;
-							$maxWidth = $newWidth;
-						}
-
-						if ($maxWidth > $maxHeight) {
-							$applyWidth = $maxWidth;
-							$applyHeight = ($oldHeight * $applyWidth) / $oldWidth;
-						} elseif ($maxHeight > $maxWidth) {
-							$applyHeight = $maxHeight;
-							$applyWidth = ($applyHeight * $oldWidth) / $oldHeight;
-						} else {
-							$applyWidth = $maxWidth;
-							$applyHeight = $maxHeight;
-						}
-						$startX = 0;
-						$startY = 0;
-						break;
-
-					case 'resizeCrop' :
-						/* Check if we're overresizing (or set new scale) */
-						/* resize to max, then crop to center */
-						if ($newWidth > $oldWidth)
-							$newWidth = $oldWidth;
-						$ratioX = $newWidth / $oldWidth;
-
-						if ($newHeight > $oldHeight)
-							$newHeight = $oldHeight;
-						$ratioY = $newHeight / $oldHeight;
-
-						if ($ratioX < $ratioY) {
-							$startX = round(($oldWidth - ($newWidth / $ratioY)) / 2);
-							$startY = 0;
-							$oldWidth = round($newWidth / $ratioY);
-							$oldHeight = $oldHeight;
-						} else {
-							$startX = 0;
-							$startY = round(($oldHeight - ($newHeight / $ratioX)) / 2);
-							$oldWidth = $oldWidth;
-							$oldHeight = round($newHeight / $ratioX);
-						}
-						$applyWidth = $newWidth;
-						$applyHeight = $newHeight;
-						break;
-
-					case 'crop' :
-						// straight centered crop
-						$startY = ($oldHeight - $newHeight) / 2;
-						$startX = ($oldWidth - $newWidth) / 2;
-						$oldHeight = $newHeight;
-						$applyHeight = $newHeight;
-						$oldWidth = $newWidth;
-						$applyWidth = $newWidth;
-						break;
+							$ratioY = $newHeight / $oldHeight;
+	
+							if ($ratioX < $ratioY) {
+								$startX = round(($oldWidth - ($newWidth / $ratioY)) / 2);
+								$startY = 0;
+								$oldWidth = round($newWidth / $ratioY);
+								$oldHeight = $oldHeight;
+							} else {
+								$startX = 0;
+								$startY = round(($oldHeight - ($newHeight / $ratioX)) / 2);
+								$oldWidth = $oldWidth;
+								$oldHeight = round($newHeight / $ratioX);
+							}
+							$applyWidth = $newWidth;
+							$applyHeight = $newHeight;
+							break;
+	
+						case 'crop' :
+							// straight centered crop
+							$startY = ($oldHeight - $newHeight) / 2;
+							$startX = ($oldWidth - $newWidth) / 2;
+							$oldHeight = $newHeight;
+							$applyHeight = $newHeight;
+							$oldWidth = $newWidth;
+							$applyWidth = $newWidth;
+							break;
+					}
+	
+					switch($ext) {
+						case 'gif' :
+							$oldImage = imagecreatefromgif($srcimg);
+							break;
+						case 'png' :
+							$oldImage = imagecreatefrompng($srcimg);
+							break;
+						case 'jpg' :
+						case 'jpeg' :
+							$oldImage = imagecreatefromjpeg($srcimg);
+							break;
+						default :
+							// image type is not a possible option
+							return false;
+							break;
+					}
+	
+					// Create new image
+					$newImage = imagecreatetruecolor($applyWidth, $applyHeight);
+					// Put old image on top of new image
+					imagealphablending($newImage, false);
+					imagesavealpha($newImage, true);
+					imagecopyresampled($newImage, $oldImage, 0, 0, $startX, $startY, $applyWidth, $applyHeight, $oldWidth, $oldHeight);
+	
+					switch($ext) {
+						case 'gif' :
+							imagegif($newImage, $dstimg, $quality);
+							break;
+						case 'png' :
+							imagepng($newImage, $dstimg, round($quality / 10));
+							break;
+						case 'jpg' :
+						case 'jpeg' :
+							imagejpeg($newImage, $dstimg, $quality);
+							break;
+						default :
+							return false;
+							break;
+					}
+	
+					imagedestroy($newImage);
+					imagedestroy($oldImage);
+					return true;
 				}
-
-				switch($ext) {
-					case 'gif' :
-						$oldImage = imagecreatefromgif($srcimg);
-						break;
-					case 'png' :
-						$oldImage = imagecreatefrompng($srcimg);
-						break;
-					case 'jpg' :
-					case 'jpeg' :
-						$oldImage = imagecreatefromjpeg($srcimg);
-						break;
-					default :
-						// image type is not a possible option
-						return false;
-						break;
-				}
-
-				// Create new image
-				$newImage = imagecreatetruecolor($applyWidth, $applyHeight);
-				// Put old image on top of new image
-				imagealphablending($newImage, false);
-				imagesavealpha($newImage, true);
-				imagecopyresampled($newImage, $oldImage, 0, 0, $startX, $startY, $applyWidth, $applyHeight, $oldWidth, $oldHeight);
-
-				switch($ext) {
-					case 'gif' :
-						imagegif($newImage, $dstimg, $quality);
-						break;
-					case 'png' :
-						imagepng($newImage, $dstimg, round($quality / 10));
-						break;
-					case 'jpg' :
-					case 'jpeg' :
-						imagejpeg($newImage, $dstimg, $quality);
-						break;
-					default :
-						return false;
-						break;
-				}
-
-				imagedestroy($newImage);
-				imagedestroy($oldImage);
-				return true;
+			} else {/* Nothing requested */
+				return false;
 			}
-		} else {/* Nothing requested */
+		} else {
 			return false;
 		}
+		
 	}
 
 	/* Many helper functions */

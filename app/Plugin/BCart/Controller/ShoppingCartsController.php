@@ -20,7 +20,18 @@ class ShoppingCartsController extends BCartAppController {
 		$user_id = $this -> Auth -> user('id');
 		if($user_id) {
 			/** hay usuario logueado **/
-			
+			$shopping_cart = $this -> ShoppingCart -> findByUserId($user_id);
+			if($shopping_cart) {
+				return $shopping_cart;
+			} else {
+				$this -> ShoppingCart -> create();
+				$shopping_cart = array('ShoppingCart' => array('user_id' => $user_id));
+				if($this -> ShoppingCart -> save($shopping_cart)) {
+					return $this -> ShoppingCart -> read(null, $this -> ShoppingCart -> id);
+				} else {
+					return array();
+				}
+			}
 		} else {
 			/** no hay usuario logueado **/
 			if(!$this -> readCookie()) {
