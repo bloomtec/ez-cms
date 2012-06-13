@@ -1,13 +1,13 @@
 $(document).ready(function() {
-	
-	var server = "";
+
+	var server = "/";
 	var path = "img/uploads";
 
 	$('#single-upload').uploadify({
-		'uploader' : server + 'swf/uploadify.swf',
-		'script' : server + 'uploadify.php',
+		'swf' : server +'swf/uploadify.swf',
+		'uploader' : server +'uploadify.php',
 		'folder' : server + path,
-		'buttonImg' : server + 'img/subir-imagenes.png',
+		'buttonText' : 'Subir Imagen',
 		'width' : 147,
 		'height' : 37,
 		'auto' : true,
