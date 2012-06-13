@@ -12,14 +12,6 @@ class ProductsController extends AppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this -> Auth -> allow('uploadify_add', 'view', 'getNovelty', 'getTopSeller');
-		if(!$this -> checkIfSizeExists()) {
-			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
-			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
-		}
-		if(!$this -> checkIfCategoryExists()) {
-			$this -> Session -> setFlash('No hay categorías creadas, cree al menos una categoría.', 'crud/error');
-			$this -> redirect(array('plugin' => false, 'controller' => 'categories', 'action' => 'index'));
-		}
 	}
 	
 	private function checkIfSizeExists() {
@@ -130,6 +122,14 @@ class ProductsController extends AppController {
 	 * @return void
 	 */
 	public function admin_add() {
+		if(!$this -> checkIfSizeExists()) {
+			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
+		}
+		if(!$this -> checkIfCategoryExists()) {
+			$this -> Session -> setFlash('No hay categorías creadas, cree al menos una categoría.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'categories', 'action' => 'index'));
+		}
 		if ($this -> request -> is('post')) {
 			$this -> Product -> create();
 			if ($this -> Product -> save($this -> request -> data)) {
