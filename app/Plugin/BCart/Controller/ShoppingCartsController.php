@@ -57,13 +57,10 @@ class ShoppingCartsController extends BCartAppController {
 			/** llegó la info proceder a guardar **/
 			$user_id = $this -> getUserId();
 			if($user_id) {
-				echo 'hay usuario<br /><br />';
 				/** tratar de obtener el carrito de la BD y verificar si existe **/
 				$shopping_cart = $this -> get();
-				print_r($shopping_cart); echo '<br /><br />';
 				if($shopping_cart) {
 					/** carrito existe, agregar el ítem **/
-					echo 'hay carrito, crear el item de carrito<br /><br />';
 					$cart_item = array(
 						'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
 						'product_id' => $product_id,
@@ -72,10 +69,8 @@ class ShoppingCartsController extends BCartAppController {
 					);
 					$this -> ShoppingCart -> CartItem -> create();
 					if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
-						echo 'se creó el item de carrito<br /><br />';
 						$shopping_cart['success'] = true;
 					} else {
-						echo 'no se creó el item de carrito<br /><br />';
 						$shopping_cart['success'] = false;
 					}
 					echo json_encode($shopping_cart);
