@@ -18,21 +18,7 @@ class InventoriesController extends AppController {
 	}
 
 	/**
-	 * admin_view method
-	 *
-	 * @param string $id
-	 * @return void
-	 */
-	public function admin_view($id = null) {
-		$this -> Inventory -> id = $id;
-		if (!$this -> Inventory -> exists()) {
-			throw new NotFoundException(__('Invalid inventory'));
-		}
-		$this -> set('inventory', $this -> Inventory -> read(null, $id));
-	}
-
-	/**
-	 * admin_add method
+	 * addInventory method
 	 *
 	 * @return void
 	 */
@@ -51,53 +37,40 @@ class InventoriesController extends AppController {
 			return false;
 		}
 	}
-
+	
 	/**
-	 * admin_edit method
-	 *
-	 * @param string $id
+	 * modifyInventory
+	 * 
 	 * @return void
 	 */
-	public function admin_edit($id = null) {
-		$this -> Inventory -> id = $id;
-		if (!$this -> Inventory -> exists()) {
-			throw new NotFoundException(__('Invalid inventory'));
-		}
-		if ($this -> request -> is('post') || $this -> request -> is('put')) {
-			if ($this -> Inventory -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The inventory has been saved'));
-				$this -> redirect(array('action' => 'index'));
+	public function modifyInventory($inventory_id = null, $action = null, $amount_to_modify = null) {
+		if($inventory_id && $action && $amount_to_modify) {
+			$inventory = $this -> Inventory -> read(null, $inventory_id);
+			if($inventory) {
+				$quantity = $inventory['Inventory']['quantity'];
+				if($action == 'add') {
+					$quantity += $amount_to_modify;
+				} elseif($action == 'substract') {
+					if($amount_to_modify > $quantity) {
+						return false;
+					} else {
+						$quantity -= $amount_to_modify;
+					}
+				} else {
+					return false;
+				}
+				$inventory['Inventory']['quantity'] = $quantity;
+				if($this -> Inventory -> save($inventory)) {
+					return true;
+				} else {
+					return false;
+				}
 			} else {
-				$this -> Session -> setFlash(__('The inventory could not be saved. Please, try again.'));
+				return false;
 			}
 		} else {
-			$this -> request -> data = $this -> Inventory -> read(null, $id);
+			return false;
 		}
-		$products = $this -> Inventory -> Product -> find('list');
-		$productSizes = $this -> Inventory -> ProductSize -> find('list');
-		$this -> set(compact('products', 'productSizes'));
-	}
-
-	/**
-	 * admin_delete method
-	 *
-	 * @param string $id
-	 * @return void
-	 */
-	public function admin_delete($id = null) {
-		if (!$this -> request -> is('post')) {
-			throw new MethodNotAllowedException();
-		}
-		$this -> Inventory -> id = $id;
-		if (!$this -> Inventory -> exists()) {
-			throw new NotFoundException(__('Invalid inventory'));
-		}
-		if ($this -> Inventory -> delete()) {
-			$this -> Session -> setFlash(__('Inventory deleted'));
-			$this -> redirect(array('action' => 'index'));
-		}
-		$this -> Session -> setFlash(__('Inventory was not deleted'));
-		$this -> redirect(array('action' => 'index'));
 	}
 
 }

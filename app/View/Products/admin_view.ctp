@@ -119,12 +119,12 @@
 	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $product['Product']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?> </li>
+		<!--<li><?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?> </li>-->
 		<li><?php echo $this->Html->link(__('Ver Productos'), array('action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Agregar Producto'), array('action' => 'add')); ?> </li>
 		<li><?php echo $this->Html->link(__('Ver Categorías'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?> </li>
+		<!--<li><?php echo $this->Html->link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?> </li>-->
 		<!--<li><?php echo $this->Html->link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?> </li>-->
 	</ul>
 </div>
@@ -136,15 +136,11 @@
 			<tr class="ui-state-disabled">
 				<th><?php echo __('Talla'); ?></th>
 				<th><?php echo __('Cantidad'); ?></th>
-				<th class="actions"><?php echo __('Acciones'); ?></th>
 			</tr>
 			<?php $i = 0; foreach ($product['Inventory'] as $inventory):	?>
 			<tr id="<?php echo $inventory['id']?>" class="ui-state-default">
 				<td><?php echo $inventory['size']; ?></td>
 				<td><?php echo $inventory['quantity']; ?></td>
-				<td class="actions">
-					<?php echo $this -> Html -> link(__('Modificar'), array('controller' => 'inventories', 'action' => 'edit', $inventory['id'])); ?>
-				</td>
 			</tr>
 			<?php endforeach; ?>
 		</tbody>
