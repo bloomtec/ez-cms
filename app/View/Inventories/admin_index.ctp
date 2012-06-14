@@ -8,7 +8,6 @@
 			<th><?php echo $this -> Paginator -> sort('quantity', 'Cantidad'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('created', 'Creado'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('updated', 'Modificado'); ?></th>
-			<th class="actions"><?php echo __('Acciones'); ?></th>
 		</tr>
 		<?php foreach ($inventories as $inventory):	?>
 		<tr>
@@ -18,9 +17,6 @@
 			<td><?php echo h($inventory['Inventory']['quantity']); ?>&nbsp;</td>
 			<td><?php echo h($inventory['Inventory']['created']); ?>&nbsp;</td>
 			<td><?php echo h($inventory['Inventory']['updated']); ?>&nbsp;</td>
-			<td class="actions">
-				<?php echo $this -> Html -> link(__('Modificar'), array('action' => 'edit', $inventory['Inventory']['id'])); ?>
-			</td>
 		</tr>
 		<?php endforeach; ?>
 	</table>

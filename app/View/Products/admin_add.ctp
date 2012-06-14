@@ -23,7 +23,7 @@
 		</div>
 		<div class="tallas">
 		<?php
-		echo $this -> Form -> input('ProductSize.size', array('label' => 'Tallas', 'type' => 'select', 'multiple' => 'checkbox'));
+		echo $this -> Form -> input('ProductSize.size', array('label' => 'Iniciar Inventario Con Tallas', 'type' => 'select', 'multiple' => 'checkbox'));
 		?>
 		</div>
 	</fieldset>
@@ -47,7 +47,7 @@
 			<?php echo $this -> Html -> link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?>
 		</li>
 		<li>
-			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?>
+			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?>
 		</li>
 		<!--<li>
 		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>

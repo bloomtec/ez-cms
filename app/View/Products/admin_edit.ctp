@@ -1,32 +1,74 @@
 <div class="products form">
-	<?php echo $this -> Form -> create('Product'); //debug($this -> data); ?>
+	<?php echo $this -> Form -> create('Product');
+	//debug($this -> data);
+	?>
 	<fieldset>
 		<legend>
 			<?php echo __('Modificar Producto'); ?>
 		</legend>
 		<div class="datos">
-		<?php
-		echo $this -> Form -> input('id');
-		echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
-		echo $this -> Form -> input('name', array('label' => 'Nombre'));
-		echo $this -> Form -> input('reference', array('label' => 'Referencia'));
-		echo $this -> Form -> input('price', array('label' => 'Precio'));
-		echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A.'));
-		echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
-		echo $this -> Form -> input('description', array('label' => 'Descripción'));
-		//echo $this -> Form -> input('order', array('label' => ''));
-		echo $this -> Form -> input('is_active', array('label' => 'Activo', 'checked' => 'checked'));
-		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
-		echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
-		echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-		echo $this -> Form -> hidden('image', array('label' => 'Imagen', "value" => $this -> data["Product"]["image"]));
-		?>
+			<?php
+			echo $this -> Form -> input('id');
+			echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
+			echo $this -> Form -> input('name', array('label' => 'Nombre'));
+			echo $this -> Form -> input('reference', array('label' => 'Referencia'));
+			echo $this -> Form -> input('price', array('label' => 'Precio'));
+			echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A.'));
+			echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
+			echo $this -> Form -> input('description', array('label' => 'Descripción'));
+			//echo $this -> Form -> input('order', array('label' => ''));
+			echo $this -> Form -> input('is_active', array('label' => 'Activo', 'checked' => 'checked'));
+			echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
+			echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
+			echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
+			echo $this -> Form -> hidden('image', array('label' => 'Imagen', "value" => $this -> data["Product"]["image"]));
+			?>
 		</div>
 		<div class="tallas">
-		<?php
-		echo $this -> Form -> input('ProductSize.size', array('label' => 'Tallas', 'type' => 'select', 'multiple' => 'checkbox'));
-		?>
+			<?php
+			echo $this -> Form -> input('ProductSize.size', array('label' => 'Tallas Sin Inventario', 'type' => 'select', 'multiple' => 'checkbox'));
+			?>
 		</div>
+		<div class="inventario">
+			<table id="TablaInventarios" style="max-width:400px;">
+				<tbody>
+					<tr>
+						<th>
+							Talla
+						</th>
+						<th>
+							Cantidad
+						</th>
+						<th>Modificar</th>
+						<th></th>
+					</tr>
+					<?php foreach($inventories as $key => $inventory) : ?>
+						<?php
+							$index = $inventory['Inventory']['id'];
+							echo $this -> Form -> hidden("Inventory.$index.id", array('value' => $index));
+						?>
+					<tr>
+						<td>
+							<?php echo $inventory['Inventory']['size']; ?>
+						</td>
+						<td>
+							<?php echo $inventory['Inventory']['quantity']; ?>
+						</td>
+						<td>
+							<?php echo $this -> Form -> input("Inventory.$index.modify", array('label' => false, 'div' => false, 'type' => 'select', 'options' => array('add' => 'Agregar', 'substract' => 'Quitar'), 'empty' => 'Seleccione...')); ?>
+						</td>
+						<td>
+							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;')); ?>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<st	
+		</div>
+		<style>
+			table#TablaInventarios * {text-align:center;}
+		</style>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
@@ -53,7 +95,7 @@
 			<?php echo $this -> Html -> link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?>
 		</li>
 		<li>
-			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?>
+			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?>
 		</li>
 		<!--<li>
 		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>

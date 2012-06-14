@@ -46,7 +46,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $product['Product']['id'])); ?>
 			<?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $product['Product']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?>
+			<?php //echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -74,7 +74,7 @@
 		<li><?php echo $this->Html->link(__('Agregar Producto'), array('action' => 'add')); ?></li>
 		<li><?php echo $this->Html->link(__('Ver Categorías'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
 		<li><?php echo $this->Html->link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'view')); ?> </li>
+		<li><?php echo $this->Html->link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?> </li>
 		<!--<li><?php echo $this->Html->link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?> </li>-->
 	</ul>
 </div>

@@ -68,14 +68,14 @@ class Inventory extends AppModel {
 			'foreignKey' => 'product_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => 'Product.name ASC'
 		),
 		'ProductSize' => array(
 			'className' => 'ProductSize',
 			'foreignKey' => 'product_size_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => ''
+			'order' => 'ProductSize.name ASC'
 		)
 	);
 }
