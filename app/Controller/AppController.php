@@ -71,8 +71,10 @@ class AppController extends Controller {
 	}
 	
 	private function beforeFilterCookieConfig() {
+	
 		if(isset($this -> Cookie -> name) && !empty($this -> Cookie -> name)) {
 			$this -> Cookie -> name = 'PriceShoes';
+			
 		}
 		if(isset($this -> Cookie -> time) && !empty($this -> Cookie -> time)) {
 			$this -> Cookie -> time = 1800;  // 3600 = '1 hour'
