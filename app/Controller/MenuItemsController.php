@@ -37,6 +37,12 @@ class MenuItemsController extends AppController {
 	 */
 	public function admin_index() {
 		$this -> MenuItem -> recursive = 0;
+		$this -> paginate = array(
+			'order' => array(
+				'MenuItem.menu_id' => 'ASC',
+				'MenuItem.position' => 'ASC'
+			)
+		);
 		$this -> set('menuItems', $this -> paginate());
 		$this -> loadModel('Page');
 		$this -> set('pages', $this -> Page -> find('list'));
@@ -54,6 +60,8 @@ class MenuItemsController extends AppController {
 			throw new NotFoundException(__('Invalid menu item'));
 		}
 		$this -> set('menuItem', $this -> MenuItem -> read(null, $id));
+		$this -> loadModel('Page');
+		$this -> set('pages', $this -> Page -> find('list'));
 	}
 
 	/**

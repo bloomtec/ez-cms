@@ -20,13 +20,26 @@
 		</td>
 		<td><?php echo h($menuItem['MenuItem']['name']); ?>&nbsp;</td>
 		<td><?php echo h($menuItem['MenuItem']['position']); ?>&nbsp;</td>
-		<td><?php echo h($pages[$menuItem['MenuItem']['link']]); // h($menuItem['MenuItem']['link']); ?>&nbsp;</td>
+		<td>
+			<?php
+				if(is_numeric($menuItem['MenuItem']['link'])) {
+					echo h($pages[$menuItem['MenuItem']['link']]);
+				} else {
+					echo h($menuItem['MenuItem']['link']);
+				}
+			?>
+			&nbsp;
+		</td>
 		<td><?php echo h($menuItem['MenuItem']['created']); ?>&nbsp;</td>
 		<td><?php echo h($menuItem['MenuItem']['updated']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $menuItem['MenuItem']['id'])); ?>
-			<?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $menuItem['MenuItem']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $menuItem['MenuItem']['id']), null, __('¿Seguro desea eliminar %s?', $menuItem['MenuItem']['name'])); ?>
+			<?php
+				if($menuItem['MenuItem']['id'] >= 20) {
+					echo $this->Html->link(__('Modificar'), array('action' => 'edit', $menuItem['MenuItem']['id']));
+					echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $menuItem['MenuItem']['id']), null, __('¿Seguro desea eliminar %s?', $menuItem['MenuItem']['name']));
+				}
+			?>
 		</td>
 	</tr>
 <?php endforeach; ?>
