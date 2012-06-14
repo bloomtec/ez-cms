@@ -18,6 +18,8 @@ $(function(){
 		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('select.product_size_id option:selected').val()+"/"+$form.find('input.quantity').val(),{},function(response){
 			if(response.success){
 				$('.resumen-carrito').load('/pages/resumenCarrito');
+				$('.to-cart.open').removeClass('open');
+				
 			}else{
 				alert('No se pudo actualizar el carrito, ¡intenta nuevamente!');
 			}

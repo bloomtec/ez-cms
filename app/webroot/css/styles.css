@@ -903,6 +903,8 @@ ul.cuadros-tallas li.selected, ul.cuadros-colores li.selected {
 }
 .add-confirm, .add-cart{
 	display:none;
+	clear:both;
+	color:#E62B7C;
 }
 #promocion h1 img.carrito{
 	width:33px; 
