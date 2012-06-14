@@ -179,7 +179,7 @@ class ShoppingCartsController extends BCartAppController {
 				}
 				$this -> writeCookie($shopping_cart);
 				$shopping_cart = $this -> readCookie();
-				$shopping_cart['success'] = $item_deleted;
+				$shopping_cart['success'] = $item_modified;
 				echo json_encode($shopping_cart);
 			}
 		} else {
