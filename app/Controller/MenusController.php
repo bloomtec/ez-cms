@@ -70,6 +70,8 @@ class MenusController extends AppController {
 			throw new NotFoundException(__('Invalid menu'));
 		}
 		$this -> set('menu', $this -> Menu -> read(null, $id));
+		$this -> loadModel('Page');
+		$this -> set('pages', $this -> Page -> find('list'));
 	}
 
 	/**

@@ -33,7 +33,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito');
+		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro');
 	}
 
 	/**
@@ -85,12 +85,26 @@ class PagesController extends AppController {
 		$this -> render(implode('/', $path));
 
 	}
+	
+	public function registro() {
+		/*$this -> redirect(
+			array(
+				'plugin' => 'user_control',
+				'controller' => 'users',
+				'action' => 'register'
+			)
+		);*/
+		$this -> redirect('/registro');
+	}
+	
 	public function carrito(){
 	
 	}
+	
 	public function tablaCarrito(){
 		$this -> layout="ajax";
 	}
+	
 	public function view($id = null) {
 		$this -> layout = "pages";
 		$this -> Page -> id = $id;

@@ -1,4 +1,3 @@
-<?php debug($this -> requestAction('/b_cart/shopping_carts/get')); ?>
 <div id="header">
 	<h1 class='logo'><a href="/"> PRICE SHOES </a></h1>
 	<div class="left">
@@ -42,24 +41,26 @@
 	</div>
 	<div style="clear:both;"></div>
 	<ul id="main-nav">
-		<li>
-			<?php echo $this -> Html -> link("Acerca de", array("controller" => "pages", "action" => "view", 'plugin' => false, "acerca-de")); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link("Nuestras Tiendas", array("controller" => "pages", "action" => "view", 'plugin' => false, "nuestras-tiendas")); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link("Tendencias", array("controller" => "pages", "action" => "display", 'view' => false, "tendencias")); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link("Tienda Virtual", "/tienda-virtual"); ?>
-			<?php echo $this -> element('menu-categorias'); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link("Franquicias", array("controller" => "pages", "action" => "view", 'plugin' => false, "franquicias")); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link("Contacto", array("controller" => "pages", "action" => "contacto", 'plugin' => false)); ?>
-		</li>
+		<?php
+			$menu_items = $this -> requestAction('/menus/getMenuItems/principal');
+			foreach ($menu_items as $key => $menu_item) :
+		?>
+			<?php if($menu_item['MenuItem']['id'] < 20): ?>
+			<li>
+				<?php if($menu_item['MenuItem']['link'] != 'tienda-virtual') : ?>
+					<a href="<?php echo '/pages/' . $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
+				<?php endif; ?>
+				<?php if($menu_item['MenuItem']['link'] == 'tienda-virtual') : ?>
+					<a><?php echo $menu_item['MenuItem']['name']; ?></a>
+					<?php echo $this -> element('menu-categorias'); ?>
+				<?php endif; ?>
+			</li>
+			<?php endif; ?>
+			<?php if($menu_item['MenuItem']['id'] >= 20): ?>
+			<li>
+				<a href="<?php echo '/pages/view/' . $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
+			</li>
+			<?php endif; ?>
+		<?php endforeach; ?>
 	</ul>
 </div>
