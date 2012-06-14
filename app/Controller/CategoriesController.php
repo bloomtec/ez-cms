@@ -9,7 +9,12 @@ class CategoriesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('view');
+		$this -> Auth -> allow('view', 'get');
+	}
+	
+	public function get() {
+		$this -> Category -> recursive = -1;
+		return $this -> Category -> find('all');
 	}
 
 	/**

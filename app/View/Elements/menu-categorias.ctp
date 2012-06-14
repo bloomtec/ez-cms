@@ -5,10 +5,13 @@
 			<?php echo $this -> Html -> image('logo_borde.png');?>
 		</div>
 		<ul>
-			<!--<li>
-				<img src="http://priceshoes.com.co/img/uploads/200x200/7612205391311285939421453.jpg" />
-				<a href="<?php echo '/pages/view/' . $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
-			</li>-->
+			<?php $categories = $this -> requestAction('/categories/get'); ?>
+			<?php foreach($categories as $key => $category) : ?>
+			<li>
+				<img src="<?php echo $category['Category']['image']; ?>" />
+				<a href="<?php echo '/categories/view/' . $category['Category']['id']; ?>"><?php echo $category['Category']['name']; ?></a>
+			</li>
+			<?php endforeach; ?>
 			<div style="clear:both;"></div>
 		</ul>
 	</div>
