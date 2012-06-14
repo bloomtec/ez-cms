@@ -32,7 +32,7 @@
 				if (!$this -> Session -> read("Auth.User.id")) {
 					echo $this -> Html -> link("Registro", "/registro");
 				} else {
-					echo $this -> Html -> link("Salir", array("controller" => "users", "action" => "logout", 'admin' => false));
+					echo $this -> Html -> link("Salir", array('plugin' => 'user_control', "controller" => "users", "action" => "logout", 'admin' => false));
 				}
 				?>
 			</li>
