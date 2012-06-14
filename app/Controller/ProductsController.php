@@ -245,6 +245,10 @@ class ProductsController extends AppController {
 				echo 'Error al tratar de redimensionar imagen';
 				exit(0);
 			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/150x150", $fileName, 150, 150)) {
+				echo 'Error al tratar de redimensionar imagen';
+				exit(0);
+			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/215x215", $fileName, 215, 215)) {
 				echo 'Error al tratar de redimensionar imagen';
 				exit(0);
