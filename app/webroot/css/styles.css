@@ -200,6 +200,7 @@ a.rosa:hover{
 	left:20px; /*este valor debe ser igual al padding de #menu-categorias  .container*/
 	top:40px; /*este valor debe ser igual al padding de #menu-categorias  .container mas el margin-top*/
 	display:none;
+	width:150px;
 	
 }
 #menu-categorias ul li:hover img{

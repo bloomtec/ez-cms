@@ -19,6 +19,10 @@ $(function(){
 			if(response.success){
 				$('.resumen-carrito').load('/pages/resumenCarrito');
 				$('.to-cart.open').removeClass('open');
+				$('.add-cart').show();
+				setTimeout(function(){
+				$('.add-cart').hide();
+				},2000);
 				
 			}else{
 				alert('No se pudo actualizar el carrito, ¡intenta nuevamente!');
