@@ -416,6 +416,7 @@ border-radius: 5px;
 -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
 box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+cursor:pointer;
 }
 .submit {
 	display:inline;
@@ -873,10 +874,7 @@ ul.botones-caracteristicas a:hover {
 .tallas {
 	margin:5px 0;
 	font-size:15px;
-	position:absolute;
-	bottom:-100px;
-	display:none;
-	left:0;
+
 }
 ul.cuadros-colores li.selected  .tallas {
 	display:block;
@@ -1015,5 +1013,52 @@ table.pago .submit input{
 	font-size:18px;
 	margin-top:10px;
 	cursor:pointer;
+}
+.to-cart form{
+	display:none;
+}
+.to-cart.open form{
+	clear:both;
+	display:block;
+}
+.to-cart label{
+	font-size:15px;
+	padding:5px 5px 5px 30px;
+	width:85px;
+	display:block;
+	float:left;
+	clear:left;	
+}
+.to-cart .input input{
+	width:50px;
+}
+.to-cart .actions{
+	margin-left:30px;
+	clear: both;
+	margin-top:10px;
+}
+.to-cart form a.button{
+	padding:5px 5px;
+	margin-right:10px;
+}
+.to-cart form a.button:hover{
+	color:white;
+	padding:5px 5px;
+}
+.to-cart.open{
+	height:120px;
+}
+.to-cart.open{
+    background-color:#000;
+    border:1px solid #fff;
+    padding:10px 15px 10px 0;
+    color:#fff;
+    text-align:left;
+    font-size:12px;
+ 
+    /* outline radius for mozilla/firefox only */
+    -moz-box-shadow:0 0 10px #000;
+    -webkit-box-shadow:0 0 10px #000;
+	box-shadow:0 0 10px #000;
 }
 /*END CART*/

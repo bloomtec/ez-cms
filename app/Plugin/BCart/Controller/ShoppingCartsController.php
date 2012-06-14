@@ -97,6 +97,7 @@ class ShoppingCartsController extends BCartAppController {
 		} else {
 			echo json_encode(array('success' => false)); // Error en los datos pasados al método
 		}
+		exit(0);
 	}
 	
 	public function removeCartItem($cart_item_id = null) {
@@ -139,6 +140,7 @@ class ShoppingCartsController extends BCartAppController {
 		} else {
 			echo json_encode(array('success' => false));
 		}
+		exit(0);
 	}
 	
 	public function updateCartItem($cart_item_id = null, $quantity = null) {
@@ -183,6 +185,7 @@ class ShoppingCartsController extends BCartAppController {
 		} else {
 			echo json_encode(array('success' => false));
 		}
+		exit(0);
 	}
 	
 	private function readCookie() {

@@ -11,20 +11,7 @@
 	<div class="tabla-carrito">
 	<?php // Carga el contenido via AJAX ?>
 	</div>
-	<table class="pago" width="550" border="0" align="center" cellpadding="10" cellspacing="0">
-		<tr align="center">
-			<td>
-				
-			</td>
-			<td>
-				<?php
-					echo $this -> Form -> create(null, array('url'=>'/orders/recibirDatosCarrito/'));
-					echo $this -> Form->radio("Tarjeta.tipo_de_tarjeta", array("Credito", "Debito"), array("default"=>"Credito"));
-					echo $this -> Form -> end('Proceder a pagar');
-	  			?>
-	  		</td>
-	  	</tr>
-	</table>
+	
 </div>
 <div style="clear:both;"></div>
 </div>
