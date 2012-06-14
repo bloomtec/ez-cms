@@ -58,7 +58,7 @@
  */
 
 // Define a destination
-$targetFolder = '/img/uploads';
+$targetFolder = '/app/webroot/img/uploads';
 // Relative to the root
 
 if (!empty($_FILES)) {

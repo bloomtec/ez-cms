@@ -9,7 +9,6 @@ $(document).ready(function() {
 		'cancelImg' : '/img/uploadify-cancel.png',
 		//'debug' : true,
 		'onUploadSuccess' : function(file, data, response) {
-			alert(data);
 			/*if(response) {
 				var name = file.name;
 				$(".preview").html('<img  src="' + data + '" />');
