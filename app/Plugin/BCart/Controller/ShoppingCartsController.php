@@ -17,6 +17,8 @@ class ShoppingCartsController extends BCartAppController {
 	 * @return Información del carrito
 	 */
 	public function get() {
+		$this -> autoRender = false;
+		Configure::write('debug', 0);
 		$user_id = $this -> getUserId();
 		if($user_id) {
 			/** hay usuario logueado **/
@@ -34,7 +36,9 @@ class ShoppingCartsController extends BCartAppController {
 			}
 		} else {
 			/** no hay usuario logueado **/
-			if(!$this -> readCookie()) {
+			//session_set_cookie_params(3600, '/', 'localhost', false, false);
+			$shopping_cart = $this -> readCookie();
+			if(empty($shopping_cart)) {
 				$shopping_cart = array(
 					'ShoppingCart' => array(
 						'CartItem' => array()
@@ -47,6 +51,8 @@ class ShoppingCartsController extends BCartAppController {
 	}
 	
 	public function addCartItem($product_id = null, $product_size_id = null, $quantity = null) {
+		$this -> autoRender = false;
+		Configure::write('debug', 0);
 		if($product_id && $product_size_id && $quantity) {
 			/** llegó la info proceder a guardar **/
 			$user_id = $this -> getUserId();
@@ -73,7 +79,7 @@ class ShoppingCartsController extends BCartAppController {
 				}
 			} else {
 				/** carrito en la cookie **/
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$this -> ShoppingCart -> CartItem -> Product -> recursive = -1;
 				$product = $this -> ShoppingCart -> CartItem -> Product -> read(null, $product_id);
 				$this -> ShoppingCart -> CartItem -> ProductSize -> recursive = -1;
@@ -89,8 +95,9 @@ class ShoppingCartsController extends BCartAppController {
 					'ProductSize' => $product_size['ProductSize']
 				);
 				$shopping_cart['ShoppingCart']['CartItem'][] = $cart_item;
+				//echo json_encode($cart_item);
 				$this -> writeCookie($shopping_cart);
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$shopping_cart['success'] = true;
 				echo json_encode($shopping_cart);
 			}
@@ -101,6 +108,8 @@ class ShoppingCartsController extends BCartAppController {
 	}
 	
 	public function removeCartItem($cart_item_id = null) {
+		$this -> autoRender = false;
+		Configure::write('debug', 0);
 		if($cart_item_id) {
 			/** verificar sesión **/
 			$user_id = $this -> getUserId();
@@ -124,7 +133,7 @@ class ShoppingCartsController extends BCartAppController {
 				}
 			} else {
 				/** carrito en la cookie **/
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$item_deleted = false;
 				foreach($shopping_cart['ShoppingCart']['CartItem'] as $key => $cart_item) {
 					if($cart_item['CartItem']['id'] == $cart_item_id) {
@@ -133,7 +142,7 @@ class ShoppingCartsController extends BCartAppController {
 					}
 				}
 				$this -> writeCookie($shopping_cart);
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$shopping_cart['success'] = $item_deleted;
 				echo json_encode($shopping_cart);
 			}
@@ -144,6 +153,8 @@ class ShoppingCartsController extends BCartAppController {
 	}
 	
 	public function updateCartItem($cart_item_id = null, $quantity = null) {
+		$this -> autoRender = false;
+		Configure::write('debug', 0);
 		if($cart_item_id && $quantity) {
 			/** verificar sesión **/
 			$user_id = $this -> getUserId();
@@ -169,7 +180,7 @@ class ShoppingCartsController extends BCartAppController {
 				}
 			} else {
 				/** carrito en la cookie **/
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$item_modified = false;
 				foreach($shopping_cart['ShoppingCart']['CartItem'] as $key => $cart_item) {
 					if($cart_item['CartItem']['id'] == $cart_item_id) {
@@ -178,7 +189,7 @@ class ShoppingCartsController extends BCartAppController {
 					}
 				}
 				$this -> writeCookie($shopping_cart);
-				$shopping_cart = $this -> readCookie();
+				$shopping_cart = $this -> get();
 				$shopping_cart['success'] = $item_modified;
 				echo json_encode($shopping_cart);
 			}

@@ -85,9 +85,11 @@ class PagesController extends AppController {
 		$this -> render(implode('/', $path));
 
 	}
+	
 	public function resumenCarrito(){
 		$this -> layout="ajax";
 	}
+	
 	public function registro() {
 		/*$this -> redirect(
 			array(
