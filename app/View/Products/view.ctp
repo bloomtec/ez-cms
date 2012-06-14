@@ -42,8 +42,9 @@
 				<li class="to-cart">
 				<?php echo $this->Html->link("Añadir al carrito","#",array('class'=>'boton-carrito show-cart-options')); ?>
 						<?php echo $this -> Form->create('bcart');?>
-							<?php echo $this -> Form -> input('product_size_id',array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
-							<?php echo $this -> Form -> input('quantity',array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
+							<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','value'=>$product['Product']['id']))?>
+							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
+							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
 							<div class="actions">
 								<a class="button addCartItem" href="/b_cart/shopping_carts/updateCartItem/">aceptar</a>
 								<a class="button cancelar">cancelar</a>

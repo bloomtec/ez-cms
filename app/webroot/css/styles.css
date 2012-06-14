@@ -1021,9 +1021,12 @@ table.pago .submit input{
 	clear:both;
 	display:block;
 }
+.to-cart  .input{
+	margin-top:5px;
+}
 .to-cart label{
 	font-size:15px;
-	padding:5px 5px 5px 30px;
+	padding:0 5px 5px 30px;
 	width:85px;
 	display:block;
 	float:left;
@@ -1031,6 +1034,7 @@ table.pago .submit input{
 }
 .to-cart .input input{
 	width:50px;
+	
 }
 .to-cart .actions{
 	margin-left:30px;
