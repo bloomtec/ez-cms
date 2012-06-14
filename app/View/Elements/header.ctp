@@ -52,7 +52,7 @@
 				<?php endif; ?>
 				<?php if($menu_item['MenuItem']['link'] == 'tienda-virtual') : ?>
 					<a><?php echo $menu_item['MenuItem']['name']; ?></a>
-					<?php echo $this -> element('menu-categorias'); ?>
+					<?php echo $this -> element('menu-categorias',array('menu_item'=>$menu_item)); ?>
 				<?php endif; ?>
 			</li>
 			<?php endif; ?>
