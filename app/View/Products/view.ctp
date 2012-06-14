@@ -46,7 +46,7 @@
 							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
 							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
 							<div class="actions">
-								<a class="button addCartItem" href="/b_cart/shopping_carts/updateCartItem/">aceptar</a>
+								<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">aceptar</a>
 								<a class="button cancelar">cancelar</a>
 							</div>
 						<?php echo $this -> Form ->end();?>
