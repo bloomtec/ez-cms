@@ -6,6 +6,7 @@
   js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=157362437721922";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
+<?php echo $this -> Html -> script('bcart');?>
 <div class="products view">
 	<div id="left-col">
 		<?php echo $this -> element('novedad'); ?>
@@ -20,8 +21,39 @@
 		</div> 	
 		<?php echo $this -> element('galeria');?>	
 		<div class="caracteristicas">
+			<div class="tallas">
+			
+				Tallas Disponibles:
+				<ul class="cuadros-tallas">
+				<?php $productSizes; ?>
+					<?php if (!empty($product['Inventory'])): ?>
+						<?php 
+							foreach($product['Inventory'] as $inventory): 
+							$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						?>
+					  		<li rel="<?php echo $inventory['product_size_id'];?>"> <?php echo $inventory["size"] ?></li>
+					  	<?php endforeach; ?>
+					<?php endif; ?>	
+				</ul>
+				<div style="clear:both"></div>
+			</div>
 			<ul class="botones-caracteristicas">
-				<?php //if($session->read("Auth.User.id")):?>
+				<?php //if($session->read("Auth.User.id")):?>			
+				<li class="to-cart">
+				<?php echo $this->Html->link("Añadir al carrito","#",array('class'=>'boton-carrito show-cart-options')); ?>
+						<?php echo $this -> Form->create('bcart');?>
+							<?php echo $this -> Form -> input('product_size_id',array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
+							<?php echo $this -> Form -> input('quantity',array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
+							<div class="actions">
+								<a class="button addCartItem" href="/b_cart/shopping_carts/updateCartItem/">aceptar</a>
+								<a class="button cancelar">cancelar</a>
+							</div>
+						<?php echo $this -> Form ->end();?>
+					<div class="add-cart">
+						producto añadido al carrito
+					</div>
+				<div style="clear:left"></div>
+			    </li>
 				<li>
 					<?php echo $this->Html->link("Añadir a favoritos",array('controller' => 'favorites', 'action' => 'addToFavorite', $product['Category']['id']),array('class'=>'boton-favoritos')); ?>
 			   		<div class="add-confirm">
@@ -30,13 +62,6 @@
 				<div style="clear:left"></div>
 			    <?php //endif;?>
 				</li>
-				<li>
-				<?php echo $this->Html->link("Añadir al carrito",array('controller' => 'categories', 'action' => 'view', $product['Category']['id']),array('class'=>'boton-carrito')); ?>
-			    	<div class="add-cart">
-						producto añadido al carrito
-					</div>
-				<div style="clear:left"></div>
-			    </li>
 				<li class='social'>
 					<div class="tweet">
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-text="Me encantan estos zapatos!!!" data-via="PriceShoesColom" data-lang="es"></a>
@@ -57,18 +82,7 @@
 			    </li>
 				
 			</ul>
-			<div class="tallas">
-				Tallas:
-				<ul class="cuadros-tallas">
-					<?php $inventarios=null;//$this->requestAction("/products/getColores/".$product['Product']['id']); ?>
-					<?php if (!empty($inventarios)): ?>
-						<?php $j=0;foreach($inventario["Talla"] as $talla): ;?>
-					  		<li rel="<?php echo $talla['id'];?>" class="<?php if($j++==0) echo "selected"?>"> <?php echo $talla["nombre"] ?></li>
-					  	<?php endforeach; ?>
-					<?php endif; ?>	
-				</ul>
-				<div style="clear:both"></div>
-			</div>
+			
 		</div>
 	</div>
 	<div style="clear:both;"></div>

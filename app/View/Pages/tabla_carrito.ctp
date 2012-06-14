@@ -1,8 +1,8 @@
 <?php
 	// Obtener el carrito
-	//$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
+	$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
 	//debug($shopping_cart);
-	$shopping_cart=array(
+	/*$shopping_cart=array(
 		'ShoppingCart' => array(
 			'CartItem' => array(
 				0 => array(
@@ -51,7 +51,7 @@
 				),
 			)
 		)
-	);
+	);*/
 ?>
 <?php if(isset($shopping_cart['ShoppingCart']['CartItem']) && !empty($shopping_cart['ShoppingCart']['CartItem'])){?>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">
@@ -92,8 +92,8 @@
 				<?php echo "$".number_format( $item['Product']['price'], 0, ' ', '.'); ?>
 			</td>
 			<td width="115" align="center">
-				<?php echo $this -> Form -> create('CartItem', array('url'=>'/carts/updates/','class'=>'updateCartItem')); ?>
-				<?php echo $this -> Form -> input('quantity', array('type'=>'text', 'label'=>'', 'value'=>$item['CartItem']['quantity']));?>
+				<?php echo $this -> Form -> create('CartItem-'.$item['CartItem']['id'], array('url'=>'/carts/updates/','class'=>'updateCartItem','rel'=>$item['CartItem']['id'])); ?>
+				<?php echo $this -> Form -> input('quantity', array('type'=>'number', 'label'=>'', 'value'=>$item['CartItem']['quantity']));?>
 				<?php echo $this -> Form -> end("Actualizar");?>
 			</td>
 			<td align="center" class="right">
@@ -120,6 +120,20 @@
 
 		</tr>
 </table>
+<table class="pago" width="550" border="0" align="center" cellpadding="10" cellspacing="0">
+	<tr align="center">
+		<td>
+			
+		</td>
+		<td>
+			<?php
+				echo $this -> Form -> create(null, array('url'=>'/orders/recibirDatosCarrito/'));
+				echo $this -> Form->radio("Tarjeta.tipo_de_tarjeta", array("Credito", "Debito"), array("default"=>"Credito"));
+				echo $this -> Form -> end('Proceder a pagar');
+			?>
+		</td>
+	</tr>
+</table>
 <?php } else { ?>
-
+		<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No tienes item en el carrito </p>
 <?php } ?>
