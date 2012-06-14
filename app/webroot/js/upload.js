@@ -1,30 +1,29 @@
 $(document).ready(function() {
 
-	var server = "/";
-	var path = "img/uploads";
-
 	$('#single-upload').uploadify({
-		'swf' : server +'swf/uploadify.swf',
-		'uploader' : server +'uploadify.php',
-		'folder' : server + path,
+		'swf' : '/swf/uploadify.swf',
+		'uploader' : '/uploadify.php',
 		'buttonText' : 'Subir Imagen',
 		'width' : 147,
 		'height' : 37,
-		'auto' : true,
-		'cancelImg' : server + 'img/uploadify-cancel.png',
-		'onComplete' : function(a, b, c, d) {
-			var name = c.name;
-			$(".preview").html('<img  src="' + d + '" />');
-			var file = d.split("/");
-			var nombre = file[(file.length - 1)];
-			$("#single-field").val(nombre);
-			$.post("/products/uploadify_add", {
-				'name' : nombre,
-				'folder' : server + path
-			}, function(data) {
-
-			});
+		'cancelImg' : '/img/uploadify-cancel.png',
+		//'debug' : true,
+		'onUploadSuccess' : function(file, data, response) {
+			alert(data);
+			/*if(response) {
+				var name = file.name;
+				$(".preview").html('<img  src="' + data + '" />');
+				var fileName = data.split("/");
+				fileName = fileName[(fileName.length - 1)];
+				$("#single-field").val(fileName);
+				$.post("/products/uploadify_add", {
+					'name' : fileName,
+					'folder' : 'uploads'
+				}, function(data) {
+					//console.log(data);
+				});
+			}*/
 		}
 	});
 
-}); 
+});

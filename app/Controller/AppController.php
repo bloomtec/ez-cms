@@ -48,6 +48,7 @@ class AppController extends Controller {
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout="Ez.default";
 		}
+		
 		// Verificación ACL
 		$this -> aclVerification();
 	}
