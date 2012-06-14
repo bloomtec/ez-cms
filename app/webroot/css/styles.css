@@ -55,6 +55,9 @@ a{
 	color:white;
 	text-decoration:none;
 }
+a.rosa:hover{
+	color:white;
+}
 
 /*ESTILOS DEL LAYOUT*/
 #container, 
@@ -324,6 +327,10 @@ a{
 	padding-top:0; 
 	padding-right:0; 
 	width:680px;
+}
+#pages #right-col{
+	padding:20px;
+	width:660px;
 }
 .form{
 	padding:40px;
@@ -908,3 +915,105 @@ ul.cuadros-tallas li.selected, ul.cuadros-colores li.selected {
 	vertical-align:middle;
 }
 /*END CATALOG*/
+
+/*CART*/
+.container-tabla {
+overflow-y: auto;
+max-height: 270px;
+}
+#cesta-tabla {
+width: 95%;
+color: white;
+background: none;
+margin: 0 auto;
+font-size: 12px;
+max-height: 270px;
+border-right: 0;
+clear: both;
+}
+table tr td {
+background: 
+white;
+padding: 6px;
+text-align: left;
+vertical-align: top;
+border-bottom: 1px solid #DDD;
+}
+#cesta-tabla tr {
+background: transparent;
+border-bottom: 1px solid white;
+}
+#cesta-tabla tr.final {
+background: transparent;
+border-bottom: none;
+}
+#cesta-tabla tr td {
+background: transparent;
+border-bottom: none;
+padding:2px 0;
+}
+
+#promocion #cesta-tabla img{
+	width:50px;
+	border:0;
+}
+.tablaCarrito  th {
+	background: url(../img/trama-nav.png) repeat-x;
+	height:30px;
+	line-height:30px;
+	text-align:left;
+}
+.carrito-view table tr td{
+	background:none;
+	padding:10px 0;
+}
+table.tablaCarrito tr td.right{
+	
+	margin-left:10px;
+}
+table.tablaCarrito tr td img{
+	width:100px;
+	margin-right:10px;
+}
+table.tablaCarrito h3{
+	margin-top:20px;
+}
+.tablaCarrito .input input{
+	width:80px;
+}
+.tablaCarrito span{
+	display:block;
+}
+.tablaCarrito a{
+	color:#E62B7C;
+}
+.tablaCarrito a:hover{
+	color:white;
+}
+.tablaCarrito .submit input{
+	height:20px;
+	line-height:20px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+table.pago{
+	float:right;
+	width:230px;
+	margin-top:20px;
+}
+table.pago legend{
+	font-size:20px;
+	padding-bottom:10px;
+}
+table.pago label{
+	font-size:18px;
+}
+table.pago .submit input{
+	float:right;
+	width:230px;
+	font-size:18px;
+	margin-top:10px;
+	cursor:pointer;
+}
+/*END CART*/

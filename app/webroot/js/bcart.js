@@ -1,0 +1,14 @@
+$(function(){
+	$('.removeCartItem').click(function(e){
+		e.preventDefault();
+	});
+	$('.updateCartItem').click(function(e){
+		e.preventDefault();
+	});
+	$('form.updateCartItem').form(function(e){
+		e.preventDefault();
+	});
+	$('.addCartItem').click(function(e){
+		e.preventDefault();
+	});
+});

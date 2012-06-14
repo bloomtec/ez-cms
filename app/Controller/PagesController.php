@@ -33,7 +33,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto');
+		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito');
 	}
 
 	/**
@@ -85,7 +85,12 @@ class PagesController extends AppController {
 		$this -> render(implode('/', $path));
 
 	}
-
+	public function carrito(){
+	
+	}
+	public function tablaCarrito(){
+		$this -> layout="ajax";
+	}
 	public function view($id = null) {
 		$this -> layout = "pages";
 		$this -> Page -> id = $id;

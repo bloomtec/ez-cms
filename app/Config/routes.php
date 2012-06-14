@@ -28,6 +28,7 @@
 	Router::connect('/admin', array('controller' => 'users', 'action' => 'login','plugin'=>'UserControl','admin'=>true));
 	Router::connect('/', array('controller' => 'options', 'action' => 'construccion','plugin'=>'Ez'));
 	Router::connect('/registro', array('controller' => 'users', 'action' => 'register','plugin'=>'UserControl'));
+	Router::connect('/carrito', array('controller' => 'pages', 'action' => 'carrito','plugin'=>false));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */

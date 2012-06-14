@@ -18,7 +18,7 @@
 				?>
 			</li>
 			<li>
-				<?php echo $this -> Html -> link("Mi Carrito", array("controller" => "carts", "action" => "view", 'plugin' => 'bcommerce'), array('class' => 'cart')); ?>
+				<?php echo $this -> Html -> link("Mi Carrito", "/carrito", array('class' => 'cart')); ?>
 			</li>
 			<li>
 				<?php
