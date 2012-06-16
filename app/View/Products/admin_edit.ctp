@@ -21,7 +21,7 @@
 			echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
 			echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
 			echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-			echo $this -> Form -> hidden('image', array('label' => 'Imagen', "value" => $this -> data["Product"]["image"]));
+			echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field', 'value' => $this -> data['Product']['image']));
 			?>
 		</div>
 		<div class="tallas">
@@ -77,7 +77,7 @@
 	<div class="preview">
 		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['image'], array("width" => 200)); ?>
 	</div>
-	<div id="single-upload" controller="products"></div>
+	<div id="single-upload-product" controller="products"></div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

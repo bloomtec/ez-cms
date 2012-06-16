@@ -32,7 +32,7 @@
 <div class="images">
 	<h2>Imagen</h2>
 	<div class="preview"></div>
-	<div id="single-upload" controller="products"></div>
+	<div id="single-upload-product" controller="products"></div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>

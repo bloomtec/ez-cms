@@ -36,11 +36,55 @@
 		<td><?php echo h($product['Product']['tax_value']); ?>&nbsp;</td>
 		<!--<td><?php echo h($product['Product']['description']); ?>&nbsp;</td>-->
 		<!--<td><?php echo h($product['Product']['order']); ?>&nbsp;</td>-->
-		<td><?php echo h($product['Product']['is_active']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['is_promoted']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['is_novelty']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['is_top_seller']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['image']); ?>&nbsp;</td>
+		<td>
+			<?php
+				//echo h($product['Product']['is_active']);
+				if($product['Product']['is_active']) {
+					echo '<input type="checkbox" checked="checked" disabled="true" />';
+				} else {
+					echo '<input type="checkbox" disabled="true" />';
+				}
+			?>
+			&nbsp;
+		</td>
+		<td>
+			<?php
+				//echo h($product['Product']['is_promoted']);
+				if($product['Product']['is_promoted']) {
+					echo '<input type="checkbox" checked="checked" disabled="true" />';
+				} else {
+					echo '<input type="checkbox" disabled="true" />';
+				}
+			?>
+			&nbsp;
+		</td>
+		<td>
+			<?php
+				//echo h($product['Product']['is_novelty']);
+				if($product['Product']['is_novelty']) {
+					echo '<input type="checkbox" checked="checked" disabled="true" />';
+				} else {
+					echo '<input type="checkbox" disabled="true" />';
+				}
+			?>
+			&nbsp;
+		</td>
+		<td>
+			<?php
+				//echo h($product['Product']['is_top_seller']);
+				if($product['Product']['is_top_seller']) {
+					echo '<input type="checkbox" checked="checked" disabled="true" />';
+				} else {
+					echo '<input type="checkbox" disabled="true" />';
+				}
+			?>
+			&nbsp;
+		</td>
+		<td>
+			<?php //echo h($product['Product']['image']); ?>
+			<img src="/img/uploads/50x50/<?php echo $product['Product']['image']; ?>" />
+			<!-- &nbsp; -->
+		</td>
 		<td><?php echo h($product['Product']['created']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['updated']); ?>&nbsp;</td>
 		<td class="actions">
