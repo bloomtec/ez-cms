@@ -1,59 +1,9 @@
 <?php
 	// Obtener el carrito
 	$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
-	//debug($shopping_cart);
-	/*$shopping_cart=array(
-		'ShoppingCart' => array(
-			'CartItem' => array(
-				0 => array(
-								'CartItem' => array(
-									'id'=>'1',
-									'shopping_cart_id' => '', // si es de usuario registrado
-									'product_id' => '',
-									'product_size_id' => '',
-									'quantity' => '5',
-									'created' => '',
-									'updated' =>''
-								),
-								'Product' => array(
-									'id' => '2',
-									'name'=>'Producto de prueba',
-									'reference'=>'9344555',
-									'image'=>'http://priceshoes.com.co/img/uploads/200x200/2052208591311286139981708.jpg',
-									'price'=>'50000'
-								),
-								'ProductSize' => array(
-									'id'=>'37',
-									'name'=>'37'
-								)
-				),
-				1 => array(
-								'CartItem' => array(
-									'id'=>'2',
-									'shopping_cart_id' => '', // si es de usuario registrado
-									'product_id' => '',
-									'product_size_id' => '',
-									'quantity' => '3',
-									'created' => '',
-									'updated' =>''
-								),
-								'Product' => array(
-									'id' => '2',
-									'name'=>'Producto Estrella',
-									'reference'=>'9344sdf555',
-									'image'=>'http://priceshoes.com.co/img/uploads/200x200/2052208591311286139981708.jpg',
-									'price'=>'70000'
-								),
-								'ProductSize' => array(
-									'id'=>'35',
-									'name'=>'35'
-								)
-				),
-			)
-		)
-	);*/
+
 ?>
-<?php if(isset($shopping_cart['ShoppingCart']['CartItem']) && !empty($shopping_cart['ShoppingCart']['CartItem'])){?>
+<?php if(isset($shopping_cart['CartItem']) && !empty($shopping_cart['CartItem'])){?>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">
 		<?php
 			$subTotal=0;
@@ -66,8 +16,8 @@
 
 		</tr>
 		<?php
-			foreach($shopping_cart['ShoppingCart']['CartItem'] as $item) {
-				$subTotal += $item['Product']['price'] * $item['CartItem']['quantity'];
+			foreach($shopping_cart['CartItem'] as $item) {
+				$subTotal += $item['Product']['price'] * $item['quantity'];
 		?>
 		<tr class="content">
 			<td width="80" align="center" class="left">
@@ -92,14 +42,14 @@
 				<?php echo "$".number_format( $item['Product']['price'], 0, ' ', '.'); ?>
 			</td>
 			<td width="115" align="center">
-				<?php echo $this -> Form -> create('CartItem-'.$item['CartItem']['id'], array('url'=>'/carts/updates/','class'=>'updateCartItem','rel'=>$item['CartItem']['id'])); ?>
-				<?php echo $this -> Form -> input('quantity', array('type'=>'number', 'label'=>'', 'value'=>$item['CartItem']['quantity']));?>
+				<?php echo $this -> Form -> create('CartItem-'.$item['id'], array('url'=>'/carts/updates/','class'=>'updateCartItem','rel'=>$item['id'])); ?>
+				<?php echo $this -> Form -> input('quantity', array('type'=>'number', 'label'=>'', 'value'=>$item['quantity']));?>
 				<?php echo $this -> Form -> end("Actualizar");?>
 			</td>
 			<td align="center" class="right">
-				<?php echo "$ ".number_format($item['Product']['price'] * $item['CartItem']['quantity'], 0, ' ', '.');?>
+				<?php echo "$ ".number_format($item['Product']['price'] * $item['quantity'], 0, ' ', '.');?>
 				<br />
-				<?php echo $this -> Html->link('Eliminar','/ShoppingCarts/removeCartItem/'.$item['CartItem']['id'],array('class'=>'removeCartItem'));?>
+				<?php echo $this -> Html->link('Eliminar','/b_cart/ShoppingCarts/removeCartItem/'.$item['id'],array('class'=>'removeCartItem'));?>
 			</td>
 		
 		</tr>

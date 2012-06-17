@@ -51,7 +51,7 @@
 					<a href="<?php echo '/pages/' . $menu_item['MenuItem']['link']; ?>"><?php echo $menu_item['MenuItem']['name']; ?></a>
 				<?php endif; ?>
 				<?php if($menu_item['MenuItem']['link'] == 'tienda-virtual') : ?>
-					<a><?php echo $menu_item['MenuItem']['name']; ?></a>
+					<a  href="/tienda-virtual"><?php echo $menu_item['MenuItem']['name']; ?></a>
 					<?php echo $this -> element('menu-categorias',array('menu_item'=>$menu_item)); ?>
 				<?php endif; ?>
 			</li>

@@ -21,12 +21,11 @@
 		</div> 	
 		<?php echo $this -> element('galeria');?>	
 		<div class="caracteristicas">
-			<div class="tallas">
-			
-				Tallas Disponibles:
-				<ul class="cuadros-tallas">
+			<div class="colores">			
+				Colores:
+				<ul class="cuadros-colores">
 				<?php $productSizes; ?>
-					<?php if (!empty($product['Inventory'])): ?>
+					<?php if (false): ?>
 						<?php 
 							foreach($product['Inventory'] as $inventory): 
 							$productSizes[$inventory['product_size_id']]=$inventory["size"];
@@ -37,6 +36,26 @@
 				</ul>
 				<div style="clear:both"></div>
 			</div>
+			<div class="tallas">			
+				Tallas Disponibles:
+				<ul class="cuadros-tallas">
+				<?php $productSizes; ?>
+					<?php if (!empty($product['Inventory'])): ?>
+						<?php 
+							$i=0;
+							foreach($product['Inventory'] as $inventory): 
+							$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						?>
+					  		<li rel="<?php echo $inventory['product_size_id'];?>" <?php if($i==0) echo "class='selected'"?>> <?php echo $inventory["size"] ?></li>
+					  	<?php 
+							$i+=1;
+							endforeach; 
+						?>
+					<?php endif; ?>	
+				</ul>
+				<div style="clear:both"></div>
+			</div>
+			
 			<ul class="botones-caracteristicas">
 				<?php //if($session->read("Auth.User.id")):?>			
 				<li class="to-cart">
@@ -51,7 +70,7 @@
 							</div>
 						<?php echo $this -> Form ->end();?>
 					<div class="add-cart">
-						producto añadido al carrito
+						producto añadido al carrito <a href="/carrito">Ir a pagar</a>
 					</div>
 				<div style="clear:left"></div>
 			    </li>

@@ -23,7 +23,6 @@ class ShoppingCartsController extends BCartAppController {
 	 * @return Información del carrito
 	 */
 	public function get() {
-		Configure::write('debug', 0);
 		$user_id = $this -> getUserId(); 
 		if($user_id) {
 			/** hay usuario logueado **/

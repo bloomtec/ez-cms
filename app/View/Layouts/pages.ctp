@@ -36,7 +36,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->Script('jquery.min');
 		echo $this->Html->Script('jquery.tools.min');
 		echo $this->Html->Script('bjs/bjs');
-		echo $this->Html->Script('bcart')
+		echo $this->Html->Script('bcart');
 		//echo $this->Html->Script('cufon');
 		echo $this -> Html -> script('common'); 
 		//echo $this->Html->Script('HelveticaNeueLT_LightExt2_400-HelveticaNeueLT_LightExt2_400.font');

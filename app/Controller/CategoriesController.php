@@ -9,9 +9,12 @@ class CategoriesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('view', 'get');
+		$this -> Auth -> allow('view', 'get','index');
 	}
-	
+	public function index(){
+		$categories = $this -> Category -> find('all',array('conditions'=>array('is_promoted'=>true)));
+		$this -> set (compact('categories'));
+	}
 	public function get() {
 		$this -> Category -> recursive = -1;
 		return $this -> Category -> find('all');

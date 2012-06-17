@@ -669,6 +669,48 @@ margin-left: 10px;
 }
 /**END PAGES/
 /*CATALOG*/
+.promocionados {
+	margin-bottom: 20px;
+}
+.promocionados ul li {
+	display: block;
+	float: left;
+	width: 181px;
+	margin: 0 6px;
+}
+.promocionados ul li.first {
+	margin: 0;
+	margin-right: 6px;
+}
+
+.promocionados ul li.last {
+	margin: 0;
+	margin-left: 6px;
+}
+
+.promocionados ul li img {
+height: 352px;
+width: 181px;
+box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+}
+
+.promocionados ul a:link, .promocionados a:active, .promocionados a:visited {
+text-decoration: none;
+color: 
+white;
+}
+.promocionados ul li a {
+background: url(../img/trama-boton-catalogo.png) repeat-x left;
+height: 50px;
+width: 181px;
+box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.6);
+float: left;
+text-align: center;
+line-height: 50px;
+margin: 10px 0;
+font-size: 21px;
+text-transform: uppercase;
+}
 .cat-description{
 	padding:5px;
 	border: solid 1px white;
@@ -967,6 +1009,19 @@ padding:2px 0;
 .carrito-view table tr td{
 	background:none;
 	padding:10px 0;
+}
+div.tabla-carrito{
+	position:relative;
+}
+div.tabla-carrito .actualizando{
+	width:100%;
+	height:100%;
+	position:absolute;
+	z-index:1;
+	text-align:center;
+	vertical-align:middle;
+	display:none;
+	background: url("../img/trama-footer.png") repeat scroll 0 0 transparent;
 }
 table.tablaCarrito tr td.right{
 	
