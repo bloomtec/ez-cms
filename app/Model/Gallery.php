@@ -1,24 +1,19 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Inventory Model
+ * Gallery Model
  *
  * @property Product $Product
- * @property ProductSize $ProductSize
+ * @property Image $Image
  */
-class Inventory extends AppModel {
+class Gallery extends AppModel {
 	
 	/**
-	 * Virtual Fields
-	 * 
-	 * @var array
+	 * Display field
+	 *
+	 * @var string
 	 */
-	public $virtualFields = array(
-		'size' => 'SELECT product_sizes.name FROM product_sizes WHERE product_sizes.id = Inventory.product_size_id',
-		'product' => 'SELECT products.name FROM products WHERE products.id = Inventory.product_id'
-	);
-	
-	public $displayField = 'product';
+	public $displayField = 'name';
 	
 	/**
 	 * Validation rules
@@ -27,29 +22,27 @@ class Inventory extends AppModel {
 	 */
 	public $validate = array(
 		'product_id' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Debe seleccionar un producto',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
+				'message' => 'Este campo es numérico',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'product_size_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'quantity' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
+		'name' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'Debe ingresar un nombre',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -59,7 +52,7 @@ class Inventory extends AppModel {
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	
+
 	/**
 	 * belongsTo associations
 	 *
@@ -71,14 +64,29 @@ class Inventory extends AppModel {
 			'foreignKey' => 'product_id',
 			'conditions' => '',
 			'fields' => '',
-			'order' => 'Product.name ASC'
-		),
-		'ProductSize' => array(
-			'className' => 'ProductSize',
-			'foreignKey' => 'product_size_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => 'ProductSize.name ASC'
+			'order' => ''
 		)
 	);
+
+	/**
+	 * hasMany associations
+	 *
+	 * @var array
+	 */
+	public $hasMany = array(
+		'Image' => array(
+			'className' => 'Image',
+			'foreignKey' => 'gallery_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+
 }

@@ -192,14 +192,15 @@ class AttachmentComponent extends Component {
 	 * newHeight: the max height or crop height
 	 * quality: the quality of the image
 	 */
-	function resize_image($cType = 'resize', $tmpfile, $dst_folder, $dstname = false, $newWidth = false, $newHeight = false, $quality = 100) {
+	function resize_image($cType = 'resize', $tmpfile = false, $dst_folder = false, $dstname = false, $newWidth = false, $newHeight = false, $quality = 100) {
 		$srcimg = IMAGES . $tmpfile;
+		$dst_folder = IMAGES . $dst_folder;
 		
 		if(file_exists($srcimg)) {
 			list($oldWidth, $oldHeight, $type) = getimagesize($srcimg);
 			$ext = $this -> image_type_to_extension($type);
 	
-			// If file is writeable, create destination (tmp) image
+			/** If file is writeable, create destination (tmp) image **/ 
 			if (is_writeable($dst_folder)) {
 				$dstimg = $dst_folder . DS . $dstname;
 			} else {

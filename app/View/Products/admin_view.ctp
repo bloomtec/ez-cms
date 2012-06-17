@@ -100,8 +100,9 @@
 		</dd>
 		<dt><?php echo __('Imagen'); ?></dt>
 		<dd>
-			<?php echo h($product['Product']['image']); ?>
-			&nbsp;
+			<!--<?php echo h($product['Product']['image']); ?>
+			&nbsp;-->
+			<img src="/img/uploads/215x215/<?php echo $product['Product']['image']; ?>" />
 		</dd>
 		<dt><?php echo __('Creado'); ?></dt>
 		<dd>

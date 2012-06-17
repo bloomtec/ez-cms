@@ -236,32 +236,62 @@ class ProductsController extends AppController {
 
 			$fileName = $_POST['name'];
 			$folder = $_POST['folder'];
-
-			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/50x50", $fileName, 50, 50)) {
-				echo 'Error al tratar de redimensionar imagen';
+			
+			if(!$this -> Attachment -> resize_image('resize', $folder . '/' . $fileName, $folder . '/50x50', $fileName, 50,	50)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 50x50
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/100x100", $fileName, 100, 100)) {
-				echo 'Error al tratar de redimensionar imagen';
+				echo
+				"
+				Error al tratar de redimensionar imagen 100x100
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/150x150", $fileName, 150, 150)) {
-				echo 'Error al tratar de redimensionar imagen';
+				echo
+				"
+				Error al tratar de redimensionar imagen 150x150
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/215x215", $fileName, 215, 215)) {
-				echo 'Error al tratar de redimensionar imagen';
+				echo
+				"
+				Error al tratar de redimensionar imagen 215x215
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/360x360", $fileName, 360, 360)) {
-				echo 'Error al tratar de redimensionar imagen';
+				echo
+				"
+				Error al tratar de redimensionar imagen 360x360
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
 			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/750x750", $fileName, 750, 750)) {
-				echo 'Error al tratar de redimensionar imagen';
+				echo
+				"
+				Error al tratar de redimensionar imagen 750x750
+				Folder : $folder
+				Archivo : $fileName
+				";
 				exit(0);
 			}
-			
+			 			
 		}
 		
 		exit(0);
