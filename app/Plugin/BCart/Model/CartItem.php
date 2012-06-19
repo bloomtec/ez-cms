@@ -35,6 +35,16 @@ class CartItem extends BCartAppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'color_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'product_size_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -75,6 +85,13 @@ class CartItem extends BCartAppModel {
 		'Product' => array(
 			'className' => 'Product',
 			'foreignKey' => 'product_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Color' => array(
+			'className' => 'Color',
+			'foreignKey' => 'color_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
