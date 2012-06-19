@@ -8,7 +8,7 @@
 			<?php $categories = $this -> requestAction('/categories/get'); ?>
 			<?php foreach($categories as $key => $category) : ?>
 			<li>
-				<img src="<?php echo $category['Category']['image']; ?>" />
+				<img src="/img/uploads/150x150/<?php echo $category['Category']['image']; ?>" />
 				<a href="<?php echo '/categories/view/' . $category['Category']['id']; ?>"><?php echo $category['Category']['name']; ?></a>
 			</li>
 			<?php endforeach; ?>
