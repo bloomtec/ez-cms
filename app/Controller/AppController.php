@@ -98,6 +98,64 @@ class AppController extends Controller {
 	public function getIdentifier() {
 		return $this -> identifier;
 	}
+	
+	protected function cleanImages() {
+		// Llamar los modelos que usan imagenes
+		$this -> loadModel('Category');
+		$this -> loadModel('Gallery');
+		$this -> loadModel('Image');
+		
+		$fileNames = array();
+		
+		$tmpFileNames = null;
+		
+		// Obtener nombres de archivos registrados en las diferentes tablas
+		$tmpFileNames = $this -> Category -> find('list', array('recursive' => -1, 'conditions' => array('Category.image NOT' => null), 'fields' => array('Category.image')));
+		foreach ($tmpFileNames as $index => $tmpFileName) {
+			$fileNames[] = $tmpFileName;
+		}
+		$tmpFileNames = $this -> Gallery -> find('list', array('recursive' => -1, 'conditions' => array('Gallery.image NOT' => null), 'fields' => array('Gallery.image')));
+		foreach ($tmpFileNames as $index => $tmpFileName) {
+			$fileNames[] = $tmpFileName;
+		}
+		$tmpFileNames = $this -> Image -> find('list', array('recursive' => -1, 'conditions' => array('Image.path NOT' => null), 'fields' => array('Image.path')));
+		foreach ($tmpFileNames as $index => $tmpFileName) {
+			$fileNames[] = $tmpFileName;
+		}
+		
+		$directories = array(
+			0 => IMAGES . 'uploads',
+			1 => IMAGES . 'uploads/50x50',
+			2 => IMAGES . 'uploads/100x100',
+			3 => IMAGES . 'uploads/150x150',
+			4 => IMAGES . 'uploads/215x215',
+			5 => IMAGES . 'uploads/360x360',
+			6 => IMAGES . 'uploads/750x750',
+		);
+		
+		foreach ($directories as $index => $directory) {
+			
+			if (is_dir($directory) && $directoryHandle = opendir($directory)) {
+				
+				$directoryFiles = array();
+				
+				while (false !== ($fileEntry = readdir($directoryHandle))) {
+					if ($fileEntry != 'empty' && is_file($directory . DS . $fileEntry))
+						$directoryFiles[] = $fileEntry;
+				}
+				closedir($directoryHandle);
+				
+				foreach ($directoryFiles as $index => $directoryFile) {
+					if (!in_array($directoryFile, $fileNames)) {
+						unlink($directory . DS . $directoryFile);
+					}
+				}
+				
+			}
+			
+		}
+		
+	}
 
 	/**
 	 * Vericar el acceso de un usuario a una función mediante ACL
@@ -142,7 +200,12 @@ class AppController extends Controller {
 
 					// Negar acceso a los siguientes métodos administrativos
 					foreach ($this -> methods as $key => $method) {
-						if ((!strstr($method, 'admin_')) && (!strstr($method, 'aclVerification')) && (!strstr($method, 'verifyUserAccess'))) {
+						if (
+							(!strstr($method, 'admin_')) &&
+							(!strstr($method, 'aclVerification')) &&
+							(!strstr($method, 'verifyUserAccess')) &&
+							(!strstr($method, 'cleanImages'))
+						) {
 							if (!$this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
 								$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
 							}

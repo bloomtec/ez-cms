@@ -134,31 +134,43 @@ class ProductsController extends AppController {
 			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
 		}
 		if ($this -> request -> is('post')) {
-			$this -> Product -> create();
-			if ($this -> Product -> save($this -> request -> data)) {
-				$inventory_errors = false;
-
-				// Crear inventarios
+			$selected_Inventory = false;
+			if(isset($this -> request -> data['Matrix']) && !empty($this -> request -> data['Matrix'])) {
 				foreach($this -> request -> data['Matrix'] as $size_color => $selected) {
-					if($selected) {
-						$sizeAndColorId = explode('-', $size_color);
-						$color_id = $sizeAndColorId[1];
-						$product_size_id = $sizeAndColorId[0];
-						if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $color_id . '/' . $product_size_id)) {
-							$inventory_errors = true;
+					if($selected) $selected_Inventory = true;
+				}
+			}
+			if($selected_Inventory) {
+				$this -> Product -> create();
+				if ($this -> Product -> save($this -> request -> data)) {
+					$inventory_errors = false;
+	
+					// Crear inventarios
+					foreach($this -> request -> data['Matrix'] as $size_color => $selected) {
+						if($selected) {
+							$sizeAndColorId = explode('-', $size_color);
+							$color_id = $sizeAndColorId[1];
+							$product_size_id = $sizeAndColorId[0];
+							if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $color_id . '/' . $product_size_id)) {
+								$inventory_errors = true;
+							}
 						}
 					}
-				}
-
-				if (!$inventory_errors) {
-					$this -> Session -> setFlash(__('Se guardó el producto'));
+	
+					if (!$inventory_errors) {
+						$this -> Session -> setFlash(__('Se creó el producto. Verifique las galerías de inventarios.'), 'crud/success');
+						$this -> redirect(array('controller' => 'galleries', 'action' => 'productGalleryWizard', $this -> Product -> id));
+					} else {
+						$this -> Session -> setFlash(__('Se creó el producto. Error al iniciar inventarios seleccionados'), 'crud/error');
+						$this -> redirect(array('action' => 'index'));
+					}
 				} else {
-					$this -> Session -> setFlash(__('Se guardó el producto. Error al iniciar inventarios seleccionados'));
+					$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
 				}
-				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
-			}
+				$this -> Session -> setFlash('Debe inicializar al menos un inventario', 'crud/error');
+				//$this -> request -> data = $this -> request -> data;
+			}			
 		}
 		$this -> set('categories', $this -> Product -> Category -> find('list'));
 		$this -> loadModel('ProductSize');

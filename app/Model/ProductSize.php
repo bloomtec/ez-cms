@@ -29,6 +29,14 @@ class ProductSize extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'isUnique' => array(
+				'rule' => array('isUnique'),
+				'message' => 'La talla ingresada ya existe',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
 		),
 		'order' => array(
 			'numeric' => array(
