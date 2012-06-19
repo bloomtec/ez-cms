@@ -18,22 +18,38 @@
 		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
 		echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
 		echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-		echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field'));
+		//echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field'));
 		?>
 		</div>
 		<div class="tallas">
-		<?php
-		echo $this -> Form -> input('ProductSize.size', array('label' => 'Iniciar Inventario Con Tallas', 'type' => 'select', 'multiple' => 'checkbox'));
-		?>
+			<table id="ColorsSizesMatrix">
+				<caption>Inicializar Inventarios (se inicia su cantidad en 0 las combinaciones seleccionadas)</caption>
+				<tbody>
+					<tr>
+						<td>Tallas/Colores</td>
+						<?php foreach($colors as $color_id => $color_name) : ?>
+						<td><?php echo $color_name; ?></td>
+						<?php endforeach; ?>
+					</tr>
+					<?php foreach($sizes as $size_id => $size_name) : ?>
+						<tr>
+							<td><?php echo $size_name; ?></td>
+							<?php foreach($colors as $color_id => $color_name) : ?>
+								<td><?php echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox')); ?></td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
 		</div>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Crear')); ?>
 </div>
-<div class="images">
+<!--<div class="images">
 	<h2>Imagen</h2>
 	<div class="preview"></div>
 	<div id="single-upload-product" controller="products"></div>
-</div>
+</div>-->
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>

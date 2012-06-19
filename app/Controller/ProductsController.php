@@ -31,6 +31,15 @@ class ProductsController extends AppController {
 			return false;
 		}
 	}
+	
+	private function checkIfColorExists() {
+		$this -> loadModel('Color');
+		if ($this -> Color -> find('count')) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * getNovedad method
@@ -112,23 +121,32 @@ class ProductsController extends AppController {
 	 * @return void
 	 */
 	public function admin_add() {
-		if (!$this -> checkIfSizeExists()) {
-			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
-			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
-		}
 		if (!$this -> checkIfCategoryExists()) {
 			$this -> Session -> setFlash('No hay categorías creadas, cree al menos una categoría.', 'crud/error');
 			$this -> redirect(array('plugin' => false, 'controller' => 'categories', 'action' => 'index'));
+		}
+		if (!$this -> checkIfColorExists()) {
+			$this -> Session -> setFlash('No hay color creado, cree al menos un color.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'colors', 'action' => 'index'));
+		}
+		if (!$this -> checkIfSizeExists()) {
+			$this -> Session -> setFlash('No hay tallas creadas, cree al menos una talla.', 'crud/error');
+			$this -> redirect(array('plugin' => false, 'controller' => 'product_sizes', 'action' => 'index'));
 		}
 		if ($this -> request -> is('post')) {
 			$this -> Product -> create();
 			if ($this -> Product -> save($this -> request -> data)) {
 				$inventory_errors = false;
 
-				/** Crear inventarios */
-				foreach ($this -> request -> data['ProductSize']['size'] as $key => $product_size_id) {
-					if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $product_size_id)) {
-						$inventory_errors = true;
+				// Crear inventarios
+				foreach($this -> request -> data['Matrix'] as $size_color => $selected) {
+					if($selected) {
+						$sizeAndColorId = explode('-', $size_color);
+						$color_id = $sizeAndColorId[1];
+						$product_size_id = $sizeAndColorId[0];
+						if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $color_id . '/' . $product_size_id)) {
+							$inventory_errors = true;
+						}
 					}
 				}
 
@@ -142,11 +160,11 @@ class ProductsController extends AppController {
 				$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
 			}
 		}
-		$categories = $this -> Product -> Category -> find('list');
-		$this -> set(compact('categories'));
+		$this -> set('categories', $this -> Product -> Category -> find('list'));
 		$this -> loadModel('ProductSize');
-		$sizes = $this -> ProductSize -> find('list');
-		$this -> set(compact('sizes'));
+		$this -> set('sizes', $this -> ProductSize -> find('list'));
+		$this -> loadModel('Color');
+		$this -> set('colors', $this -> Color -> find('list'));
 	}
 
 	/**
@@ -164,12 +182,19 @@ class ProductsController extends AppController {
 			if ($this -> Product -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se guardó el producto', 'crud/success'));
 				$errors = false;
-				/** Crear inventarios */
-				foreach ($this -> request -> data['ProductSize']['size'] as $key => $product_size_id) {
-					if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $product_size_id)) {
-						$errors = true;
+				
+				// Crear inventarios
+				foreach($this -> request -> data['Matrix'] as $size_color => $selected) {
+					if($selected) {
+						$sizeAndColorId = explode('-', $size_color);
+						$color_id = $sizeAndColorId[1];
+						$product_size_id = $sizeAndColorId[0];
+						if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $color_id . '/' . $product_size_id)) {
+							$inventory_errors = true;
+						}
 					}
 				}
+				
 				if($errors) {
 					$this -> Session -> setFlash(__('Error al tratar de agregar talla al inventario. Se omitió el proceso de cambios en cantidades de inventarios.', 'crud/error'));
 					$this -> redirect(array('action' => 'index'));
@@ -199,9 +224,12 @@ class ProductsController extends AppController {
 			$sizes = $this -> ProductSize -> find('list', array('conditions' => array('ProductSize.id NOT' => $product_sizes)));
 			$this -> set(compact('sizes'));
 		}
-		$categories = $this -> Product -> Category -> find('list');
-		$this -> set(compact('categories'));
 		$this -> set('inventories', $this -> Product -> Inventory -> find('all', array('conditions' => array('Inventory.product_id' => $id))));
+		$this -> set('categories', $this -> Product -> Category -> find('list'));
+		$this -> loadModel('ProductSize');
+		$this -> set('sizes', $this -> ProductSize -> find('list'));
+		$this -> loadModel('Color');
+		$this -> set('colors', $this -> Color -> find('list'));
 	}
 
 	/**

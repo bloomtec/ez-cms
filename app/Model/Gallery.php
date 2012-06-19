@@ -3,8 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * Gallery Model
  *
- * @property Product $Product
- * @property Image $Image
+ * @property Inventory $Inventory
  */
 class Gallery extends AppModel {
 	
@@ -21,10 +20,10 @@ class Gallery extends AppModel {
 	 * @var array
 	 */
 	public $validate = array(
-		'product_id' => array(
+		'inventory_id' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'Debe seleccionar un producto',
+				'message' => 'Debe seleccionar el inventario al que se relaciona la galería',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -42,7 +41,17 @@ class Gallery extends AppModel {
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => 'Debe ingresar un nombre',
+				'message' => 'La galería debe tener un nombre',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'image' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => 'La galería debe tener una imagen',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -59,15 +68,15 @@ class Gallery extends AppModel {
 	 * @var array
 	 */
 	public $belongsTo = array(
-		'Product' => array(
-			'className' => 'Product',
-			'foreignKey' => 'product_id',
+		'Inventory' => array(
+			'className' => 'Inventory',
+			'foreignKey' => 'inventory_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		)
 	);
-
+	
 	/**
 	 * hasMany associations
 	 *
@@ -88,5 +97,5 @@ class Gallery extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+	
 }

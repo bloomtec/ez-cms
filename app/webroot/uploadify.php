@@ -32,6 +32,7 @@ if (!empty($_FILES)) {
 
 	if (in_array($fileParts['extension'], $fileTypes)) {
 		if (move_uploaded_file($tempFile, $targetFile)) {
+			time_nanosleep(0, 5000000);
 			echo str_replace($_SERVER['DOCUMENT_ROOT'], '', $targetFile);
 		} else {
 			echo '

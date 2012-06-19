@@ -21,18 +21,45 @@
 			echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
 			echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
 			echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-			echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field', 'value' => $this -> data['Product']['image']));
+			//echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field', 'value' => $this -> data['Product']['image']));
 			?>
 		</div>
 		<div class="tallas">
-			<?php
-			echo $this -> Form -> input('ProductSize.size', array('label' => 'Tallas Sin Inventario', 'type' => 'select', 'multiple' => 'checkbox'));
-			?>
+			<table id="ColorsSizesMatrix">
+				<caption>Inicializar Inventarios (se inicia su cantidad en 0 las combinaciones seleccionadas)</caption>
+				<tbody>
+					<tr>
+						<td>Tallas/Colores</td>
+						<?php foreach($colors as $color_id => $color_name) : ?>
+						<td><?php echo $color_name; ?></td>
+						<?php endforeach; ?>
+					</tr>
+					<?php foreach($sizes as $size_id => $size_name) : ?>
+						<tr>
+							<td><?php echo $size_name; ?></td>
+							<?php foreach($colors as $color_id => $color_name) : ?>
+								<td>
+									<?php
+										if($this -> requestAction('/inventories/hasInventory/' . $this -> data['Product']['id'] . '/' . $color_id . '/' . $size_id)) {
+											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox', 'disabled' => 'disabled', 'checked' => 'checked'));
+										} else {
+											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox'));
+										}
+									?>
+								</td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
 		</div>
 		<div class="inventario">
 			<table id="TablaInventarios" style="max-width:400px;">
 				<tbody>
 					<tr>
+						<th>
+							Color
+						</th>
 						<th>
 							Talla
 						</th>
@@ -48,6 +75,9 @@
 							echo $this -> Form -> hidden("Inventory.$index.id", array('value' => $index));
 						?>
 					<tr>
+						<td>
+							<?php echo $inventory['Inventory']['color']; ?>
+						</td>
 						<td>
 							<?php echo $inventory['Inventory']['size']; ?>
 						</td>
@@ -72,13 +102,13 @@
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
-<div class="images">
+<!--<div class="images">
 	<h2>Imagen</h2>
 	<div class="preview">
 		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['image'], array("width" => 200)); ?>
 	</div>
 	<div id="single-upload-product" controller="products"></div>
-</div>
+</div>-->
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>

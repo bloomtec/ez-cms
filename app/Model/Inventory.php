@@ -14,11 +14,12 @@ class Inventory extends AppModel {
 	 * @var array
 	 */
 	public $virtualFields = array(
-		'size' => 'SELECT product_sizes.name FROM product_sizes WHERE product_sizes.id = Inventory.product_size_id',
-		'product' => 'SELECT products.name FROM products WHERE products.id = Inventory.product_id'
+		'color' => 'SELECT `colors`.`name` FROM `colors` WHERE `colors`.`id` = Inventory.color_id',
+		'size' => 'SELECT `product_sizes`.`name` FROM `product_sizes` WHERE `product_sizes`.`id` = Inventory.product_size_id',
+		'product' => 'SELECT `products`.`name` FROM `products` WHERE `products`.`id` = Inventory.product_id',
 	);
 	
-	public $displayField = 'product';
+	public $displayField = 'color';
 	
 	/**
 	 * Validation rules
@@ -79,6 +80,35 @@ class Inventory extends AppModel {
 			'conditions' => '',
 			'fields' => '',
 			'order' => 'ProductSize.name ASC'
+		),
+		'Color' => array(
+			'className' => 'Color',
+			'foreignKey' => 'color_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => 'Color.name ASC'
 		)
 	);
+	
+	/**
+	 * hasOne associations
+	 *
+	 * @var array
+	 */
+	public $hasOne = array(
+		'Gallery' => array(
+			'className' => 'Gallery',
+			'foreignKey' => 'inventory_id',
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+	
 }

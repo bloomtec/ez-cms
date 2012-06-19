@@ -103,6 +103,7 @@
 			<!--<?php echo h($product['Product']['image']); ?>
 			&nbsp;-->
 			<img src="/img/uploads/215x215/<?php echo $product['Product']['image']; ?>" />
+			&nbsp;
 		</dd>
 		<dt><?php echo __('Creado'); ?></dt>
 		<dd>
@@ -135,11 +136,13 @@
 	<table id="sortable" cellpadding="0" cellspacing="0" controller="menu_items">
 		<tbody>
 			<tr class="ui-state-disabled">
+				<th><?php echo __('Color'); ?></th>
 				<th><?php echo __('Talla'); ?></th>
 				<th><?php echo __('Cantidad'); ?></th>
 			</tr>
 			<?php $i = 0; foreach ($product['Inventory'] as $inventory):	?>
 			<tr id="<?php echo $inventory['id']?>" class="ui-state-default">
+				<td><?php echo $inventory['color']; ?></td>
 				<td><?php echo $inventory['size']; ?></td>
 				<td><?php echo $inventory['quantity']; ?></td>
 			</tr>

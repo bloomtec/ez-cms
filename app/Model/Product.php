@@ -147,27 +147,6 @@ class Product extends AppModel {
 	 *
 	 * @var array
 	 */
-	public $hasOne = array(
-		'Gallery' => array(
-			'className' => 'Gallery',
-			'foreignKey' => 'product_id',
-			'dependent' => true,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
-	
-	/**
-	 * hasOne associations
-	 *
-	 * @var array
-	 */
 	public $hasMany = array(
 		'Inventory' => array(
 			'className' => 'Inventory',

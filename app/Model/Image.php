@@ -7,6 +7,12 @@ App::uses('AppModel', 'Model');
  */
 class Image extends AppModel {
 /**
+ * Display field
+ *
+ * @var string
+ */
+	public $displayField = 'path';
+/**
  * Validation rules
  *
  * @var array

@@ -6,34 +6,27 @@
 		</legend>
 		<?php
 		echo $this -> Form -> input('id');
-		echo $this->Form->input('product_id', array('label' => 'Producto', 'empty' => 'Seleccione...'));
-		echo $this->Form->input('name', array('label' => 'Nombre'));
-		echo $this->Form->input('description', array('label' => 'Descripción'));
+		echo $this -> Form -> input('inventory_id', array('label' => 'Inventarios sin galería'));
+		echo $this -> Form -> input('name', array('label' => 'Nombre'));
+		echo $this -> Form -> input('description', array('label' => 'Descripión'));
+		echo $this -> Form -> hidden('image', array('id' => 'single-field'));
 		?>
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
+</div>
+<div class="images">
+	<h2>Imagen</h2>
+	<div class="preview"><img src="/img/uploads/215x215/<?php echo $this -> request -> data['Gallery']['image']; ?>" /></div>
+	<div id="single-upload-gallery" controller="galleries">
+
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 
 		<li>
-			<?php echo $this -> Form -> postLink(__('Eliminar'), array('action' => 'delete', $this -> Form -> value('Gallery.id')), null, __('¿Seguro desea eliminar %s?', $this -> Form -> value('Gallery.name'))); ?>
-		</li>
-		<li>
 			<?php echo $this -> Html -> link(__('Ver Galerías'), array('action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Productos'), array('controller' => 'products', 'action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Agregar Producto'), array('controller' => 'products', 'action' => 'add')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Imagenes'), array('controller' => 'images', 'action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Agregar Imagen'), array('controller' => 'images', 'action' => 'add')); ?>
 		</li>
 	</ul>
 </div>

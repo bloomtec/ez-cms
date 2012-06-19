@@ -16,17 +16,37 @@ class InventoriesController extends AppController {
 		$this -> Inventory -> recursive = 0;
 		$this -> set('inventories', $this -> paginate());
 	}
+	
+	public function hasInventory($product_id = null, $color_id = null, $product_size_id = null) {
+		if($product_id && $color_id && $product_size_id) {
+			$inventory = $this -> Inventory -> find('first', array(
+				'conditions' => array(
+					'Inventory.product_id' => $product_id,
+					'Inventory.color_id' => $color_id,
+					'Inventory.product_size_id' => $product_size_id
+				)
+			));
+			if($inventory) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 	/**
 	 * addInventory method
 	 *
 	 * @return void
 	 */
-	public function addInventory($product_id = null, $product_size_id = null) {
-		if($product_id && $product_size_id) {
+	public function addInventory($product_id = null, $color_id = null, $product_size_id = null) {
+		if($product_id && $color_id && $product_size_id) {
 			$inventory = array(
 				'Inventory' => array(
 					'product_id' => $product_id,
+					'color_id' => $color_id,
 					'product_size_id' => $product_size_id,
 					'quantity' => 0
 				)

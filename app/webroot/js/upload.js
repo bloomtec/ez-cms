@@ -21,7 +21,7 @@ $(document).ready(function() {
 					'name' : fileName,
 					'folder' : 'uploads'
 				}, function(data) {
-					console.log(data);
+					//console.log(data);
 				});
 			}
 		}
@@ -44,11 +44,11 @@ $(document).ready(function() {
 				var fileName = data.split("/");
 				fileName = fileName[(fileName.length - 1)];
 				$("#single-field").val(fileName);
-				$.post("/products/uploadify_add", {
+				$.post("/galleries/uploadify_add", {
 					'name' : fileName,
 					'folder' : 'uploads'
 				}, function(data) {
-					console.log(data);
+					//console.log(data);
 				});
 			}
 		}
@@ -58,7 +58,7 @@ $(document).ready(function() {
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
 		'uploader' : '/uploadify.php',
-		'buttonText' : 'Subir Imagen',
+		'buttonText' : 'Subir Imagenes',
 		'width' : 147,
 		'height' : 37,
 		'cancelImg' : '/img/uploadify-cancel.png',
@@ -66,17 +66,20 @@ $(document).ready(function() {
 		'onUploadSuccess' : function(file, data, response) {
 			if(response) {
 				var name = file.name;
-				$(".preview").html('<img  src="' + data + '" />');
 				var fileName = data.split("/");
 				fileName = fileName[(fileName.length - 1)];
-				$("#single-field").val(fileName);
-				$.post("/products/uploadify_add", {
+				$.post("/images/uploadify_add", {
 					'name' : fileName,
-					'folder' : 'uploads'
+					'folder' : 'uploads',
+					'gallery_id' : $('#gallery_id').attr('rel')
 				}, function(data) {
-					console.log(data);
+					//console.log(data);
 				});
 			}
+		},
+		'onQueueComplete' : function(queueData) {
+			var location = '/admin/galleries/view/' + $('#gallery_id').attr('rel');
+			window.location.replace(location);
 		}
 	});
 
