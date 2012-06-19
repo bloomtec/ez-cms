@@ -55,10 +55,10 @@ class ShoppingCartsController extends BCartAppController {
 		}
 	}
 	
-	public function addCartItem($product_id = null, $product_size_id = null, $quantity = null) {
+	public function addCartItem($product_id = null, $color_id = null, $product_size_id = null, $quantity = null) {
 		$this -> autoRender = false;
 		Configure::write('debug', 0);
-		if($product_id && $product_size_id && $quantity) {
+		if($product_id && $color_id && $product_size_id && $quantity) {
 			/** llegó la info proceder a guardar **/
 			$shopping_cart = $this -> get();
 			if($shopping_cart) {
@@ -66,6 +66,7 @@ class ShoppingCartsController extends BCartAppController {
 				$cart_item = array(
 					'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
 					'product_id' => $product_id,
+					'color_id' => $color_id,
 					'product_size_id' => $product_size_id,
 					'quantity' => $quantity
 				);
@@ -75,6 +76,7 @@ class ShoppingCartsController extends BCartAppController {
 				} else {
 					$shopping_cart['success'] = false;
 				}
+				$shopping_cart = $this -> get();
 				echo json_encode($shopping_cart);
 			} else {
 				echo json_encode(array('success' => false)); // No existe el carrito
