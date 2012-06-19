@@ -35,10 +35,11 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Categoría no válida'));
 		}
 		$this -> paginate=array('limit'=>6);
-		$products = $this -> paginate('Product',array('Product.category_id'=>$id));
+		$products = $this -> Category -> Product -> find('list',array('conditions'=>array('Product.category_id'=>$id)));
+		//$inventories = $this -> paginate('Inventory',array('product_id'=>$products,'quantity >'=>0));
 		$this -> Category -> recursive = -1;
 		$category= $this -> Category -> read(null, $id);
-		$this -> set(compact('category','products'));
+		$this -> set(compact('category','inventories'));
 	}
 
 	/**
