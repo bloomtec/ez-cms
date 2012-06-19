@@ -7,14 +7,18 @@ App::uses('AppController', 'Controller');
  */
 class CategoriesController extends AppController {
 	
+	public $components = array('Attachment');
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('view', 'get','index');
+		$this -> Auth -> allow('view', 'get','index', 'uploadify_add');
 	}
+	
 	public function index(){
 		$categories = $this -> Category -> find('all',array('conditions'=>array('is_promoted'=>true)));
 		$this -> set (compact('categories'));
 	}
+	
 	public function get() {
 		$this -> Category -> recursive = -1;
 		return $this -> Category -> find('all');
@@ -121,6 +125,76 @@ class CategoriesController extends AppController {
 		}
 		$this -> Session -> setFlash(__('No se eliminó la categoría'));
 		$this -> redirect(array('action' => 'index'));
+	}
+	
+	function uploadify_add() {
+		$this -> autoRender = false;
+		Configure::write("debug", 0);
+		
+		if ($_POST['name'] && $_POST['folder']) {
+
+			$fileName = $_POST['name'];
+			$folder = $_POST['folder'];
+			
+			if(!$this -> Attachment -> resize_image('resize', $folder . '/' . $fileName, $folder . '/50x50', $fileName, 50,	50)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 50x50
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/100x100", $fileName, 100, 100)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 100x100
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/150x150", $fileName, 150, 150)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 150x150
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/215x215", $fileName, 215, 215)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 215x215
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/360x360", $fileName, 360, 360)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 360x360
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			if(!$this -> Attachment -> resize_image("resize", $folder . "/" . $fileName, $folder . "/750x750", $fileName, 750, 750)) {
+				echo
+				"
+				Error al tratar de redimensionar imagen 750x750
+				Folder : $folder
+				Archivo : $fileName
+				";
+				exit(0);
+			}
+			 			
+		}
+		
+		exit(0);
+
 	}
 
 }

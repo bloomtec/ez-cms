@@ -18,7 +18,9 @@
 <div class="images">
 	<h2>Imagen</h2>
 	<div class="preview"></div>
-	<div id="single-upload" controller="categories"></div>
+	<div id="single-upload-category" controller="categories">
+
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>

@@ -18,7 +18,11 @@
 		<!--<td><?php echo h($category['Category']['id']); ?>&nbsp;</td>-->
 		<td><?php echo h($category['Category']['name']); ?>&nbsp;</td>
 		<!--<td><?php echo h($category['Category']['description']); ?>&nbsp;</td>-->
-		<td><?php echo h($category['Category']['image']); ?>&nbsp;</td>
+		<td>
+			<?php //echo h($category['Category']['image']); ?>
+			<img src="/img/uploads/50x50/<?php echo $category['Category']['image']; ?>" />
+			&nbsp;
+		</td>
 		<td>
 			<?php
 				//echo h($category['Category']['is_promoted']);
