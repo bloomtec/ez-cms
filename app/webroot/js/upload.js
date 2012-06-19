@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	$('#single-upload-category').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -53,7 +53,7 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+
 	$('#single-upload-gallery').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -80,7 +80,7 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+
 	$('#multiple-upload-gallery').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -108,6 +108,35 @@ $(document).ready(function() {
 			var location = '/admin/galleries/view/' + $('#gallery_id').attr('rel');
 			window.location.replace(location);
 		}
+	});
+
+	$.each($('.gallery-single-upload'), function(i, val) {
+		$('#single-upload-gallery-' + val.id).uploadify({
+			'swf' : '/swf/uploadify.swf',
+			'checkExisting' : '/check-exists.php',
+			'uploader' : '/uploadify.php',
+			'buttonText' : 'Subir Imagen',
+			'width' : 147,
+			'height' : 37,
+			'cancelImg' : '/img/uploadify-cancel.png',
+			'multi' : false,
+			//'debug' : true,
+			'onUploadSuccess' : function(file, data, response) {
+				if(response) {
+					var name = file.name;
+					$('#preview-' + val.id).html('<img width="150" height="150" src="' + data + '" />');
+					var fileName = data.split("/");
+					fileName = fileName[(fileName.length - 1)];
+					$(val).val(fileName);
+					$.post("/galleries/uploadify_add", {
+						'name' : fileName,
+						'folder' : 'uploads'
+					}, function(data) {
+						//console.log(data);
+					});
+				}
+			}
+		});
 	});
 
 });

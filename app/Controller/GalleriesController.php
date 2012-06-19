@@ -81,27 +81,61 @@ class GalleriesController extends AppController {
 		$inventories = $this -> Gallery -> Inventory -> find('list');
 		$this -> set(compact('inventories'));
 	}
-
-	/**
-	 * delete method
-	 *
-	 * @param string $id
-	 * @return void
-	 */
-	public function delete($id = null) {
-		if (!$this -> request -> is('post')) {
-			throw new MethodNotAllowedException();
+	
+	public function admin_productGalleryWizard($product_id = null) {
+		if($this -> request -> is('post') || $this -> request -> is('put')) {
+			foreach($this -> request -> data['Gallery'] as $index => $gallery) {
+				$data = array('Gallery' => $gallery);
+				$this -> Gallery -> save($data);
+			}
+			$this -> redirect(array('controller' => 'products', 'action' => 'index'));
 		}
-		$this -> Gallery -> id = $id;
-		if (!$this -> Gallery -> exists()) {
-			throw new NotFoundException(__('Invalid gallery'));
+		if($product_id) {
+			$inventories = $this -> Gallery -> Inventory -> find(
+				'list',
+				array(
+					'recursive' => -1,
+					'conditions' => array(
+						'Inventory.product_id' => $product_id
+					),
+					'fields' => array(
+						'Inventory.id'
+					)
+				)
+			);
+			if(!empty($inventories)) {
+				foreach ($inventories as $inventory_id => $inventoryDisplayField) {
+					$tmp_gallery = $this -> Gallery -> find(
+						'first',
+						array(
+							'recursive' => -1,
+							'conditions' => array(
+								'Gallery.inventory_id' => $inventory_id
+							)
+						)
+					);
+					if(!$tmp_gallery) {
+						$tmp_inventory = $this -> Gallery -> Inventory -> read(null, $inventory_id);
+						$this -> Gallery -> create();
+						$gallery = array(
+							'Gallery' => array(
+								'inventory_id' => $inventory_id,
+								'name' => $tmp_inventory['Inventory']['product'] . " - " . $tmp_inventory['Inventory']['color'] . " - " . $tmp_inventory['Inventory']['size'],
+								'description' => '',
+								'image' => ''
+							)
+						);
+						if($this -> Gallery -> save($gallery)) {
+							//debug('Se creo la galería');
+						} else {
+							//debug('No se creó la galería');
+							//debug($this -> Gallery -> invalidFields());
+						}
+					}
+				}
+			}
+			$this -> set('galleries', $this -> Gallery -> find('all', array('recursive' => -1, 'conditions' => array('Gallery.inventory_id' => $inventories))));
 		}
-		if ($this -> Gallery -> delete()) {
-			$this -> Session -> setFlash(__('Gallery deleted'));
-			$this -> redirect(array('action' => 'index'));
-		}
-		$this -> Session -> setFlash(__('Gallery was not deleted'));
-		$this -> redirect(array('action' => 'index'));
 	}
 
 	/**

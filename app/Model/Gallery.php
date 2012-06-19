@@ -49,6 +49,7 @@ class Gallery extends AppModel {
 			),
 		),
 		'image' => array(
+			/**
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'La galería debe tener una imagen',
@@ -57,6 +58,7 @@ class Gallery extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			 */
 		),
 	);
 
