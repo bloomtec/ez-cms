@@ -194,6 +194,7 @@ class ProductsController extends AppController {
 			if ($this -> Product -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se guardó el producto', 'crud/success'));
 				$errors = false;
+				$inventory_added = false;
 				
 				// Crear inventarios
 				foreach($this -> request -> data['Matrix'] as $size_color => $selected) {
@@ -203,12 +204,14 @@ class ProductsController extends AppController {
 						$product_size_id = $sizeAndColorId[0];
 						if (!$this -> requestAction('/inventories/addInventory/' . $this -> Product -> id . '/' . $color_id . '/' . $product_size_id)) {
 							$inventory_errors = true;
+						} else {
+							$inventory_added = true;
 						}
 					}
 				}
 				
 				if($errors) {
-					$this -> Session -> setFlash(__('Error al tratar de agregar talla al inventario. Se omitió el proceso de cambios en cantidades de inventarios.', 'crud/error'));
+					$this -> Session -> setFlash(__('Error al tratar de crear un inventario. Se omitió el proceso de cambios en cantidades de inventarios y la asignación de imagenes de galerías para cualquier inventario extra inicializado.', 'crud/error'));
 					$this -> redirect(array('action' => 'index'));
 				}
 				foreach($this -> request -> data['Inventory'] as $key => $data) {
@@ -221,7 +224,11 @@ class ProductsController extends AppController {
 				if($errors) {
 					$this -> Session -> setFlash(__('Errores al modificar inventario. Verifique las cantidades actuales vs el cambio para continuar.', 'crud/error'));
 				}
-				$this -> redirect(array('action' => 'index'));
+				if($inventory_added) {
+					$this -> redirect(array('controller' => 'galleries', 'action' => 'productGalleryWizard', $this -> Product -> id));
+				} else {
+					$this -> redirect(array('action' => 'index'));
+				}
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
 			}

@@ -10,7 +10,7 @@
 			<?php
 				$gallery_id = $gallery['Gallery']['id'];
 				echo $this -> Form -> hidden("Gallery.$gallery_id.id", array('value' => $gallery_id));
-				echo $this -> Form -> hidden("Gallery.$gallery_id.image", array('class' => 'gallery-single-upload', 'id' => $gallery_id));
+				echo $this -> Form -> hidden("Gallery.$gallery_id.image", array('value' => $gallery['Gallery']['image'], 'class' => 'gallery-single-upload', 'id' => $gallery_id));
 			?>
 			<div class="images">
 				<h2>Imagen Principal Galería <?php echo $gallery['Gallery']['name']; ?></h2>

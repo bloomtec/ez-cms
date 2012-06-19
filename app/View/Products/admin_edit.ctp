@@ -12,9 +12,9 @@
 			echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
 			echo $this -> Form -> input('name', array('label' => 'Nombre'));
 			echo $this -> Form -> input('reference', array('label' => 'Referencia'));
-			echo $this -> Form -> input('price', array('label' => 'Precio'));
-			echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A.'));
-			echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
+			echo $this -> Form -> input('price', array('label' => 'Precio (I.V.A. Incluído)'));
+			echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A. (X%)', 'value' => '16'));
+			//echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
 			echo $this -> Form -> input('description', array('label' => 'Descripción'));
 			//echo $this -> Form -> input('order', array('label' => ''));
 			echo $this -> Form -> input('is_active', array('label' => 'Activo', 'checked' => 'checked'));
