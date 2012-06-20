@@ -24,14 +24,29 @@
 			<div class="colores">			
 				Colores:
 				<ul class="cuadros-colores">
-				<?php $productSizes; ?>
-					<?php if (false): ?>
+				<?php $productColors; ?>
+					<?php if ($product['Inventory']): ?>
 						<?php 
-							foreach($product['Inventory'] as $inventory): 
-							$productSizes[$inventory['product_size_id']]=$inventory["size"];
+							$i=0;
+							foreach($product['Inventory'] as $inventory): 							
+							$class="";
+							if($i==0){
+								if($inventory['color_id']==$this -> params['pass'][1]){
+									 $class='first-child selected';
+								}else{
+									 $class='first-child';
+								}								
+							}elseif($inventory['color_id']==$this -> params['pass'][1]){
+								 $class='selected';
+							}
+						?>	
+						<?php if(!isset($productColors[$inventory['color_id']])): ?>
+								<li rel="<?php echo $inventory['color_id'];?>" <?php if($i==0){ echo "class='$class'"; $i+=1; }?> style="background:<?php echo $inventory['color_code'];?>"></li>
+						<?php 	$productColors[$inventory['color_id']]=$inventory["color"];
+							endif; 								
 						?>
-					  		<li rel="<?php echo $inventory['product_size_id'];?>"> <?php echo $inventory["size"] ?></li>
-					  	<?php endforeach; ?>
+						
+						<?php endforeach; ?>
 					<?php endif; ?>	
 				</ul>
 				<div style="clear:both"></div>
@@ -46,9 +61,9 @@
 							foreach($product['Inventory'] as $inventory): 
 							$productSizes[$inventory['product_size_id']]=$inventory["size"];
 						?>
-					  		<li rel="<?php echo $inventory['product_size_id'];?>" <?php if($i==0) echo "class='selected'"?>> <?php echo $inventory["size"] ?></li>
+					  		<li rel="<?php echo $inventory['product_size_id'];?>" <?php if($i==0) {echo "class='selected first-child'"; $i+=1;}?>> <?php echo $inventory["size"] ?></li>
 					  	<?php 
-							$i+=1;
+							
 							endforeach; 
 						?>
 					<?php endif; ?>	

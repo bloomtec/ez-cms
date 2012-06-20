@@ -7,7 +7,8 @@ App::uses('AppModel', 'Model');
  * @property Category $Category
  */
 class Product extends AppModel {
-	
+
+	public $actsAs = array('Containable');
 	/**
 	 * Display field
 	 *

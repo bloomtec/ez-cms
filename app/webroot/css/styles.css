@@ -922,11 +922,12 @@ ul.botones-caracteristicas a:hover {
 ul.cuadros-colores li.selected  .tallas {
 	display:block;
 }
-ul.cuadros-tallas {
+ul.cuadros-tallas ,ul.cuadros-colores{
 	height: 25px;
-	margin-top:12px;
+	margin-top:20px;
+	margin-bottom:30px;
 }
-ul.cuadros-tallas li:first-child {
+ul.cuadros-tallas li.first-child, ul.cuadros-colores li.first-child {
 	margin: 0;
 }
 ul.cuadros-tallas li {
@@ -940,6 +941,16 @@ ul.cuadros-tallas li {
 	cursor: pointer;
 	text-align: center;
 	line-height: 26px;
+}
+ul.cuadros-colores li {
+	width: 25px;
+	height: 25px;
+	display: block;
+	float: left;
+	list-style: none;
+	margin-left: 15px;
+	cursor: pointer;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.6);
 }
 ul.cuadros-tallas li.selected, ul.cuadros-colores li.selected {
 	border: 2px solid #E62B7C;
