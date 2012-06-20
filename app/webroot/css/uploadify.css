@@ -55,7 +55,8 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 	color: #808080;
 }
 .uploadify-queue {
-	margin-bottom: 1em;
+	margin-bottom: 5px;
+	padding:5px;
 }
 .uploadify-queue-item {
 	background-color: #F5F5F5;

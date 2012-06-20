@@ -5,23 +5,22 @@ $(document).ready(function() {
 		'checkExisting' : '/check-exists.php',
 		'uploader' : '/uploadify.php',
 		'buttonText' : 'Subir Imagen',
-		'width' : 147,
-		'height' : 37,
+		'width' : 80,
+		'height' : 20,
 		'cancelImg' : '/img/uploadify-cancel.png',
 		'multi' : false,
 		//'debug' : true,
 		'onUploadSuccess' : function(file, data, response) {
 			if(response) {
 				var name = file.name;
-				$(".preview").html('<img  src="' + data + '" />');
-				var fileName = data.split("/");
-				fileName = fileName[(fileName.length - 1)];
-				$("#single-field").val(fileName);
+				$("#single-field").val(data);
 				$.post("/categories/uploadify_add", {
-					'name' : fileName,
+					'name' : data,
 					'folder' : 'uploads'
-				}, function(data) {
-					//console.log(data);
+				}, function(confirm) {
+					if(confirm){
+						$(".preview").html('<img  src="/img/uploads/100x100/' + data + '" />');
+					}				
 				});
 			}
 		}

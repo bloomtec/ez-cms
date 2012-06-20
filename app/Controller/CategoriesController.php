@@ -200,7 +200,7 @@ class CategoriesController extends AppController {
 			}
 			 			
 		}
-		
+		echo true;
 		exit(0);
 
 	}

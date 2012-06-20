@@ -16,7 +16,7 @@ if (!empty($_FILES)) {
 	
 	// Sección para crear nombre de archivo único
 	$fileParts  = pathinfo($_FILES['Filedata']['name']);
-	$fechaActual = gmdate('His', time() + $gmt);
+	$fechaActual = gmdate('His', time());
 	$time = explode(' ',microtime());
     list($totalSeconds, $extraMilliseconds) = array($time[1], (int)round($time[0]*1000,3));
     $stringFinal = rand(100, 1000).$fechaActual . $totalSeconds . $extraMilliseconds.rand(0, 1000);
@@ -33,7 +33,7 @@ if (!empty($_FILES)) {
 	if (in_array($fileParts['extension'], $fileTypes)) {
 		if (move_uploaded_file($tempFile, $targetFile)) {
 			time_nanosleep(0, 5000000);
-			echo str_replace($_SERVER['DOCUMENT_ROOT'], '', $targetFile);
+			echo $stringFinal . '.' . $fileParts['extension'];
 		} else {
 			echo '
 			:: Error ::
@@ -45,7 +45,6 @@ if (!empty($_FILES)) {
 			Info adicional
 			' . print_r($fileData, true);
 		}
-
 		//echo '1';
 	} else {
 		echo
