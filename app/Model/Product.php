@@ -21,9 +21,7 @@ class Product extends AppModel {
 	 * 
 	 * @var array
 	 */
-	public $virtualFields = array(
-		//'inventory' => 'SELECT * FROM inventories WHERE inventories.product_id = id'
-	);
+	public $virtualFields = array();
 	
 	/**
 	 * Validation rules
