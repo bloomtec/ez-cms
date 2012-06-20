@@ -6,7 +6,7 @@
 		</legend>
 		<?php
 		echo $this -> Form -> input('id');
-		echo $this -> Form -> input('inventory_id', array('label' => 'Inventarios sin galería'));
+		//echo $this -> Form -> input('inventory_id', array('label' => 'Inventarios sin galería'));
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
 		echo $this -> Form -> input('description', array('label' => 'Descripión'));
 		echo $this -> Form -> hidden('image', array('id' => 'single-field'));

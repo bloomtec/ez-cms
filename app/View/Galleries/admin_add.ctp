@@ -5,7 +5,7 @@
 			<?php echo __('Crear Galería'); ?>
 		</legend>
 		<?php
-		echo $this -> Form -> input('inventory_id', array('label' => 'Inventarios sin galería', 'empty' => 'Seleccione...'));
+		//echo $this -> Form -> input('inventory_id', array('label' => 'Inventarios sin galería', 'empty' => 'Seleccione...'));
 		echo $this -> Form -> input('name', array('label' => 'Nombre'));
 		echo $this -> Form -> input('description', array('label' => 'Descripión'));
 		echo $this -> Form -> hidden('image', array('id' => 'single-field'));

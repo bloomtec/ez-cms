@@ -91,36 +91,35 @@ class GalleriesController extends AppController {
 			$this -> redirect(array('controller' => 'products', 'action' => 'index'));
 		}
 		if($product_id) {
-			$inventories = $this -> Gallery -> Inventory -> find(
-				'list',
+			$this -> loadModel('Inventory');
+			$inventories = $this -> Inventory -> find(
+				'all',
 				array(
 					'recursive' => -1,
 					'conditions' => array(
 						'Inventory.product_id' => $product_id
-					),
-					'fields' => array(
-						'Inventory.id'
 					)
 				)
 			);
+			$prod_color_codes = array();
 			if(!empty($inventories)) {
-				foreach ($inventories as $inventory_id => $inventoryDisplayField) {
+				foreach ($inventories as $index => $inventory) {
+					$prod_color_codes[] = $inventory['Inventory']['gallery'];
 					$tmp_gallery = $this -> Gallery -> find(
 						'first',
 						array(
 							'recursive' => -1,
 							'conditions' => array(
-								'Gallery.inventory_id' => $inventory_id
+								'Gallery.prod_color_code' => $inventory['Inventory']['gallery']
 							)
 						)
 					);
 					if(!$tmp_gallery) {
-						$tmp_inventory = $this -> Gallery -> Inventory -> read(null, $inventory_id);
 						$this -> Gallery -> create();
 						$gallery = array(
 							'Gallery' => array(
-								'inventory_id' => $inventory_id,
-								'name' => $tmp_inventory['Inventory']['product'] . " - " . $tmp_inventory['Inventory']['color'] . " - " . $tmp_inventory['Inventory']['size'],
+								'prod_color_code' => $inventory['Inventory']['gallery'],
+								'name' => $inventory['Inventory']['product'] . " - " . $inventory['Inventory']['color'],
 								'description' => '',
 								'image' => ''
 							)
@@ -134,7 +133,7 @@ class GalleriesController extends AppController {
 					}
 				}
 			}
-			$this -> set('galleries', $this -> Gallery -> find('all', array('recursive' => -1, 'conditions' => array('Gallery.inventory_id' => $inventories))));
+			$this -> set('galleries', $this -> Gallery -> find('all', array('conditions' => array('Gallery.prod_color_code' => $prod_color_codes))));
 		}
 	}
 
@@ -161,9 +160,9 @@ class GalleriesController extends AppController {
 		}
 		$gallery = $this -> Gallery -> read(null, $id);
 		$this -> set('gallery', $gallery);
-		$inventory = $this -> Gallery -> Inventory -> find('first', array('conditions' => array('Inventory.id' => $gallery['Gallery']['inventory_id'])));
-		$inventory['Inventory']['name_for_gallery'] = $inventory['Inventory']['product'] . " - " . $inventory['Inventory']['color'] . " - " . $inventory['Inventory']['size'];
-		$this -> set('inventory', $inventory);
+		//$inventory = $this -> Gallery -> Inventory -> find('first', array('conditions' => array('Inventory.gallery' => $gallery['Gallery']['prod_color_code'])));
+		//$inventory['Inventory']['name_for_gallery'] = $inventory['Inventory']['product'] . " - " . $inventory['Inventory']['color'] . " - " . $inventory['Inventory']['size'];
+		//$this -> set('inventory', $inventory);
 	}
 
 	/**
@@ -181,6 +180,7 @@ class GalleriesController extends AppController {
 				$this -> Session -> setFlash(__('No se pudo guardar la galería. Recuerde agregar una imagen e intente de nuevo.'));
 			}
 		}
+		/**
 		$tmp_inventories = $this -> Gallery -> Inventory -> find('all');
 		$inventories = array();
 		foreach($tmp_inventories as $key => $inventory) {
@@ -191,6 +191,7 @@ class GalleriesController extends AppController {
 			unset($inventories[$gallery['Gallery']['id']]);
 		}
 		$this -> set(compact('inventories'));
+		 */
 	}
 
 	/**
@@ -214,6 +215,7 @@ class GalleriesController extends AppController {
 		} else {
 			$this -> request -> data = $this -> Gallery -> read(null, $id);
 		}
+		/**
 		$tmp_inventories = $this -> Gallery -> Inventory -> find('all');
 		$inventories = array();
 		foreach($tmp_inventories as $key => $inventory) {
@@ -226,6 +228,7 @@ class GalleriesController extends AppController {
 			}
 		}
 		$this -> set(compact('inventories'));
+		 */
 	}
 
 	/**

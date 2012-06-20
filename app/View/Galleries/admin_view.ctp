@@ -6,11 +6,11 @@
 			<?php echo h($gallery['Gallery']['id']); ?>
 			&nbsp;
 		</dd>-->
-		<dt><?php echo __('Inventario'); ?></dt>
+		<!--<dt><?php echo __('Inventario'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($inventory['Inventory']['name_for_gallery'], array('controller' => 'inventories', 'action' => 'view', $inventory['Inventory']['id'])); ?>
 			&nbsp;
-		</dd>
+		</dd>-->
 		<dt><?php echo __('Nombre'); ?></dt>
 		<dd>
 			<?php echo h($gallery['Gallery']['name']); ?>
@@ -84,6 +84,6 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Modifciar Galería'), array('action' => 'edit', $gallery['Gallery']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Ver Galerías'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Galería'), array('action' => 'add')); ?> </li>
+		<!--<li><?php echo $this->Html->link(__('Agregar Galería'), array('action' => 'add')); ?> </li>-->
 	</ul>
 </div>

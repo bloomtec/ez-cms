@@ -204,6 +204,7 @@ class AppController extends Controller {
 							(!strstr($method, 'admin_')) &&
 							(!strstr($method, 'aclVerification')) &&
 							(!strstr($method, 'verifyUserAccess')) &&
+							(!strstr($method, 'getIdentifier')) &&
 							(!strstr($method, 'cleanImages'))
 						) {
 							if (!$this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {

@@ -20,7 +20,7 @@ class Gallery extends AppModel {
 	 * @var array
 	 */
 	public $validate = array(
-		'inventory_id' => array(
+		/**'inventory_id' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => 'Debe seleccionar el inventario al que se relaciona la galería',
@@ -37,7 +37,7 @@ class Gallery extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-		),
+		),*/
 		'name' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -69,15 +69,17 @@ class Gallery extends AppModel {
 	 *
 	 * @var array
 	 */
+	/**
 	public $belongsTo = array(
 		'Inventory' => array(
 			'className' => 'Inventory',
 			'foreignKey' => 'inventory_id',
-			'conditions' => '',
+			//'conditions' => array('Inventory.gallery' => 'Gallery.prod_color_code'),
 			'fields' => '',
 			'order' => ''
 		)
 	);
+	 */
 	
 	/**
 	 * hasMany associations
