@@ -18,26 +18,32 @@ class InventoriesController extends AppController {
 	public function getInventoryData($product_id = null, $color_id = null) {
 		$this -> autoRender = false;
 		Configure::write('debug', 0);
-		$inventories = $this -> Inventory -> find(
-			'all',
-			array(
-				'conditions' => array(
-					'Inventory.product_id' => $product_id,
-					'Inventory.color_id' => $color_id,
-					'Inventory.quantity >' => 0
+		
+		if($product_id && $color_id) {
+			$inventories = $this -> Inventory -> find(
+				'all',
+				array(
+					'conditions' => array(
+						'Inventory.product_id' => $product_id,
+						'Inventory.color_id' => $color_id,
+						'Inventory.quantity >' => 0
+					)
 				)
-			)
-		);
-		$product_sizes = array();
-		foreach($inventories as $key => $inventory) {
-			$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
+			);
+			$product_sizes = array();
+			foreach($inventories as $key => $inventory) {
+				$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
+			}
+			$gallery = null;
+			$return_data = array(
+				'ProductSize' => $product_sizes,
+				'Gallery' => $gallery
+			);
+			echo json_encode($return_data);
+		} else {
+			echo json_encode(array());
 		}
-		$gallery = null;
-		$return_data = array(
-			'ProductSize' => $product_sizes,
-			'Gallery' => $gallery
-		);
-		echo json_encode($return_data);
+		
 		exit(0);
 	}
 
