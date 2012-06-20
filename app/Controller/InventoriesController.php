@@ -6,6 +6,40 @@ App::uses('AppController', 'Controller');
  * @property Inventory $Inventory
  */
 class InventoriesController extends AppController {
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('getInventoryData');
+	}
+	
+	/**
+	 * Función ajax para dar datos al front
+	 */
+	public function getInventoryData($product_id = null, $color_id = null) {
+		$this -> autoRender = false;
+		Configure::write('debug', 0);
+		$inventories = $this -> Inventory -> find(
+			'all',
+			array(
+				'conditions' => array(
+					'Inventory.product_id' => $product_id,
+					'Inventory.color_id' => $color_id,
+					'Inventory.quantity >' => 0
+				)
+			)
+		);
+		$product_sizes = array();
+		foreach($inventories as $key => $inventory) {
+			$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
+		}
+		$gallery = null;
+		$return_data = array(
+			'ProductSize' => $product_sizes,
+			'Gallery' => $gallery
+		);
+		echo json_encode($return_data);
+		exit(0);
+	}
 
 	/**
 	 * admin_index method
