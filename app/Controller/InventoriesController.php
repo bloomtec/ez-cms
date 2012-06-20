@@ -20,6 +20,7 @@ class InventoriesController extends AppController {
 		Configure::write('debug', 0);
 		
 		if($product_id && $color_id) {
+			// Información inventario
 			$inventories = $this -> Inventory -> find(
 				'all',
 				array(
@@ -30,11 +31,16 @@ class InventoriesController extends AppController {
 					)
 				)
 			);
+			// Información tallas
 			$product_sizes = array();
 			foreach($inventories as $key => $inventory) {
 				$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
 			}
-			$gallery = null;
+			// Información galería
+			$this -> loadModel('Gallery');
+			$tmp_gallery = $this -> Gallery -> findByProdColorCode("$product_id$color_id");
+			$gallery = $tmp_gallery['Gallery'];
+			$gallery['Image'] = $tmp_gallery['Image'];
 			$return_data = array(
 				'ProductSize' => $product_sizes,
 				'Gallery' => $gallery

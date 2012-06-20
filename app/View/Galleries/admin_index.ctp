@@ -3,7 +3,7 @@
 	<table cellpadding="0" cellspacing="0">
 		<tr>
 			<!--<th><?php echo $this -> Paginator -> sort('id'); ?></th>-->
-			<th><?php echo $this -> Paginator -> sort('inventory_id', 'Inventario'); ?></th>
+			<!--<th><?php echo $this -> Paginator -> sort('inventory_id', 'Inventario'); ?></th>-->
 			<th><?php echo $this -> Paginator -> sort('name', 'Nombre'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('description', 'Descripción'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('image', 'Imagen'); ?></th>
@@ -14,7 +14,7 @@
 		<?php foreach ($galleries as $gallery): ?>
 		<tr>
 			<!--<td><?php echo h($gallery['Gallery']['id']); ?>&nbsp;</td>-->
-			<td><?php echo $this -> Html -> link($gallery['Inventory']['product'], array('controller' => 'inventories', 'action' => 'view', $gallery['Inventory']['id'])); ?></td>
+			<!--<td><?php echo $this -> Html -> link($gallery['Inventory']['product'], array('controller' => 'inventories', 'action' => 'view', $gallery['Inventory']['id'])); ?></td>-->
 			<td><?php echo h($gallery['Gallery']['name']); ?>&nbsp;</td>
 			<td><?php echo h($gallery['Gallery']['description']); ?>&nbsp;</td>
 			<td>

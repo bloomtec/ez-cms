@@ -6,11 +6,11 @@
 			<?php echo h($gallery['Gallery']['id']); ?>
 			&nbsp;
 		</dd>-->
-		<dt><?php echo __('Inventario'); ?></dt>
+		<!--<dt><?php echo __('Inventario'); ?></dt>
 		<dd>
 			<?php echo $this->Html->link($inventory['Inventory']['name_for_gallery'], array('controller' => 'inventories', 'action' => 'view', $inventory['Inventory']['id'])); ?>
 			&nbsp;
-		</dd>
+		</dd>-->
 		<dt><?php echo __('Nombre'); ?></dt>
 		<dd>
 			<?php echo h($gallery['Gallery']['name']); ?>
