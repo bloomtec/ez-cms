@@ -88,10 +88,11 @@ $(function(){
 		$that.addClass('selected');
 	});
 	$('.cuadros-colores').on('click','li',function(){
-		$that=$(this);
-		$('input.color_id').val($that.attr('rel'));
-		$('.cuadros-colores li').removeClass('selected');
-		$that.addClass('selected');
+		$that=$(this);		
+		//window.location=$that.attr('rel');
+		window.location.hash=$that.attr('rel');
+		
+		getProductData();
 	});
 	$('select.product_size_id').change(function(){
 		$that=$(this);
@@ -106,8 +107,32 @@ $(function(){
 		}else{
 			$parent.addClass('open');
 		}
-	});
-	
-	
+	});	
 	
 });
+function getProductData(){
+var color=location.hash.slice(1);
+var $that=$('li[rel="'+color+'"]')
+$('.cuadros-colores li').removeClass('selected');
+$('input.color_id').val($that.attr('rel'));
+$that.addClass('selected');
+	BJS.JSON("/inventories/getInventoryData/"+$('input#product_id').val()+"/"+color,{},function(response){
+		if(response.ProductSize){
+			var $tallas=$('ul.cuadros-tallas');
+			var $selecTallas=$('select.product_size_id');
+			$tallas.html("");
+			$selecTallas.html("");
+			j=0;
+			$.each(response.ProductSize,function(i,val){
+				clase="";
+				if(j==0){
+					clase="selected first-child";
+					j+=1;
+				}
+				$tallas.append('<li rel="'+i+'" class="'+clase+'">'+val+'</li>');
+				$selecTallas.append('<option value="'+i+'">'+val+'</option>');
+			});
+			//
+		}
+	});
+}

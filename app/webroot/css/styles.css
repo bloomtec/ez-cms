@@ -2,9 +2,9 @@
 	font-family: 'HelveticaNeueLT LightExt';
 	src: url('../fonts/helveticaneuelt_lightext-webfont.eot');
 	src: url('../fonts/helveticaneuelt_lightext-webfont.eot?iefix') format('eot'),
-	url('../fonts/helveticaneuelt_lightext-webfont.woff') format('woff'),
+/*	url('../fonts/helveticaneuelt_lightext-webfont.woff') format('woff'),
 	url('../fonts/helveticaneuelt_lightext-webfont.ttf') format('truetype'),
-	url('../fonts/helveticaneuelt_lightext-webfont.svg#webfonthdbz99XW') format('svg');
+	url('../fonts/helveticaneuelt_lightext-webfont.svg#webfonthdbz99XW') format('svg');*/
 	font-weight: normal;
 	font-style: normal;
 }
