@@ -79,6 +79,7 @@
 				<?php echo $this->Html->link("Añadir al carrito","#",array('class'=>'boton-carrito show-cart-options')); ?>
 						<?php echo $this -> Form->create('bcart');?>
 							<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','value'=>$product['Product']['id']))?>
+							<?php echo $this -> Form -> hidden('color_id-'.$product['Product']['id'],array('class'=>'color_id','value'=>$product['Product']['id']))?>
 							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
 							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
 							<div class="actions">

@@ -7,7 +7,7 @@ $(function(){
 		e.preventDefault();
 		$that=$(this);
 		$form=$that.parent().parent();		
-		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('select.product_size_id option:selected').val()+"/"+$form.find('input.quantity').val(),{},function(response){
+		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('select.product_size_id option:selected').val()+"/"+$form.find('input.quantity').val()+"/"+$form.find('input.color_id').val(),{},function(response){
 			if(response.success){
 				$('.resumen-carrito').load('/pages/resumenCarrito');
 				$('.to-cart.open').removeClass('open');
@@ -81,10 +81,16 @@ $(function(){
 			}
 		}
 	});
-	$('.cuadros-tallas li').click(function(){
+	$('.cuadros-tallas').on('click','li',function(){
 		$that=$(this);
 		$('select.product_size_id').val($that.attr('rel'));
 		$('.cuadros-tallas li').removeClass('selected');
+		$that.addClass('selected');
+	});
+	$('.cuadros-colores').on('click','li',function(){
+		$that=$(this);
+		$('input.color_id').val($that.attr('rel'));
+		$('.cuadros-colores li').removeClass('selected');
 		$that.addClass('selected');
 	});
 	$('select.product_size_id').change(function(){
