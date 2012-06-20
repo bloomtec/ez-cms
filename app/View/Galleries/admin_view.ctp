@@ -84,6 +84,6 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Modifciar Galería'), array('action' => 'edit', $gallery['Gallery']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Ver Galerías'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Galería'), array('action' => 'add')); ?> </li>
+		<!--<li><?php echo $this->Html->link(__('Agregar Galería'), array('action' => 'add')); ?> </li>-->
 	</ul>
 </div>
