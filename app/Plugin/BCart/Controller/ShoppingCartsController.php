@@ -62,22 +62,39 @@ class ShoppingCartsController extends BCartAppController {
 			/** llegó la info proceder a guardar **/
 			$shopping_cart = $this -> get();
 			if($shopping_cart) {
-				/** carrito existe, agregar el ítem **/
-				$cart_item = array(
-					'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
-					'product_id' => $product_id,
-					'color_id' => $color_id,
-					'product_size_id' => $product_size_id,
-					'quantity' => $quantity
+				/** carrito existe, agregar el ítem; verificar primero si ya existe el ítem en el carrito **/
+				$cart_item = $this -> ShoppingCart -> CartItem -> find(
+					'first',
+					array(
+						'conditions' => array(
+							'CartItem.product_id' => $product_id,
+							'CartItem.color_id' => $color_id,
+							'CartItem.product_size_id' => $product_size_id
+						),
+						'recursive' => -1
+					)
 				);
-				$this -> ShoppingCart -> CartItem -> create();
-				if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
-					$shopping_cart['success'] = true;
+				if($cart_item) {
+					// Existe el ítem, actualizar
+					$this -> updateCartItem($cart_item['CartItem']['id'], $cart_item['CartItem']['quantity'] + $quantity);
 				} else {
-					$shopping_cart['success'] = false;
+					// No existe el ítem, crear
+					$cart_item = array(
+						'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
+						'product_id' => $product_id,
+						'color_id' => $color_id,
+						'product_size_id' => $product_size_id,
+						'quantity' => $quantity
+					);
+					$this -> ShoppingCart -> CartItem -> create();
+					if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
+						$shopping_cart['success'] = true;
+					} else {
+						$shopping_cart['success'] = false;
+					}
+					$shopping_cart = $this -> get();
+					echo json_encode($shopping_cart);
 				}
-				$shopping_cart = $this -> get();
-				echo json_encode($shopping_cart);
 			} else {
 				echo json_encode(array('success' => false)); // No existe el carrito
 			}
@@ -113,6 +130,11 @@ class ShoppingCartsController extends BCartAppController {
 		exit(0);
 	}
 	
+	/**
+	 * Actualizar la cantidad de un cartItem
+	 * @param int $cart_item_id ID del cartItem
+	 * @param int $quantity La cantidad que debe quedar del cartItem
+	 */
 	public function updateCartItem($cart_item_id = null, $quantity = null) {
 		$this -> autoRender = false;
 		Configure::write('debug', 0);
