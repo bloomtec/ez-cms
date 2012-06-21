@@ -1,3 +1,4 @@
+var galeria;
 $(function(){
 	// FUNCIONALIDADES GENERALES CARRITO
 	$('.to-cart .cancelar').click(function(){
@@ -74,6 +75,109 @@ $(function(){
 		// '/b_cart/shopping_carts/get'
 	});
 	//FUNCIONALIDADES PARA PRODUCTS/VIEW
+	galeria={
+		ORIGINAL_WIDTH:360,
+		ORIGINAL_HEIGHT:360,
+		MAX_WIDTH:750,
+		MAX_HEIGHT:750,
+		DURATION:400,
+		last_width:360,
+		last_height:360,
+		last_top:0,
+		last_left:0,
+		zoom_ratio:50,
+		init:function(){
+			//FUNCIONES ZOOM
+			that=this;
+			$(".galeria").on("click",".zoom-in",function(){
+				that.guardarEstado();
+				var newWidth= that.last_width + that.zoom_ratio;	
+				if(newWidth<=that.MAX_WIDTH){
+					$(".imagen-container img").animate({"width":newWidth,"height":newWidth,left:that.last_left-(that.zoom_ratio/2),top:that.last_top-(that.zoom_ratio/2)},that.DURATION);
+				}
+				
+			});			
+			$(".galeria").on("click",".zoom-out",function(){
+				that.guardarEstado();
+				var newWidth=that.last_width - that.zoom_ratio;
+				if(newWidth>=that.ORIGINAL_WIDTH){
+					$(".imagen-container img").animate({"width":newWidth,"height":newWidth,left:that.last_left+(that.zoom_ratio/2),top:that.last_top+(that.zoom_ratio/2)},that.DURATION);
+				}
+				
+			});
+			$(".galeria").on("click",".reset",function(){
+				that.guardarEstado();
+				that.reset();
+			});
+		},
+		reset:function(){
+			that=this;
+			$(".imagen-container img").animate({"width":that.ORIGINAL_WIDTH,"height":that.ORIGINAL_HEIGHT,left:0,top:0},that.DURATION);
+		},
+		change:function(gallery){					
+					if(typeof gallery['Image']['0']!="undefined"){
+					$(".galeria .imagen-container").html("<img src='/img/uploads/750x750/"+gallery['Image']['0']['path']+"'>");
+					$(".galeria .thumbs").html("");
+					$.each(gallery['Image'],function(i,image){
+						$(".galeria .thumbs").append("<img src='/img/uploads/100x100/"+image['path']+"'>");
+					});
+					$(".imagen-container img").draggable({ drag: function(event, ui) {
+						if(ui.position.top>=0){// Controla limites horizontales
+							ui.position.top=0;
+						}
+						if(ui.position.left>=0){// Controla limites horizontales
+							ui.position.left=0;
+						}
+						var maxLeft=(parseInt($(".galeria .imagen-container img").width())- that.ORIGINAL_WIDTH);
+						if(ui.position.left<=-maxLeft){// Controla limites horizontales
+							ui.position.left=-maxLeft;
+						}
+						var maxTop=(parseInt($(".galeria .imagen-container img").height())- that.ORIGINAL_HEIGHT);
+						if(ui.position.top<=-maxTop){// Controla limites horizontales
+							ui.position.top=-maxTop;
+						}
+					}});
+					}else{
+						//NO HAY GALERIA
+					}
+					
+				
+
+	
+		},
+		guardarEstado:function(){
+			that.last_width=parseFloat($(".imagen-container img").width());
+			that.last_height=parseFloat($(".imagen-container img").height());
+			that.last_top=parseFloat($(".imagen-container img").css("top"));
+			that.last_left=parseFloat($(".imagen-container img").css("left"));
+		},				
+	};
+	galeria.init();
+	//Carga la primer galeria li selected
+	//galeria.change($("ul.cuadros-colores > li.selected"));
+		/*
+		//Carga la galeria cuando se le da click a un cuadro de color
+		$("ul.cuadros-colores > li").click(function(e){
+
+			$("ul.cuadros-colores > li").removeClass("selected");
+			$(this).addClass("selected");
+			that.change($(this));
+		});
+		//ACTUALIZA la talla.
+		$("ul.cuadros-tallas li").click(function(e){
+			e.stopPropagation();
+			$("ul.cuadros-tallas li").removeClass("selected");
+			$(this).addClass("selected");
+			
+		});
+		*/
+		//Reemplaza la imagen principal cuando se le hace click a un thumb
+		$(".galeria .thumbs img").live("click",function(){
+			var newSrc=$(this).attr("src").replace("100x100","750x750");
+			$(".galeria .imagen-container img").attr("src",newSrc);
+		});
+	
+	
 	$('body').click(function(e){		
 		if($('.to-cart.open').length){// si está abierto el cuadro de comprar
 			if(!$(e.target).parents().is('.to-cart')&&!$(e.target).is('.to-cart')){
@@ -90,8 +194,7 @@ $(function(){
 	$('.cuadros-colores').on('click','li',function(){
 		$that=$(this);		
 		//window.location=$that.attr('rel');
-		window.location.hash=$that.attr('rel');
-		
+		window.location.hash=$that.attr('rel');		
 		getProductData();
 	});
 	$('select.product_size_id').change(function(){
@@ -110,14 +213,19 @@ $(function(){
 	});	
 	
 });
-function getProductData(){
-var color=location.hash.slice(1);
-var $that=$('li[rel="'+color+'"]')
-$('.cuadros-colores li').removeClass('selected');
-$('input.color_id').val($that.attr('rel'));
-$that.addClass('selected');
+function getProductData(getTallas){
+if(location.hash){
+	var color=location.hash.slice(1);
+	$('.cuadros-colores li').removeClass('selected');
+	var $that=$('li[rel="'+color+'"]');
+	$('input.color_id').val($that.attr('rel'));
+	$that.addClass('selected');
+}else{
+	var color=$('input.color_id').val();
+	var $that=$('li[rel="'+color+'"]');
+}
 	BJS.JSON("/inventories/getInventoryData/"+$('input#product_id').val()+"/"+color,{},function(response){
-		if(response.ProductSize){
+		if(getTallas && response.ProductSize){
 			var $tallas=$('ul.cuadros-tallas');
 			var $selecTallas=$('select.product_size_id');
 			$tallas.html("");
@@ -132,7 +240,10 @@ $that.addClass('selected');
 				$tallas.append('<li rel="'+i+'" class="'+clase+'">'+val+'</li>');
 				$selecTallas.append('<option value="'+i+'">'+val+'</option>');
 			});
-			//
 		}
+		if(response.Gallery){
+			galeria.change(response.Gallery);
+		}
+		
 	});
 }

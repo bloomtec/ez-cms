@@ -9,9 +9,9 @@
 	 	<?php //echo $this->Html->image("uploads/360x360/".$product['Product']['imagen'])?>
 	 </div>	
 	 <div class="control">
-	 	<div class="botones zoom-in"> zoom-in </div>
-	 	<div class="botones zoom-out"> zomm-out</div>
-	 	<div class="botones reset"> reset</div>
+	 	<div class="botones zoom-in" title="acercar"> zoom-in </div>
+	 	<div class="botones zoom-out" title="alejar"> zomm-out</div>
+	 	<div class="botones reset" title="tamaño inicial"> reset</div>
 	 	<div style="clear:both"></div>
 	 </div>
 	<div class="thumbs">

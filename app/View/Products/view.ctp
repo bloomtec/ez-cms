@@ -1,3 +1,4 @@
+
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -7,6 +8,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 <?php echo $this -> Html -> script('bcart');?>
+<?php echo $this -> Html -> script('jquery-ui.custom.min');?>
 <div class="products view">
 	<div id="left-col">
 		<?php echo $this -> element('novedad'); ?>
@@ -28,20 +30,22 @@
 					<?php if ($product['Inventory']): ?>
 						<?php 
 							$j=0;
-							foreach($product['Inventory'] as $inventory): 							
-							$class="";
-							if($j==0){
-								if($inventory['color_id']==$this -> params['pass'][1]){
-									 $class='first-child selected';
-								}else{
-									 $class='first-child';
-								}	
-								$j+=1;
-							}elseif($inventory['color_id']==$this -> params['pass'][1]){
-								 $class='selected';
-							}
+							foreach($product['Inventory'] as $inventory): 						
 						?>	
-						<?php if(!isset($productColors[$inventory['color_id']])): ?>
+						<?php if(!isset($productColors[$inventory['color_id']])&&$inventory['quantity']): 
+								$class="";
+								if($j==0){
+									if($inventory['color_id']==$this -> params['pass'][1]){
+										 $class='first-child selected';
+									}else{
+										 $class='first-child';
+									}	
+									$j+=1;
+								}elseif($inventory['color_id']==$this -> params['pass'][1]){
+									 $class='selected';
+								}
+						?>
+						
 								<li rel="<?php echo $inventory['color_id'];?>" <?php echo "class='$class'";?> style="background:<?php echo $inventory['color_code'];?>"></li>
 						<?php 	$productColors[$inventory['color_id']]=$inventory["color"];
 							endif; 								
@@ -127,6 +131,8 @@
 </div>
 <script type="text/javascript">
 if(location.hash){
-	getProductData();
+	getProductData(true);
+}else{
+	getProductData(false);
 }
 </script>
