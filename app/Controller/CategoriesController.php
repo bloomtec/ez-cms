@@ -44,7 +44,6 @@ class CategoriesController extends AppController {
 			'group' => 'Inventory.gallery'
 		);
 		$inventories = $this -> paginate('Inventory',array('product_id'=>$products,'quantity >'=>0));
-		debug($inventories);
 		$this -> Category -> recursive = -1;
 		$category= $this -> Category -> read(null, $id);
 		$this -> set(compact('category','inventories'));

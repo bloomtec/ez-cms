@@ -3,7 +3,7 @@
 	<?php $i=1;?>
 	<?php foreach($inventories as $product):?>
 	<li <?php if($i%3 == 0) echo "class='last'"?> > 
-		<?php echo $this -> Html -> link($this -> Html -> image($product['Product']['image']),array("controller"=>"products","action"=>"view",$product['Product']['id'],$product['Inventory']['color_id']),array('escape'=>false));?>
+		<?php echo $this -> Html -> link($this -> Html -> image("uploads/150x150/".$product['Inventory']['image']),array("controller"=>"products","action"=>"view",$product['Product']['id'],$product['Inventory']['color_id']),array('escape'=>false));?>
 		<?php echo $this -> Html -> link($product['Product']['name'],array("controller"=>"products","action"=>"view",$product['Product']['id'],$product['Inventory']['color_id'])); ?>
 		<span class="price"><?php echo "$ ".number_format($product['Product']['price'], 0, ' ', '.'); ?></span>
 	</li>
