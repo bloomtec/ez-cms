@@ -303,27 +303,15 @@ class ProductsController extends AppController {
 			}
 		} else {
 			$this -> request -> data = $this -> Product -> read(null, $id);
-			//debug($this -> request -> data);
-			$product_sizes = array();
-			foreach ($this -> request -> data['Inventory'] as $key => $inventory) {
-				$product_sizes[] = $inventory['product_size_id'];
-			}
-			$this -> loadModel('ProductSize');
-			$sizes = $this -> ProductSize -> find('list', array('conditions' => array('ProductSize.id NOT' => $product_sizes)));
-			$this -> set(compact('sizes'));
 		}
-		$this -> set('inventories', $this -> Product -> Inventory -> find('all', array('conditions' => array('Inventory.product_id' => $id))));
+		$this -> set('inventories', $this -> Product -> Inventory -> find('all', array('conditions' => array('Inventory.product_id' => $id), 'recursive' => -1)));
 		$this -> set('categories', $this -> Product -> Category -> find('list'));
 		$this -> loadModel('ProductSize');
-		$sizes = $this -> ProductSize -> find('list');
-		$this -> set('sizes', $sizes);
+		$this -> set('sizes', $this -> ProductSize -> find('list'));
 		$this -> loadModel('Color');
-		$colors = $this -> Color -> find('list');
-		$this -> set('colors', $colors);
-		
+		$this -> set('colors', $this -> Color -> find('list'));		
 		$size_ids_color_ids = $this -> requestAction('/inventories/hasInventory/' . $id);
-		$this -> set('size_ids_color_ids', $size_ids_color_ids);
-		
+		$this -> set('size_ids_color_ids', $size_ids_color_ids);		
 	}
 
 	/**
