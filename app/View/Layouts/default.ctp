@@ -23,7 +23,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<meta property="og:title" content="Price Shoes" />
-	<meta property="og:type" content="fashion" />
+	<meta property="og:type" content="company" />
 	<meta property="og:url" content="http://priceshoes.bloomweb.co/products/view/2/1" />
 	<meta property="og:image" content="http://priceshoes.bloomweb.co/img/carrito_2.png" />
 	<meta property="og:site_name" content="PriceShoes" />
