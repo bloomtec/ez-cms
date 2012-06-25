@@ -139,16 +139,18 @@ class ProductsController extends AppController {
 		}
 		$product = $this -> Product -> find('first', array(
 			'conditions'=>array(
-				'id'=>$id
+				'Product.id'=>$id
 			),
 			'contain'=>array(
+				'Category',
 				'Inventory'=>array(
 					'conditions'=>array(
 						'quantity >'=>0
 					)
 				),
+				
 			),
-			'Category'
+			
 		));
 		foreach($product['Inventory'] as $inventory){			
 			if($inventory['color_id']==$color){
