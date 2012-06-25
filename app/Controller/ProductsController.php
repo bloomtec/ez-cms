@@ -67,7 +67,7 @@ class ProductsController extends AppController {
 	 * @return Array
 	 */
 	public function getNovelty() {
-		$this -> Product -> recursive = -1;
+		
 		$product = $this -> Product -> find(
 			'first',
 			array(
@@ -75,7 +75,14 @@ class ProductsController extends AppController {
 					'Product.is_novelty' => true,
 					'Product.id' => $this -> productsWithInventory()
 				),
-				'order' => 'RAND()'
+				'order' => 'RAND()',
+				'contain'=>array(
+					'Inventory'=>array(
+						'conditions' => array('Inventory.quantity >' => 0),
+						'order' => 'RAND()',
+						'limit'=>1
+					)
+				)
 			)
 		);
 		return $product;
@@ -95,7 +102,14 @@ class ProductsController extends AppController {
 					'Product.is_top_seller' => true,
 					'Product.id' => $this -> productsWithInventory()
 				),
-				'order' => 'RAND()'
+				'order' => 'RAND()',
+				'contain'=>array(
+					'Inventory'=>array(
+						'conditions' => array('Inventory.quantity >' => 0),
+						'order' => 'RAND()',
+						'limit'=>1
+					)
+				)
 			)
 		);
 		return $product;
