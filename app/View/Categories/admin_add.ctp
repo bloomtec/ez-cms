@@ -15,7 +15,7 @@
 		</div>
 		<div style="clear:both;"></div>
 		<?php
-		echo $this -> Form -> input('banner', array('label' => 'Banner', 'class' => 'editor', 'div'=>'textarea banner'));
+		echo $this -> Form -> input('banner', array('label' => 'Banner', 'class' => 'editor', 'div' => 'textarea banner'));
 		echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field'));
 		echo $this -> Form -> input('is_promoted', array('label' => 'Promocionada'));
 		//echo $this -> Form -> input('order', array('label' => 'Posición'));
