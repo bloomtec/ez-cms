@@ -166,7 +166,7 @@ a.rosa:hover{
 #menu-categorias .container{
 	margin-top:20px;
 	width:450px;
-	height:150px;
+	height:165px;
 	padding:20px;
 	background:#E62B7C;
 	text-align:left;
@@ -176,9 +176,8 @@ a.rosa:hover{
 	border-radius:5px;
 }
 #menu-categorias .foto-categoria{
-
-	width:150px;
-	height:150px;
+	width:90px;
+	height:170px;
 	float:left;
 }
 #menu-categorias .foto-categoria img{
@@ -190,7 +189,7 @@ a.rosa:hover{
 }
 #menu-categorias ul li{
 	position:inherit;
-	width:100px;
+	width:120px;
 	text-align:left;
 	display:block;
 	float:left;
@@ -200,13 +199,10 @@ a.rosa:hover{
 	left:20px; /*este valor debe ser igual al padding de #menu-categorias  .container*/
 	top:40px; /*este valor debe ser igual al padding de #menu-categorias  .container mas el margin-top*/
 	display:none;
-	width:150px;
-	
 }
 #menu-categorias ul li:hover img{
 	display:block;
-	width:150px;
-	height:150px;
+	height:170px;
 	z-index:2;
 }
 #content{

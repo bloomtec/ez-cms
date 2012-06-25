@@ -7,10 +7,6 @@
 			<th><?php echo $this->Paginator->sort('name', 'Nombre');?></th>
 			<th><?php echo $this->Paginator->sort('reference', 'Referencia');?></th>
 			<th><?php echo $this->Paginator->sort('price', 'Precio');?></th>
-			<th><?php echo $this->Paginator->sort('tax_base', 'Base I.V.A.');?></th>
-			<th><?php echo $this->Paginator->sort('tax_value', 'Valor I.V.A.');?></th>
-			<!--<th><?php echo $this->Paginator->sort('description');?></th>-->
-			<!--<th><?php echo $this->Paginator->sort('order');?></th>-->
 			<th><?php echo $this->Paginator->sort('is_active', 'Activo');?></th>
 			<th><?php echo $this->Paginator->sort('is_promoted', 'Promocionado');?></th>
 			<th><?php echo $this->Paginator->sort('is_novelty', 'Novedad');?></th>
@@ -32,10 +28,7 @@
 		<td><?php echo h($product['Product']['name']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['reference']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['price']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['tax_base']); ?>&nbsp;</td>
-		<td><?php echo h($product['Product']['tax_value']); ?>&nbsp;</td>
-		<!--<td><?php echo h($product['Product']['description']); ?>&nbsp;</td>-->
-		<!--<td><?php echo h($product['Product']['order']); ?>&nbsp;</td>-->
+		
 		<td>
 			<?php
 				//echo h($product['Product']['is_active']);

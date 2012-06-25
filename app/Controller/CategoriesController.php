@@ -33,8 +33,7 @@ class CategoriesController extends AppController {
 		$this -> Category -> id = $id;
 		if (!$this -> Category -> exists()) {
 			throw new NotFoundException(__('Categoría no válida'));
-		}
-		
+		}		
 		$products = $this -> Category -> Product -> find('list',array('fields'=>array('id','id'),'conditions'=>array('Product.category_id'=>$id)));
 		$this -> loadModel('Inventory');
 		$this -> Inventory -> recursive=-1;

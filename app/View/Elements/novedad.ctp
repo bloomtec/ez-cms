@@ -1,6 +1,7 @@
 <?php 
 // esta variable recibe el producto aleatoreo
 $product = $this->requestAction('/products/getNovelty');
+debug($product);
 ?>
 <div id="promocion" class="caja-producto-lateral">
 	<div class="titulo">
