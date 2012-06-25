@@ -195,7 +195,7 @@ $(function(){
 		$that=$(this);		
 		//window.location=$that.attr('rel');
 		window.location.hash=$that.attr('rel');		
-		getProductData();
+		getProductData(true);
 	});
 	$('select.product_size_id').change(function(){
 		$that=$(this);
@@ -214,16 +214,16 @@ $(function(){
 	
 });
 function getProductData(getTallas){
-if(location.hash){
-	var color=location.hash.slice(1);
-	$('.cuadros-colores li').removeClass('selected');
-	var $that=$('li[rel="'+color+'"]');
-	$('input.color_id').val($that.attr('rel'));
-	$that.addClass('selected');
-}else{
-	var color=$('input.color_id').val();
-	var $that=$('li[rel="'+color+'"]');
-}
+	if(location.hash){
+		var color=location.hash.slice(1);
+		$('.cuadros-colores li').removeClass('selected');
+		var $that=$('li[rel="'+color+'"]');
+		$('input.color_id').val($that.attr('rel'));
+		$that.addClass('selected');
+	}else{
+		var color=$('input.color_id').val();
+		var $that=$('li[rel="'+color+'"]');
+	}
 	BJS.JSON("/inventories/getInventoryData/"+$('input#product_id').val()+"/"+color,{},function(response){
 		if(getTallas && response.ProductSize){
 			var $tallas=$('ul.cuadros-tallas');
