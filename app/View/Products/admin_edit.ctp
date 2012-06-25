@@ -34,6 +34,23 @@
 						<td><?php echo $color_name; ?></td>
 						<?php endforeach; ?>
 					</tr>
+					<?php foreach($size_ids_color_ids as $size_id => $colors) : ?>
+						<tr>
+							<td><?php echo $sizes[$size_id]; ?></td>
+							<?php foreach($colors as $color_id => $hasInventory) : ?>
+								<td>
+									<?php
+										if($hasInventory) {
+											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox', 'disabled' => 'disabled', 'checked' => 'checked'));
+										} else {
+											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox'));
+										}
+									?>
+								</td>
+							<?php endforeach; ?>
+						</tr>
+					<?php endforeach; ?>
+					<!--
 					<?php foreach($sizes as $size_id => $size_name) : ?>
 						<tr>
 							<td><?php echo $size_name; ?></td>
@@ -50,6 +67,7 @@
 							<?php endforeach; ?>
 						</tr>
 					<?php endforeach; ?>
+					-->
 				</tbody>
 			</table>
 		</div>
@@ -102,13 +120,6 @@
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
-<!--<div class="images">
-	<h2>Imagen</h2>
-	<div class="preview">
-		<?php echo $this -> Html -> image("uploads/" . $this -> data['Product']['image'], array("width" => 200)); ?>
-	</div>
-	<div id="single-upload-product" controller="products"></div>
-</div>-->
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
 	<ul>
@@ -127,8 +138,5 @@
 		<li>
 			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?>
 		</li>
-		<!--<li>
-		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
-		</li>-->
 	</ul>
 </div>
