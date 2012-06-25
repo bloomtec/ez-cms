@@ -22,15 +22,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 	<?php echo $this->Html->charset(); ?>
-	<?php /* if(isset($product)): ?>
 	<meta property="og:title" content="<?php $product['Product']['name'] ?>" />
 	<meta property="og:type" content="company" />
 	<meta property="og:url" content="http://priceshoes.bloomweb.co/products/view/<?php echo $this -> params['pass'][0]."/".$this -> params['pass'][1] ?>" />
-	<meta property="og:image" content="http://priceshoes.bloomweb.co/img/uploads" />
+	<meta property="og:image" content="http://priceshoes.bloomweb.co/img/uploads/100x100/<?php $product['Product']['image']?>" />
 	<meta property="og:site_name" content="PriceShoes" />
 	<meta property="og:description" content="<?php echo $product['Product']['description']?>"> 
 	<meta property="fb:app_id" content="157362437721922" />
-	<?php endif; */ ?>
 	<title>
 		<?php echo 'PriceShoes'?> :: 
 		<?php echo $title_for_layout; ?>

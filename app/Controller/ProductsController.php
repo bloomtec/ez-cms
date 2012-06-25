@@ -131,12 +131,33 @@ class ProductsController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function view($id = null) {
+	public function view($id = null,$color) {
+		$this -> layout="product-view";
 		$this -> Product -> id = $id;
 		if (!$this -> Product -> exists()) {
 			throw new NotFoundException(__('Producto no válido'));
 		}
-		$this -> set('product', $this -> Product -> read(null, $id));
+		$product = $this -> Product -> find('first', array(
+			'conditions'=>array(
+				'id'=>$id
+			),
+			'contain'=>array(
+				'Inventory'=>array(
+					'conditions'=>array(
+						'quantity >'=>0
+					)
+				),
+			),
+			'Category'
+		));
+		foreach($product['Inventory'] as $inventory){			
+			if($inventory['color_id']==$color){
+				$product['Product']['image']=$inventory['image'];				
+				break;
+			}
+		}
+		$this -> set('product', $product);
+		
 	}
 
 	/**
