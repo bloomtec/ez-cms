@@ -46,7 +46,6 @@ class ProductsController extends AppController {
 	 * @return ID's de productos con inventario'
 	 */
 	private function productsWithInventory() {
-		$this -> autoRender = false;
 		$products = $this -> Product -> Inventory -> find(
 			'list',
 			array(
@@ -69,7 +68,6 @@ class ProductsController extends AppController {
 	 */
 	public function getNovelty() {
 		$this -> Product -> recursive = -1;
-		/*CONDICION QUE TENGA INGENTARIO*/
 		$product = $this -> Product -> find(
 			'first',
 			array(
