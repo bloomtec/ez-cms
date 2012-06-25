@@ -40,6 +40,27 @@ class ProductsController extends AppController {
 			return false;
 		}
 	}
+	
+	/**
+	 * Verificar productos que tengan inventario
+	 * @return ID's de productos con inventario'
+	 */
+	private function productsWithInventory() {
+		$this -> autoRender = false;
+		$products = $this -> Product -> Inventory -> find(
+			'list',
+			array(
+				'fields' => array(
+					'Inventory.product_id'
+				),
+				'conditions' => array(
+					'Inventory.quantity >=' => 1
+				),
+				'recursive' => -1
+			)
+		);
+		return $products;
+	}
 
 	/**
 	 * getNovedad method
@@ -48,9 +69,17 @@ class ProductsController extends AppController {
 	 */
 	public function getNovelty() {
 		$this -> Product -> recursive = -1;
-		$product = $this -> Product -> find('first', array('conditions' => array('is_novelty' => true,
 		/*CONDICION QUE TENGA INGENTARIO*/
-		), 'order' => 'RAND()'));
+		$product = $this -> Product -> find(
+			'first',
+			array(
+				'conditions' => array(
+					'Product.is_novelty' => true,
+					'Product.id' => $this -> productsWithInventory()
+				),
+				'order' => 'RAND()'
+			)
+		);
 		return $product;
 	}
 
@@ -61,9 +90,16 @@ class ProductsController extends AppController {
 	 */
 	public function getTopSeller() {
 		$this -> Product -> recursive = -1;
-		$product = $this -> Product -> find('first', array('conditions' => array('is_top_seller' => true,
-		/*CONDICION QUE TENGA INGENTARIO*/
-		), 'order' => 'RAND()'));
+		$product = $this -> Product -> find(
+			'first',
+			array(
+				'conditions' => array(
+					'Product.is_top_seller' => true,
+					'Product.id' => $this -> productsWithInventory()
+				),
+				'order' => 'RAND()'
+			)
+		);
 		return $product;
 	}
 
