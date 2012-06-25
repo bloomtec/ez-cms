@@ -50,24 +50,6 @@
 							<?php endforeach; ?>
 						</tr>
 					<?php endforeach; ?>
-					<!--
-					<?php foreach($sizes as $size_id => $size_name) : ?>
-						<tr>
-							<td><?php echo $size_name; ?></td>
-							<?php foreach($colors as $color_id => $color_name) : ?>
-								<td>
-									<?php
-										if($this -> requestAction('/inventories/hasInventory/' . $this -> data['Product']['id'] . '/' . $color_id . '/' . $size_id)) {
-											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox', 'disabled' => 'disabled', 'checked' => 'checked'));
-										} else {
-											echo $this -> Form -> input("Matrix.$size_id-$color_id", array('label' => false, 'div' => false, 'type' => 'checkbox'));
-										}
-									?>
-								</td>
-							<?php endforeach; ?>
-						</tr>
-					<?php endforeach; ?>
-					-->
 				</tbody>
 			</table>
 		</div>
