@@ -63,7 +63,35 @@ class InventoriesController extends AppController {
 		$this -> set('inventories', $this -> paginate());
 	}
 	
-	public function hasInventory($product_id = null, $color_id = null, $product_size_id = null) {
+	public function hasInventory($product_id = null) {
+		$this -> loadModel('ProductSize');
+		$sizes = $this -> ProductSize -> find('list');
+		$this -> loadModel('Color');
+		$colors = $this -> Color -> find('list');
+		
+		// Tratar de armar ó enviar la información de la matriz de una sola vez para que no haya retardo
+		$size_ids_color_ids = array();
+		foreach($sizes as $size_id => $size_name) {
+			foreach($colors as $color_id => $color_name) {
+				$inventory = $this -> Inventory -> find('first', array(
+					'conditions' => array(
+						'Inventory.product_id' => $product_id,
+						'Inventory.color_id' => $color_id,
+						'Inventory.product_size_id' => $size_id
+					),
+					'recursive' => -1
+				));
+				if($inventory) {
+					$size_ids_color_ids[$size_id][$color_id] = true;
+				} else {
+					$size_ids_color_ids[$size_id][$color_id] = false;
+				}
+			}
+		}
+		return $size_ids_color_ids;
+	}
+	
+	/*public function hasInventory($product_id = null, $color_id = null, $product_size_id = null) {
 		if($product_id && $color_id && $product_size_id) {
 			$inventory = $this -> Inventory -> find('first', array(
 				'conditions' => array(
@@ -80,7 +108,7 @@ class InventoriesController extends AppController {
 		} else {
 			return false;
 		}
-	}
+	}*/
 
 	/**
 	 * addInventory method

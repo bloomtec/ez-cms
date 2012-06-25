@@ -280,9 +280,15 @@ class ProductsController extends AppController {
 		$this -> set('inventories', $this -> Product -> Inventory -> find('all', array('conditions' => array('Inventory.product_id' => $id))));
 		$this -> set('categories', $this -> Product -> Category -> find('list'));
 		$this -> loadModel('ProductSize');
-		$this -> set('sizes', $this -> ProductSize -> find('list'));
+		$sizes = $this -> ProductSize -> find('list');
+		$this -> set('sizes', $sizes);
 		$this -> loadModel('Color');
-		$this -> set('colors', $this -> Color -> find('list'));
+		$colors = $this -> Color -> find('list');
+		$this -> set('colors', $colors);
+		
+		$size_ids_color_ids = $this -> requestAction('/inventories/hasInventory/' . $id);
+		$this -> set('size_ids_color_ids', $size_ids_color_ids);
+		
 	}
 
 	/**
