@@ -38,7 +38,7 @@ class ShoppingCart extends BCartAppModel {
 			'className' => 'UserControl.User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
-			'fields' => '',
+			'fields' => 'username',
 			'order' => ''
 		)
 	);

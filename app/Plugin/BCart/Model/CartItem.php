@@ -13,7 +13,7 @@ class CartItem extends BCartAppModel {
 	 * virtualFields
 	 */
 	public $virtualFields = array(
-		'image' => 'SELECT `galleries.image` FROM `galleries` WHERE `galleries.prod_color_code` = CONCAT(CartItem.product_id, CartItem.color_id)'
+		'image' => 'SELECT galleries.image FROM galleries, cart_items WHERE cart_items.id = CartItem.id AND galleries.prod_color_code = CONCAT(cart_items.product_id, cart_items.color_id)'
 	);
 	
 	/**
