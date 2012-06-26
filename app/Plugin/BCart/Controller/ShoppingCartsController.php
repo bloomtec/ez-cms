@@ -64,6 +64,10 @@ class ShoppingCartsController extends BCartAppController {
 		}
 	}
 	
+	private function checkInventoryQuantity($product_id = null, $color_id = null, $product_size_id = null, $quantity = null) {
+		$inventory
+	}
+	
 	public function addCartItem($product_id = null, $color_id = null, $product_size_id = null, $quantity = null) {
 		$this -> autoRender = false;
 		Configure::write('debug', 0);
