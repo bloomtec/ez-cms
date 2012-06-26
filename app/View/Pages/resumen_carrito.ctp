@@ -1,5 +1,6 @@
 <?php
 $shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
+debug($shopping_cart);
 ?>
 	<?php if(isset($shopping_cart['CartItem']) && !empty($shopping_cart['CartItem'])):?>
 	<?php $subTotal=0; ?>
