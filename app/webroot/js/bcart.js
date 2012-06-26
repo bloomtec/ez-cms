@@ -8,7 +8,7 @@ $(function(){
 		e.preventDefault();
 		$that=$(this);
 		$form=$that.parent().parent();		
-		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('select.product_size_id option:selected').val()+"/"+$form.find('input.quantity').val()+"/"+$form.find('input.color_id').val(),{},function(response){
+		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val()+ "/"+$form.find('input.quantity').val(),{},function(response){
 			if(response.success){
 				$('.resumen-carrito').load('/pages/resumenCarrito');
 				$('.to-cart.open').removeClass('open');
