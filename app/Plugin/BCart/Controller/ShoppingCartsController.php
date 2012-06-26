@@ -10,7 +10,16 @@ class ShoppingCartsController extends BCartAppController {
 		parent::beforeFilter();
 		$this -> ShoppingCart -> Behaviors -> attach('Containable');
 		$this -> ShoppingCart -> contain('CartItem', 'CartItem.Product', 'CartItem.ProductSize');
-		$this -> Auth -> Allow('get', 'addCartItem', 'removeCartItem', 'updateCartItem');
+		$this -> Auth -> Allow('get', 'emptyCart', 'addCartItem', 'removeCartItem', 'updateCartItem', 'borrarCarritos');
+	}
+	
+	public function borrarCarritos() {
+		$this -> autoRender = false;
+		$carritos = $this -> ShoppingCart -> find('list');
+		foreach ($carritos as $key => $id) {
+			$this -> ShoppingCart -> delete($id);
+		}
+		$this -> Cookie -> delete('User.identifier');
 	}
 	
 	private function getUserId() {
@@ -88,11 +97,12 @@ class ShoppingCartsController extends BCartAppController {
 					);
 					$this -> ShoppingCart -> CartItem -> create();
 					if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
+						$shopping_cart = $this -> get();
 						$shopping_cart['success'] = true;
 					} else {
+						$shopping_cart = $this -> get();
 						$shopping_cart['success'] = false;
 					}
-					$shopping_cart = $this -> get();
 					echo json_encode($shopping_cart);
 				}
 			} else {
@@ -118,8 +128,13 @@ class ShoppingCartsController extends BCartAppController {
 						$shopping_cart = $this -> get();
 						$shopping_cart['success'] = true;
 						echo json_encode($shopping_cart);
+					} else {
+						$shopping_cart = $this -> get();
+						$shopping_cart['success'] = false;
+						echo json_encode($shopping_cart);
 					}
 				} else {
+					$shopping_cart = $this -> get();
 					$shopping_cart['success'] = false;
 					echo json_encode($shopping_cart);
 				}
@@ -128,6 +143,21 @@ class ShoppingCartsController extends BCartAppController {
 			echo json_encode(array('success' => false));
 		}
 		exit(0);
+	}
+	
+	public function emptyCart() {
+		$shoppingCart = $this -> get();
+		$cartItems = $this -> ShoppingCart -> CartItem -> find(
+			'list',
+			array(
+				'conditions' => array(
+					'CartItem.shopping_cart_id' => $shoppingCart['ShoppingCart']['id']
+				)
+			)
+		);
+		foreach ($cartItems as $key => $id) {
+			$this -> ShoppingCart -> CartItem -> delete($id);
+		}
 	}
 	
 	/**
@@ -154,6 +184,7 @@ class ShoppingCartsController extends BCartAppController {
 						echo json_encode($shopping_cart);
 					}
 				} else {
+					$shopping_cart = $this -> get();
 					$shopping_cart['success'] = false;
 					echo json_encode($shopping_cart);
 				}

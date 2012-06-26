@@ -10,6 +10,13 @@ App::uses('BCartAppModel', 'BCart.Model');
 class CartItem extends BCartAppModel {
 	
 	/**
+	 * virtualFields
+	 */
+	public $virtualFields = array(
+		'image' => 'SELECT `galleries.image` FROM `galleries` WHERE `galleries.prod_color_code` = CONCAT(CartItem.product_id, CartItem.color_id)'
+	);
+	
+	/**
 	 * Validation rules
 	 *
 	 * @var array

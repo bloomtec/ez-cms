@@ -20,7 +20,8 @@ class Inventory extends AppModel {
 		'size' => 'SELECT `product_sizes`.`name` FROM `product_sizes` WHERE `product_sizes`.`id` = Inventory.product_size_id',
 		'product' => 'SELECT `products`.`name` FROM `products` WHERE `products`.`id` = Inventory.product_id',
 		'gallery' => 'CONCAT(Inventory.product_id, Inventory.color_id)',
-		'image' => 'SELECT galleries.image FROM galleries, inventories WHERE inventories.id = Inventory.id AND galleries.prod_color_code = CONCAT(inventories.product_id, inventories.color_id)'
+		//'image' => 'SELECT galleries.image FROM galleries, inventories WHERE inventories.id = Inventory.id AND galleries.prod_color_code = CONCAT(inventories.product_id, inventories.color_id)'
+		'image' => 'SELECT galleries.image FROM galleries WHERE galleries.prod_color_code = CONCAT(inventories.product_id, inventories.color_id)'
 	);
 	
 	public $displayField = 'color';

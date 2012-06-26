@@ -33,11 +33,7 @@ namespace :deploy do
   
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "cp /home/embalao/priceshoes.bloomweb.co/current/. /home/embalao/priceshoes.bloomweb.co/ -R"
-    # run "chmod 666 /home/embalao/priceshoes.bloomweb.co/app/config/database.php"
-    # run "cp /home/embalao/priceshoes.bloomweb.co/app/config/database.php.srvr /home/embalao/priceshoes.bloomweb.co/app/config/database.php"
     run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/tmp/ -R"
-    # run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/img/uploads/ -R"
-    # run "chmod 777 /home/embalao/priceshoes.bloomweb.co/app/webroot/files/uploads/ -R"
   end
   
 end

@@ -52,7 +52,7 @@ class ShoppingCart extends BCartAppModel {
 		'CartItem' => array(
 			'className' => 'BCart.CartItem',
 			'foreignKey' => 'shopping_cart_id',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
