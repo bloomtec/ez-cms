@@ -114,6 +114,7 @@
 							<a  onclick="window.open('http://twitter.com/share?url=<?php echo rawurlencode("http://".$_SERVER["SERVER_NAME"]."/products/view/".$this -> Html-> url("/products/view/".$product["Product"]["id"]));?>','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');"class="boton-twitter" target="_blank">Compartir en twitter</a>
 					<div style="clear:left"></div>
 					-->
+					
 			    </li>
 				<li class='social'>
 					<!--<a class='boton-facebook' href="javascript: void(0);" onclick="window.open('http://www.facebook.com/sharer.php?u=<?php echo urlencode("http://".$_SERVER['SERVER_NAME'].$this -> Html -> url("/products/view/".$product["Product"]["id"]));?>','ventanacompartir', 'toolbar=0, status=0, width=650, height=450');">
@@ -123,7 +124,7 @@
 				<div class="fb-like" data-href="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-send="false" data-width="280" data-show-faces="true"></div>
 					<div style="clear:left"></div>
 			    -->
-				
+				<fb:like href="http://priceshoes.bloomweb.co/products/view/<?php echo $product['Product']['id']?>" width="450" height="80"/>
 				</li>
 				
 			</ul>
