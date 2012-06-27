@@ -9,7 +9,25 @@ class InventoriesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('getInventoryData','getQuantity');
+		$this -> Auth -> allow('getInventoryData', 'getQuantity');
+	}
+	
+	public function getQuantity($product_id = null, $color_id = null, $product_size_id = null) {
+		$inventory = $this -> Inventory -> find(
+			'fisrt',
+			array(
+				'conditions' => array(
+					'Inventory.product_id' => $product_id,
+					'Inventory.color_id' => $color_id,
+					'Inventory.product_size_id' => $product_size_id
+				)
+			)
+		);
+		if($inventory) {
+			return $inventory['Inventory']['quantity'];
+		} else {
+			return 0;
+		}
 	}
 	
 	/**
