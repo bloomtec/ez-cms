@@ -12,28 +12,12 @@ class InventoriesController extends AppController {
 		$this -> Auth -> allow('getInventoryData', 'getQuantity');
 	}
 	
-	public function getQuantity($product_id = null, $color_id = null, $product_size_id = null) {
-		$inventory = $this -> Inventory -> find(
-			'fisrt',
-			array(
-				'conditions' => array(
-					'Inventory.product_id' => $product_id,
-					'Inventory.color_id' => $color_id,
-					'Inventory.product_size_id' => $product_size_id
-				)
-			)
-		);
-		if($inventory) {
-			return $inventory['Inventory']['quantity'];
-		} else {
-			return 0;
-		}
-	}
+
 	
 	/**
 	* Funcion que devuelve la cantidad de un inventario
 	*/
-	public function getQuantity($product_id,$color_id,$product_size_id){
+	public function getQuantity($product_id=null,$color_id=null,$product_size_id=null){
 		$this ->Inventory-> recursive = -1;
 		return $this ->Inventory-> find ('first',array(
 			'conditions'=>array(
