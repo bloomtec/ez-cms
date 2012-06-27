@@ -59,16 +59,25 @@
 			<div class="tallas">			
 				Tallas Disponibles:
 				<ul class="cuadros-tallas">
-				<?php $productSizes; ?>
+				<?php $productSizes; $options=null;?>
 					<?php if (!empty($product['Inventory'])): ?>
 						<?php 
 							$i=0;
 							foreach($product['Inventory'] as $inventory): 
-							$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						
 						?>
-						<?php 	if($inventory['color_id']==$this -> params['pass'][1] && $inventory['quantity']>0): ?>
-									<li rel="<?php echo $inventory['product_size_id'];?>" <?php if($i==0) {echo "class='selected first-child'"; $i+=1;}?>> <?php echo $inventory["size"] ?></li>
-					  	<?php
+						<?php 	if($inventory['color_id']==$this -> params['pass'][1] && $inventory['quantity']>0): 
+									$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						?>
+									<?php 
+										if($i==0){
+											for($k=1; $k <= $inventory['quantity']; $k++){
+												$options[$k]=$k;
+											}
+										}
+									?>
+									<li data="<?php echo $inventory['quantity']?>" rel="<?php echo $inventory['product_size_id'];?>" <?php if($i==0) {echo "class='selected first-child'"; $i+=1;}?>> <?php echo $inventory["size"] ?></li>
+					  	<?php							
 								endif;							
 							endforeach; 
 						?>
@@ -85,7 +94,7 @@
 							<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','id'=>'product_id','value'=>$product['Product']['id']))?>
 							<?php echo $this -> Form -> hidden('color_id-'.$product['Product']['id'],array('class'=>'color_id','value'=>$this -> params['pass'][1]))?>
 							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
-							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'number','value'=>'1'))?>
+							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'select','options'=>$options,'value'=>'1'))?>
 							<div class="actions">
 								<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">aceptar</a>
 								<a class="button cancelar">cancelar</a>

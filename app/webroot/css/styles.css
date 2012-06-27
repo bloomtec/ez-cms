@@ -1022,10 +1022,16 @@ padding:2px 0;
 	height:30px;
 	line-height:30px;
 	text-align:left;
+	padding-left:10px;
 }
 .carrito-view table tr td{
 	background:none;
 	padding:10px 0;
+}
+.carrito-view table tr td.total,
+.carrito-view table tr td.price,
+.carrito-view table tr td.quantity{
+	padding-top:25px;
 }
 div.tabla-carrito{
 	position:relative;

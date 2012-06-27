@@ -31,6 +31,23 @@ class InventoriesController extends AppController {
 	}
 	
 	/**
+	* Funcion que devuelve la cantidad de un inventario
+	*/
+	public function getQuantity($product_id,$color_id,$product_size_id){
+		$this ->Inventory-> recursive = -1;
+		return $this ->Inventory-> find ('first',array(
+			'conditions'=>array(
+				'product_id'=>$product_id,
+				'color_id'=>$color_id,
+				'product_size_id'=>$product_size_id
+			),
+			'fields'=>array(
+				'id',
+				'quantity'
+			)
+		));
+	}
+	/**
 	 * Función ajax para dar datos al front
 	 */
 	public function getInventoryData($product_id = null, $color_id = null) {
@@ -52,7 +69,9 @@ class InventoriesController extends AppController {
 			// Información tallas
 			$product_sizes = array();
 			foreach($inventories as $key => $inventory) {
-				$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
+				//$product_sizes[$inventory['Inventory']['product_size_id']]['id'] = $inventory['Inventory']['product_size_id'];
+				$product_sizes[$inventory['Inventory']['product_size_id']]['size'] = $inventory['Inventory']['size'];
+				$product_sizes[$inventory['Inventory']['product_size_id']]['quantity'] = $inventory['Inventory']['quantity'];
 			}
 			// Información galería
 			$this -> loadModel('Gallery');
