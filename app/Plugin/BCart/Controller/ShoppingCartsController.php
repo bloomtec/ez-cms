@@ -87,27 +87,34 @@ class ShoppingCartsController extends BCartAppController {
 						'recursive' => -1
 					)
 				);
-				if($cart_item) {
-					// Existe el ítem, actualizar
-					$this -> updateCartItem($cart_item['CartItem']['id'], $cart_item['CartItem']['quantity'] + $quantity);
-				} else {
-					// No existe el ítem, crear
-					$cart_item = array(
-						'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
-						'product_id' => $product_id,
-						'color_id' => $color_id,
-						'product_size_id' => $product_size_id,
-						'quantity' => $quantity
-					);
-					$this -> ShoppingCart -> CartItem -> create();
-					if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
-						$shopping_cart = $this -> get();
-						$shopping_cart['success'] = true;
+				$item_quantity = $this -> requestAction('/inventories/getQuantity/' . $product_id . '/' . $color_id . '/' . $product_size_id);
+				// Revisar la cantidad existente vs la cantidad solicitada
+				if($item_quantity >= $quantity) {
+					// Hay cantidad
+					if($cart_item) {
+						// Existe el ítem, actualizar
+						$this -> updateCartItem($cart_item['CartItem']['id'], $cart_item['CartItem']['quantity'] + $quantity);
 					} else {
-						$shopping_cart = $this -> get();
-						$shopping_cart['success'] = false;
+						// No existe el ítem, crear
+						$cart_item = array(
+							'shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
+							'product_id' => $product_id,
+							'color_id' => $color_id,
+							'product_size_id' => $product_size_id,
+							'quantity' => $quantity
+						);
+						$this -> ShoppingCart -> CartItem -> create();
+						if($this -> ShoppingCart -> CartItem -> save($cart_item)) {
+							$shopping_cart = $this -> get();
+							$shopping_cart['success'] = true;
+						} else {
+							$shopping_cart = $this -> get();
+							$shopping_cart['success'] = false;
+						}
+						echo json_encode($shopping_cart);
 					}
-					echo json_encode($shopping_cart);
+				} else {
+					echo json_encode(array('success' => false)); //No hay cantidad
 				}
 			} else {
 				echo json_encode(array('success' => false)); // No existe el carrito
