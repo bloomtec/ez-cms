@@ -51,7 +51,9 @@ class InventoriesController extends AppController {
 			// Información tallas
 			$product_sizes = array();
 			foreach($inventories as $key => $inventory) {
-				$product_sizes[$inventory['Inventory']['product_size_id']] = $inventory['Inventory']['size'];
+				//$product_sizes[$inventory['Inventory']['product_size_id']]['id'] = $inventory['Inventory']['product_size_id'];
+				$product_sizes[$inventory['Inventory']['product_size_id']]['size'] = $inventory['Inventory']['size'];
+				$product_sizes[$inventory['Inventory']['product_size_id']]['quantity'] = $inventory['Inventory']['quantity'];
 			}
 			// Información galería
 			$this -> loadModel('Gallery');

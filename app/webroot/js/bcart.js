@@ -153,29 +153,11 @@ $(function(){
 		},				
 	};
 	galeria.init();
-	//Carga la primer galeria li selected
-	//galeria.change($("ul.cuadros-colores > li.selected"));
-		/*
-		//Carga la galeria cuando se le da click a un cuadro de color
-		$("ul.cuadros-colores > li").click(function(e){
 
-			$("ul.cuadros-colores > li").removeClass("selected");
-			$(this).addClass("selected");
-			that.change($(this));
-		});
-		//ACTUALIZA la talla.
-		$("ul.cuadros-tallas li").click(function(e){
-			e.stopPropagation();
-			$("ul.cuadros-tallas li").removeClass("selected");
-			$(this).addClass("selected");
-			
-		});
-		*/
-		//Reemplaza la imagen principal cuando se le hace click a un thumb
-		$(".galeria .thumbs img").live("click",function(){
-			var newSrc=$(this).attr("src").replace("100x100","750x750");
-			$(".galeria .imagen-container img").attr("src",newSrc);
-		});
+	$(".galeria .thumbs img").live("click",function(){
+		var newSrc=$(this).attr("src").replace("100x100","750x750");
+		$(".galeria .imagen-container img").attr("src",newSrc);
+	});
 	
 	
 	$('body').click(function(e){		
@@ -188,22 +170,13 @@ $(function(){
 	$('.cuadros-tallas').on('click','li',function(){
 		$that=$(this);
 		quantity=parseInt($that.attr('data'));
-		$('select.product_size_id').val($that.attr('rel'));
-		$('select.quantity').html('');
-				updateSelectQuantity(quantity);
+		$('select.product_size_id').val($that.attr('rel'));		
+		updateSelectQuantity(quantity);
 		
 		$('.cuadros-tallas li').removeClass('selected');
 		$that.addClass('selected');
 	});
-	function updateSelectQuantity(quantity){
-		for(i=1;i<=quantity;i++){
-			if(i==1){
-				$('select.quantity').append('<option value="'+i+'" selected="selected">'+i+'</option>');
-			}else{
-				$('select.quantity').append('<option value="'+i+'">'+i+'</option>');
-			}					
-		}
-	}
+	
 	$('.cuadros-colores').on('click','li',function(){
 		$that=$(this);		
 		//window.location=$that.attr('rel');
@@ -214,6 +187,8 @@ $(function(){
 		$that=$(this);
 		$('.cuadros-tallas li').removeClass('selected');
 		$('.cuadros-tallas li[rel="'+$that.val()+'"]').addClass('selected');
+		quantity=parseInt($('.cuadros-tallas li[rel="'+$that.val()+'"]').attr('data'));
+		updateSelectQuantity(quantity);
 	});
 	$('.show-cart-options').click(function(e){
 		e.preventDefault();
@@ -224,8 +199,18 @@ $(function(){
 			$parent.addClass('open');
 		}
 	});	
-	
+		
 });
+function updateSelectQuantity(quantity){
+	$('select.quantity').html('');
+	for(i=1;i<=quantity;i++){
+		if(i==1){
+			$('select.quantity').append('<option value="'+i+'" selected="selected">'+i+'</option>');
+		}else{
+			$('select.quantity').append('<option value="'+i+'">'+i+'</option>');
+		}					
+	}
+}
 function getProductData(getTallas){
 	if(location.hash){
 		var color=location.hash.slice(1);
@@ -238,20 +223,26 @@ function getProductData(getTallas){
 		var $that=$('li[rel="'+color+'"]');
 	}
 	BJS.JSON("/inventories/getInventoryData/"+$('input#product_id').val()+"/"+color,{},function(response){
-		if(getTallas && response.ProductSize){
+		if(getTallas && response.ProductSize){		
 			var $tallas=$('ul.cuadros-tallas');
 			var $selecTallas=$('select.product_size_id');
 			$tallas.html("");
 			$selecTallas.html("");
 			j=0;
+			quantity=0;
+			numTallas=BJS.objectSize(response.ProductSize);
 			$.each(response.ProductSize,function(i,val){
 				clase="";
 				if(j==0){
 					clase="selected first-child";
-					j+=1;
+					quantity=val.quantity;
 				}
-				$tallas.append('<li rel="'+i+'" class="'+clase+'">'+val+'</li>');
-				$selecTallas.append('<option value="'+i+'">'+val+'</option>');
+				j+=1;
+				$tallas.append('<li data="'+val.quantity+'" rel="'+i+'" class="'+clase+'">'+val.size+'</li>');
+				$selecTallas.append('<option value="'+i+'">'+val.size+'</option>');
+				if(j == numTallas){//Acctualiza las tallas
+					updateSelectQuantity(quantity);
+				}
 			});
 		}
 		if(response.Gallery){

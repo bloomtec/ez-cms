@@ -64,9 +64,11 @@
 						<?php 
 							$i=0;
 							foreach($product['Inventory'] as $inventory): 
-							$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						
 						?>
-						<?php 	if($inventory['color_id']==$this -> params['pass'][1] && $inventory['quantity']>0): ?>
+						<?php 	if($inventory['color_id']==$this -> params['pass'][1] && $inventory['quantity']>0): 
+									$productSizes[$inventory['product_size_id']]=$inventory["size"];
+						?>
 									<?php 
 										if($i==0){
 											for($k=1; $k <= $inventory['quantity']; $k++){
