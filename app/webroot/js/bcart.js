@@ -187,10 +187,23 @@ $(function(){
 	});
 	$('.cuadros-tallas').on('click','li',function(){
 		$that=$(this);
+		quantity=parseInt($that.attr('data'));
 		$('select.product_size_id').val($that.attr('rel'));
+		$('select.quantity').html('');
+				updateSelectQuantity(quantity);
+		
 		$('.cuadros-tallas li').removeClass('selected');
 		$that.addClass('selected');
 	});
+	function updateSelectQuantity(quantity){
+		for(i=1;i<=quantity;i++){
+			if(i==1){
+				$('select.quantity').append('<option value="'+i+'" selected="selected">'+i+'</option>');
+			}else{
+				$('select.quantity').append('<option value="'+i+'">'+i+'</option>');
+			}					
+		}
+	}
 	$('.cuadros-colores').on('click','li',function(){
 		$that=$(this);		
 		//window.location=$that.attr('rel');

@@ -9,9 +9,26 @@ class InventoriesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('getInventoryData');
+		$this -> Auth -> allow('getInventoryData','getQuantity');
 	}
 	
+	/**
+	* Funcion que devuelve la cantidad de un inventario
+	*/
+	public function getQuantity($product_id,$color_id,$product_size_id){
+		$this ->Inventory-> recursive = -1;
+		return $this ->Inventory-> find ('first',array(
+			'conditions'=>array(
+				'product_id'=>$product_id,
+				'color_id'=>$color_id,
+				'product_size_id'=>$product_size_id
+			),
+			'fields'=>array(
+				'id',
+				'quantity'
+			)
+		));
+	}
 	/**
 	 * Función ajax para dar datos al front
 	 */

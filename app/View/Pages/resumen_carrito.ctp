@@ -1,6 +1,5 @@
 <?php
 $shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
-debug($shopping_cart);
 ?>
 	<?php if(isset($shopping_cart['CartItem']) && !empty($shopping_cart['CartItem'])):?>
 	<?php $subTotal=0; ?>
@@ -14,8 +13,8 @@ debug($shopping_cart);
 					<td width="20%">
 						<?php
 							echo $this -> Html -> link(
-								$this -> Html->image(
-									$item['Product']['image'],
+								$this -> Html->image('uploads/50x50/'.
+									$item['image'],
 									array('border' => '0','width' => '50px')),
 									'/products/view/'.$item['Product']['id'],
 									array('escape' => false)
