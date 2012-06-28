@@ -106,17 +106,18 @@ class ShoppingCartsController extends BCartAppController {
 						} else {
 							$shopping_cart = $this -> get();
 							$shopping_cart['success'] = false;
+							$shopping_cart['message'] = 'Error a la hora de guardar el carrito';
 						}
 						echo json_encode($shopping_cart);
 					}
 				} else {
-					echo json_encode(array('success' => false)); //No hay cantidad
+					echo json_encode(array('success' => false, 'message' => 'No hay suficiente cantidad para agregar al carrito')); //No hay cantidad
 				}
 			} else {
-				echo json_encode(array('success' => false)); // No existe el carrito
+				echo json_encode(array('success' => false, 'message' => 'No hay carrito asociado en el momento')); // No existe el carrito
 			}
 		} else {
-			echo json_encode(array('success' => false)); // Error en los datos pasados al método
+			echo json_encode(array('success' => false, 'message' => 'Error en los datos pasados')); // Error en los datos pasados al método
 		}
 		exit(0);
 	}
@@ -138,16 +139,18 @@ class ShoppingCartsController extends BCartAppController {
 					} else {
 						$shopping_cart = $this -> get();
 						$shopping_cart['success'] = false;
+						$shopping_cart['message'] = 'No se pudo eliminar el ítem';
 						echo json_encode($shopping_cart);
 					}
 				} else {
 					$shopping_cart = $this -> get();
 					$shopping_cart['success'] = false;
+					$shopping_cart['message'] = 'No coincide el carrito actual con el carrito del ítem';
 					echo json_encode($shopping_cart);
 				}
 			}
 		} else {
-			echo json_encode(array('success' => false));
+			echo json_encode(array('success' => false, 'message' => 'No hay carrito asociado en el momento'));
 		}
 		exit(0);
 	}
@@ -193,11 +196,12 @@ class ShoppingCartsController extends BCartAppController {
 				} else {
 					$shopping_cart = $this -> get();
 					$shopping_cart['success'] = false;
+					$shopping_cart['message'] = 'No coincide el carrito actual con el carrito del ítem';
 					echo json_encode($shopping_cart);
 				}
 			}
 		} else {
-			echo json_encode(array('success' => false));
+			echo json_encode(array('success' => false, 'message' => 'Error en los datos pasados')); // Error en los datos pasados al método
 		}
 		exit(0);
 	}
