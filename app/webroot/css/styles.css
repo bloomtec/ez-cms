@@ -1087,10 +1087,11 @@ table.tablaCarrito h3{
 .datos-envio .submit input{
 	float:right;
 	width:230px;
+	height:30px;
 	font-size:18px;
 	margin-top:10px;
 	cursor:pointer;
-	background:background: url(../img/trama-nav.png) repeat-x;;
+	background:url(../img/trama-nav.png) repeat-x;;
 
 }
 .datos-envio .input{

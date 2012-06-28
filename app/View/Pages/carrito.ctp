@@ -25,6 +25,7 @@
 		$('.tabla-carrito .content').load('/pages/tablaCarrito',function(){
 			rel=$(".direcciones li.selected").attr('rel');
 			updateAddressForm(rel);
+			$('#OrderTablaCarritoForm').validator({ lang: 'es', position:"bottom left"});
 		});
 		$('.tabla-carrito').on('click','.direcciones li',function(){
 			$that=$(this);
