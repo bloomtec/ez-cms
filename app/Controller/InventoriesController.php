@@ -12,8 +12,6 @@ class InventoriesController extends AppController {
 		$this -> Auth -> allow('getInventoryData', 'getQuantity');
 	}
 	
-
-	
 	/**
 	* Funcion que devuelve la cantidad de un inventario
 	*/
@@ -31,6 +29,7 @@ class InventoriesController extends AppController {
 			)
 		));
 	}
+	
 	/**
 	 * Función ajax para dar datos al front
 	 */
