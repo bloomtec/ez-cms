@@ -1107,6 +1107,7 @@ table.tablaCarrito h3{
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	border-radius:3px;
+	width:90%;
 }
 .to-cart form{
 	display:none;

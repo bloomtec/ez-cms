@@ -78,7 +78,7 @@
 </table>
 <div class="datos-envio">
 	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/recibirDatosCarrito/')); ?>
-		<?php if($this -> Session -> read('Auth.User.id')): ?>
+		<?php if(!$this -> Session -> read('Auth.User.id')): ?>
 		<div>
 			<h2 class="rosa">Datos de usuario</h2>
 			<?php echo $this -> Form -> input('User.email', array('label' => 'e-mail', 'type' => 'email', 'required' => 'required')); ?>
@@ -92,7 +92,14 @@
 		</div>
 		<?php endif; ?>
 		<div>
-			<h2 class='rosa'>Dirección de envío</h2>
+		<h2 class='rosa'>Dirección de envío</h2>
+		<?php if($this -> Session -> read('Auth.User.id')){  ?>
+			<?php $addresses=$this ->requestAction("/user_control/user_addresses/get"); $i=0; ?>
+			<ul class="direcciones">
+				<?php foreach($addresses as $address):?>
+				<li rel="<?php $i++; ?>" > <?php echo $address['UserAddress']['name']?></li>
+				<?php endforeach;?>
+			</ul>
 			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
 			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
 			<br style="clear:both;"/>
@@ -100,11 +107,22 @@
 			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
 			<br style="clear:both;"/>
 			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea'));?>
+				
+		<?php } else{ ?>		
+			
+			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
+			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
+			<br style="clear:both;"/>
+			<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required'));?>
+			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
+			<br style="clear:both;"/>
+			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea'));?>
+		<?php } ?>	
 			<div style="clear:both"></div>			
 		</div>
 		<div>
 			<h2 class='rosa'>Comentarios</h2>
-			<?php echo $this -> Form->input("comentraios",array("label"=>false,'required'=>'required', 'type' => 'textarea'));?>
+			<?php echo $this -> Form->input("comments",array("label"=>false,'required'=>'required', 'type' => 'textarea'));?>
 			<div style="clear:both"></div>			
 		</div>
 		<div style="clear:both"></div>
@@ -114,3 +132,9 @@
 <?php } else { ?>
 		<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No tienes item en el carrito </p>
 <?php } ?>
+<?php if(isset($addresses)):?>
+	<script type="text/javascript">
+		var addresses=<?php echo json_encode($addresses);?>
+		console.log(addresses);
+	</script>
+<?php endif;?>
