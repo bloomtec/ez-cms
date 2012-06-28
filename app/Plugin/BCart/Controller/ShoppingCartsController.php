@@ -66,7 +66,7 @@ class ShoppingCartsController extends BCartAppController {
 	
 	public function addCartItem($product_id = null, $color_id = null, $product_size_id = null, $quantity = null) {
 		$this -> autoRender = false;
-		Configure::write('debug', 0);
+		//Configure::write('debug', 0);
 		if($product_id && $color_id && $product_size_id && $quantity) {
 			/** llegó la info proceder a guardar **/
 			$shopping_cart = $this -> get();
