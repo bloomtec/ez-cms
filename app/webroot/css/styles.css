@@ -1076,20 +1076,37 @@ table.tablaCarrito h3{
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-
-div.pago legend{
+.datos-envio h2{
+	display:block;
+	margin:10px 0;
+}
+.datos-envio legend{
 	font-size:20px;
 	padding-bottom:10px;
 }
-div.pago label{
-	font-size:18px;
-}
-div.pago .submit input{
+.datos-envio .submit input{
 	float:right;
 	width:230px;
 	font-size:18px;
 	margin-top:10px;
 	cursor:pointer;
+
+}
+.datos-envio .input{
+	float:left;
+	width:50%;
+	margin:5px 0;
+}
+.datos-envio label, .datos-envio input{
+	display:block;
+	width:90%;
+	height: 20px;
+	
+}
+.datos-envio input, .datos-envio textarea{
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
 }
 .to-cart form{
 	display:none;

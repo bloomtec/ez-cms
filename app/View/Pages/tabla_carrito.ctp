@@ -76,23 +76,37 @@
 
 		</tr>
 </table>
-<div class="pago">
+<div class="datos-envio">
 	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/recibirDatosCarrito/')); ?>
-		<h2 class="rosa">Información de la orden</h2>
-		<?php echo $this -> Form -> input('email', array('label' => 'Dirección E-mail', 'type' => 'email', 'required' => 'required')); ?>
-		<?php echo $this -> Form -> input('verify_email', array('label' => '<br />Escribe de nuevo tu dirección E-mail', 'type' => 'email', 'required' => 'required', 'data-equals' => 'data[User][email]')); ?>
-		<?php //echo $this -> Form -> input('password',array('type'=>'password','div' => 'password ',"label"=>"Contraseña",'required'=>'required'));?>
-		<?php //echo $this -> Form -> input('verify_password',array('type'=>'password','div' => 'password ',"label"=>"Escribe de nuevo tu contraseña",'required'=>'required','data-equals'=>"data[User][password]"));?>
-		<?php echo $this -> Form -> input('name',array('div' => 'input',"label"=>"Escribe tu (s) Nombre (s)",'required'=>'required'));?>
-		<?php echo $this -> Form -> input('lastname',array('div' => 'input',"label"=>"Escribe tu (s) Apellido (s)",'required'=>'required'));?>
-		
-		<h2 class='rosa' style='clear:both; margin-bottom:20px;'>Direccion Principal</h2>
-		<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
-		<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
-		<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required'));?>
-		<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
-		<div style="clear:both"></div>
-		<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea', 'style' => 'min-width:345px;'));?>
+		<?php if($this -> Session -> read('Auth.User.id')): ?>
+		<div>
+			<h2 class="rosa">Datos de usuario</h2>
+			<?php echo $this -> Form -> input('User.email', array('label' => 'e-mail', 'type' => 'email', 'required' => 'required')); ?>
+			<?php echo $this -> Form -> input('User.verify_email', array('label' => 'Confirma tu e-mail', 'type' => 'email', 'required' => 'required', 'data-equals' => 'data[User][email]')); ?>
+			<?php //echo $this -> Form -> input('password',array('type'=>'password','div' => 'password ',"label"=>"Contraseña",'required'=>'required'));?>
+			<?php //echo $this -> Form -> input('verify_password',array('type'=>'password','div' => 'password ',"label"=>"Escribe de nuevo tu contraseña",'required'=>'required','data-equals'=>"data[User][password]"));?>
+			<br style="clear:both;"/>
+			<?php echo $this -> Form -> input('User.name',array('div' => 'input',"label"=>"Escribe tu (s) Nombre (s)",'required'=>'required'));?>
+			<?php echo $this -> Form -> input('User.lastname',array('div' => 'input',"label"=>"Escribe tu (s) Apellido (s)",'required'=>'required'));?>
+			<div style="clear:both;"></div>
+		</div>
+		<?php endif; ?>
+		<div>
+			<h2 class='rosa'>Dirección de envío</h2>
+			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
+			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
+			<br style="clear:both;"/>
+			<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required'));?>
+			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
+			<br style="clear:both;"/>
+			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea'));?>
+			<div style="clear:both"></div>			
+		</div>
+		<div>
+			<h2 class='rosa'>Comentarios</h2>
+			<?php echo $this -> Form->input("comentraios",array("label"=>false,'required'=>'required', 'type' => 'textarea'));?>
+			<div style="clear:both"></div>			
+		</div>
 		<div style="clear:both"></div>
 		<?php	echo $this -> Form -> end('Proceder a pagar'); ?>
 </div>
