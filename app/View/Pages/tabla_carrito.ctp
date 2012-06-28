@@ -93,11 +93,12 @@
 		<?php endif; ?>
 		<div>
 		<h2 class='rosa'>Dirección de envío</h2>
+		<p>Danos la dirección donde quieres que se envie tu pedido, esta dirección puede ser una de las que tienes registrada o puedes indicar una nueva</p>
 		<?php if($this -> Session -> read('Auth.User.id')){  ?>
 			<?php $addresses=$this ->requestAction("/user_control/user_addresses/get"); $i=0; ?>
 			<ul class="direcciones">
 				<?php foreach($addresses as $address):?>
-				<li rel="<?php $i++; ?>" > <?php echo $address['UserAddress']['name']?></li>
+				<li rel="<?php $i; ?>" <?php if($i==0) echo "class='selected'"; $i+=1;?>> <?php echo $address['UserAddress']['name']?></li>
 				<?php endforeach;?>
 			</ul>
 			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
