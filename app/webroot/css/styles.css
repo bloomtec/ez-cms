@@ -1090,6 +1090,7 @@ table.tablaCarrito h3{
 	font-size:18px;
 	margin-top:10px;
 	cursor:pointer;
+	background:background: url(../img/trama-nav.png) repeat-x;;
 
 }
 .datos-envio .input{
@@ -1110,14 +1111,14 @@ table.tablaCarrito h3{
 	width:90%;
 }
 .datos-envio ul.direcciones{
-	margin:5px 0;
+	margin:20px 0;
 }
 .datos-envio ul.direcciones li{
 	display: inline;
 	padding: 5px;
 	border-top: solid 1px 	white;
 	border-bottom: solid 1px 	white;
-	
+	cursor:pointer;
 }
 .datos-envio ul.direcciones li.selected{	
 	border-top: solid 1px 	#E62B7C;

@@ -77,7 +77,7 @@
 		</tr>
 </table>
 <div class="datos-envio">
-	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/recibirDatosCarrito/')); ?>
+	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/add')); ?>
 		<?php if(!$this -> Session -> read('Auth.User.id')): ?>
 		<div>
 			<h2 class="rosa">Datos de usuario</h2>
@@ -98,16 +98,18 @@
 			<?php $addresses=$this ->requestAction("/user_control/user_addresses/get"); $i=0; ?>
 			<ul class="direcciones">
 				<?php foreach($addresses as $address):?>
-				<li rel="<?php $i; ?>" <?php if($i==0) echo "class='selected'"; $i+=1;?>> <?php echo $address['UserAddress']['name']?></li>
+				<li rel="<?php echo $i; ?>" <?php if($i==0) echo "class='selected'"; $i+=1;?>> <?php echo $address['UserAddress']['name']?></li>
 				<?php endforeach;?>
+				<li rel="nueva-direccion"> Nueva </li>
 			</ul>
-			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
-			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
+			<?php echo $this -> Form->hidden("UserAddress.id");?>
+			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required','disabled'=>true));?>
+			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required','disabled'=>true));?>
 			<br style="clear:both;"/>
-			<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required'));?>
-			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
+			<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required','disabled'=>true));?>
+			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono",'disabled'=>true));?>
 			<br style="clear:both;"/>
-			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea'));?>
+			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea','disabled'=>true));?>
 				
 		<?php } else{ ?>		
 			
@@ -136,6 +138,5 @@
 <?php if(isset($addresses)):?>
 	<script type="text/javascript">
 		var addresses=<?php echo json_encode($addresses);?>
-		console.log(addresses);
 	</script>
 <?php endif;?>

@@ -22,6 +22,37 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		$('.tabla-carrito .content').load('/pages/tablaCarrito');
+		$('.tabla-carrito .content').load('/pages/tablaCarrito',function(){
+			rel=$(".direcciones li.selected").attr('rel');
+			updateAddressForm(rel);
+		});
+		$('.tabla-carrito').on('click','.direcciones li',function(){
+			$that=$(this);
+			rel=$that.attr('rel');
+			$('.direcciones li').removeClass('selected');
+			$that.addClass('selected');		
+			updateAddressForm(rel);	
+		});
+		function updateAddressForm(rel){
+			if($.isNumeric(rel)){
+				address=addresses[rel];
+				$("#UserAddressCountry").val(address['UserAddress']['country']).attr('disabled',true);
+				$("#UserAddressState").val(address['UserAddress']['state']).attr('disabled',true);
+				$("#UserAddressCity").val(address['UserAddress']['city']).attr('disabled',true);
+				$("#UserAddressPhone").val(address['UserAddress']['phone']).attr('disabled',true);
+				$("#UserAddressAddress").val(address['UserAddress']['address']).attr('disabled',true);
+				$("#UserAddressId").val(address['UserAddress']['id']);
+			}else{
+				if(rel=="nueva-direccion"){
+					$("#UserAddressCountry").val("").attr('disabled',false);
+					$("#UserAddressState").val("").attr('disabled',false);
+					$("#UserAddressCity").val("").attr('disabled',false);
+					$("#UserAddressPhone").val("").attr('disabled',false);
+					$("#UserAddressAddress").val("").attr('disabled',false);
+					$("#UserAddressId").val("");
+				}
+			}
+			
+		}
 	});
 </script>
