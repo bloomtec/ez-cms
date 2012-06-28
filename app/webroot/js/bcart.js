@@ -8,7 +8,7 @@ $(function(){
 		e.preventDefault();
 		$that=$(this);
 		$form=$that.parent().parent();		
-		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val()+ "/"+$form.find('input.quantity').val(),{},function(response){
+		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val()+ "/"+$form.find('select.quantity').val(),{},function(response){
 			if(response.success){
 				$('.resumen-carrito').load('/pages/resumenCarrito');
 				$('.to-cart.open').removeClass('open');
@@ -60,7 +60,7 @@ $(function(){
 		$height=$('.tabla-carrito').height()+"px";
 		$('.actualizando').css({'height':$height,'line-height':$height}).show();
 		var $that=$(this);
-		var quantity=$that.find('input[type="number"]').val();
+		var quantity=$that.find('select').val();
 		BJS.JSON('/b_cart/shopping_carts/updateCartItem/'+$that.attr('rel')+"/"+quantity,{},function(response){
 			if(response.success){
 				$('.tabla-carrito .content').load('/pages/tablaCarrito',function(){

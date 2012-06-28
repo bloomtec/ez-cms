@@ -16,13 +16,13 @@ $shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
 								$this -> Html->image('uploads/50x50/'.
 									$item['image'],
 									array('border' => '0','width' => '50px')),
-									'/products/view/'.$item['Product']['id'],
+									'/products/view/'.$item['Product']['id'].'/'.$item['color_id'],
 									array('escape' => false)
 							);
 						?>
 					</td>
 					<td width="60%" style="vertical-align:middle; text-align: center;">
-						<?php echo $this -> Html->link($item['Product']['name'], '/products/view/'.$item['Product']['id'],array('class'=>'rosa'));?>
+						<?php echo $this -> Html->link($item['Product']['name'], '/products/view/'.$item['Product']['id'].'/'.$item['color_id'],array('class'=>'rosa'));?>
 					</br>
 						<?php echo $item['quantity']; ?> x <?php  echo "$ ".number_format($item['Product']['price'], 0, ' ', '.'); ?>
 					</td>

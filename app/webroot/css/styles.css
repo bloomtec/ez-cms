@@ -1076,19 +1076,15 @@ table.tablaCarrito h3{
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
-table.pago{
-	float:right;
-	width:230px;
-	margin-top:20px;
-}
-table.pago legend{
+
+div.pago legend{
 	font-size:20px;
 	padding-bottom:10px;
 }
-table.pago label{
+div.pago label{
 	font-size:18px;
 }
-table.pago .submit input{
+div.pago .submit input{
 	float:right;
 	width:230px;
 	font-size:18px;

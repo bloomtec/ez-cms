@@ -76,20 +76,27 @@
 
 		</tr>
 </table>
-<table class="pago" width="550" border="0" align="center" cellpadding="10" cellspacing="0">
-	<tr align="center">
-		<td>
-			
-		</td>
-		<td>
-			<?php
-				echo $this -> Form -> create(null, array('url'=>'/orders/recibirDatosCarrito/'));
-				echo $this -> Form->radio("Tarjeta.tipo_de_tarjeta", array("Credito", "Debito"), array("default"=>"Credito"));
-				echo $this -> Form -> end('Proceder a pagar');
-			?>
-		</td>
-	</tr>
-</table>
+<div class="pago">
+	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/recibirDatosCarrito/')); ?>
+		<h2 class="rosa">Información de la orden</h2>
+		<?php echo $this -> Form -> input('email', array('label' => 'Dirección E-mail', 'type' => 'email', 'required' => 'required')); ?>
+		<?php echo $this -> Form -> input('verify_email', array('label' => '<br />Escribe de nuevo tu dirección E-mail', 'type' => 'email', 'required' => 'required', 'data-equals' => 'data[User][email]')); ?>
+		<?php //echo $this -> Form -> input('password',array('type'=>'password','div' => 'password ',"label"=>"Contraseña",'required'=>'required'));?>
+		<?php //echo $this -> Form -> input('verify_password',array('type'=>'password','div' => 'password ',"label"=>"Escribe de nuevo tu contraseña",'required'=>'required','data-equals'=>"data[User][password]"));?>
+		<?php echo $this -> Form -> input('name',array('div' => 'input',"label"=>"Escribe tu (s) Nombre (s)",'required'=>'required'));?>
+		<?php echo $this -> Form -> input('lastname',array('div' => 'input',"label"=>"Escribe tu (s) Apellido (s)",'required'=>'required'));?>
+		
+		<h2 class='rosa' style='clear:both; margin-bottom:20px;'>Direccion Principal</h2>
+		<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
+		<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
+		<?php echo $this -> Form->input("UserAddress.city",array("label"=>"Ciudad",'required'=>'required'));?>
+		<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
+		<div style="clear:both"></div>
+		<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea', 'style' => 'min-width:345px;'));?>
+		<div style="clear:both"></div>
+		<?php	echo $this -> Form -> end('Proceder a pagar'); ?>
+</div>
+
 <?php } else { ?>
 		<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No tienes item en el carrito </p>
 <?php } ?>

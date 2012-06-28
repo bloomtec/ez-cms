@@ -15,7 +15,7 @@ class InventoriesController extends AppController {
 	/**
 	* Funcion que devuelve la cantidad de un inventario
 	*/
-	public function getQuantity($product_id,$color_id,$product_size_id){
+	public function getQuantity($product_id=null,$color_id=null,$product_size_id=null){
 		$this ->Inventory-> recursive = -1;
 		return $this ->Inventory-> find ('first',array(
 			'conditions'=>array(
@@ -29,6 +29,7 @@ class InventoriesController extends AppController {
 			)
 		));
 	}
+	
 	/**
 	 * Función ajax para dar datos al front
 	 */

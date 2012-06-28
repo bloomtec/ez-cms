@@ -133,7 +133,7 @@
 				<div class="fb-like" data-href="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-send="false" data-width="280" data-show-faces="true"></div>
 					<div style="clear:left"></div>
 			    -->
-				<fb:like href="http://priceshoes.bloomweb.co/products/view/<?php echo $product['Product']['id']?>" width="450" height="80"/>
+				<fb:like href="http://priceshoes.bloomweb.co/products/view/<?php echo $product['Product']['id']?>" width="200" height="80"/>
 				</li>
 				
 			</ul>
