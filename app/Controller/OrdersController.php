@@ -48,10 +48,18 @@ class OrdersController extends AppController {
 				$this -> Session -> setFlash(__('The order could not be saved. Please, try again.'));
 			}
 		}
+		/**
 		$orderStates = $this -> Order -> OrderState -> find('list');
 		$users = $this -> Order -> User -> find('list');
 		$userAddresses = $this -> Order -> UserAddress -> find('list');
 		$this -> set(compact('orderStates', 'users', 'userAddresses'));
+		 */
+	}
+	
+	public function verify($code = null) {
+		if($code) {
+			
+		}
 	}
 
 	/**
