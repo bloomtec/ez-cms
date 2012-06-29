@@ -55,19 +55,6 @@ class OrdersController extends AppController {
 		$this -> set(compact('orderStates', 'users', 'userAddresses'));
 		 */
 	}
-	
-	public function verify($code = null) {
-		if($code) {
-			$this -> Order -> Behaviors -> attach('Containable');
-			$this -> Order -> contain(
-				'OrderItem',
-				'OrderItem.Product'
-			);
-			$order = $this -> Order -> findByCode($code);
-			$this -> set('order', $order);
-			debug($order);
-		}
-	}
 
 	/**
 	 * admin_index method
