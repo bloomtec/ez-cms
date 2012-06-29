@@ -91,8 +91,6 @@ class ShoppingCartsController extends BCartAppController {
 					if($cart_item) {
 						// Existe el ítem, actualizar
 						if($item_quantity['Inventory']['quantity'] >= $cart_item['CartItem']['quantity'] + $quantity) { // Guardar
-							//debug($item_quantity['Inventory']['quantity']);
-							//debug($cart_item['CartItem']['quantity'] + $quantity);
 							$this -> updateCartItem($cart_item['CartItem']['id'], $cart_item['CartItem']['quantity'] + $quantity);
 						} else { // Supera la cantidad
 							$shopping_cart = $this -> get();
