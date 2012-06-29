@@ -76,6 +76,7 @@ class ShoppingCartsController extends BCartAppController {
 					'first',
 					array(
 						'conditions' => array(
+							'CartItem.shopping_cart_id' => $shopping_cart['ShoppingCart']['id'],
 							'CartItem.product_id' => $product_id,
 							'CartItem.color_id' => $color_id,
 							'CartItem.product_size_id' => $product_size_id
