@@ -27,7 +27,6 @@ $shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
 						<?php echo $item['quantity']; ?> x <?php  echo "$ ".number_format($item['Product']['price'], 0, ' ', '.'); ?>
 					</td>
 					<td width="20%" style="vertical-align:middle; text-align: center;">
-						<!-- <?php Configure::read('Shop.currency');?><?php echo '$' . $item['Product']['price'] * $item['quantity'];?> -->
 						<?php //echo $this -> Html->link('Añadir otro par', '/carts/add/inventory_id:'.$item['inventories']['id'].'category_id:'.$item['categories']['id']);?>
 						<?php echo $this -> Html->link('Quitar', '/b_cart/ShoppingCarts/removeCartItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeCartItem rosa"));?>
 					</td>
