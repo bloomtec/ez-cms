@@ -85,7 +85,7 @@ class ShoppingCartsController extends BCartAppController {
 				);
 				$item_quantity = $this -> requestAction('/inventories/getQuantity/' . $product_id . '/' . $color_id . '/' . $product_size_id);
 				// Revisar la cantidad existente vs la cantidad solicitada
-				if($item_quantity >= $quantity) {
+				if($item_quantity['Inventory']['quantity'] >= $quantity) {
 					// Hay cantidad
 					if($cart_item) {
 						// Existe el ítem, actualizar

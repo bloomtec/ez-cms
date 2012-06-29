@@ -55,12 +55,6 @@ class OrdersController extends AppController {
 		$this -> set(compact('orderStates', 'users', 'userAddresses'));
 		 */
 	}
-	
-	public function verify($code = null) {
-		if($code) {
-			
-		}
-	}
 
 	/**
 	 * admin_index method
