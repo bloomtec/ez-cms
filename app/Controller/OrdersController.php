@@ -58,7 +58,14 @@ class OrdersController extends AppController {
 	
 	public function verify($code = null) {
 		if($code) {
-			
+			$this -> Order -> Behaviors -> attach('Containable');
+			$this -> Order -> contain(
+				'OrderItem',
+				'OrderItem.Product'
+			);
+			$order = $this -> Order -> findByCode($code);
+			$this -> set('order', $order);
+			debug($order);
 		}
 	}
 

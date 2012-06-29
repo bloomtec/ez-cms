@@ -18,6 +18,14 @@ class OrderItem extends AppModel {
 	public $displayField = 'id';
 	
 	/**
+	 * Virtual Fields
+	 * @var array
+	 */
+	public $virtualFields = array(
+		'total' => 'OrderItem.total_items_price + OrderItem.total_items_tax'
+	);
+	
+	/**
 	 * Validation rules
 	 *
 	 * @var array
