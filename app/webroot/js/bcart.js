@@ -18,7 +18,7 @@ $(function(){
 				},2000);
 				
 			}else{
-				alert('No se pudo actualizar el carrito, ¡intenta nuevamente!');
+				alert(response.message);
 			}
 			
 		});
