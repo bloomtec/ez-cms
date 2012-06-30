@@ -23,7 +23,7 @@
 			<li>
 				<?php
 				if ($this -> Session -> read("Auth.User.id")) {
-					echo $this -> Html -> link("Mis Favoritos", array("controller" => "favorites", "action" => "index", 'plugin' => 'bcommerce'));
+					echo $this -> Html -> link("Mis Favoritos", array("controller" => "pages", "action" => "favoritos", 'plugin' => false));
 				}
 				?>
 			</li>

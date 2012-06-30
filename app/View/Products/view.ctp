@@ -106,7 +106,7 @@
 				<div style="clear:left"></div>
 			    </li>
 				<li>
-					<?php echo $this->Html->link("Añadir a favoritos",array('controller' => 'favorites', 'action' => 'addToFavorite', $product['Category']['id']),array('class'=>'boton-favoritos')); ?>
+					<?php echo $this->Html->link("Añadir a favoritos",array('controller' => 'favorites', 'action' => 'addFavoriteItem', $product['Category']['id']),array('class'=>'boton-favoritos addFavoriteItem')); ?>
 			   		<div class="add-confirm">
 						producto añadido a favoritos
 					</div>

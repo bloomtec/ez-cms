@@ -21,9 +21,7 @@ $(function(){
 				alert(response.message);
 			}
 			
-		});
-		
-		
+		});		
 	});
 
 	$('.resumen-carrito').on('click','.removeCartItem',function(e){
@@ -74,6 +72,58 @@ $(function(){
 		
 		// '/b_cart/shopping_carts/get'
 	});
+	// FUNCIONALIDADES FAVORITOS
+	$('.addFavoriteItem').click(function(e){
+		e.preventDefault();
+		$that=$(this);
+		$form=$that.parent().parent();		
+		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val(),{},function(response){
+			if(response.success){
+				$('.add-confirm').show();
+				setTimeout(function(){
+				$('.add-confirm').hide();
+				},2000);
+				
+			}else{
+				alert(response.message);
+			}
+			
+		});		
+	});
+	$('.resumen-favoritoss').on('click','removeFavoriteItem',function(e){
+		e.preventDefault();
+		$that=$(this);
+		BJS.JSON($that.attr('href'),{},function(response){
+			if(response.success){
+				$('.resumen-carrito').load('/pages/resumenFavoritos');
+			}else{
+				alert(response.message);
+			}
+			
+		});
+	});
+	$('.tabla-carrito').on('click','.removeFavoriteItem',function(e){
+		e.preventDefault();
+		$that=$(this);
+		$height=$('.tabla-carrito').height()+"px";
+		$('.actualizando').css({'height':$height,'line-height':$height}).show();
+		BJS.JSON($that.attr('href'),{},function(response){
+			if(response.success){
+				$('.tabla-carrito .content').load('/pages/tablaFavoritos',function(){
+					$('.actualizando').hide();
+				});
+			}else{
+				alert(response.message);
+			}
+			
+		});
+	});
+	
+	
+	
+	
+	
+	
 	//FUNCIONALIDADES PARA PRODUCTS/VIEW
 	galeria={
 		ORIGINAL_WIDTH:360,

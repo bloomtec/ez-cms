@@ -6,7 +6,7 @@
 	<div class="titulo">
 		<h1>Mis Favoritos <img src="/img/favoritos_2.png" class="carrito" alt="carrito"> </h1>
 	</div>
-	<div class="resumen-carrito">
+	<div class="resumen-favoritos">
 	<?php
 	$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
 	?>
@@ -32,7 +32,7 @@
 						</td>
 						<td width="20%" style="vertical-align:middle; text-align: center;">
 							<?php //echo $this -> Html->link('Añadir otro par', '/carts/add/inventory_id:'.$item['inventories']['id'].'category_id:'.$item['categories']['id']);?>
-							<?php echo $this -> Html->link('Quitar', '/b_cart/ShoppingCarts/removeCartItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeCartItem rosa"));?>
+							<?php echo $this -> Html->link('Quitar', '/favorites/removeFavoriteItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeFavoriteItem rosa"));?>
 						</td>
 					</tr>
 				<?php endforeach;?>

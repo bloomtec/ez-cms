@@ -12,16 +12,17 @@
 		<div class="content">
 			<?php
 				// Obtener el carrito
-				$favoritos = $this -> requestAction('/b_cart/ShoppingCarts/get');
+				$favoritos = $this -> requestAction('/favorites/get');
+				debug($favoritos);
 			?>
-			<?php if(isset($favoritos['CartItem']) && !empty($favoritos['CartItem'])){?>
+			<?php if(isset($favoritos['FavoriteItem']) && !empty($favoritos['FavoriteItem'])){?>
 			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">
 					<tr class="entryTableHeader">
 						<th colspan="2" align="center">Producto</th>
 						<th align="center">Descripción</td>
 						
 					</tr>
-					<?php foreach($favoritos['CartItem'] as $item) { ?>
+					<?php foreach($favoritos['FavoriteItem'] as $item) { ?>
 					<tr class="content">
 						<td width="80" align="center" class="left">
 							<?php
@@ -44,6 +45,7 @@
 							<p>
 								<?php echo $item['Product']['description'];?>
 							</p>
+								<?php echo $this -> Html->link('Quitar de mis favoritos', '/favorites/removeFavoriteItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeFavoriteItem rosa",'style'=>'float:right;'));?>
 						</td>
 					
 					</tr>
