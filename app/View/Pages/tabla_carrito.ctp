@@ -110,9 +110,7 @@
 			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono",'disabled'=>true));?>
 			<br style="clear:both;"/>
 			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea','disabled'=>true));?>
-				
-		<?php } else{ ?>		
-			
+		<?php } else { ?>
 			<?php echo $this -> Form->input("UserAddress.country",array("label"=>"País",'required'=>'required'));?>
 			<?php echo $this -> Form->input("UserAddress.state",array("label"=>"Departamento",'required'=>'required'));?>
 			<br style="clear:both;"/>
@@ -120,13 +118,13 @@
 			<?php echo $this -> Form->input("UserAddress.phone",array("label"=>"Teléfono"));?>
 			<br style="clear:both;"/>
 			<?php echo $this -> Form->input("UserAddress.address",array("label"=>"Dirección",'required'=>'required', 'type' => 'textarea'));?>
-		<?php } ?>	
+		<?php } ?>
 			<div style="clear:both"></div>			
 		</div>
 		<div>
 			<h2 class='rosa'>Comentarios</h2>
 			<?php echo $this -> Form->input("comments",array("label"=>false,'required'=>'required', 'type' => 'textarea'));?>
-			<div style="clear:both"></div>			
+			<div style="clear:both"></div>
 		</div>
 		<div style="clear:both"></div>
 		<?php	echo $this -> Form -> end('Proceder a pagar'); ?>

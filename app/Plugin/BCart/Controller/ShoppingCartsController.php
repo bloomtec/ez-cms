@@ -10,7 +10,7 @@ class ShoppingCartsController extends BCartAppController {
 		parent::beforeFilter();
 		$this -> ShoppingCart -> Behaviors -> attach('Containable');
 		$this -> ShoppingCart -> contain('CartItem', 'CartItem.Product', 'CartItem.ProductSize');
-		$this -> Auth -> Allow('get', 'emptyCart', 'addCartItem', 'removeCartItem', 'updateCartItem', 'borrarCarritos');
+		$this -> Auth -> Allow('get', 'assignUserToCart', 'emptyCart', 'addCartItem', 'removeCartItem', 'updateCartItem', 'borrarCarritos');
 	}
 	
 	public function borrarCarritos() {
@@ -20,6 +20,19 @@ class ShoppingCartsController extends BCartAppController {
 			$this -> ShoppingCart -> delete($id);
 		}
 		$this -> Cookie -> delete('User.identifier');
+	}
+	
+	public function assignUserToCart($user_id = null) {
+		if($user_id) {
+			$this -> ShoppingCart -> recursive = -1;
+			$shopping_cart = $this -> ShoppingCart -> findByUserId($user_id);
+			if(!$shopping_cart) {
+				$shopping_cart = $this -> get();
+				$shopping_cart['ShoppingCart']['user_id'] = $user_id;
+				$shopping_cart['ShoppingCart']['identifier'] = NULL;
+				$this -> ShoppingCart -> save($shopping_cart);
+			}
+		}
 	}
 	
 	private function getUserId() {

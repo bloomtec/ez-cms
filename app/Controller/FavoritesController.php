@@ -31,10 +31,13 @@ class FavoritesController extends AppController {
 	 * @return Información del carrito
 	 */
 	public function get() {
+		$this -> autoRender = false;
+		//Configure::write('debug', 0);
 		$user_id = $this -> getUserId(); 
 		if($user_id) {
 			/** hay usuario logueado **/
 			$favorite = $this -> Favorite -> findByUserId($user_id);
+			debug($favorite);
 			if($favorite) {
 				return $favorite;
 			} else {
