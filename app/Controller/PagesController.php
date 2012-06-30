@@ -33,7 +33,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos');
+		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos','tablaFavoritos','resumenFavoritos');
 	}
 
 	/**
@@ -89,7 +89,10 @@ class PagesController extends AppController {
 	public function resumenCarrito(){
 		$this -> layout="ajax";
 	}
-	
+	public function resumenFavoritos(){
+		$this -> layout="ajax";
+		Configure::write('debug',0);
+	}
 	public function registro() {
 		/*$this -> redirect(
 			array(
@@ -106,6 +109,10 @@ class PagesController extends AppController {
 	}
 	public function favoritos(){
 	
+	}
+	public function tablaFavoritos(){
+		Configure::write('debug',0);
+		$this -> layout="ajax";
 	}
 	
 	public function tablaCarrito(){

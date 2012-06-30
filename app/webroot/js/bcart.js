@@ -90,12 +90,12 @@ $(function(){
 			
 		});		
 	});
-	$('.resumen-favoritoss').on('click','removeFavoriteItem',function(e){
+	$('.resumen-favoritos').on('click','.removeFavoriteItem',function(e){
 		e.preventDefault();
 		$that=$(this);
 		BJS.JSON($that.attr('href'),{},function(response){
 			if(response.success){
-				$('.resumen-carrito').load('/pages/resumenFavoritos');
+				$('.resumen-favoritos .content').load('/pages/resumenFavoritos');
 			}else{
 				alert(response.message);
 			}
