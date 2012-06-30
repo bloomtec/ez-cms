@@ -2,7 +2,7 @@
 				// Obtener el carrito
 				
 				$favoritos = $this -> requestAction('/favorites/get');
-				//debug($favoritos);
+			//	debug($favoritos);
 			?>
 			<?php if(isset($favoritos['FavoriteItem']) && !empty($favoritos['FavoriteItem'])){?>
 			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">

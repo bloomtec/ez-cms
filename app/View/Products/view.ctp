@@ -105,14 +105,15 @@
 					</div>
 				<div style="clear:left"></div>
 			    </li>
+				<?php if($this -> Session -> read('Auth.User.id')): ?>
 				<li>
 					<?php echo $this->Html->link("Añadir a favoritos",array('controller' => 'favorites', 'action' => 'addFavoriteItem', $product['Category']['id']),array('class'=>'boton-favoritos addFavoriteItem')); ?>
 			   		<div class="add-confirm">
 						producto añadido a favoritos
 					</div>
-				<div style="clear:left"></div>
-			    <?php //endif;?>
+				<div style="clear:left"></div>			   
 				</li>
+				 <?php endif;?>
 				<li class='social'>
 					<div class="tweet">
 						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-text="Me encantan estos zapatos!!!" data-via="PriceShoesColom" data-lang="es"></a>
