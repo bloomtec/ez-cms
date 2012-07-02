@@ -11,7 +11,7 @@ class OrdersController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('add');
+		$this -> Auth -> allow('add', 'sendPlatformRequest', 'platformResponse', 'platformUpdate');
 	}
 
 	/**
@@ -44,7 +44,6 @@ class OrdersController extends AppController {
 	 * @return void
 	 */
 	public function add() {
-		$this -> autoRender = false;
 		if ($this -> request -> is('post')) {
 			
 			/**
@@ -55,27 +54,20 @@ class OrdersController extends AppController {
 			
 			// Usuario NO registrado
 			if(!$this -> Auth -> user('id')) {
-				$this -> loadModel('BCart.User');
-				$this -> loadModel('BCart.UserAddress');
-				// Crear una contraseña automatica
-				$this -> request -> data['User']['password'] = $password;
-				$this -> request -> data['User']['verify_password'] = $password;
-				$clientRole = $this -> User -> Role -> find('first', array('order' => array('id' => 'DESC'), 'recursive' => -1));
-				$this -> request -> data['User']['role_id'] = $clientRole['Role']['id'];
 				// Crear el usuario
-				$user = array('User' => $this -> request -> data['User']);
-				$address = array('UserAddress' => $this -> request -> data['UserAddress']);
-				$this -> User -> create();
-				if ($this -> User -> save($user)) {
-					$user = $this -> User -> read(null, $this -> User -> id);
-					$user_id = $user['User']['id'];
-					$user_alias = $user['User']['username'];
-					$this -> User -> query("UPDATE `aros` SET `alias`='$user_alias' WHERE `model`='User' AND `foreign_key`=$user_id");
+				$email = $this -> request -> data['User']['email'];
+				$name = $this -> request -> data['User']['name'];
+				$lastname = $this -> request -> data['User']['lastname'];
+				$user_data = $this -> requestAction('/user_control/users/createUser/' . $email . '/' . $name . '/' . $lastname);
+				$user_id = $user_data['user_id'];
+				$user_password = $user_data['password'];
+				$user_address = array('UserAddress' => $this -> request -> data['UserAddress']);
+				if ($user_id) {
 					// El usuario se creó, crear la dirección
 					$user_address['UserAddress']['name'] = 'Principal';
 					$user_address['UserAddress']['user_id'] = $user_id;
-					$this -> UserAddress -> create();
-					if($this -> UserAddress -> save($user_address)) {
+					$this -> Order -> UserAddress -> create();
+					if($this -> Order -> UserAddress -> save($user_address)) {
 						// Se registró la dirección
 						$this -> requestAction('/b_cart/shopping_carts/assignUserToCart/' . $user_id);
 						
@@ -86,15 +78,17 @@ class OrdersController extends AppController {
 						 * c. redireccionar a interpagos registrado con sus datos.
 						 */
 						
+						$this -> createOrder($user_id);
+						
 					} else {
 						// Error al registrar la dirección
-						debug($this -> UserAddress -> invalidFields());
+						debug($this -> Order -> UserAddress -> invalidFields());
 					}
 				} else {
 					// Error al crear el usuario
-					debug($this -> User -> invalidFields());
+					debug('error al crear el usuario');
 				}
-			} 
+			}
 			// Usuario registrado
 			else {
 				/**
@@ -103,13 +97,8 @@ class OrdersController extends AppController {
 				 * b. Crear la orden
 				 * c. redireccionar a interpagos
 				 */
-				 
-				// Crear la orden
-				$this -> loadModel('BCart.ShoppingCart');						
-				$shopping_cart = $this -> ShoppingCart -> findByUserId($this -> Order -> User -> id);
+				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id']);
 			}
-			
-			debug($this -> request -> data);
 			
 			/**
 			$this -> Order -> create();
@@ -129,18 +118,92 @@ class OrdersController extends AppController {
 		 */
 	}
 	
-	/**
-	 * Generar una contraseña de manera automática
-	 * 
-	 * @return Una contraseña aleatoria
-	 */
-	private function generatePassword() {
-		$str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-		$cad = "";
-		for ($i = 0; $i < 8; $i++) {
-			$cad .= substr($str, rand(0, 62), 1);
+	private function createOrder($user_id = null, $user_address_id = null) {
+		if($user_id && $user_address_id) {
+			$this -> loadModel('BCart.ShoppingCart');
+			$shopping_cart = $this -> ShoppingCart -> findByUserId($user_id);
+			
+			// Generar el código de la orden
+			$total_orders = $this -> Order -> find('count');
+			$total_orders += 1;
+			//$total_orders += 0000000100;
+			while(strlen($total_orders) < 10) {
+				$total_orders = '0' . $total_orders;
+			}
+			
+			// Crear la orden
+			$this -> Order -> create();
+			$order = array(
+				'Order' => array(
+					'code' => $total_orders,
+					'order_state_id' => 1,
+					'user_id' => $user_id,
+					'user_address_id' => $user_address_id
+				)
+			);
+			if($this -> Order -> save($order)) {
+				foreach($shopping_cart['CartItem'] as $key => $cart_item) {
+					$this -> Order -> OrderItem -> create();
+					$this -> Order -> OrderItem -> Product -> recursive = -1;
+					$product = $this -> Order -> OrderItem -> Product -> findById($cart_item['product_id']);
+					$order_item = array(
+						'OrderItem' => array(
+							'order_id' => $this -> Order -> id,
+							'product_id' => $cart_item['product_id'],
+							'color_id' => $cart_item['color_id'],
+							'product_size_id' => $cart_item['product_size_id'],
+							'quantity' => $cart_item['quantity'],
+							'single_item_price' => round($product['Product']['price'], 2),
+							'single_item_tax' => round($product['Product']['tax_value'], 2),
+							'total_items_price' => round($cart_item['quantity'] * $product['Product']['price'], 2),
+							'total_items_tax' => round($cart_item['quantity'] * $product['Product']['tax_value'], 2)
+						)
+					);
+					$this -> Order -> OrderItem -> save($order_item);
+				}
+				$this -> redirect(array('action' => 'sendPlatformRequest', $this -> Order -> id, $user_id, $user_address_id));
+			} else {
+				return false;
+			}
+		} else {
+			return false;
 		}
-		return $cad;
+	}
+	
+	public function sendPlatformRequest($order_id, $user_id, $user_address_id) {
+		$order = $this -> Order -> read(null, $order_id);
+		
+		// Datos de la orden
+		$money_data = array(
+			'base' => 0,
+			'tax' => 0,
+			'total' => 0
+		);
+		
+		foreach ($order['OrderItem'] as $key => $item) {
+			$money_data['total'] += $item['total_items_price'];
+			$money_data['tax'] += $item['total_items_tax'];
+			$money_data['base'] += $item['total_items_price'] - $item['total_items_tax']; 
+		}
+
+		$this -> set('tax', $money_data['tax']);
+		$this -> set('base', $money_data['base']);
+		$this -> set('total', $money_data['total']);
+		
+		// Datos interpagos
+		$this -> set('client_id', $this -> Interpagos -> getClientId());
+		$this -> set('token', $this -> Interpagos -> getToken($order['Order']['code'], $money_data['total']));
+		$this -> set('reference_id', $order['Order']['code']);
+		$this -> set('reference', 'Pago compra PriceShoes :: ' . date('Y-m-d H:i:s', time()));
+		
+		// Datos comprador
+		$this -> set('shopper_name', $order['User']['full_name']);
+		$this -> set('shopper_email', $order['User']['email']);
+		
+		// Datos extra
+		$this -> set('user_id', $user_id);
+		$this -> set('user_address_id', $user_address_id);
+		$this -> set('order_id', $order_id);
 	}
 
 	/**
@@ -173,14 +236,24 @@ class OrdersController extends AppController {
 	 * Recibir respuesta inicial
 	 */
 	public function platformResponse() {
-		
+		$this -> autoRender = false;
+		$response = $this -> Interpagos -> checkResponse();
+		$order = $this -> Order -> read(null, $response['order_id']);
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['order_state_id'] = 2;
+		$this -> Order -> save($order);
 	}
 	
 	/**
 	 * Recibir actualizaciones
 	 */
 	public function platformUpdate() {
-		
+		$this -> autoRender = false;
+		$response = $this -> Interpagos -> checkResponse();
+		$order = $this -> Order -> read(null, $response['order_id']);
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['order_state_id'] = 2;
+		$this -> Order -> save($order); 
 	}
 
 }

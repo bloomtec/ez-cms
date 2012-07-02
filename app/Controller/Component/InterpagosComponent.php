@@ -11,12 +11,12 @@ class InterpagosComponent extends Component {
 	/**
 	 * ID de cliente.
 	 */
-	private $client_id = null;
+	private $client_id = '1006';
 
 	/**
 	 * PIN asignado.
 	 */
-	private $pin = null;
+	private $pin = 'AIWI1AQDLFE3KTV6';
 	
 	/**
 	 * Idiomas
@@ -102,6 +102,10 @@ class InterpagosComponent extends Component {
 		'VI005' => 'El campo IDReference debe ser único, actualmente ya está registrado el número enviado',
 	);
 	
+	public function getClientId() {
+		return $this -> client_id;
+	}
+	
 	/**
 	 * Obtener el token para iniciar el proceso de pago
 	 * 
@@ -113,7 +117,8 @@ class InterpagosComponent extends Component {
 		if ($reference_id && is_numeric($total_amount) && $total_amount > 0) {
 			$client_id = $this -> client_id;
 			$pin = $this -> pin;
-			return sha1("$client_id-$pin-$reference_id-$total_amount");
+			$token = sha1("$client_id-$pin-$reference_id-$total_amount"); 
+			return $token;
 		} else {
 			return null;
 		}
@@ -125,28 +130,45 @@ class InterpagosComponent extends Component {
 	 * @return Mensaje informativo del resultado de la transacción.
 	 */
 	public function checkResponse() {
-		$_POST['idClient']; // ID del cliente
-		$_POST['Token']; // Token codificado
-		$_POST['IDReference']; // Número de factura, único
-		$_POST['Rerefence']; // Descripción de la venta
-		$_POST['Currency']; // Modena correspondiente a la transacción
-		$_POST['BaseAmount']; // Valor base de la venta (sin impuestos)
-		$_POST['TaxAmount']; // Valor de los impuestos de la venta
-		$_POST['TotalAmount']; // Valor total de la venta
-		$_POST['ShopperName']; // Nombre del comprador
-		$_POST['ShopperEmail']; // Email del comprador
-		$_POST['LanguajeInterface']; // Lenguaje en el que se hizo la transacción
-		$_POST['PayMethod']; // Origen de la transacción
-		$_POST['RecurringBill']; // Define si es un pago recurrente
-		$_POST['RecurringBillTimes']; // Define cuantas veces se hace el pago recurrente
-		$_POST['ExtraData1']; // Campo extra para información
-		$_POST['ExtraData2']; // Campo extra para información
-		$_POST['ExtraData3']; // Campo extra para información
-		$_POST['Test']; // Define si la transacción es una prueba
-		$_POST['TransactionId']; // Número único de transacción
-		$_POST['TransactionCode']; // Código de respuesta de la transacción
-		$_POST['TransactionMessage']; // Descripción del código de respuesta
-		$_POST['TokenTransactionCode']; // Campo para verificación
+				
+		$response_data = array(
+			'approved' => false,
+			'client_id' => $_POST['idClient'], // ID del cliente
+			'token' => $_POST['Token'], // Token codificado
+			'reference_id' => $_POST['IDReference'], // Número de factura, único
+			'reference' => $_POST['Rerefence'], // Descripción de la venta
+			'currency' => $_POST['Currency'], // Modena correspondiente a la transacción
+			'base' => $_POST['BaseAmount'], // Valor base de la venta (sin impuestos)
+			'tax' => $_POST['TaxAmount'], // Valor de los impuestos de la venta
+			'total' => $_POST['TotalAmount'], // Valor total de la venta
+			'shopper_name' => $_POST['ShopperName'], // Nombre del comprador
+			'shopper_email' => $_POST['ShopperEmail'], // Email del comprador
+			'language' => $_POST['LanguajeInterface'], // Lenguaje en el que se hizo la transacción
+			'payment_method' => $_POST['PayMethod'], // Origen de la transacción
+			'recurring' => $_POST['RecurringBill'], // Define si es un pago recurrente
+			'recurring_times' => $_POST['RecurringBillTimes'], // Define cuantas veces se hace el pago recurrente
+			'user_id' => $_POST['ExtraData1'], // Campo extra para información (user_id)
+			'order_id' => $_POST['ExtraData2'], // Campo extra para información (order_id)
+			'user_address_id' => $_POST['ExtraData3'], // Campo extra para información (user_address_id)
+			'test' => $_POST['Test'], // Define si la transacción es una prueba
+			'order_code' => $_POST['TransactionId'], // Número único de transacción
+			'response_code' => $_POST['TransactionCode'], // Código de respuesta de la transacción
+			'response_message' => $_POST['TransactionMessage'], // Descripción del código de respuesta
+			'token_transaction_code' => $_POST['TokenTransactionCode'], // Campo para verificación
+		);
+		
+		// Transacción aprobada
+		if($response_code == '00' || $response_code == '02') {
+			$response_data['approved'] = true;
+		}
+		
+		// Transacción no aprobada
+		else {
+			
+		}
+		
+		return $response_data;
+		
 	}
 
 }
