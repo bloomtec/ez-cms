@@ -7,6 +7,7 @@
 	</div>
 	<?php endif;?>
 	<div id="left-col">
+		<?php echo $this -> element('survey'); ?>
 		<?php echo $this -> element('novedad'); ?>
 		<?php echo $this -> element('mas-vendidos'); ?>
 	</div>
