@@ -51,8 +51,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<div id="container">
 		<?php echo $this -> element('header');?>
 		<div id="content">
-			<?php echo $this -> element('left-col-big');?>
-			<div id="right-col" class='black-wrapper'>
+			<?php echo $this -> element('novedades');?>
+			<?php echo $this -> element('resumen-favoritos');?>
+			<div id="right-col">
 				<ul id="profile-menu">
 					<li class='profile'> <a href="/user_control/users/profile">Mi Perfil</a></li>
 					<li class='edit'> <a href="/user_control/users/edit">Modificar Datos</a></li>
