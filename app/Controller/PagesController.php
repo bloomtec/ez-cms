@@ -91,7 +91,7 @@ class PagesController extends AppController {
 	}
 	public function resumenFavoritos(){
 		$this -> layout="ajax";
-		Configure::write('debug',0);
+		
 	}
 	public function registro() {
 		/*$this -> redirect(
@@ -111,7 +111,7 @@ class PagesController extends AppController {
 	
 	}
 	public function tablaFavoritos(){
-		Configure::write('debug',0);
+
 		$this -> layout="ajax";
 	}
 	

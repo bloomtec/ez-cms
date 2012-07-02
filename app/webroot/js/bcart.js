@@ -77,7 +77,7 @@ $(function(){
 		e.preventDefault();
 		$that=$(this);
 		$form=$that.parent().parent();		
-		BJS.JSON($that.attr('href')+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val(),{},function(response){
+		BJS.JSON('/favorites/addFavoriteItem/'+$form.find('input.id').val()+"/"+$form.find('input.color_id').val()+"/"+$form.find('select.product_size_id option:selected').val(),{},function(response){
 			if(response.success){
 				$('.add-confirm').show();
 				setTimeout(function(){

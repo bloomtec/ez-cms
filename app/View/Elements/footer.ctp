@@ -6,7 +6,7 @@
 				<?php echo $this -> Form -> create('User', array('action' => 'registerEmail')); ?>
 				<form id="mail" accept-charset="utf-8" method="post" controller="users" action="/user_control/users/registerEmail">
 					<div>
-						<?php echo $this -> Form -> input('email', array('label' => false)); ?>
+						<?php echo $this -> Form -> input('email', array('label' => false,'value'=>'')); ?>
 						<?php echo $this -> Form -> submit('Enviar'); ?>
 					</div>
 					<?php echo $this -> Form -> end(); ?>
