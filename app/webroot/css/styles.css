@@ -1030,14 +1030,18 @@ padding:2px 0;
 	width:50px;
 	border:0;
 }
-.tablaCarrito  th {
+.tablaCarrito  th, .tablas th {
 	background: url(../img/trama-nav.png) repeat-x;
 	height:30px;
 	line-height:30px;
 	text-align:left;
 	padding-left:10px;
 }
-.carrito-view table tr td{
+.tablas{
+	width:100%;
+	margin:0 auto;
+}
+.carrito-view table tr td, .tablas tr td{
 	background:none;
 	padding:10px 0;
 }
