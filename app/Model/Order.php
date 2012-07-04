@@ -9,6 +9,8 @@ App::uses('AppModel', 'Model');
  * @property OrderItem $OrderItem
  */
 class Order extends AppModel {
+
+	public $actsAs = array('Containable');
 	
 	/**
 	 * Display field

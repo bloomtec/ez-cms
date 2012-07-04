@@ -14,8 +14,9 @@
 		"5"=>array("id"=>"6","name"=>"Tacones Medios"),
 
 	);*/?>
+	<?php debug($this -> Session->read("voto"));?>
 	<div class="wrapper">
-		<?php if($sondeo ){?>
+		<?php if($sondeo && !$this -> Session->read("voto")){?>
 		<h3><?php echo $sondeo["Survey"]["titulo"]; ?></h3>
 		<ul>
 		<?php foreach($sondeo["SurveyOption"] as $i=>$option):?>

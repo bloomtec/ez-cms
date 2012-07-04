@@ -66,22 +66,17 @@
 	<?php if (!empty($category['Product'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<!--<th><?php echo __('Id'); ?></th>-->
-		<!--<th><?php echo __('Category Id'); ?></th>-->
+
 		<th><?php echo __('Name'); ?></th>
 		<th><?php echo __('Reference'); ?></th>
 		<th><?php echo __('Precio'); ?></th>
 		<th><?php echo __('Base I.V.A.'); ?></th>
 		<th><?php echo __('Valor I.V.A.'); ?></th>
-		<!--<th><?php echo __('Description'); ?></th>-->
-		<!--<th><?php echo __('Order'); ?></th>-->
 		<th><?php echo __('Activo'); ?></th>
 		<th><?php echo __('Promocionado'); ?></th>
 		<th><?php echo __('Novedad'); ?></th>
 		<th><?php echo __('Más Vendido'); ?></th>
 		<th><?php echo __('Imagen'); ?></th>
-		<!--<th><?php echo __('Creado'); ?></th>-->
-		<!--<th><?php echo __('Modificado'); ?></th>-->
 		<th class="actions"><?php echo __('Acciones');?></th>
 	</tr>
 	<?php
