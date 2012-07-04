@@ -75,10 +75,12 @@ class OrdersController extends AppController {
 						
 						/**
 						 * Falta:
-						 * b. enviar el correo al usuario
+						 * a.	revisar el proceso de registro para que coincida con el proceso principal
+						 * 		i. enviar el correo al usuario
 						 */
 						
 						$this -> requestAction('/user_control/users/internalLoginUser/' . $user_id);
+						$this -> requestAction('/user_control/users/internalSendRegistrationData/' . $user_id . '/' . $user_password);
 						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
 						
 					} else {
@@ -92,11 +94,24 @@ class OrdersController extends AppController {
 			}
 			// Usuario registrado
 			else {
-				/**
-				 * Falta:
-				 * a. Revisar si es o no una dirección nueva
-				 */
-				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
+				// Dirección registrada
+				if($this -> request -> data['UserAddress']['id']) {
+					$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
+				}
+				// Dirección nueva
+				else {
+					// Crear la dirección nueva
+					$user_address = array('UserAddress' => $this -> request -> data['UserAddress']);
+					unset($user_address['id']);
+					$user_address['UserAddress']['user_id'] = $this -> Auth -> user('id');
+					$user_address['UserAddress']['name'] = 'Nueva';
+					$this -> Order -> UserAddress -> create();
+					if($this -> Order -> UserAddress -> save($user_address)) {
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
+					} else {
+						debug($this -> Order -> UserAddress -> invalidFields());
+					}
+				}				
 			}
 		}
 	}
