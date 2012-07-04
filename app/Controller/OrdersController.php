@@ -60,7 +60,7 @@ class OrdersController extends AppController {
 				$email = $this -> request -> data['User']['email'];
 				$name = $this -> request -> data['User']['name'];
 				$lastname = $this -> request -> data['User']['lastname'];
-				$user_data = $this -> requestAction('/user_control/users/createUser/' . $email . '/' . $name . '/' . $lastname);
+				$user_data = $this -> requestAction('/user_control/users/internalCreateUser/' . $email . '/' . $name . '/' . $lastname);
 				$user_id = $user_data['user_id'];
 				$user_password = $user_data['password'];
 				$user_address = array('UserAddress' => $this -> request -> data['UserAddress']);
@@ -75,12 +75,11 @@ class OrdersController extends AppController {
 						
 						/**
 						 * Falta:
-						 * a. Crear la orden
 						 * b. enviar el correo al usuario
-						 * c. redireccionar a interpagos registrado con sus datos.
 						 */
 						
-						$this -> createOrder($user_id, $this -> Order -> UserAddress -> id, $order_comment);
+						$this -> requestAction('/user_control/users/internalLoginUser/' . $user_id);
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
 						
 					} else {
 						// Error al registrar la dirección
@@ -96,28 +95,10 @@ class OrdersController extends AppController {
 				/**
 				 * Falta:
 				 * a. Revisar si es o no una dirección nueva
-				 * b. Crear la orden
-				 * c. redireccionar a interpagos
 				 */
 				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
 			}
-			
-			/**
-			$this -> Order -> create();
-			if ($this -> Order -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The order has been saved'));
-				$this -> redirect(array('action' => 'index'));
-			} else {
-				$this -> Session -> setFlash(__('The order could not be saved. Please, try again.'));
-			}
-			 */
 		}
-		/**
-		$orderStates = $this -> Order -> OrderState -> find('list');
-		$users = $this -> Order -> User -> find('list');
-		$userAddresses = $this -> Order -> UserAddress -> find('list');
-		$this -> set(compact('orderStates', 'users', 'userAddresses'));
-		 */
 	}
 	
 	private function createOrder($user_id = null, $user_address_id = null, $order_comment = null) {
