@@ -84,7 +84,7 @@ class Order extends AppModel {
 			'className' => 'BCart.User',
 			'foreignKey' => 'user_id',
 			'conditions' => '',
-			'fields' => array('email', 'full_name'),
+			'fields' => '',
 			'order' => ''
 		),
 		'UserAddress' => array(
