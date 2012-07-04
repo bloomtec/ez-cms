@@ -37,7 +37,7 @@ class FavoritesController extends AppController {
 		if($user_id) {
 			/** hay usuario logueado **/
 			$favorite = $this -> Favorite -> findByUserId($user_id);
-			debug($favorite);
+			
 			if($favorite) {
 				return $favorite;
 			} else {
