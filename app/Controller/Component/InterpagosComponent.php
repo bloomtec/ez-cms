@@ -4,7 +4,8 @@
  * Componente CakePHP para integración de aplicaciones con INTERPAGOS.
  *
  * @author Julio César Domínguez Giraldo
- *
+ * @version 0.3
+ * 
  */
 class InterpagosComponent extends Component {
 
@@ -106,6 +107,10 @@ class InterpagosComponent extends Component {
 		return $this -> client_id;
 	}
 	
+	public function getPin() {
+		return $this -> pin;
+	}
+	
 	/**
 	 * Obtener el token para iniciar el proceso de pago
 	 * 
@@ -115,9 +120,9 @@ class InterpagosComponent extends Component {
 	 */
 	public function getToken($reference_id = null, $total_amount = null) {
 		if ($reference_id && is_numeric($total_amount) && $total_amount > 0) {
-			$client_id = $this -> client_id;
-			$pin = $this -> pin;
-			$token = sha1("$client_id-$pin-$reference_id-$total_amount"); 
+			$client_id = $this -> getClientId();
+			$pin = $this -> getPin();
+			$token = sha1("$client_id-$pin-$reference_id-$total_amount");
 			return $token;
 		} else {
 			return null;
@@ -158,7 +163,7 @@ class InterpagosComponent extends Component {
 		);
 		
 		// Transacción aprobada
-		if($response_code == '00' || $response_code == '02') {
+		if($response_data['response_code'] == '00' || $response_data['response_code'] == '02') {
 			$response_data['approved'] = true;
 		}
 		

@@ -52,6 +52,8 @@ class OrdersController extends AppController {
 			 * b. Si usuario registrado dirección nueva o registrada
 			 */
 			
+			$order_comment = $this -> request -> data['Order']['comments'];
+			
 			// Usuario NO registrado
 			if(!$this -> Auth -> user('id')) {
 				// Crear el usuario
@@ -78,7 +80,7 @@ class OrdersController extends AppController {
 						 * c. redireccionar a interpagos registrado con sus datos.
 						 */
 						
-						$this -> createOrder($user_id);
+						$this -> createOrder($user_id, $this -> Order -> UserAddress -> id, $order_comment);
 						
 					} else {
 						// Error al registrar la dirección
@@ -97,7 +99,7 @@ class OrdersController extends AppController {
 				 * b. Crear la orden
 				 * c. redireccionar a interpagos
 				 */
-				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id']);
+				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
 			}
 			
 			/**
@@ -118,9 +120,10 @@ class OrdersController extends AppController {
 		 */
 	}
 	
-	private function createOrder($user_id = null, $user_address_id = null) {
+	private function createOrder($user_id = null, $user_address_id = null, $comment = null) {
 		if($user_id && $user_address_id) {
 			$this -> loadModel('BCart.ShoppingCart');
+			$this -> loadModel('BCart.CartItem');
 			$shopping_cart = $this -> ShoppingCart -> findByUserId($user_id);
 			
 			// Generar el código de la orden
@@ -138,7 +141,8 @@ class OrdersController extends AppController {
 					'code' => $total_orders,
 					'order_state_id' => 1,
 					'user_id' => $user_id,
-					'user_address_id' => $user_address_id
+					'user_address_id' => $user_address_id,
+					'comment' => $comment
 				)
 			);
 			if($this -> Order -> save($order)) {
@@ -159,9 +163,12 @@ class OrdersController extends AppController {
 							'total_items_tax' => round($cart_item['quantity'] * $product['Product']['tax_value'], 2)
 						)
 					);
-					$this -> Order -> OrderItem -> save($order_item);
+					if($this -> Order -> OrderItem -> save($order_item)) {
+						$this -> CartItem -> delete($cart_item['id']);
+					}
 				}
-				$this -> redirect(array('action' => 'sendPlatformRequest', $this -> Order -> id, $user_id, $user_address_id));
+				$this -> Session -> write('OrderInfo', array('order_id' => $this -> Order -> id, 'user_id' => $user_id, 'user_address_id' => $user_address_id));
+				$this -> redirect(array('action' => 'sendPlatformRequest'));
 			} else {
 				return false;
 			}
@@ -170,7 +177,16 @@ class OrdersController extends AppController {
 		}
 	}
 	
-	public function sendPlatformRequest($order_id, $user_id, $user_address_id) {
+	public function sendPlatformRequest() {
+		//$this -> Session -> write('OrderInfo', array('order_id' => 1, 'user_id' => 12, 'user_address_id' => 7));
+		$order_info = $this -> Session -> read('OrderInfo');
+		$order_id = $order_info['order_id'];
+		$user_id = $order_info['user_id'];
+		$user_address_id = $order_info['user_address_id'];
+		$this -> Order -> Behaviors -> attach('Containable');
+		$this -> Order -> contain(
+			'User.email', 'User.name', 'User.lastname', 'OrderItem'
+		);
 		$order = $this -> Order -> read(null, $order_id);
 		
 		// Datos de la orden
@@ -185,6 +201,11 @@ class OrdersController extends AppController {
 			$money_data['tax'] += $item['total_items_tax'];
 			$money_data['base'] += $item['total_items_price'] - $item['total_items_tax']; 
 		}
+		
+		$money_data['total'] = (string) $money_data['total'];
+		if(!strstr($money_data['total'], '.')) {
+			$money_data['total'] .= '.00';
+		}
 
 		$this -> set('tax', $money_data['tax']);
 		$this -> set('base', $money_data['base']);
@@ -194,10 +215,10 @@ class OrdersController extends AppController {
 		$this -> set('client_id', $this -> Interpagos -> getClientId());
 		$this -> set('token', $this -> Interpagos -> getToken($order['Order']['code'], $money_data['total']));
 		$this -> set('reference_id', $order['Order']['code']);
-		$this -> set('reference', 'Pago compra PriceShoes :: ' . date('Y-m-d H:i:s', time()));
+		$this -> set('reference', 'Pago compra PriceShoes S.A.S. :: ' . date('Y-m-d H:i:s', time()));
 		
 		// Datos comprador
-		$this -> set('shopper_name', $order['User']['full_name']);
+		$this -> set('shopper_name', $order['User']['name'] . ' ' . $order['User']['lastname']);
 		$this -> set('shopper_email', $order['User']['email']);
 		
 		// Datos extra
