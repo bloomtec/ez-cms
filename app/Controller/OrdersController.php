@@ -263,6 +263,7 @@ class OrdersController extends AppController {
 		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
 		$order['Order']['order_state_id'] = 2;
 		$this -> Order -> save($order);
+		debug($response);
 	}
 	
 	/**

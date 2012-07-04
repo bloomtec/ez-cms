@@ -22,7 +22,8 @@ class OrderItem extends AppModel {
 	 * @var array
 	 */
 	public $virtualFields = array(
-		'total' => 'OrderItem.total_items_price + OrderItem.total_items_tax'
+		'total' => 'OrderItem.total_items_price + OrderItem.total_items_tax',
+		'image' => 'SELECT `galleries.image` FROM `galleries` WHERE `galleries.prod_color_code` = CONCAT(OrderItem.product_id, OrderItem.color_id)'
 	);
 	
 	/**

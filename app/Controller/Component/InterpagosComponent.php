@@ -63,6 +63,14 @@ class InterpagosComponent extends Component {
 		'11' => 'Pendiente de confirmación PSE.'
 	);
 	
+	public function getResponseCodeMessage($code = null) {
+		if($code && isset($this -> response_codes[$code])) {
+			return $this -> response_codes[$code];
+		} else {
+			return null;
+		}
+	}
+	
 	/**
 	 * Códigos de errores
 	 */
@@ -138,10 +146,10 @@ class InterpagosComponent extends Component {
 				
 		$response_data = array(
 			'approved' => false,
-			'client_id' => $_POST['idClient'], // ID del cliente
+			'client_id' => $_POST['IdClient'], // ID del cliente
 			'token' => $_POST['Token'], // Token codificado
 			'reference_id' => $_POST['IDReference'], // Número de factura, único
-			'reference' => $_POST['Rerefence'], // Descripción de la venta
+			'reference' => $_POST['Reference'], // Descripción de la venta
 			'currency' => $_POST['Currency'], // Modena correspondiente a la transacción
 			'base' => $_POST['BaseAmount'], // Valor base de la venta (sin impuestos)
 			'tax' => $_POST['TaxAmount'], // Valor de los impuestos de la venta
@@ -169,7 +177,7 @@ class InterpagosComponent extends Component {
 		
 		// Transacción no aprobada
 		else {
-			
+			// TODO : Hacer algo?
 		}
 		
 		return $response_data;
