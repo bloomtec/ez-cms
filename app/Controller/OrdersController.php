@@ -120,7 +120,7 @@ class OrdersController extends AppController {
 		 */
 	}
 	
-	private function createOrder($user_id = null, $user_address_id = null, $comment = null) {
+	private function createOrder($user_id = null, $user_address_id = null, $order_comment = null) {
 		if($user_id && $user_address_id) {
 			$this -> loadModel('BCart.ShoppingCart');
 			$this -> loadModel('BCart.CartItem');
@@ -142,7 +142,7 @@ class OrdersController extends AppController {
 					'order_state_id' => 1,
 					'user_id' => $user_id,
 					'user_address_id' => $user_address_id,
-					'comment' => $comment
+					'comments' => $order_comment
 				)
 			);
 			if($this -> Order -> save($order)) {
@@ -260,10 +260,15 @@ class OrdersController extends AppController {
 		$this -> autoRender = false;
 		$response = $this -> Interpagos -> checkResponse();
 		$order = $this -> Order -> read(null, $response['order_id']);
-		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $this -> Interpagos -> getResponseCodeMessage($response['response_code']);
 		$order['Order']['order_state_id'] = 2;
 		$this -> Order -> save($order);
-		debug($response);
+		if($response['success']) {
+			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/success');
+		} else {
+			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/error');
+		}
+		$this -> redirect(array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile'));
 	}
 	
 	/**
@@ -273,9 +278,9 @@ class OrdersController extends AppController {
 		$this -> autoRender = false;
 		$response = $this -> Interpagos -> checkResponse();
 		$order = $this -> Order -> read(null, $response['order_id']);
-		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $this -> Interpagos -> getResponseCodeMessage($response['response_code']);
 		$order['Order']['order_state_id'] = 2;
-		$this -> Order -> save($order); 
+		$this -> Order -> save($order);
 	}
 
 }

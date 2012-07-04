@@ -63,14 +63,6 @@ class InterpagosComponent extends Component {
 		'11' => 'Pendiente de confirmación PSE.'
 	);
 	
-	public function getResponseCodeMessage($code = null) {
-		if($code && isset($this -> response_codes[$code])) {
-			return $this -> response_codes[$code];
-		} else {
-			return null;
-		}
-	}
-	
 	/**
 	 * Códigos de errores
 	 */
@@ -117,6 +109,14 @@ class InterpagosComponent extends Component {
 	
 	public function getPin() {
 		return $this -> pin;
+	}
+	
+	public function getResponseCodeMessage($code = null) {
+		if($code && isset($this -> response_codes[$code])) {
+			return $this -> response_codes[$code];
+		} else {
+			return null;
+		}
 	}
 	
 	/**
