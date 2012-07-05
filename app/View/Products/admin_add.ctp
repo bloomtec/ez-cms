@@ -45,28 +45,3 @@
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Crear')); ?>
 </div>
-<!--<div class="images">
-	<h2>Imagen</h2>
-	<div class="preview"></div>
-	<div id="single-upload-product" controller="products"></div>
-</div>-->
-<div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
-	<ul>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Productos'), array('action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Categorías'), array('controller' => 'categories', 'action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?>
-		</li>
-		<!--<li>
-		<?php echo $this -> Html -> link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?>
-		</li>-->
-	</ul>
-</div>

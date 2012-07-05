@@ -14,7 +14,11 @@
 			?>
 			<div class="images">
 				<h2>Imagen Principal Galería <?php echo $gallery['Gallery']['name']; ?></h2>
-				<div id="preview-<?php echo $gallery_id; ?>"><img src="/img/uploads/150x150/<?php echo $gallery['Gallery']['image']; ?>" /></div>
+				<div id="preview-<?php echo $gallery_id; ?>"> 
+					<?php if( $gallery['Gallery']['image']): ?>
+						<img src="/img/uploads/150x150/<?php echo $gallery['Gallery']['image']; ?>" />						
+					 <?php endif;?>	 
+				 </div>
 				<div id="single-upload-gallery-<?php echo $gallery_id; ?>" controller="galleries"></div>
 			</div>
 		</div>

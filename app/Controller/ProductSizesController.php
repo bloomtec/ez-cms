@@ -53,10 +53,10 @@ class ProductSizesController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> ProductSize -> create();
 			if ($this -> ProductSize -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se agregó la talla'));
+				$this -> Session -> setFlash(__('Se agregó la talla'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'));
+				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'), 'crud/error');
 			}
 		}
 	}
@@ -74,10 +74,10 @@ class ProductSizesController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> ProductSize -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se agregó la talla'));
+				$this -> Session -> setFlash(__('Se agregó la talla'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'));
+				$this -> Session -> setFlash(__('No se agregó la talla. Por favor, intente de nuevo.'), 'crud/error');
 			}
 		} else {
 			$this -> request -> data = $this -> ProductSize -> read(null, $id);

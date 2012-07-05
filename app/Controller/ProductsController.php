@@ -229,7 +229,7 @@ class ProductsController extends AppController {
 					}
 	
 					if (!$inventory_errors) {
-						$this -> Session -> setFlash(__('Se creó el producto. Verifique las galerías de inventarios.'), 'crud/success');
+						$this -> Session -> setFlash(__('Se creó el producto. Por favor,  Suba la foto principal de cada color del producto.'), 'crud/success');
 						$this -> redirect(array('controller' => 'galleries', 'action' => 'productGalleryWizard', $this -> Product -> id));
 					} else {
 						$this -> Session -> setFlash(__('Se creó el producto. Error al iniciar inventarios seleccionados'), 'crud/error');

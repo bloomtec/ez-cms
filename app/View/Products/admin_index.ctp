@@ -11,7 +11,6 @@
 			<th><?php echo $this->Paginator->sort('is_promoted', 'Promocionado');?></th>
 			<th><?php echo $this->Paginator->sort('is_novelty', 'Novedad');?></th>
 			<th><?php echo $this->Paginator->sort('is_top_seller', 'Más Vendido');?></th>
-			<th><?php echo $this->Paginator->sort('image', 'Imagen');?></th>
 			<th><?php echo $this->Paginator->sort('created', 'Creado');?></th>
 			<th><?php echo $this->Paginator->sort('updated', 'Modificado');?></th>
 			<th class="actions"><?php echo __('Acciones');?></th>
@@ -73,11 +72,6 @@
 			?>
 			&nbsp;
 		</td>
-		<td>
-			<?php //echo h($product['Product']['image']); ?>
-			<img src="/img/uploads/50x50/<?php echo $product['Product']['image']; ?>" />
-			<!-- &nbsp; -->
-		</td>
 		<td><?php echo h($product['Product']['created']); ?>&nbsp;</td>
 		<td><?php echo h($product['Product']['updated']); ?>&nbsp;</td>
 		<td class="actions">
@@ -106,12 +100,7 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Agregar Producto'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Ver Categorías'), array('controller' => 'categories', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?> </li>
-		<!--<li><?php echo $this->Html->link(__('New Inventory'), array('controller' => 'inventories', 'action' => 'add')); ?> </li>-->
 	</ul>
 </div>

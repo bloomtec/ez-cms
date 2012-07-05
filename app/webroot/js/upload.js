@@ -123,7 +123,7 @@ $(document).ready(function() {
 			'onUploadSuccess' : function(file, data, response) {
 				if(response) {
 					var name = file.name;
-					$('#preview-' + val.id).html('<img width="150" height="150" src="' + data + '" />');
+					$('#preview-' + val.id).html('<img width="150" height="150" src="/img/uploads/' + data + '" />');
 					var fileName = data.split("/");
 					fileName = fileName[(fileName.length - 1)];
 					$(val).val(fileName);
