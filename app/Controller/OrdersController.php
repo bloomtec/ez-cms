@@ -60,7 +60,7 @@ class OrdersController extends AppController {
 				$email = $this -> request -> data['User']['email'];
 				$name = $this -> request -> data['User']['name'];
 				$lastname = $this -> request -> data['User']['lastname'];
-				$user_data = $this -> requestAction('/user_control/users/createUser/' . $email . '/' . $name . '/' . $lastname);
+				$user_data = $this -> requestAction('/user_control/users/internalCreateUser/' . $email . '/' . $name . '/' . $lastname);
 				$user_id = $user_data['user_id'];
 				$user_password = $user_data['password'];
 				$user_address = array('UserAddress' => $this -> request -> data['UserAddress']);
@@ -75,12 +75,13 @@ class OrdersController extends AppController {
 						
 						/**
 						 * Falta:
-						 * a. Crear la orden
-						 * b. enviar el correo al usuario
-						 * c. redireccionar a interpagos registrado con sus datos.
+						 * a.	revisar el proceso de registro para que coincida con el proceso principal
+						 * 		i. enviar el correo al usuario
 						 */
 						
-						$this -> createOrder($user_id, $this -> Order -> UserAddress -> id, $order_comment);
+						$this -> requestAction('/user_control/users/internalLoginUser/' . $user_id);
+						$this -> requestAction('/user_control/users/internalSendRegistrationData/' . $user_id . '/' . $user_password);
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
 						
 					} else {
 						// Error al registrar la dirección
@@ -93,34 +94,29 @@ class OrdersController extends AppController {
 			}
 			// Usuario registrado
 			else {
-				/**
-				 * Falta:
-				 * a. Revisar si es o no una dirección nueva
-				 * b. Crear la orden
-				 * c. redireccionar a interpagos
-				 */
-				$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
+				// Dirección registrada
+				if($this -> request -> data['UserAddress']['id']) {
+					$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
+				}
+				// Dirección nueva
+				else {
+					// Crear la dirección nueva
+					$user_address = array('UserAddress' => $this -> request -> data['UserAddress']);
+					unset($user_address['id']);
+					$user_address['UserAddress']['user_id'] = $this -> Auth -> user('id');
+					$user_address['UserAddress']['name'] = 'Nueva';
+					$this -> Order -> UserAddress -> create();
+					if($this -> Order -> UserAddress -> save($user_address)) {
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
+					} else {
+						debug($this -> Order -> UserAddress -> invalidFields());
+					}
+				}				
 			}
-			
-			/**
-			$this -> Order -> create();
-			if ($this -> Order -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The order has been saved'));
-				$this -> redirect(array('action' => 'index'));
-			} else {
-				$this -> Session -> setFlash(__('The order could not be saved. Please, try again.'));
-			}
-			 */
 		}
-		/**
-		$orderStates = $this -> Order -> OrderState -> find('list');
-		$users = $this -> Order -> User -> find('list');
-		$userAddresses = $this -> Order -> UserAddress -> find('list');
-		$this -> set(compact('orderStates', 'users', 'userAddresses'));
-		 */
 	}
 	
-	private function createOrder($user_id = null, $user_address_id = null, $comment = null) {
+	private function createOrder($user_id = null, $user_address_id = null, $order_comment = null) {
 		if($user_id && $user_address_id) {
 			$this -> loadModel('BCart.ShoppingCart');
 			$this -> loadModel('BCart.CartItem');
@@ -142,7 +138,7 @@ class OrdersController extends AppController {
 					'order_state_id' => 1,
 					'user_id' => $user_id,
 					'user_address_id' => $user_address_id,
-					'comment' => $comment
+					'comments' => $order_comment
 				)
 			);
 			if($this -> Order -> save($order)) {
@@ -260,10 +256,15 @@ class OrdersController extends AppController {
 		$this -> autoRender = false;
 		$response = $this -> Interpagos -> checkResponse();
 		$order = $this -> Order -> read(null, $response['order_id']);
-		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $this -> Interpagos -> getResponseCodeMessage($response['response_code']);
 		$order['Order']['order_state_id'] = 2;
 		$this -> Order -> save($order);
-		debug($response);
+		if($response['success']) {
+			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/success');
+		} else {
+			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/error');
+		}
+		$this -> redirect(array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile'));
 	}
 	
 	/**
@@ -273,9 +274,9 @@ class OrdersController extends AppController {
 		$this -> autoRender = false;
 		$response = $this -> Interpagos -> checkResponse();
 		$order = $this -> Order -> read(null, $response['order_id']);
-		$order['Order']['information'] = $response['response_code'] . ' - ' . $response['response_message'];
+		$order['Order']['information'] = $response['response_code'] . ' - ' . $this -> Interpagos -> getResponseCodeMessage($response['response_code']);
 		$order['Order']['order_state_id'] = 2;
-		$this -> Order -> save($order); 
+		$this -> Order -> save($order);
 	}
 
 }
