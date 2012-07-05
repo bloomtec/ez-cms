@@ -62,11 +62,8 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
+<div class="actions">	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Agregar Categoría'), array('action' => 'add')); ?></li>
-		<li><?php echo $this->Html->link(__('Ver Productos'), array('controller' => 'products', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('Agregar Producto'), array('controller' => 'products', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

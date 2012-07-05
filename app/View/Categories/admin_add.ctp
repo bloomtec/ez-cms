@@ -25,11 +25,3 @@
 
 	<div style="clear:both;"></div>
 </div>
-
-<div class="actions">
-	<ul>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Categorías'), array('action' => 'index')); ?>
-		</li>
-	</ul>
-</div>

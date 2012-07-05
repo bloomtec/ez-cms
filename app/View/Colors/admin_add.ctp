@@ -9,14 +9,5 @@
 		echo $this -> Form -> input('code', array('label' => 'Código', 'maxlength' => 7, 'minlength' => 7));
 		?>
 	</fieldset>
-	<?php echo $this -> Form -> end(__('Crear')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
-	<ul>
-
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Colores'), array('action' => 'index')); ?>
-		</li>
-	</ul>
+	<?php echo $this -> Form -> end(__('Guardar')); ?>
 </div>
