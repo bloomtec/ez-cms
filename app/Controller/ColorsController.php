@@ -40,10 +40,10 @@ class ColorsController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> Color -> create();
 			if ($this -> Color -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The color has been saved'));
+				$this -> Session -> setFlash(__('El color ha sido guardado') , 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The color could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('El color no se pudo guardar. Por favor, intente nuevamente.'), 'crud/error');
 			}
 		}
 	}
@@ -61,10 +61,10 @@ class ColorsController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Color -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The color has been saved'));
+				$this -> Session -> setFlash(__('El color ha sido guardado') , 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The color could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('El color no se pudo guardar. Por favor, intente nuevamente.'), 'crud/error');
 			}
 		} else {
 			$this -> request -> data = $this -> Color -> read(null, $id);
@@ -86,10 +86,10 @@ class ColorsController extends AppController {
 			throw new NotFoundException(__('Invalid color'));
 		}
 		if ($this -> Color -> delete()) {
-			$this -> Session -> setFlash(__('Color deleted'));
+			$this -> Session -> setFlash(__('Color borrado'), 'crud/success');
 			$this -> redirect(array('action' => 'index'));
 		}
-		$this -> Session -> setFlash(__('Color was not deleted'));
+		$this -> Session -> setFlash(__('No se pudo guardar el color'), 'crud/error');
 		$this -> redirect(array('action' => 'index'));
 	}
 

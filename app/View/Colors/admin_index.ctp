@@ -13,7 +13,7 @@
 		<tr>
 			<!--<td><?php echo h($color['Color']['id']); ?>&nbsp;</td>-->
 			<td><?php echo h($color['Color']['name']); ?>&nbsp;</td>
-			<td><?php echo h($color['Color']['code']); ?>&nbsp;</td>
+			<td><span style="display:block;width:33px;float:left;background:<?php echo $color['Color']['code']; ?>">&nbsp;</span> &nbsp; <?php echo h($color['Color']['code']); ?>&nbsp;</td>
 			<td><?php echo h($color['Color']['created']); ?>&nbsp;</td>
 			<td><?php echo h($color['Color']['updated']); ?>&nbsp;</td>
 			<td class="actions"><?php echo $this -> Html -> link(__('Ver'), array('action' => 'view', $color['Color']['id'])); ?>
@@ -40,7 +40,6 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 		<li>
 			<?php echo $this -> Html -> link(__('Agregar Color'), array('action' => 'add')); ?>

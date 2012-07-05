@@ -96,10 +96,10 @@ class CategoriesController extends AppController {
 		if ($this -> request -> is('post')) {
 			$this -> Category -> create();
 			if ($this -> Category -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se guardó la categoría'));
+				$this -> Session -> setFlash(__('Se guardó la categoría'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'));
+				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'), 'crud/error');
 			}
 		}
 	}
@@ -117,10 +117,10 @@ class CategoriesController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Category -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se guardó la categoría'));
+				$this -> Session -> setFlash(__('Se guardó la categoría'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'));
+				$this -> Session -> setFlash(__('No se pudo guardar la categoría. Por favor, intente de nuevo.'), 'crud/error');
 			}
 		} else {
 			$this -> request -> data = $this -> Category -> read(null, $id);
@@ -142,10 +142,10 @@ class CategoriesController extends AppController {
 			throw new NotFoundException(__('Categoría no válida'));
 		}
 		if ($this -> Category -> delete()) {
-			$this -> Session -> setFlash(__('Se elminó la categoría'));
+			$this -> Session -> setFlash(__('Se elminó la categoría'),'crud/success');
 			$this -> redirect(array('action' => 'index'));
 		}
-		$this -> Session -> setFlash(__('No se eliminó la categoría'));
+		$this -> Session -> setFlash(__('No se eliminó la categoría'),'crud/error');
 		$this -> redirect(array('action' => 'index'));
 	}
 	
