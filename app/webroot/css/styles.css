@@ -629,6 +629,12 @@ margin-left: 10px;
 #profile .input , #profile .password{
 	width:50%;
 }
+#profile .order-info{
+
+}
+#profile .order-details{
+	display:none;
+}
 /*END PROFILE*/
 /*PAGES*/
 .caja-producto-lateral{
