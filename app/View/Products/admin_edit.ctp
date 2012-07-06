@@ -85,10 +85,10 @@
 							<?php echo $inventory['Inventory']['quantity']; ?>
 						</td>
 						<td>
-							<?php echo $this -> Form -> input("Inventory.$index.modify", array('label' => false, 'div' => false, 'type' => 'select', 'options' => array('add' => 'Agregar', 'substract' => 'Quitar'), 'empty' => 'Seleccione...')); ?>
+							<?php echo $this -> Form -> input("Inventory.$index.modify", array('label' => false, 'div' => false, 'type' => 'select', 'options' => array('add' => 'Agregar', 'substract' => 'Quitar'), 'empty' => 'Seleccione...','class'=>'operacion','rel'=>$inventory['Inventory']['color'])); ?>
 						</td>
 						<td>
-							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;')); ?>
+							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;','class'=>'cantidad','rel'=>$inventory['Inventory']['id'])); ?>
 						</td>
 					</tr>
 					<?php endforeach; ?>
