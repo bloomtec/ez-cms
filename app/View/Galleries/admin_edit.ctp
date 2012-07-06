@@ -7,15 +7,13 @@
 	
 		</div>
 	</div>
-	<fieldset style="float:left; max-width:60%">
+	<fieldset style="float:left; min-width:50%; max-width:60%">
 		<legend>
 			<?php echo __('Modificar Galería'); ?>
 		</legend>
 		<?php echo $this -> Form -> input('id'); ?>
-		<label for="GalleryName">Nombre</label>
-		<?php echo $this -> Form -> input('name', array('label' => false, 'div' => false)); ?>
-		<label for="GalleryDescription">Descripión</label>
-		<?php echo $this -> Form -> input('description', array('label' => false, 'div' => false)); ?>
+		<?php echo $this -> Form -> input('name', array('label' => 'Nombre')); ?>
+		<?php echo $this -> Form -> input('description', array('label' => 'Descripción')); ?>
 		<?php echo $this -> Form -> hidden('image', array('id' => 'single-field'));	?>
 	</fieldset>
 	<div style="clear:both;"></div>
