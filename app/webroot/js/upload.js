@@ -121,8 +121,13 @@ $(document).ready(function() {
 			}
 		},
 		'onQueueComplete' : function(queueData) {
-			var location = '/admin/galleries/edit/' + $('#prod_color_code').attr('rel') + '/' + $('#product_id').attr('rel');
-			window.location.replace(location);
+			setTimeout(
+				function() {
+					var location = '/admin/galleries/edit/' + $('#prod_color_code').attr('rel') + '/' + $('#product_id').attr('rel');
+					window.location.replace(location);
+				},
+				2000
+			);
 		}
 	});
 	
