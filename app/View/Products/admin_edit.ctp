@@ -85,7 +85,7 @@
 							<?php echo $inventory['Inventory']['quantity']; ?>
 						</td>
 						<td>
-							<?php echo $this -> Form -> input("Inventory.$index.modify", array('label' => false, 'div' => false, 'type' => 'select', 'options' => array('add' => 'Agregar', 'substract' => 'Quitar'), 'empty' => 'Seleccione...','class'=>'operacion','rel'=>$inventory['Inventory']['color'])); ?>
+							<?php echo $this -> Form -> input("Inventory.$index.modify", array('label' => false, 'div' => false, 'type' => 'select', 'options' => array('add' => 'Agregar', 'substract' => 'Quitar'), 'empty' => 'Seleccione...','class'=>'operacion','rel'=>$inventory['Inventory']['id'])); ?>
 						</td>
 						<td>
 							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;','class'=>'cantidad','rel'=>$inventory['Inventory']['id'])); ?>
@@ -102,3 +102,37 @@
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
+<script type="text/javascript">
+	$(function(){
+		var enviar=false;
+		$('form').submit(function(e){
+			if(!enviar){			
+				e.preventDefault();
+			}
+			$that=$(this);			
+			errors=0;
+			cantidades=$('input.cantidad');
+			limiteCantidades=parseInt(cantidades.length) -1;
+			$.each(cantidades,function(i,val){				
+				if($(val).val() > 0){
+					$select=$("select.operacion[rel='"+$(val).attr('rel')+"']");
+					if(!$select.find('option:selected').val() > 0){
+						$select.addClass('error').focus();
+						errors+=1;
+					}else{
+						$select.removeClass('error');
+					}
+				}	
+				if(i == limiteCantidades){
+					if(errors){
+						alert('No ha seleccionado que tipo de modificación quiere hacer en el formulario');
+					}else{
+						enviar=true;
+						$that.unbind('submit').submit();
+					}
+					
+				}			
+			});	
+		});
+	});
+</script>
