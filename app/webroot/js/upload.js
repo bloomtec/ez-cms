@@ -112,14 +112,30 @@ $(document).ready(function() {
 				$.post("/images/uploadify_add", {
 					'name' : fileName,
 					'folder' : 'uploads',
-					'gallery_id' : $('#gallery_id').attr('rel')
-				}, function(success) {
-					if(success) {
-						// TODO : ?
+					'gallery_id' : $('#gallery_id').attr('rel'),
+					'prod_color_code' : $('#prod_color_code').attr('rel'),
+					'product_id' : $('#product_id').attr('rel')
+				}, function(data) {
+					data = JSON.parse(data);
+					if(data.success) {
+						var htmlData =
+						'<tr><td>' 
+						+ data.image_id 
+						+ '</td><td><img src="/img/uploads/50x50/' 
+						+ fileName 
+						+ '"></td><td><form method="post" style="display:none;" id="post_UploadedID'
+						+ data.image_id
+						+ '" name="post_UploadedID' + data.image_id + '" action="/admin/images/delete/' + data.image_id + '/' + data.prod_color_code + '/' + data.product_id + '">'
+						+ '<input type="hidden" value="POST" name="_method"></form>'
+						+ '<a onclick="if (confirm(\'¿Seguro desea eliminar la imagen #' + data.image_id + '?\')) { document.post_UploadedID' + data.image_id + '.submit(); } event.returnValue = false; return false;" href="#">Eliminar</a>'
+						+ '</td></tr>';
+						//console.log(htmlData);
+						$('#RelatedImagesBody').append(htmlData);
 					}
 				});
 			}
-		},
+		}
+		/*,
 		'onQueueComplete' : function(queueData) {
 			setTimeout(
 				function() {
@@ -128,7 +144,7 @@ $(document).ready(function() {
 				},
 				2000
 			);
-		}
+		}*/
 	});
 	
 	/**

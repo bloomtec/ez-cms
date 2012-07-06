@@ -21,6 +21,8 @@ class ImagesController extends AppController {
 			$fileName = $_POST['name'];
 			$folder = $_POST['folder'];
 			$gallery_id = $_POST['gallery_id'];
+			$prod_color_code = $_POST['prod_color_code'];
+			$product_id = $_POST['product_id'];
 			
 			//time_nanosleep(0, 500000);
 			
@@ -87,7 +89,14 @@ class ImagesController extends AppController {
 				)
 			);
 			if($this -> Image -> save($image)) {
-				echo true;
+				echo json_encode(array(
+					'success' => true,
+					'image_id' => $this -> Image -> id,
+					'prod_color_code' => $prod_color_code,
+					'product_id' => $product_id
+				));
+			} else {
+				echo json_encode(array('success' => false));
 			}
 				
 		}

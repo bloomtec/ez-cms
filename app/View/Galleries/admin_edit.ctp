@@ -23,7 +23,7 @@
 	<?php //debug($this -> request -> data); ?>
 	<h2>Imagenes En La Galería</h2>
 	<table id="RelatedImages">
-		<tbody>
+		<tbody id="RelatedImagesBody">
 			<tr><td>ID</td><td>Imagen</td><td>Acciones</td></tr>
 			<?php foreach($this -> request -> data['Image'] as $key => $image) : ?>
 			<tr>
@@ -58,8 +58,6 @@
 <div id="prod_color_code" rel="<?php echo $this -> request -> data['Gallery']['prod_color_code']; ?>"></div>
 <div id="product_id" rel="<?php echo $product_id; ?>"></div>
 <div class="images">
-	<!--<h2>Imagenes Galería</h2>-->
-	<h3>En caso de subir imagenes, hagalo antes de realizar otros cambios o estos se perderán!</h3>
 	<div class="preview"></div>
 	<div id="multiple-upload-gallery" controller="galleries">
 
