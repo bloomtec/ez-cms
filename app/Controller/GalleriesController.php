@@ -208,7 +208,7 @@ class GalleriesController extends AppController {
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Gallery -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se guardó la galería', 'crud/success'));
-				$this -> redirect(array('action' => 'index'));
+				$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar la galería. Recuerde agregar una imagen e intente de nuevo.'));
 			}
