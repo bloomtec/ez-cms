@@ -116,7 +116,7 @@ $(document).ready(function() {
 					'prod_color_code' : $('#prod_color_code').attr('rel'),
 					'product_id' : $('#product_id').attr('rel')
 				}, function(data) {
-					data = JSON.parse(data);
+					data = $.parseJSON(data);
 					if(data.success) {
 						var htmlData =
 						'<tr><td>' 
