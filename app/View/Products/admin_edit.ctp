@@ -102,23 +102,3 @@
 	</fieldset>
 	<?php echo $this -> Form -> end(__('Modificar')); ?>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li>
-			<?php echo $this -> Form -> postLink(__('Eliminar'), array('action' => 'delete', $this -> Form -> value('Product.id')), null, __('¿Seguro desea eliminar %s?', $this -> Form -> value('Product.name'))); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Productos'), array('action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Categorías'), array('controller' => 'categories', 'action' => 'index')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Agregar Categoría'), array('controller' => 'categories', 'action' => 'add')); ?>
-		</li>
-		<li>
-			<?php echo $this -> Html -> link(__('Ver Inventario'), array('controller' => 'inventories', 'action' => 'index')); ?>
-		</li>
-	</ul>
-</div>

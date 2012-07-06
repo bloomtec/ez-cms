@@ -236,7 +236,7 @@ class ProductsController extends AppController {
 						$this -> redirect(array('action' => 'index'));
 					}
 				} else {
-					$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'));
+					$this -> Session -> setFlash(__('No se pudo guardar el producto. Por favor, intente de nuevo.'), 'crud/error');
 				}
 			} else {
 				$this -> Session -> setFlash('Debe inicializar al menos un inventario', 'crud/error');
@@ -263,7 +263,7 @@ class ProductsController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Product -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('Se guardó el producto', 'crud/success'));
+				$this -> Session -> setFlash(__('Se guardó el producto'), 'crud/success');
 				$errors = false;
 				$inventory_added = false;
 				
@@ -282,7 +282,7 @@ class ProductsController extends AppController {
 				}
 				
 				if($errors) {
-					$this -> Session -> setFlash(__('Error al tratar de crear un inventario. Se omitió el proceso de cambios en cantidades de inventarios y la asignación de imagenes de galerías para cualquier inventario extra inicializado.', 'crud/error'));
+					$this -> Session -> setFlash(__('Error al tratar de crear un inventario. Se omitió el proceso de cambios en cantidades de inventarios y la asignación de imagenes de galerías para cualquier inventario extra inicializado.'), 'crud/error');
 					$this -> redirect(array('action' => 'index'));
 				}
 				foreach($this -> request -> data['Inventory'] as $key => $data) {
@@ -293,7 +293,7 @@ class ProductsController extends AppController {
 					}
 				}
 				if($errors) {
-					$this -> Session -> setFlash(__('Errores al modificar inventario. Verifique las cantidades actuales vs el cambio para continuar.', 'crud/error'));
+					$this -> Session -> setFlash(__('Errores al modificar inventario. Verifique las cantidades actuales vs el cambio para continuar.'), 'crud/error');
 				}
 				if($inventory_added) {
 					$this -> redirect(array('controller' => 'galleries', 'action' => 'productGalleryWizard', $this -> Product -> id));
