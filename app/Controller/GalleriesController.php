@@ -200,9 +200,9 @@ class GalleriesController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function admin_edit($id = null) {
-		$this -> Gallery -> id = $id;
-		if (!$this -> Gallery -> exists()) {
+	public function admin_edit($prod_color_code = null, $product_id = null) {
+		$gallery = $this -> Gallery -> findByProdColorCode($prod_color_code);
+		if (!$gallery) {
 			throw new NotFoundException(__('Invalid gallery'));
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
@@ -213,22 +213,9 @@ class GalleriesController extends AppController {
 				$this -> Session -> setFlash(__('No se pudo guardar la galería. Recuerde agregar una imagen e intente de nuevo.'));
 			}
 		} else {
-			$this -> request -> data = $this -> Gallery -> read(null, $id);
+			$this -> request -> data = $gallery;
 		}
-		/**
-		$tmp_inventories = $this -> Gallery -> Inventory -> find('all');
-		$inventories = array();
-		foreach($tmp_inventories as $key => $inventory) {
-			$inventories[$inventory['Inventory']['id']] = $inventory['Inventory']['product'] . " - " . $inventory['Inventory']['color'] . " - " . $inventory['Inventory']['size'];
-		}
-		$galleries = $this -> Gallery -> find('all', array('recursive' => -1));
-		foreach ($galleries as $key => $gallery) {
-			if($id != $gallery['Gallery']['id']) {
-				unset($inventories[$gallery['Gallery']['id']]);
-			}
-		}
-		$this -> set(compact('inventories'));
-		 */
+		$this -> set('product_id', $product_id);
 	}
 
 	/**
@@ -319,6 +306,7 @@ class GalleriesController extends AppController {
 			 			
 		}
 		
+		echo true;
 		exit(0);
 
 	}

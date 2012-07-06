@@ -15,8 +15,6 @@ class ImagesController extends AppController {
 	}
 	
 	function uploadify_add() {
-		$this -> autoRender = false;
-		//Configure::write("debug", 0);
 		
 		if ($_POST['name'] && $_POST['folder'] && $_POST['gallery_id']) {
 
@@ -88,10 +86,12 @@ class ImagesController extends AppController {
 					'path' => $fileName
 				)
 			);
-			$this -> Image -> save($image);
+			if($this -> Image -> save($image)) {
+				echo true;
+			}
 				
 		}
-		
+
 		exit(0);
 
 	}
@@ -238,8 +238,8 @@ class ImagesController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function admin_delete($id = null, $gallery_id = null) {
-		if($id && $gallery_id) {
+	public function admin_delete($id = null, $prod_color_code = null, $product_id = null) {
+		if($id && $prod_color_code && $product_id) {
 			if (!$this -> request -> is('post')) {
 				throw new MethodNotAllowedException();
 			}
@@ -248,14 +248,15 @@ class ImagesController extends AppController {
 				throw new NotFoundException(__('Invalid image'));
 			}
 			if ($this -> Image -> delete()) {
-				$this -> Session -> setFlash(__('Image deleted'));
+				$this -> Session -> setFlash(__('Imagen eliminada'), 'crud/success');
 			} else {
-				$this -> Session -> setFlash(__('Image was not deleted'));
+				$this -> Session -> setFlash(__('No se eliminó la imagen'), 'crud/error');
 			}
 			$this -> redirect(array(
 				'controller' => 'galleries',
-				'action' => 'view',
-				$gallery_id
+				'action' => 'edit',
+				$prod_color_code,
+				$product_id
 			));
 		}
 	}

@@ -64,10 +64,11 @@
 							Talla
 						</th>
 						<th>
-							Cantidad
+							Cantidad Actual
 						</th>
-						<th>Modificar</th>
-						<th></th>
+						<th>Operación</th>
+						<th>Cantidad Operación</th>
+						<th>Galería</th>
 					</tr>
 					<?php foreach($inventories as $key => $inventory) : ?>
 						<?php
@@ -90,8 +91,12 @@
 						<td>
 							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;','class'=>'cantidad','rel'=>$inventory['Inventory']['id'])); ?>
 						</td>
+						<td><?php echo $this -> Html -> link(__('Modificar'), array('controller' => 'galleries', 'action' => 'edit', $inventory['Inventory']['gallery'], $inventory['Inventory']['product_id'])); ?></td>
 					</tr>
-					<?php endforeach; ?>
+					<?php
+						//debug($inventory);
+						endforeach;
+					?>
 				</tbody>
 			</table>
 			<st	

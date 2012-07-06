@@ -1,5 +1,8 @@
 $(document).ready(function() {
-
+	
+	/**
+	 * Categoría
+	 */
 	$('#single-upload-category').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -19,13 +22,16 @@ $(document).ready(function() {
 					'folder' : 'uploads'
 				}, function(confirm) {
 					if(confirm){
-						$(".preview").html('<img  src="/img/uploads/100x100/' + data + '" />');
+						$(".preview").html('<img  src="/img/uploads/215x215/' + data + '" />');
 					}				
 				});
 			}
 		}
 	});
-
+	
+	/**
+	 * Producto
+	 */
 	$('#single-upload-product').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -39,20 +45,24 @@ $(document).ready(function() {
 		'onUploadSuccess' : function(file, data, response) {
 			if(response) {
 				var name = file.name;
-				$(".preview").html('<img  src="' + data + '" />');
 				var fileName = data.split("/");
 				fileName = fileName[(fileName.length - 1)];
 				$("#single-field").val(fileName);
 				$.post("/products/uploadify_add", {
 					'name' : fileName,
 					'folder' : 'uploads'
-				}, function(data) {
-					//console.log(data);
+				}, function(confirm) {
+					if(confirm) {
+						$(".preview").html('<img  src="/img/uploads/215x215/' + data + '" />');
+					}
 				});
 			}
 		}
 	});
-
+	
+	/**
+	 * Imagen principal galería
+	 */
 	$('#single-upload-gallery').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -66,20 +76,25 @@ $(document).ready(function() {
 		'onUploadSuccess' : function(file, data, response) {
 			if(response) {
 				var name = file.name;
-				$(".preview").html('<img  src="' + data + '" />');
 				var fileName = data.split("/");
 				fileName = fileName[(fileName.length - 1)];
 				$("#single-field").val(fileName);
 				$.post("/galleries/uploadify_add", {
 					'name' : fileName,
 					'folder' : 'uploads'
-				}, function(data) {
-					//console.log(data);
+				}, function(confirm) {
+					if(confirm) {
+						$('#MainImg').remove();
+						$(".main-img-preview").html('<img  src="/img/uploads/215x215/' + data + '" />');
+					}
 				});
 			}
 		}
 	});
-
+	
+	/**
+	 * Multiples imagenes galería
+	 */
 	$('#multiple-upload-gallery').uploadify({
 		'swf' : '/swf/uploadify.swf',
 		'checkExisting' : '/check-exists.php',
@@ -98,17 +113,22 @@ $(document).ready(function() {
 					'name' : fileName,
 					'folder' : 'uploads',
 					'gallery_id' : $('#gallery_id').attr('rel')
-				}, function(data) {
-					//console.log(data);
+				}, function(success) {
+					if(success) {
+						// TODO : ?
+					}
 				});
 			}
 		},
 		'onQueueComplete' : function(queueData) {
-			var location = '/admin/galleries/view/' + $('#gallery_id').attr('rel');
+			var location = '/admin/galleries/edit/' + $('#prod_color_code').attr('rel') + '/' + $('#product_id').attr('rel');
 			window.location.replace(location);
 		}
 	});
-
+	
+	/**
+	 * Wizard
+	 */
 	$.each($('.gallery-single-upload'), function(i, val) {
 		$('#single-upload-gallery-' + val.id).uploadify({
 			'swf' : '/swf/uploadify.swf',
@@ -123,15 +143,16 @@ $(document).ready(function() {
 			'onUploadSuccess' : function(file, data, response) {
 				if(response) {
 					var name = file.name;
-					$('#preview-' + val.id).html('<img width="150" height="150" src="/img/uploads/' + data + '" />');
 					var fileName = data.split("/");
 					fileName = fileName[(fileName.length - 1)];
 					$(val).val(fileName);
 					$.post("/galleries/uploadify_add", {
 						'name' : fileName,
 						'folder' : 'uploads'
-					}, function(data) {
-						//console.log(data);
+					}, function(success) {
+						if(success) {
+							$('#preview-' + val.id).html('<img src="/img/uploads/215x215/' + data + '" />');
+						}
 					});
 				}
 			}

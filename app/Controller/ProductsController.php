@@ -406,6 +406,7 @@ class ProductsController extends AppController {
 			 			
 		}
 		
+		echo true;
 		exit(0);
 
 	}
