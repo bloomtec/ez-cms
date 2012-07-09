@@ -1,5 +1,22 @@
 <div class="products index">
 	<h2><?php echo __('Productos');?></h2>
+	<?php echo $this -> Form -> create('Search'); ?>
+	<table id="ProductsSearch" class="search">
+		<!--<tr>
+			<th>Categoría</th><th>Nombre</th><th>Referencia</th><th>Activo</th><th>Promocionado</th><th>Novedad</th><th>Más Vendido</th><th></th>
+		</tr>-->
+		<tr>
+			<td><?php echo $this -> Form -> input('Search.category_id', array('label' => 'Categoría', 'empty' => 'Seleccione...')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.name', array('label' => 'Nombre')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.reference', array('label' => 'Nombre')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.is_active', array('label' => 'Activo', 'type' => 'checkbox')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.is_promoted', array('label' => 'Promocionado', 'type' => 'checkbox')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.is_novelty', array('label' => 'Novedad', 'type' => 'checkbox')); ?></td>
+			<td><?php echo $this -> Form -> input('Search.is_top_seller', array('label' => 'Más Vendido', 'type' => 'checkbox')); ?></td>
+			<td><?php echo $this -> Form -> submit('Buscar'); ?></td>
+		</tr>
+	</table>
+	<?php $this -> Form -> end(); ?>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
 			<!--<th><?php echo $this->Paginator->sort('id');?></th>-->

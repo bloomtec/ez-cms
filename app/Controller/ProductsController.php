@@ -169,7 +169,33 @@ class ProductsController extends AppController {
 	 */
 	public function admin_index() {
 		$this -> Product -> recursive = 0;
+		if($this -> request -> is('post') || $this -> request -> is('put')) {
+			$conditions = array();
+			if($this -> request -> data['Search']['category_id']) {
+				$conditions['Product.category_id'] = $this -> request -> data['Search']['category_id'];
+			}
+			if(!empty($this -> request -> data['Search']['name'])) {
+				$conditions['Product.name LIKE'] = '%' . trim($this -> request -> data['Search']['name']) . '%';
+			}
+			if(!empty($this -> request -> data['Search']['reference'])) {
+				$conditions['Product.reference LIKE'] = '%' . trim($this -> request -> data['Search']['reference']) . '%';
+			}
+			if($this -> request -> data['Search']['is_active']) {
+				$conditions['Product.is_active'] = $this -> request -> data['Search']['is_active'];
+			}
+			if($this -> request -> data['Search']['is_novelty']) {
+				$conditions['Product.is_novelty'] = $this -> request -> data['Search']['is_novelty'];
+			}
+			if($this -> request -> data['Search']['is_top_seller']) {
+				$conditions['Product.is_top_seller'] = $this -> request -> data['Search']['is_top_seller'];
+			}
+			if($this -> request -> data['Search']['is_promoted']) {
+				$conditions['Product.is_promoted'] = $this -> request -> data['Search']['is_promoted'];
+			}
+			$this -> paginate = array('conditions' => $conditions);
+		}
 		$this -> set('products', $this -> paginate());
+		$this -> set('categories', $this -> Product -> Category -> find('list'));
 	}
 
 	/**
@@ -406,6 +432,7 @@ class ProductsController extends AppController {
 			 			
 		}
 		
+		echo true;
 		exit(0);
 
 	}

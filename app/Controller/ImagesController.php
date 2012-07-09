@@ -15,14 +15,14 @@ class ImagesController extends AppController {
 	}
 	
 	function uploadify_add() {
-		$this -> autoRender = false;
-		//Configure::write("debug", 0);
 		
 		if ($_POST['name'] && $_POST['folder'] && $_POST['gallery_id']) {
 
 			$fileName = $_POST['name'];
 			$folder = $_POST['folder'];
 			$gallery_id = $_POST['gallery_id'];
+			$prod_color_code = $_POST['prod_color_code'];
+			$product_id = $_POST['product_id'];
 			
 			//time_nanosleep(0, 500000);
 			
@@ -88,10 +88,19 @@ class ImagesController extends AppController {
 					'path' => $fileName
 				)
 			);
-			$this -> Image -> save($image);
+			if($this -> Image -> save($image)) {
+				echo json_encode(array(
+					'success' => true,
+					'image_id' => $this -> Image -> id,
+					'prod_color_code' => $prod_color_code,
+					'product_id' => $product_id
+				));
+			} else {
+				echo json_encode(array('success' => false));
+			}
 				
 		}
-		
+
 		exit(0);
 
 	}
@@ -238,8 +247,8 @@ class ImagesController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function admin_delete($id = null, $gallery_id = null) {
-		if($id && $gallery_id) {
+	public function admin_delete($id = null, $prod_color_code = null, $product_id = null) {
+		if($id && $prod_color_code && $product_id) {
 			if (!$this -> request -> is('post')) {
 				throw new MethodNotAllowedException();
 			}
@@ -248,14 +257,15 @@ class ImagesController extends AppController {
 				throw new NotFoundException(__('Invalid image'));
 			}
 			if ($this -> Image -> delete()) {
-				$this -> Session -> setFlash(__('Image deleted'));
+				$this -> Session -> setFlash(__('Imagen eliminada'), 'crud/success');
 			} else {
-				$this -> Session -> setFlash(__('Image was not deleted'));
+				$this -> Session -> setFlash(__('No se eliminó la imagen'), 'crud/error');
 			}
 			$this -> redirect(array(
 				'controller' => 'galleries',
-				'action' => 'view',
-				$gallery_id
+				'action' => 'edit',
+				$prod_color_code,
+				$product_id
 			));
 		}
 	}
