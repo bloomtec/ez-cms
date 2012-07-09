@@ -88,7 +88,7 @@ class GalleriesController extends AppController {
 				$data = array('Gallery' => $gallery);
 				$this -> Gallery -> save($data);
 			}
-			$this -> redirect(array('controller' => 'products', 'action' => 'index'));
+			$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id, true));
 		}
 		if($product_id) {
 			$this -> loadModel('Inventory');
@@ -208,7 +208,8 @@ class GalleriesController extends AppController {
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Gallery -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se guardó la galería', 'crud/success'));
-				$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id));
+				//$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id));
+				$this -> redirect(array('action' => 'closeWindow'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar la galería. Recuerde agregar una imagen e intente de nuevo.'));
 			}
@@ -217,6 +218,8 @@ class GalleriesController extends AppController {
 		}
 		$this -> set('product_id', $product_id);
 	}
+	
+	public function admin_closeWindow() {}
 
 	/**
 	 * admin_delete method

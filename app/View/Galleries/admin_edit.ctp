@@ -63,7 +63,7 @@
 
 	</div>
 </div>
-<div class="actions">
+<!--<div class="actions">
 	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
 
@@ -71,4 +71,4 @@
 			<?php echo $this -> Html -> link(__('Volver'), array('controller' => 'products', 'action' => 'edit', $product_id)); ?>
 		</li>
 	</ul>
-</div>
+</div>-->

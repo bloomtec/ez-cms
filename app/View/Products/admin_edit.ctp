@@ -4,26 +4,35 @@
 	?>
 	<fieldset>
 		<legend>
-			<?php echo __('Modificar Producto'); ?>
+			<?php
+				if(!$after_wizard) {
+					echo __('Modificar Producto');
+				} else {
+					echo __('Inventarios');
+				}
+			?>
 		</legend>
 		<div class="datos">
-			<?php
-			echo $this -> Form -> input('id');
-			echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
-			echo $this -> Form -> input('name', array('label' => 'Nombre'));
-			echo $this -> Form -> input('reference', array('label' => 'Referencia'));
-			echo $this -> Form -> input('price', array('label' => 'Precio (I.V.A. Incluído)'));
-			echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A. (X%)', 'value' => '16'));
-			//echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
-			echo $this -> Form -> input('description', array('label' => 'Descripción'));
-			//echo $this -> Form -> input('order', array('label' => ''));
-			echo $this -> Form -> input('is_active', array('label' => 'Activo', 'checked' => 'checked'));
-			echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
-			echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
-			echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
-			//echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field', 'value' => $this -> data['Product']['image']));
+			<?php echo $this -> Form -> input('id'); ?>
+			<?
+			if(!$after_wizard) {
+				echo $this -> Form -> input('category_id', array('label' => 'Categoría', 'empty' => 'Selecione...'));
+				echo $this -> Form -> input('name', array('label' => 'Nombre'));
+				echo $this -> Form -> input('reference', array('label' => 'Referencia'));
+				echo $this -> Form -> input('price', array('label' => 'Precio (I.V.A. Incluído)'));
+				echo $this -> Form -> input('tax_base', array('label' => 'Base I.V.A. (X%)', 'value' => '16'));
+				//echo $this -> Form -> input('tax_value', array('label' => 'Valor I.V.A.'));
+				echo $this -> Form -> input('description', array('label' => 'Descripción'));
+				//echo $this -> Form -> input('order', array('label' => ''));
+				echo $this -> Form -> input('is_active', array('label' => 'Activo', 'checked' => 'checked'));
+				echo $this -> Form -> input('is_promoted', array('label' => 'Promocionado'));
+				echo $this -> Form -> input('is_novelty', array('label' => 'Novedad'));
+				echo $this -> Form -> input('is_top_seller', array('label' => 'Más Vendido'));
+				//echo $this -> Form -> hidden('image', array('label' => 'Imagen', 'id' => 'single-field', 'value' => $this -> data['Product']['image']));
+			}
 			?>
 		</div>
+		<?php if(!$after_wizard) : ?>
 		<div class="tallas">
 			<table id="ColorsSizesMatrix">
 				<caption>Inicializar Inventarios (se inicia su cantidad en 0 las combinaciones seleccionadas)</caption>
@@ -53,6 +62,7 @@
 				</tbody>
 			</table>
 		</div>
+		<?php endif; ?>
 		<div class="inventario">
 			<table id="TablaInventarios" style="max-width:400px;">
 				<tbody>
@@ -91,7 +101,15 @@
 						<td>
 							<?php echo $this -> Form -> input("Inventory.$index.amount_to_modify", array('label' => false, 'div' => false, 'type' => 'number', 'min' => 0, 'value' => 0, 'style' => 'text-align:center;','class'=>'cantidad','rel'=>$inventory['Inventory']['id'])); ?>
 						</td>
-						<td><?php echo $this -> Html -> link(__('Modificar'), array('controller' => 'galleries', 'action' => 'edit', $inventory['Inventory']['gallery'], $inventory['Inventory']['product_id'])); ?></td>
+						<td>
+							<?php
+								echo $this -> Html -> link(
+									__('Modificar'),
+									array('controller' => 'galleries', 'action' => 'edit', $inventory['Inventory']['gallery'], $inventory['Inventory']['product_id']),
+									array('target' => '_blank')
+								);
+							?>
+						</td>
 					</tr>
 					<?php
 						//debug($inventory);

@@ -282,7 +282,7 @@ class ProductsController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function admin_edit($id = null) {
+	public function admin_edit($id = null, $after_wizard = false) {
 		$this -> Product -> id = $id;
 		if (!$this -> Product -> exists()) {
 			throw new NotFoundException(__('Producto no válido'));
@@ -339,7 +339,8 @@ class ProductsController extends AppController {
 		$this -> loadModel('Color');
 		$this -> set('colors', $this -> Color -> find('list'));		
 		$size_ids_color_ids = $this -> requestAction('/inventories/hasInventory/' . $id);
-		$this -> set('size_ids_color_ids', $size_ids_color_ids);		
+		$this -> set('size_ids_color_ids', $size_ids_color_ids);
+		$this -> set('after_wizard', $after_wizard);
 	}
 
 	/**
