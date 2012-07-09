@@ -148,14 +148,18 @@ class Product extends AppModel {
 	);
 	
 	public function beforeSave() {
-		// Ajustes de la base del IVA
-		$tax_base = $this -> data['Product']['tax_base'];
-		$tax_base = ($tax_base / 100) + 1;
-		$this -> data['Product']['tax_base'] = $tax_base;
-		// Ajusted del valor del IVA
-		$tax_value = $this -> data['Product']['price'];
-		$tax_value = $tax_value - ($tax_value / $tax_base);
-		$this -> data['Product']['tax_value'] = $tax_value;
+		if(isset($this -> data['Product']['tax_base']) && !empty($this -> data['Product']['tax_base'])) {
+			// Ajustes de la base del IVA
+			$tax_base = $this -> data['Product']['tax_base'];
+			$tax_base = ($tax_base / 100) + 1;
+			$this -> data['Product']['tax_base'] = $tax_base;
+		}
+		if(isset($this -> data['Product']['price']) && !empty($this -> data['Product']['price'])) {
+			// Ajusted del valor del IVA
+			$tax_value = $this -> data['Product']['price'];
+			$tax_value = $tax_value - ($tax_value / $tax_base);
+			$this -> data['Product']['tax_value'] = $tax_value;
+		}
 		return true;
 	}
 
