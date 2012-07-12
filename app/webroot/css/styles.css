@@ -329,6 +329,9 @@ a.rosa:hover{
 	padding:0px;
 	width:660px;
 }
+#pages #right-col > p {
+	margin:0px;
+}
 .form{
 	padding:40px;
 }
