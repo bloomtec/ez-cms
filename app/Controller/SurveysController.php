@@ -2,6 +2,11 @@
 class SurveysController extends AppController {
 
 	var $name = 'Surveys';
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('sondeo');
+	}
 
 	function index() {
 		$this -> Survey -> recursive = 0;
