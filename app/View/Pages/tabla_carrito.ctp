@@ -33,8 +33,7 @@
 
 			</td>
 			<td>
-				<h3><?php echo $this -> Html->link( $item['Product']['name'], "/products/view/".$item['Product']['id']."/".$item['color_id']);?></h3>
-				<span>Ref. <?php echo $item['Product']['reference'] ?></span>
+				<h3><?php echo $this -> Html->link($item['Product']['reference'], "/products/view/".$item['Product']['id']."/".$item['color_id']);?></h3>
 				<span>Talla <?php echo $item['ProductSize']['name']; ?></span>
 			</td>
 			<td align="center" class="price">
