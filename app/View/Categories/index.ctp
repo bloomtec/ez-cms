@@ -12,8 +12,20 @@
 				}
 			?>
 			<li <?php echo $class;?>> 
-			<?php echo $this->Html->image("uploads/".$category["Category"]["image"])?>
-			<?php echo $this->Html->link($category["Category"]["name"],array("controller"=>"categories","action"=>"view",$category["Category"]["id"])) ?>
+			<?php
+				echo $this -> Html -> image(
+					"uploads/" . $category["Category"]["image"],
+					array(
+						'alt' => $category["Category"]["name"],
+						'url' => array(
+							"controller" => "categories",
+							"action" => "view",
+							$category["Category"]["id"]
+						)
+					)
+				);
+			?>
+			<?php echo $this->Html->link($category["Category"]["name"],array("controller"=>"categories","action"=>"view",$category["Category"]["id"])); ?>
 			</li>
 			<?php }$i++;?>
 		<?php endforeach;?>
