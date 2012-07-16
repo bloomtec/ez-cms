@@ -25,7 +25,19 @@
 					)
 				);
 			?>
-			<?php echo $this->Html->link($category["Category"]["name"],array("controller"=>"categories","action"=>"view",$category["Category"]["id"])); ?>
+			<?php
+				echo $this -> Html -> link(
+					$category["Category"]["name"],
+					array(
+						"controller" => "categories",
+						"action" => "view",
+						$category["Category"]["id"],
+					),
+					array(
+						'class' => 'name'
+					)
+				);
+			?>
 			</li>
 			<?php }$i++;?>
 		<?php endforeach;?>
