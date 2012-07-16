@@ -5,7 +5,7 @@
  		<div class="layer">
 		<?php
 			echo $this->Form->input('id');
-			echo $this->Form->input('titulo');
+			echo $this->Form->input('titulo', array('label' => 'Título'));
 			echo $this->Form->input('estado',array("label"=>"Activa?"));
 		?>
 		<p style="width:250px; margin-top:40px;">
@@ -18,13 +18,13 @@
 			$i=0;
 			foreach($this->data["SurveyOption"] as $option):
 				echo $this->Form->input('Options.'.$option["id"].'.id',array("type"=>"hidden","value"=>$option["id"]));
-				echo $this->Form->input('Options.'.$option["id"].'.name',array("label"=>"Opcion ".($i+1),"value"=>$option["name"]));
+				echo $this->Form->input('Options.'.$option["id"].'.name',array("label"=>"Opción ".($i+1),"value"=>$option["name"]));
 		 		$i++;
 		 	endforeach;
 		 ?>
 		<?php 
 			for(;$i<6;$i++){
-				echo $this->Form->input('Options.-'.$i.'.name',array("label"=>"Opcion ".($i+1)));
+				echo $this->Form->input('Options.-'.$i.'.name',array("label"=>"Opción ".($i+1)));
 			}
 		?>
 		

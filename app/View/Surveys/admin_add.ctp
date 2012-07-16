@@ -14,22 +14,22 @@
 		
 		<div class="layer">
 		<?php
-			echo $this->Form->input('Options.0.name',array("label"=>"Opcion 1"));
+			echo $this->Form->input('Options.0.name',array("label"=>"Opción 1"));
 		?>
 		<?php
-			echo $this->Form->input('Options.1.name',array("label"=>"Opcion 2"));
+			echo $this->Form->input('Options.1.name',array("label"=>"Opción 2"));
 		?>
 		<?php
-			echo $this->Form->input('Options.2.name',array("label"=>"Opcion 3"));
+			echo $this->Form->input('Options.2.name',array("label"=>"Opción 3"));
 		?>
 		<?php
-			echo $this->Form->input('Options.3.name',array("label"=>"Opcion 4"));
+			echo $this->Form->input('Options.3.name',array("label"=>"Opción 4"));
 		?>
 		<?php
-			echo $this->Form->input('Options.4.name',array("label"=>"Opcion 5"));
+			echo $this->Form->input('Options.4.name',array("label"=>"Opción 5"));
 		?>
 		<?php
-			echo $this->Form->input('Options.5.name',array("label"=>"Opcion 6"));
+			echo $this->Form->input('Options.5.name',array("label"=>"Opción 6"));
 		?>
 		</div>
 	</fieldset>
