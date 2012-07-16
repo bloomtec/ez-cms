@@ -52,6 +52,7 @@ class AppController extends Controller {
 
 	private function beforeFilterAuthConfig() {
 		$this -> Auth -> authorize = array('Actions' => array('actionPath' => 'controllers'));
+		$this -> Auth -> authenticate = array('Form' => array('scope' => array('is_active' => 1)));
 		$this -> Auth -> loginAction = array('controller' => 'users', 'action' => 'login', 'plugin' => 'user_control', 'admin' => false);
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
 		$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile');

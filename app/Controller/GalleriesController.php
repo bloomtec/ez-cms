@@ -86,7 +86,16 @@ class GalleriesController extends AppController {
 		if($this -> request -> is('post') || $this -> request -> is('put')) {
 			foreach($this -> request -> data['Gallery'] as $index => $gallery) {
 				$data = array('Gallery' => $gallery);
-				$this -> Gallery -> save($data);
+				if($this -> Gallery -> save($data)) {
+					$image = array(
+						'Image' => array(
+							'gallery_id' => $this -> Gallery -> id,
+							'path' => $data['Gallery']['image']
+						)
+					);
+					$this -> Gallery -> Image -> create();
+					$this -> Gallery -> Image -> save($image);
+				}
 			}
 			$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id, true));
 		}
@@ -207,8 +216,18 @@ class GalleriesController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Gallery -> save($this -> request -> data)) {
+				$image = $this -> Gallery -> Image -> findByPath($this -> request -> data['Gallery']['image']);
+				if(!$image) {
+					$image = array(
+						'Image' => array(
+							'gallery_id' => $this -> Gallery -> id,
+							'path' => $this -> request -> data['Gallery']['image']
+						)
+					);
+					$this -> Gallery -> Image -> create();
+					$this -> Gallery -> Image -> save($image);
+				}
 				$this -> Session -> setFlash(__('Se guardó la galería', 'crud/success'));
-				//$this -> redirect(array('controller' => 'products', 'action' => 'edit', $product_id));
 				$this -> redirect(array('action' => 'closeWindow'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo guardar la galería. Recuerde agregar una imagen e intente de nuevo.'));

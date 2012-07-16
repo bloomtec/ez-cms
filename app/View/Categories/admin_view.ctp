@@ -18,7 +18,8 @@
 		</dd>
 		<dt><?php echo __('Imagen'); ?></dt>
 		<dd>
-			<?php echo h($category['Category']['image']); ?>
+			<?php //echo h($category['Category']['image']); ?>
+			<?php echo $this -> Html -> image("uploads/215x215/" . $category['Category']['image']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Promocionada'); ?></dt>
@@ -33,6 +34,14 @@
 			?>
 			&nbsp;
 		</dd>
+		<?php if($category['Category']['is_promoted']) : ?>
+		<dt><?php echo __('Imagen Promocionada'); ?></dt>
+		<dd>
+			<?php //echo h($category['Category']['image']); ?>
+			<?php echo $this -> Html -> image("uploads/215x215/" . $category['Category']['promoted_image']); ?>
+			&nbsp;
+		</dd>
+		<?php endif; ?>
 		<dt><?php echo __('Posición'); ?></dt>
 		<dd>
 			<?php echo h($category['Category']['order']); ?>

@@ -33,7 +33,15 @@ class Category extends AppModel {
 		'is_promoted' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
+				'message' => 'Debe ser un valor tipo boolean',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'hasPromotedImage' => array(
+				'rule' => array('hasPromotedImage'),
+				'message' => 'Debe asignar una imagen para el estado promocionado',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -41,6 +49,14 @@ class Category extends AppModel {
 			),
 		),
 	);
+	
+	public function hasPromotedImage() {
+		if(($this -> data['Category']['is_promoted']) & (!isset($this -> data['Category']['promoted_image']) || empty($this -> data['Category']['promoted_image']))) {
+			return false;
+		} else {
+			return true;
+		}
+	}
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 

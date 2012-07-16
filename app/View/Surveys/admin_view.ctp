@@ -8,7 +8,13 @@
 		</dd>
 		<dt><?php echo __('Estado'); ?></dt>
 		<dd>
-			<?php echo $survey['Survey']['estado']; ?>
+			<?php
+				if($survey['Survey']['estado']) {
+					echo 'Activo';
+				} else {
+					echo 'Inactivo';
+				}
+			?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Creada'); ?></dt>

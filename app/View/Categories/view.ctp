@@ -1,11 +1,9 @@
-
-
 <div class="categories view">
 	<?php if(isset($category['Category']['banner']) && !empty($category['Category']['banner'])):?>
 	<div class="banner">
-		<?php echo $category['Category']['banner'];?>
+		<?php echo $category['Category']['banner']; ?>
 	</div>
-	<?php endif;?>
+	<?php endif; ?>
 	<div id="left-col">
 		<?php echo $this -> element('survey'); ?>
 		<?php echo $this -> element('novedad'); ?>
@@ -13,13 +11,13 @@
 	</div>
 	<div id="right-col">
 		<div class='black-wrapper cat-description'>
-			<h3><?php echo $category['Category']['name'];?></h3>
+			<h3><?php echo $category['Category']['name']; ?></h3>
 			<p>
-			<?php echo $category['Category']['description'];?>
+			<?php echo $category['Category']['description']; ?>
 			</p>
 		</div> 
 		
-		<?php echo $this -> element('listado-por-inventarios');?>
+		<?php echo $this -> element('listado-por-inventarios'); ?>
 		
 	</div>
 	<div style="clear:both;"></div>

@@ -30,6 +30,35 @@ $(document).ready(function() {
 	});
 	
 	/**
+	 * Categoría
+	 */
+	$('#single-upload-category-promoted').uploadify({
+		'swf' : '/swf/uploadify.swf',
+		'checkExisting' : '/check-exists.php',
+		'uploader' : '/uploadify.php',
+		'buttonText' : 'Subir Imagen',
+		'width' : 80,
+		'height' : 20,
+		'cancelImg' : '/img/uploadify-cancel.png',
+		'multi' : false,
+		//'debug' : true,
+		'onUploadSuccess' : function(file, data, response) {
+			if(response) {
+				var name = file.name;
+				$("#single-field-promoted").val(data);
+				$.post("/categories/uploadify_add", {
+					'name' : data,
+					'folder' : 'uploads'
+				}, function(confirm) {
+					if(confirm){
+						$(".preview-promoted").html('<img  src="/img/uploads/215x215/' + data + '" />');
+					}				
+				});
+			}
+		}
+	});
+	
+	/**
 	 * Producto
 	 */
 	$('#single-upload-product').uploadify({

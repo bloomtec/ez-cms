@@ -326,8 +326,15 @@ a.rosa:hover{
 	width:680px;
 }
 #pages #right-col{
-	padding:20px;
+	padding:0px;
 	width:660px;
+}
+#pages #right-col > p {
+	margin:0px;
+}
+#pages.contacto #right-col {
+	padding: 20px;
+	width: 660px;
 }
 .form{
 	padding:40px;
@@ -714,7 +721,7 @@ text-decoration: none;
 color: 
 white;
 }
-.promocionados ul li a {
+.promocionados ul li a.name {
 background: url(../img/trama-boton-catalogo.png) repeat-x left;
 height: 50px;
 width: 181px;
@@ -730,7 +737,7 @@ text-transform: uppercase;
 	padding:5px;
 	border: solid 1px white;
 	margin-bottom:20px;
-	height:130px;
+	height:70px;
 }
 .cat-description h3{
 	text-transform:uppercase;

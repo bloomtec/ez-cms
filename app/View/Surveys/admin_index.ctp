@@ -2,10 +2,10 @@
 	<h2><?php __('Encuestas');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('titulo');?></th>
+			<th><?php echo $this->Paginator->sort('titulo', 'Título');?></th>
 			<th><?php echo $this->Paginator->sort('estado');?></th>
-			<th><?php echo $this->Paginator->sort('Creado','created');?></th>
-			<th><?php echo $this->Paginator->sort('Modificado','updated');?></th>
+			<th><?php echo $this->Paginator->sort('created', 'Creado');?></th>
+			<th><?php echo $this->Paginator->sort('updated', 'Modificado');?></th>
 			<th class="actions"><?php __('Opciones');?></th>
 	</tr>
 	<?php
@@ -18,7 +18,16 @@
 	?>
 	<tr<?php echo $class;?>>
 		<td><?php echo $survey['Survey']['titulo']; ?>&nbsp;</td>
-		<td><?php echo $survey['Survey']['estado']; ?>&nbsp;</td>
+		<td>
+			<?php
+				if($survey['Survey']['estado']) {
+					echo 'Activo';
+				} else {
+					echo 'Inactivo';
+				}
+			?>
+			&nbsp;
+		</td>
 		<td><?php echo $survey['Survey']['created']; ?>&nbsp;</td>
 		<td><?php echo $survey['Survey']['updated']; ?>&nbsp;</td>
 		<td class="actions">
@@ -45,4 +54,9 @@
 		echo $this->Paginator->last(' >>', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
+</div>
+<div class="actions">
+	<ul>
+		<li><?php echo $this->Html->link(__('Agregar Sondeo'), array('action' => 'add')); ?></li>
+	</ul>
 </div>
