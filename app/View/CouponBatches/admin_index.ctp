@@ -16,7 +16,7 @@
 			<td><?php echo $this -> Html -> link($couponBatch['CouponType']['name'], array('controller' => 'coupon_types', 'action' => 'view', $couponBatch['CouponType']['id'])); ?></td>
 			<td><?php echo h($couponBatch['CouponBatch']['name']); ?>&nbsp;</td>
 			<td>
-				<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
+				<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 2 || $couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 				<?php echo h((1-$couponBatch['CouponBatch']['discount'])*100); ?>%
 				<?php endif; ?>
 				&nbsp;

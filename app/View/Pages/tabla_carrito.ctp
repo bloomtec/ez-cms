@@ -1,4 +1,6 @@
 <?php
+	// Cargar el JS de manejo de cupones
+	echo $this -> Html -> script('coupons');
 	// Obtener el carrito
 	$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
 ?>
@@ -9,34 +11,32 @@
 		?>
 		<tr class="entryTableHeader">
 			<th colspan="2" align="center">Producto</th>
-			<th align="center">Precio</td>
+			<th align="center">Precio</th>
 			<th width="75" align="center">Cantidad</th>
-			<th align="center">Total</td>
-
+			<th align="center">Total</th>
 		</tr>
 		<?php
 			foreach($shopping_cart['CartItem'] as $item) {
 				$subTotal += $item['Product']['price'] * $item['quantity'];
 		?>
-		<tr class="content">
+		<tr class="content cart-item item-id-<?php echo $item['id']; ?>" rel="<?php echo $item['id']; ?>">
 			<td width="80" align="center" class="left">
 				<?php
-				  echo 	$this -> Html->link(
-				      			$this -> Html->image(
-											'/img/uploads/100x100/' . $item['image'],
-				      						array('border' => '0')
-										),
-				      					array('action' => '../products/view/'.$item['Product']['id']."/".$item['color_id']),
-				      					array('escape' => false)
-								); 
+					echo $this -> Html->link(
+						$this -> Html->image(
+							'/img/uploads/100x100/' . $item['image'],
+							array('border' => '0')
+						),
+						array('action' => '../products/view/'.$item['Product']['id']."/".$item['color_id']),
+						array('escape' => false)
+					); 
 				?>
-
 			</td>
 			<td>
 				<h3><?php echo $this -> Html->link($item['Product']['reference'], "/products/view/".$item['Product']['id']."/".$item['color_id']);?></h3>
 				<span>Talla <?php echo $item['ProductSize']['name']; ?></span>
 			</td>
-			<td align="center" class="price">
+			<td align="center" class="price" id="<?php echo 'CartItem-' . $item['id'] . 'Price'; ?>" rel="<?php echo $item['Product']['price']; ?>">
 				<?php echo "$".number_format( $item['Product']['price'], 0, ' ', '.'); ?>
 			</td>
 			<td width="115" align="center" class="quantity">
@@ -52,8 +52,8 @@
 				<?php echo $this -> Form -> end("Actualizar");?>
 			</td>
 			<td align="center" class="right total">
-				<?php echo "$ ".number_format($item['Product']['price'] * $item['quantity'], 0, ' ', '.');?>
-				<br />
+				<p id="<?php echo 'CartItem-' . $item['id'] . 'Total'; ?>"><?php echo "$ ".number_format($item['Product']['price'] * $item['quantity'], 0, ' ', '.');?></p>
+				<p id="<?php echo 'CartItem-' . $item['id'] . 'Discount'; ?>"></p>
 				<?php echo $this -> Html->link('Eliminar','/b_cart/ShoppingCarts/removeCartItem/'.$item['id'],array('class'=>'removeCartItem'));?>
 			</td>
 		
@@ -62,21 +62,33 @@
 				}
 		?>
 		<tr class="total">
+			<th colspan="2"style="background: none;">
+				
+			</th>
+			<th colspan="1"style="text-align: center; background: none;">
+				Cupon
+			</th>
+			<th colspan="1"style="text-align:center; min-width: 180px;">
+				<input id="CouponCode" type="text" style="text-align: center; width: 100px; float: left;" />
+				<input id="SetCoupon" type="submit" value="Aplicar" />
+			</th>
+			<th id="CouponDiscount" style="text-align:center;"></th>
+		</tr>
+		<tr class="total">
 			<th colspan="3"style="background:none;">
 				
 			</th>
 			<th colspan="1"style="text-align:right;">
 				Total
 			</th>
-			<th style="text-align:center;">
-			
-				<?php if (isset($subTotal)) echo "$ ".number_format($subTotal, 0, ' ', '.');?>
+			<th id="TotalCarrito" rel="<?php echo $subTotal; ?>" style="text-align:center;">
+				<?php if (isset($subTotal)) echo "$ ".number_format($subTotal, 0, ' ', '.'); ?>
 			</th>
-
 		</tr>
 </table>
 <div class="datos-envio">
 	<?php	echo $this -> Form -> create('Order', array('url'=>'/orders/add')); ?>
+		<?php echo $this -> Form -> hidden('coupon_code'); ?>
 		<?php if(!$this -> Session -> read('Auth.User.id')): ?>
 		<div>
 			<h2 class="rosa">Datos de usuario</h2>

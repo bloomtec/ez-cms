@@ -104,7 +104,7 @@ class CouponBatch extends AppModel {
 					'is_used' => false
 				)
 			);
-			for ($i=$this -> data['CouponBatch']['quantity']; $i > 0 ; $i--) { 
+			for ($i=$this -> data['CouponBatch']['quantity']; $i > 0 ; $i--) {
 				$coupon['Coupon']['code'] = $this -> setCouponCode();
 				$this -> Coupon -> create();
 				if(!$this -> Coupon -> save($coupon)) $i++;
@@ -154,7 +154,7 @@ class CouponBatch extends AppModel {
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',
-			'order' => '',
+			'order' => array('Coupon.updated' => 'DESC'),
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',

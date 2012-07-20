@@ -53,6 +53,7 @@ class OrdersController extends AppController {
 			 */
 			
 			$order_comment = $this -> request -> data['Order']['comments'];
+			$coupon_code = $this -> request -> data['Order']['coupon_code'];
 			
 			// Usuario NO registrado
 			if(!$this -> Auth -> user('id')) {
@@ -81,7 +82,7 @@ class OrdersController extends AppController {
 						
 						$this -> requestAction('/user_control/users/internalLoginUser/' . $user_id);
 						$this -> requestAction('/user_control/users/internalSendRegistrationData/' . $user_id . '/' . $user_password);
-						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment, $coupon_code);
 						
 					} else {
 						// Error al registrar la dirección
@@ -96,7 +97,7 @@ class OrdersController extends AppController {
 			else {
 				// Dirección registrada
 				if($this -> request -> data['UserAddress']['id']) {
-					$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment);
+					$this -> createOrder($this -> Auth -> user('id'), $this -> request -> data['UserAddress']['id'], $order_comment, $coupon_code);
 				}
 				// Dirección nueva
 				else {
@@ -107,7 +108,7 @@ class OrdersController extends AppController {
 					$user_address['UserAddress']['name'] = 'Nueva';
 					$this -> Order -> UserAddress -> create();
 					if($this -> Order -> UserAddress -> save($user_address)) {
-						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment);
+						$this -> createOrder($this -> Auth -> user('id'), $this -> Order -> UserAddress -> id, $order_comment, $coupon_code);
 					} else {
 						debug($this -> Order -> UserAddress -> invalidFields());
 					}
@@ -116,7 +117,7 @@ class OrdersController extends AppController {
 		}
 	}
 	
-	private function createOrder($user_id = null, $user_address_id = null, $order_comment = null) {
+	private function createOrder($user_id = null, $user_address_id = null, $order_comment = null, $coupon_code = null) {
 		if($user_id && $user_address_id) {
 			$this -> loadModel('BCart.ShoppingCart');
 			$this -> loadModel('BCart.CartItem');
@@ -138,14 +139,71 @@ class OrdersController extends AppController {
 					'order_state_id' => 1,
 					'user_id' => $user_id,
 					'user_address_id' => $user_address_id,
-					'comments' => $order_comment
+					'comments' => $order_comment,
+					'coupon_code' => $coupon_code
 				)
 			);
+			
 			if($this -> Order -> save($order)) {
+				
+				/**
+				 * Verificar si se envió un código de cupon
+				 */
+				
+				$coupon_info = null;
+				
+				if($coupon_code) {
+					$coupon_info = $this -> requestAction('/coupon_batches/getInternalCouponInfo/' . $coupon_code);
+				}
+				
 				foreach($shopping_cart['CartItem'] as $key => $cart_item) {
+						
 					$this -> Order -> OrderItem -> create();
 					$this -> Order -> OrderItem -> Product -> recursive = -1;
 					$product = $this -> Order -> OrderItem -> Product -> findById($cart_item['product_id']);
+					$total_items_price = 0;
+					
+					if($coupon_info) {
+						// Pague uno lleve 2
+						if($coupon_info['CouponBatch']['coupon_type_id'] == 1) {
+							$quantity = $cart_item['quantity'];
+							$price = $product['Product']['price'];
+							$pairs = (int) ($quantity / 2);
+							if($pairs >= 1) {
+								$discount = $price * $pairs;
+								$itemTotal = ($price * $quantity) - $discount;
+								$total_items_price = round($itemTotal, 2);
+							} else {
+								// No hay 2do par
+								$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
+							}
+						}
+						// Pague el 2do a X% de descuento
+						elseif($coupon_info['CouponBatch']['coupon_type_id'] == 2) {
+							$quantity = $cart_item['quantity'];
+							$price = $product['Product']['price'];
+							$pairs = (int) ($quantity / 2);
+							if($pairs >= 1) {
+								$discount = $price - ($price * $coupon_info['CouponBatch']['discount']);
+								$itemTotal = ($price * $quantity) - ($discount * $pairs);
+								$total_items_price = round($itemTotal, 2);
+							} else {
+								// No hay 2do par
+								$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
+							}
+						}
+						// X% de descuento en la compra
+						elseif($coupon_info['CouponBatch']['coupon_type_id'] == 3) {
+							$quantity = $cart_item['quantity'];
+							$price = $product['Product']['price'];
+							$discount = $price - ($price * $coupon_info['CouponBatch']['discount']);
+							$itemTotal = ($price * $quantity) - ($discount * $quantity);
+							$total_items_price = round($itemTotal, 2);
+						}
+					} else {
+						$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
+					}
+					
 					$order_item = array(
 						'OrderItem' => array(
 							'order_id' => $this -> Order -> id,
@@ -155,22 +213,28 @@ class OrdersController extends AppController {
 							'quantity' => $cart_item['quantity'],
 							'single_item_price' => round($product['Product']['price'], 2),
 							'single_item_tax' => round($product['Product']['tax_value'], 2),
-							'total_items_price' => round($cart_item['quantity'] * $product['Product']['price'], 2),
+							'total_items_price' => $total_items_price,
 							'total_items_tax' => round($cart_item['quantity'] * $product['Product']['tax_value'], 2)
 						)
 					);
+					
 					if($this -> Order -> OrderItem -> save($order_item)) {
 						$this -> CartItem -> delete($cart_item['id']);
 					}
+					
 				}
+
 				$this -> Session -> write('OrderInfo', array('order_id' => $this -> Order -> id, 'user_id' => $user_id, 'user_address_id' => $user_address_id));
 				$this -> redirect(array('action' => 'sendPlatformRequest'));
+				
 			} else {
 				return false;
 			}
+			
 		} else {
 			return false;
 		}
+		
 	}
 	
 	public function sendPlatformRequest() {

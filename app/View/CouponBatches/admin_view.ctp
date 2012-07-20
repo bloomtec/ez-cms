@@ -13,7 +13,7 @@
 		</dd>
 		<dt><?php echo __('Descuento'); ?></dt>
 		<dd>
-			<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
+			<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 2 || $couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 			<?php echo h((1-$couponBatch['CouponBatch']['discount'])*100); ?>%
 			<?php endif; ?>
 			&nbsp;
@@ -39,10 +39,14 @@
 	<tr>
 		<th><?php echo __('Código'); ?></th>
 		<th><?php echo __('Activo'); ?></th>
+		<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 		<th><?php echo __('Usado'); ?></th>
+		<?php endif; ?>
 		<th><?php echo __('Creado'); ?></th>
 		<th><?php echo __('Modificado'); ?></th>
+		<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 		<th class="actions"><?php echo __('Acciones');?></th>
+		<?php endif; ?>
 	</tr>
 	<?php
 		$i = 0;
@@ -57,6 +61,7 @@
 				<input type="checkbox" disabled="true" />
 				<?php endif; ?>
 			</td>
+			<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 			<td>
 				<?php if($coupon['is_used']) : ?>
 				<input type="checkbox" checked="checked" disabled="true" />
@@ -65,8 +70,10 @@
 				<input type="checkbox" disabled="true" />
 				<?php endif; ?>
 			</td>
+			<?php endif; ?>
 			<td><?php echo $coupon['created'];?></td>
 			<td><?php echo $coupon['updated'];?></td>
+			<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
 			<td class="actions">
 				<?php
 					if($coupon['is_active']) {
@@ -76,6 +83,7 @@
 					}
 				?>
 			</td>
+			<?php endif; ?>
 		</tr>
 	<?php endforeach; ?>
 	</table>

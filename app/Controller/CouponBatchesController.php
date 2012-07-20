@@ -6,6 +6,11 @@ App::uses('AppController', 'Controller');
  * @property CouponBatch $CouponBatch
  */
 class CouponBatchesController extends AppController {
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this -> Auth -> allow('getCouponInfo', 'getInternalCouponInfo');
+	}
 
 	public function admin_deactivateCoupon($batch_id = null, $coupon_id = null) {
 		if (!$this -> request -> is('post')) {
@@ -16,10 +21,10 @@ class CouponBatchesController extends AppController {
 			throw new NotFoundException(__('Cupon no válido'));
 		}
 		if ($this -> CouponBatch -> Coupon -> saveField('is_active', false)) {
-			$this -> Session -> setFlash(__('Se desactivo el cupon'));
+			$this -> Session -> setFlash(__('Se desactivo el cupon'), 'crud/success');
 			$this -> redirect(array('action' => 'view', $batch_id));
 		}
-		$this -> Session -> setFlash(__('No se desactivo el cupon'));
+		$this -> Session -> setFlash(__('No se desactivo el cupon'), 'crud/error');
 		$this -> redirect(array('action' => 'view', $batch_id));
 	}
 
@@ -33,15 +38,15 @@ class CouponBatchesController extends AppController {
 		}
 		$coupon = $this -> CouponBatch -> Coupon -> read(null, $coupon_id);
 		if($coupon['Coupon']['is_used']) {
-			$this -> Session -> setFlash(__('El cupon ya fue usado por lo que no se puede activar'));
+			$this -> Session -> setFlash(__('El cupon ya fue usado por lo que no se puede activar'), 'crud/error');
 			$this -> redirect(array('action' => 'view', $batch_id));
 		} else {
 			if ($this -> CouponBatch -> Coupon -> saveField('is_active', true)) {
-				$this -> Session -> setFlash(__('Se activo el cupon'));
+				$this -> Session -> setFlash(__('Se activo el cupon'), 'crud/success');
 				$this -> redirect(array('action' => 'view', $batch_id));
 			}
 		}
-		$this -> Session -> setFlash(__('No se desactivo el cupon'));
+		$this -> Session -> setFlash(__('No se desactivo el cupon'), 'crud/error');
 		$this -> redirect(array('action' => 'view', $batch_id));
 	}
 
@@ -52,6 +57,7 @@ class CouponBatchesController extends AppController {
 	 */
 	public function admin_index() {
 		$this -> CouponBatch -> recursive = 0;
+		$this -> paginate = array('order' => array('CouponBatch.created' => 'DESC'));
 		$this -> set('couponBatches', $this -> paginate());
 	}
 
@@ -74,40 +80,52 @@ class CouponBatchesController extends AppController {
 	 *
 	 * @return void
 	 */
-	public function admin_add() {
+	public function admin_add($coupon_type_id = null, $name = null, $quantity = null, $discount = 0) {
 		if ($this -> request -> is('post')) {
 			$this -> CouponBatch -> create();
 			if ($this -> CouponBatch -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The coupon batch has been saved'));
+				$this -> Session -> setFlash(__('Se crearon los cupones'), 'crud/success');
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The coupon batch could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se pudo crear los cupones. Por favor, intente de nuevo.'), 'crud/error');
+			}
+		} elseif($coupon_type_id && $name && $quantity) {
+			$coupon_batch = array(
+				'CouponBatch' => array(
+					'coupon_type_id' => $coupon_type_id,
+					'name' => $name,
+					'quantity' => $quantity,
+					'discount' => $discount
+				)
+			);
+			if($this -> CouponBatch -> save($coupon_batch)) {
+				$coupon_batch_id = $this -> CouponBatch -> id;
+				$coupon = $this -> CouponBatch -> Coupon -> find('first', array('conditions' => array('Coupon.coupon_batch_id' => $coupon_batch_id)));
+				return $coupon['Coupon']['id'];
 			}
 		}
 		$couponTypes = $this -> CouponBatch -> CouponType -> find('list');
+		unset($couponTypes[1]);
+		unset($couponTypes[2]);
 		$this -> set(compact('couponTypes'));
 	}
-
-	/**
-	 * admin_delete method
-	 *
-	 * @param string $id
-	 * @return void
-	 */
-	public function admin_delete($id = null) {
-		if (!$this -> request -> is('post')) {
-			throw new MethodNotAllowedException();
+	
+	public function getCouponInfo($code) {
+		if($code) {
+			$coupon = $this -> CouponBatch -> Coupon -> findByCode($code);
+			echo json_encode($coupon);
+		} else {
+			echo json_encode(array());
 		}
-		$this -> CouponBatch -> id = $id;
-		if (!$this -> CouponBatch -> exists()) {
-			throw new NotFoundException(__('Invalid coupon batch'));
+		exit(0);
+	}
+	
+	public function getInternalCouponInfo($code) {
+		if($code) {
+			return $this -> CouponBatch -> Coupon -> findByCode($code);
+		} else {
+			return array();
 		}
-		if ($this -> CouponBatch -> delete()) {
-			$this -> Session -> setFlash(__('Coupon batch deleted'));
-			$this -> redirect(array('action' => 'index'));
-		}
-		$this -> Session -> setFlash(__('Coupon batch was not deleted'));
-		$this -> redirect(array('action' => 'index'));
 	}
 
 }
