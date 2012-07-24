@@ -131,13 +131,22 @@ class PagesController extends AppController {
 	public function admin_beforePrev() {
 		$this -> Session -> write('left_content', $_POST['left_content']);
 		$this -> Session -> write('content', $_POST['content']);
+		$this -> Session -> write('element1', $_POST['element1']);
+		$this -> Session -> write('element2', $_POST['element2']);
+		$this -> Session -> write('element3', $_POST['element3']);
+
 		echo true;
 		exit(0);
 	}
 
 	public function admin_preview() {
 		$this -> layout = "pages";
-		$page = array('Page' => array('left_content' => $this -> Session -> read('left_content'), 'content' => $this -> Session -> read('content')));
+		$page = array('Page' => array(
+			'left_content' => $this -> Session -> read('left_content'), 
+			'content' => $this -> Session -> read('content'),
+			'element1' => $this -> Session -> read('element1'),
+			'element2' => $this -> Session -> read('element2'),
+			'element3' => $this -> Session -> read('element3')));
 		$this -> set(compact('page'));
 	}
 
