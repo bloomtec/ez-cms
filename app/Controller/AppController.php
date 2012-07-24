@@ -159,32 +159,6 @@ class AppController extends Controller {
 	}
 
 	/**
-	 * Vericar el acceso de un usuario a una función mediante ACL
-	 *
-	 * @param string $username El nombre de usuario
-	 * @param string $controlador Nombre del controlador; i.e.: Users
-	 * @param string $accion Nombre de la función
-	 * @return true o false acorde si hay o no acceso
-	 */
-	protected function verifyUserAccess($username, $controlador = null, $accion = null) {
-		if (!$controlador || !$accion) {
-			// Armar la ruta
-			$ruta = '';
-			for ($i = 0; $i < count($this -> params['ruta']); $i++) {
-				$ruta .= $this -> params['ruta'][$i];
-				if ($i != count($this -> params['ruta']) - 1) {
-					$ruta .= '/';
-				}
-			}
-			return $this -> Acl -> check($username, $ruta);
-		} elseif (!$accion) {
-			return $this -> Acl -> check($username, $controlador);
-		} else {
-			return $this -> Acl -> check($username, $controlador . '/' . $accion);
-		}
-	}
-
-	/**
 	 * Cuadrar accesos mediante ACL
 	 *
 	 * @return void
