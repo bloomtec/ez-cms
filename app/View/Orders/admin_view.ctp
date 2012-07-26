@@ -1,47 +1,47 @@
 <div class="orders view">
 <h2><?php  echo __('Order');?></h2>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($order['Order']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Code'); ?></dt>
+		<dt><?php echo __('Código'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['code']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Order State'); ?></dt>
+		<dt><?php echo __('Estado'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['OrderState']['name'], array('controller' => 'order_states', 'action' => 'view', $order['OrderState']['id'])); ?>
+			<?php echo $order['OrderState']['name']; ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Comments'); ?></dt>
+		<dt><?php echo __('Comentarios'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['comments']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Information'); ?></dt>
+		<dt><?php echo __('Información'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['information']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('User'); ?></dt>
+		<dt><?php echo __('Cupon'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['User']['name'], array('controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
+			<?php echo h($order['Order']['coupon_code']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('User Address'); ?></dt>
+		<dt><?php echo __('Usuario'); ?></dt>
 		<dd>
-			<?php echo $this->Html->link($order['UserAddress']['name'], array('controller' => 'user_addresses', 'action' => 'view', $order['UserAddress']['id'])); ?>
+			<?php echo $this -> Html -> link($order['User']['username'], array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Created'); ?></dt>
+		<dt><?php echo __('Dirección'); ?></dt>
+		<dd>
+			<?php echo $order['UserAddress']['name'] . ' :: ' . $order['UserAddress']['address']; ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Creada'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['created']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Updated'); ?></dt>
+		<dt><?php echo __('Modificada'); ?></dt>
 		<dd>
 			<?php echo h($order['Order']['updated']); ?>
 			&nbsp;
@@ -49,70 +49,38 @@
 	</dl>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('Acciones'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('Edit Order'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Order'), array('action' => 'delete', $order['Order']['id']), null, __('Are you sure you want to delete # %s?', $order['Order']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Orders'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Order'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Order States'), array('controller' => 'order_states', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Order State'), array('controller' => 'order_states', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List User Addresses'), array('controller' => 'user_addresses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User Address'), array('controller' => 'user_addresses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Order Items'), array('controller' => 'order_items', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Order Item'), array('controller' => 'order_items', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Modificar Orden'), array('action' => 'edit', $order['Order']['id'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Ver Ordenes'), array('action' => 'index')); ?> </li>
 	</ul>
 </div>
 <div class="related">
-	<h3><?php echo __('Related Order Items');?></h3>
+	<h3><?php echo __('Ítems Relacionados');?></h3>
 	<?php if (!empty($order['OrderItem'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
-		<th><?php echo __('Id'); ?></th>
-		<th><?php echo __('Order Id'); ?></th>
-		<th><?php echo __('Product Id'); ?></th>
-		<th><?php echo __('Color Id'); ?></th>
-		<th><?php echo __('Product Size Id'); ?></th>
-		<th><?php echo __('Quantity'); ?></th>
-		<th><?php echo __('Single Item Price'); ?></th>
-		<th><?php echo __('Single Item Tax'); ?></th>
-		<th><?php echo __('Total Items Price'); ?></th>
-		<th><?php echo __('Total Items Tax'); ?></th>
-		<th><?php echo __('Created'); ?></th>
-		<th><?php echo __('Updated'); ?></th>
-		<th class="actions"><?php echo __('Actions');?></th>
+		<th><?php echo __('Produco'); ?></th>
+		<th><?php echo __('Color'); ?></th>
+		<th><?php echo __('Talla'); ?></th>
+		<th><?php echo __('Cantidad'); ?></th>
+		<th><?php echo __('Precio Unitario'); ?></th>
+		<th><?php echo __('I.V.A. Unitario'); ?></th>
+		<th><?php echo __('Total'); ?></th>
+		<th><?php echo __('Total I.V.A.'); ?></th>
 	</tr>
-	<?php
-		$i = 0;
-		foreach ($order['OrderItem'] as $orderItem): ?>
+	<?php $i = 0; foreach ($order['OrderItem'] as $orderItem): ?>
 		<tr>
-			<td><?php echo $orderItem['id'];?></td>
-			<td><?php echo $orderItem['order_id'];?></td>
-			<td><?php echo $orderItem['product_id'];?></td>
-			<td><?php echo $orderItem['color_id'];?></td>
-			<td><?php echo $orderItem['product_size_id'];?></td>
+			<td><?php echo $orderItem['Product']['reference'];?></td>
+			<td><?php echo $orderItem['Color']['name'];?></td>
+			<td><?php echo $orderItem['ProductSize']['name'];?></td>
 			<td><?php echo $orderItem['quantity'];?></td>
-			<td><?php echo $orderItem['single_item_price'];?></td>
-			<td><?php echo $orderItem['single_item_tax'];?></td>
-			<td><?php echo $orderItem['total_items_price'];?></td>
-			<td><?php echo $orderItem['total_items_tax'];?></td>
-			<td><?php echo $orderItem['created'];?></td>
-			<td><?php echo $orderItem['updated'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View'), array('controller' => 'order_items', 'action' => 'view', $orderItem['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'order_items', 'action' => 'edit', $orderItem['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'order_items', 'action' => 'delete', $orderItem['id']), null, __('Are you sure you want to delete # %s?', $orderItem['id'])); ?>
-			</td>
+			<td><?php echo '$ ' . number_format($orderItem['single_item_price'], 2); ?></td>
+			<td><?php echo '$ ' . number_format($orderItem['single_item_tax'], 2); ?></td>
+			<td><?php echo '$ ' . number_format($orderItem['total_items_price'], 2); ?></td>
+			<td><?php echo '$ ' . number_format($orderItem['total_items_tax'], 2); ?></td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
-<?php endif; ?>
-
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Order Item'), array('controller' => 'order_items', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
+	<?php endif; ?>
 </div>
