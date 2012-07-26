@@ -204,6 +204,7 @@ a.rosa:hover{
 	display:block;
 	height:170px;
 	z-index:2;
+	max-width: 90px;
 }
 #content{
 	min-height:400px;
