@@ -1,5 +1,6 @@
 <?php
 class SurveyOption extends AppModel {
+	public $actsAs = array('Ez.Auditable');
 	var $name = 'SurveyOption';
 	var $displayField = 'name';
 	var $validate = array(

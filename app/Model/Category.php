@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  * @property Product $Product
  */
 class Category extends AppModel {
+
+	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Display field

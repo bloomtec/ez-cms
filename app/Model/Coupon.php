@@ -6,6 +6,8 @@ App::uses('AppModel', 'Model');
  * @property CouponBatch $CouponBatch
  */
 class Coupon extends AppModel {
+
+	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Display field

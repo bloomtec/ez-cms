@@ -7,7 +7,8 @@ App::uses('AppModel', 'Model');
  * @property ProductSize $ProductSize
  */
 class Inventory extends AppModel {
-	public $actsAs = array('Containable');
+
+	public $actsAs = array('Containable','Ez.Auditable');
 	
 	/**
 	 * Virtual Fields

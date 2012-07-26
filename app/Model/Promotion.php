@@ -7,6 +7,8 @@ App::uses('AppModel', 'Model');
  * @property Coupon $Coupon
  */
 class Promotion extends AppModel {
+
+	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Validation rules

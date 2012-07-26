@@ -6,9 +6,10 @@ App::uses('AppModel', 'Model');
  * @property Inventory $Inventory
  * @property Category $Category
  */
-class Product extends AppModel {
+class Product extends AppModel {	
 
-	public $actsAs = array('Containable');
+	public $actsAs = array('Containable','Ez.Auditable');
+	
 	/**
 	 * Display field
 	 *

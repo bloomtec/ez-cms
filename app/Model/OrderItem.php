@@ -9,6 +9,8 @@ App::uses('AppModel', 'Model');
  * @property ProductSize $ProductSize
  */
 class OrderItem extends AppModel {
+
+	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Display field

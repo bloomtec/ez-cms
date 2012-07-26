@@ -5,6 +5,8 @@ App::uses('AppModel', 'Model');
  *
  */
 class Page extends AppModel {
+
+	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Display field

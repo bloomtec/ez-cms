@@ -10,7 +10,7 @@ App::uses('AppModel', 'Model');
  */
 class Order extends AppModel {
 
-	public $actsAs = array('Containable');
+	public $actsAs = array('Containable','Ez.Auditable');
 	
 	/**
 	 * Display field
