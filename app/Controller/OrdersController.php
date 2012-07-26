@@ -304,6 +304,43 @@ class OrdersController extends AppController {
 		$this -> Order -> recursive = 0;
 		$this -> set('orders', $this -> paginate());
 	}
+	
+	/**
+	 * admin_edit method
+	 *
+	 * @param string $id
+	 * @return void
+	 */
+	public function admin_edit($id = null) {
+		$this -> Order -> id = $id;
+		if (!$this -> Order -> exists()) {
+			throw new NotFoundException(__('Invalid order'));
+		}
+		if ($this -> request -> is('post') || $this -> request -> is('put')) {
+			
+			if ($this -> Order -> save($this -> request -> data)) {
+				$this -> Session -> setFlash(__('Se ha cambiado el estado de la orden'), 'crud/success');
+				$this -> redirect(array('action' => 'index'));
+			} else {
+				$this -> Session -> setFlash(__('No se pudo cambiar el estado de la orden. Por favor, intente de nuevo.'), 'crud/error');
+			}
+						
+		} else {
+			$this -> request -> data = $this -> Order -> read(null, $id);
+		}
+		$orderStates = $this -> Order -> OrderState -> find('list', array('conditions' => array('OrderState.id >' => 2)));
+		if($this -> request -> data['Order']['order_state_id'] == 3) {
+			unset($orderStates[3]);
+			unset($orderStates[5]);
+		} elseif($this -> request -> data['Order']['order_state_id'] == 4) {
+			unset($orderStates[3]);
+			unset($orderStates[5]);
+		} elseif($this -> request -> data['Order']['order_state_id'] == 5) {
+			unset($orderStates[3]);
+			unset($orderStates[4]);
+		}
+		$this -> set(compact('orderStates'));
+	}
 
 	/**
 	 * admin_view method
@@ -312,6 +349,7 @@ class OrdersController extends AppController {
 	 * @return void
 	 */
 	public function admin_view($id = null) {
+		$this -> Order -> recursive = 2;
 		$this -> Order -> id = $id;
 		if (!$this -> Order -> exists()) {
 			throw new NotFoundException(__('Invalid order'));
