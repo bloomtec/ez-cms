@@ -9,11 +9,11 @@
 	<div style="float: left; margin-left: 25px; width: 95%;">
 		<br />
 		<div style="background: none repeat scroll 0 0 #DC3682; color: white; margin-bottom: auto; margin-left: auto; margin-right: auto; min-height: 25px; padding: 9px 5px 5px 10px;">
-			Gracias por comprar en <b>priceshoes.com.co</b>
+			Gracias por comprar en <b><a style="color: white;">priceshoes.com.co</a></b>
 		</div>
 		<br />
 		<div style="margin-left: auto; margin-bottom: auto; margin-right: auto; margin-top: auto; max-height: 240px; max-width: 530px; min-height: 240px; min-width: 530px;">
-			<table style="margin: auto; min-width: 524px;">
+			<table style="margin: auto; min-width: 524px; padding-right: 70px;">
 				<tr>
 					<td width="210" align="right"><img alt="Price Shoes" src="http://<?php echo Configure::read('site_domain'); ?>/img/check_correos.jpg"></td>
 					<td width="60" align="center"><img alt="Price Shoes" src="http://<?php echo Configure::read('site_domain'); ?>/img/arrow_correos.jpg"></td>

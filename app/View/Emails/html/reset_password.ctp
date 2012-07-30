@@ -18,13 +18,13 @@
 			Contrase&ntilde;a provisional: <b><?php echo $password; ?></b>
 		</p>
 		<p>
-			Si necesitas ayuda o tienes alguna duda, escribenos al correo <a href="mailto:servicioalcliente@priceshoes.com.co">servicioalcliente@priceshoes.com.co</a>
+			Si necesitas ayuda o tienes alguna duda, escríbenos al correo <a href="mailto:servicioalcliente@priceshoes.com.co">servicioalcliente@priceshoes.com.co</a>
 		</p>
 		<p>
 			Atentamente,
 		</p>
 		<p>
-			<b>Servicio al cliente Price Shoes</b>
+			<b>Servicio al Cliente Price Shoes</b>
 		</p>
 	</div>
 	<div class="email-footer" style="background: #DC3682; min-height: 5px;"></div>

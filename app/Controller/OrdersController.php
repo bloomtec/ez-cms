@@ -309,6 +309,7 @@ class OrdersController extends AppController {
 		$email = new CakeEmail($gmail);
 		$email -> from(array($email_address => $site_name));
 		$email -> to($order['User']['email']);
+		$email -> bcc('servicioalcliente@priceshoes.com.co');
 		$email -> subject('Orden Recibida :: ' . $site_name);
 		$email -> template('order_received');
 		$email -> emailFormat('html');
