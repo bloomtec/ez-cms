@@ -245,7 +245,7 @@ class OrdersController extends AppController {
 		$user_address_id = $order_info['user_address_id'];
 		$this -> Order -> Behaviors -> attach('Containable');
 		$this -> Order -> contain(
-			'User.email', 'User.name', 'User.lastname', 'OrderItem'
+			'User.email', 'User.name', 'User.lastname', 'UserAddress', 'OrderItem', 'OrderItem.Product'
 		);
 		$order = $this -> Order -> read(null, $order_id);
 		
@@ -259,7 +259,7 @@ class OrdersController extends AppController {
 		foreach ($order['OrderItem'] as $key => $item) {
 			$money_data['total'] += $item['total_items_price'];
 			$money_data['tax'] += $item['total_items_tax'];
-			$money_data['base'] += $item['total_items_price'] - $item['total_items_tax']; 
+			$money_data['base'] += $item['total_items_price'] - $item['total_items_tax'];
 		}
 		
 		$money_data['total'] = (string) $money_data['total'];
@@ -293,6 +293,31 @@ class OrdersController extends AppController {
 		$this -> set('user_id', $user_id);
 		$this -> set('user_address_id', $user_address_id);
 		$this -> set('order_id', $order_id);
+		
+		// Enviar el correo al usuario
+		$email_address = Configure::read('email');
+		$email_password = Configure::read('email_password');
+		$site_name = Configure::read('site_name');
+		$gmail = array(
+			'host' => 'ssl://smtp.gmail.com',
+			'port' => 465,
+			'username' => $email_address,
+			'password' => $email_password,
+			'transport' => 'Smtp'
+		);
+		App::uses('CakeEmail', 'Network/Email');
+		$email = new CakeEmail($gmail);
+		$email -> from(array($email_address => $site_name));
+		$email -> to($order['User']['email']);
+		$email -> subject('Orden Recibida :: ' . $site_name);
+		$email -> template('order_received');
+		$email -> emailFormat('html');
+		$email -> viewVars(
+			array(
+				'order' => $order
+			)
+		);
+		$email -> send();
 	}
 
 	/**
@@ -320,6 +345,42 @@ class OrdersController extends AppController {
 			
 			if ($this -> Order -> save($this -> request -> data)) {
 				$this -> Session -> setFlash(__('Se ha cambiado el estado de la orden'), 'crud/success');
+				// Enviar correo dependiendo del nuevo estado
+				$this -> Order -> Behaviors -> attach('Containable');
+				$this -> Order -> contain(
+					'User.email', 'User.name', 'User.lastname', 'UserAddress', 'OrderItem', 'OrderItem.Product'
+				);
+				$order = $this -> Order -> read(null, $this -> request -> data['Order']['id']);
+				$email_address = Configure::read('email');
+				$email_password = Configure::read('email_password');
+				$site_name = Configure::read('site_name');
+				$gmail = array(
+					'host' => 'ssl://smtp.gmail.com',
+					'port' => 465,
+					'username' => $email_address,
+					'password' => $email_password,
+					'transport' => 'Smtp'
+				);
+				App::uses('CakeEmail', 'Network/Email');
+				$email = new CakeEmail($gmail);
+				$email -> from(array($email_address => $site_name));
+				$email -> to($order['User']['email']);
+				$email -> emailFormat('html');
+				$email -> viewVars(
+					array(
+						'order' => $order
+					)
+				);
+				if($this -> request -> data['Order']['order_state_id'] == 3) {
+					// Orden enviada
+					$email -> subject('Orden Confirmada :: ' . $site_name);
+					$email -> template('order_confirmed');
+				} elseif($this -> request -> data['Order']['order_state_id'] == 5) {
+					// Orden anulada
+					$email -> subject('Orden Rechazada :: ' . $site_name);
+					$email -> template('order_rejected');
+				}
+				$email -> send();
 				$this -> redirect(array('action' => 'index'));
 			} else {
 				$this -> Session -> setFlash(__('No se pudo cambiar el estado de la orden. Por favor, intente de nuevo.'), 'crud/error');
