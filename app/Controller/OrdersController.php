@@ -431,7 +431,7 @@ class OrdersController extends AppController {
 		$order['Order']['information'] = $response['response_code'] . ' - ' . $this -> Interpagos -> getResponseCodeMessage($response['response_code']);
 		$order['Order']['order_state_id'] = 2;
 		$this -> Order -> save($order);
-		if($response['success']) {
+		if($response['approved']) {
 			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/success');
 		} else {
 			$this -> Session -> setFlash($this -> Interpagos -> getResponseCodeMessage($response['response_code']), 'crud/error');
