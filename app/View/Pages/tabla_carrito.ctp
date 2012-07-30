@@ -134,7 +134,7 @@
 		</div>
 		<div>
 			<h2 class='rosa'>Comentarios</h2>
-			<?php echo $this -> Form->input("comments",array("label"=>false,'required'=>'required', 'type' => 'textarea'));?>
+			<?php echo $this -> Form->input("comments",array("label"=>false, 'type' => 'textarea'));?>
 			<div style="clear:both"></div>
 		</div>
 		<div style="clear:both"></div>
