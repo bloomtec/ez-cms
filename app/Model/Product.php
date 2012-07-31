@@ -148,7 +148,7 @@ class Product extends AppModel {
 		if(isset($this -> data['Product']['price']) && !empty($this -> data['Product']['price'])) {
 			// Ajusted del valor del IVA
 			$tax_value = $this -> data['Product']['price'];
-			$tax_value = $tax_value - ($tax_value / $tax_base);
+			$tax_value = $tax_value * ($tax_base - 1);
 			$this -> data['Product']['tax_value'] = $tax_value;
 		}
 		return true;

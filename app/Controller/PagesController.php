@@ -33,7 +33,15 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos','tablaFavoritos','resumenFavoritos');
+		$this -> Auth -> allow('email', 'display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos','tablaFavoritos','resumenFavoritos');
+	}
+	
+	public function email() {
+		$this -> layout = 'ajax';
+		$this -> loadModel('Order');
+		$this -> Order -> Behaviors -> attach('Containable');
+		$this -> Order -> contain('User', 'UserAddress', 'OrderItem', 'OrderItem.Product');
+		$this -> set('order', $this -> Order -> read(null, 5));
 	}
 
 	/**
@@ -83,16 +91,17 @@ class PagesController extends AppController {
 		}
 		$this -> set(compact('page', 'subpage', 'title_for_layout'));
 		$this -> render(implode('/', $path));
-
 	}
 	
 	public function resumenCarrito(){
 		$this -> layout="ajax";
 	}
+	
 	public function resumenFavoritos(){
 		$this -> layout="ajax";
 		
 	}
+	
 	public function registro() {
 		/*$this -> redirect(
 			array(
