@@ -24,7 +24,7 @@
 		<?php echo $this -> element('galeria');?>	
 		<div class="caracteristicas">
 			<div class="colores">			
-				Colores:
+				<h2>Colores:</h2>
 				<ul class="cuadros-colores">
 				<?php $productColors; ?>
 					<?php if ($product['Inventory']): ?>
@@ -57,7 +57,7 @@
 				<div style="clear:both"></div>
 			</div>
 			<div class="tallas">			
-				Tallas Disponibles:
+				<h2>Tallas Disponibles:</h2>
 				<ul class="cuadros-tallas">
 				<?php $productSizes; $options=null;?>
 					<?php if (!empty($product['Inventory'])): ?>
@@ -85,7 +85,7 @@
 				</ul>
 				<div style="clear:both"></div>
 			</div>
-			
+			<h2>Precio: <span class='price'><?php echo "$ ".number_format($product['Product']['price'], 0, ' ', '.'); ?></span></h2> 
 			<ul class="botones-caracteristicas">
 				<?php //if($session->read("Auth.User.id")):?>			
 				<li class="to-cart">

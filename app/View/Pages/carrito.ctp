@@ -1,4 +1,4 @@
-<div id="pages">
+<div >
 <div id="left-col">
 	<?php echo $this -> element('novedad'); ?>
 	<?php echo $this -> element('resumen-favoritos'); ?>
