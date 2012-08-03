@@ -44,36 +44,37 @@ class ShoppingCartsController extends BCartAppController {
 	 * 
 	 * @return Información del carrito
 	 */
-	public function get() {
-		$user_id = $this -> getUserId(); 
+	public function get($json = false) {
+		$user_id = $this -> getUserId();
+		$shopping_cart = array();
 		if($user_id) {
 			/** hay usuario logueado **/
 			$shopping_cart = $this -> ShoppingCart -> findByUserId($user_id);
-			if($shopping_cart) {
-				return $shopping_cart;
-			} else {
+			if(!$shopping_cart) {
 				$this -> ShoppingCart -> create();
 				$shopping_cart = array('ShoppingCart' => array('user_id' => $user_id));
 				if($this -> ShoppingCart -> save($shopping_cart)) {
-					return $this -> ShoppingCart -> read(null, $this -> ShoppingCart -> id);
-				} else {
-					return array();
+					$shopping_cart = $this -> ShoppingCart -> read(null, $this -> ShoppingCart -> id);
 				}
 			}
 		} else {
 			// no hay usuario logueado
 			$shopping_cart = $this -> ShoppingCart -> findByIdentifier($this -> getIdentifier());
-			if($shopping_cart) {
-				return $shopping_cart;
-			} else {
+			if(!$shopping_cart) {
 				$this -> ShoppingCart -> create();
 				$shopping_cart = array('ShoppingCart' => array('identifier' => $this -> getIdentifier()));
 				if($this -> ShoppingCart -> save($shopping_cart)) {
-					return $this -> ShoppingCart -> read(null, $this -> ShoppingCart -> id);
-				} else {
-					return array();
+					$shopping_cart = $this -> ShoppingCart -> read(null, $this -> ShoppingCart -> id);
 				}
 			}
+		}
+		
+		
+		if(!$json) {
+			return $shopping_cart;
+		} else {
+			echo json_encode($shopping_cart);
+			exit(0);
 		}
 	}
 	

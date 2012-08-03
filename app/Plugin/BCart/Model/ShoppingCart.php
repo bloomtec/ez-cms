@@ -55,7 +55,7 @@ class ShoppingCart extends BCartAppModel {
 			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
-			'order' => '',
+			'order' => array('CartItem.price' => 'DESC'),
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',

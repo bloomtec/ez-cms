@@ -164,41 +164,81 @@ class OrdersController extends AppController {
 					$total_items_price = 0;
 					
 					if($coupon_info) {
-						// Pague uno lleve 2
-						if($coupon_info['CouponBatch']['coupon_type_id'] == 1) {
-							$quantity = $cart_item['quantity'];
-							$price = $product['Product']['price'];
-							$pairs = (int) ($quantity / 2);
-							if($pairs >= 1) {
-								$discount = $price * $pairs;
-								$itemTotal = ($price * $quantity) - $discount;
-								$total_items_price = round($itemTotal, 2);
-							} else {
-								// No hay 2do par
-								$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
-							}
-						}
-						// Pague el 2do a X% de descuento
-						elseif($coupon_info['CouponBatch']['coupon_type_id'] == 2) {
-							$quantity = $cart_item['quantity'];
-							$price = $product['Product']['price'];
-							$pairs = (int) ($quantity / 2);
-							if($pairs >= 1) {
-								$discount = $price - ($price * $coupon_info['CouponBatch']['discount']);
-								$itemTotal = ($price * $quantity) - ($discount * $pairs);
-								$total_items_price = round($itemTotal, 2);
-							} else {
-								// No hay 2do par
-								$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
-							}
-						}
 						// X% de descuento en la compra
-						elseif($coupon_info['CouponBatch']['coupon_type_id'] == 3) {
+						if($coupon_info['CouponBatch']['coupon_type_id'] == 3) {
 							$quantity = $cart_item['quantity'];
 							$price = $product['Product']['price'];
 							$discount = $price - ($price * $coupon_info['CouponBatch']['discount']);
 							$itemTotal = ($price * $quantity) - ($discount * $quantity);
 							$total_items_price = round($itemTotal, 2);
+						} else {
+							/**
+							 * Proceso para cuando se es pague uno lleve 2 o paque el 2do a un % de descuento
+							 */
+							// Obtener el total de pares de zapatos comprados
+							$cartItems = $shopping_cart['CartItem'];
+							$totalItems = 0;
+							foreach($cartItems as $key => $anItem) {
+								$totalItems += $anItem['quantity'];
+								$cartItems[$key]['displayPrice'] = 0;
+							}
+							// Ver cuantas parejas de pares de zapatos hay
+							$pairs = (int) $totalItems / 2;
+							// Procesar el pedido y obtener los descuentos acorde el tipo de cupon (solo aplica a los pares)
+							do {
+								// Recorrer los items comprados de mayor a menor precio
+								for($pos = 0, $foundFirst = false; $pos < count($cartItems) & !$foundFirst; $pos += 1) {
+									// Verificar la cantidad de pares comprados del ítem
+									if($cartItems[$pos]['quantity'] >= 1) {
+										// Hay uno o más de un par de zapatos de este ítem
+										$cartItems[$pos]['quantity'] -= 1;
+										$foundFirst = true;
+										$cartItems[$pos]['displayPrice'] += $cartItems[$pos]['price'];
+										/**
+										 * Se redujo la cantidad en 1 lo que implica que se reviso este par de zapatos.
+										 * Proceder a aplicar descuentos apliclables a los pares con menores precios.
+										 * NOTA: Proceso en el siguiente for()...
+										 */
+									} else {
+										// Ya fueron procesados los pares de zapatos de este ítem
+									}
+								}
+								// Recorrer los items comprados de menor a mayor precio
+								for($pos = count($cartItems) - 1, $foundLast = false; $pos >= 0  & !$foundLast; $pos -= 1) {
+									// Verificar la cantidad de pares comprados del ítem
+									if($cartItems[$pos]['quantity'] >= 1) {
+										// Hay uno o más de un par de zapatos de este ítem
+										$foundLast = true;
+										$priceWithDiscount = 0;
+										/**
+										 * Verificar que tipo de descuento es y aplicarlo
+										 */
+										// Pague uno lleve 2
+										if($coupon_info['CouponBatch']['coupon_type_id'] == 1) {
+											// TODO : Nada por el momento!
+										}
+										// Pague el 2do a X% de descuento
+										else if($coupon_info['CouponBatch']['coupon_type_id'] == 2) {
+											// Encontrar el valor de descuento y asignar subTotal
+											$itemPrice = $cartItems[$pos]['price'];
+											$discount = couponInfo.CouponBatch.discount;
+											$priceWithDiscount = $itemPrice * $discount;
+											$cartItems[$pos]['displayPrice'] += $priceWithDiscount;
+										}
+										$cartItems[$pos]['quantity'] -= 1;
+									} else {
+										// Ya fueron procesados los pares de zapatos de este ítem
+									}
+								}
+								$pairs -= 1;
+							} while($pairs > 0);
+							// Procesar los pares restantes
+							for($pos = 0; $pos < count($cartItems); $pos += 1) {
+								if($cartItems[$pos]['quantity'] > 0) {
+									$cartItems[$pos]['displayPrice'] += $cartItems[$pos]['quantity'] * $cartItems[$pos]['price'];
+								}
+							};
+							$total_items_price = round($cartItems[$key]['displayPrice'], 2);
 						}
 					} else {
 						$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
