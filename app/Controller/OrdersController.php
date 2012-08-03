@@ -44,6 +44,7 @@ class OrdersController extends AppController {
 	 * @return void
 	 */
 	public function add() {
+		$this -> autoRender = false;
 		if ($this -> request -> is('post')) {
 			
 			/**
@@ -238,7 +239,12 @@ class OrdersController extends AppController {
 									$cartItems[$pos]['displayPrice'] += $cartItems[$pos]['quantity'] * $cartItems[$pos]['price'];
 								}
 							};
-							$total_items_price = round($cartItems[$key]['displayPrice'], 2);
+							foreach($cartItems as $pos => $anItem) {
+								if($cart_item['id'] == $anItem['id']) {
+									$total_items_price = round($anItem['displayPrice'], 2);
+									break;
+								}
+							}
 						}
 					} else {
 						$total_items_price = round($cart_item['quantity'] * $product['Product']['price'], 2);
