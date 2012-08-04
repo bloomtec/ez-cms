@@ -47,7 +47,7 @@ class CategoriesController extends AppController {
 		$this -> loadModel('Inventory');
 		$this -> Inventory -> recursive=-1;
 		$this -> paginate = array(
-			'limit' => 6,
+			'limit' => 9,
 			'contain' => array('Product'),
 			'group' => 'Inventory.gallery'
 		);
