@@ -44,7 +44,7 @@
 					
 			</table>
 			<?php } else { ?>
-					<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No productos en tus favoritos </p>
+					<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No hay productos en tus favoritos</p>
 			<?php } ?>
 			<?php if(isset($addresses)):?>
 				<script type="text/javascript">

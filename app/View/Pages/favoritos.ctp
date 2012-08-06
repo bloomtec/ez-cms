@@ -6,14 +6,16 @@
 <div id="right-col" class='black-wrapper carrito-view'>
 	<h2>Mis Favoritos</h2>
 	<p>
-	Gracias por realizar tus compras en <a href="/" class="rosa">www.priceshoes.com.co</a>	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ac lorem velit, quis auctor sem. In luctus enim a eros sodales consequat. Proin ultrices venenatis venenatis. Proin lectus arcu, ultrices id ultricies eu, tempus in elit. Vivamus fermentum arcu sed felis rutrum luctus. Ut at tempor nisl. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Quisque et dolor justo, non molestie dolor. Proin convallis pulvinar aliquam. Proin vitae sapien nunc, a condimentum justo. 
+		Las mujeres siempre queremos tener zapatos para toda ocasión… En esta lista encontrarás todos los productos que tú has seleccionado como Favoritos.
+		Seguramente en tu lista hay muchos estilos que te gustaría tener, no los dejes a un lado…
+		Sí son tus Favoritos, no te olvides de ellos, agrégalos a tu Carrito!!
 	</p>
 	<div class="tabla-carrito">
 		<div class="actualizando">
 			Actualizando tus favoritos...
 		</div>
 		<div class="content">
-
+			
 		</div>
 		<?php // Carga el contenido via AJAX ?>
 	</div>
