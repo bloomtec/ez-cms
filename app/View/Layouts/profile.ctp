@@ -59,7 +59,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				<ul id="profile-menu">
 					<li class='profile'> <a href="/user_control/users/profile">Mi Perfil</a></li>
 					<li class='edit'> <a href="/user_control/users/edit">Modificar Datos</a></li>
-					<li class='orders'> <a href="/user_control/users/orders">Mis Pedidos</a></li>
+					<li class='orders'> <a href="/user_control/users/orders">Mis Ordenes</a></li>
 				</ul>
 			<?php echo $this->Session->flash(); ?>
 			<?php echo $this->fetch('content'); ?>
