@@ -1057,16 +1057,39 @@ padding:2px 0;
 	width:50px;
 	border:0;
 }
-.tablaCarrito  th, .tablas th {
+.tablaCarrito th, .tablas th {
 	background: url(../img/trama-nav.png) repeat-x;
 	height:30px;
 	line-height:30px;
 	text-align:left;
 	padding-left:10px;
 }
-.tablas{
+.tablas {
 	width:100%;
 	margin:0 auto;
+}
+.tablas .mis-ordenes-fecha {
+	width: 20px;
+}
+.tablas td.mis-ordenes-fecha {
+	text-align: center;
+}
+.tablas .mis-ordenes-estado {
+	width: 180px;
+}
+.tablas .mis-ordenes-comentarios {
+	width: 180px;
+}
+.tablas td.mis-ordenes-comentarios, .tablas td.mis-ordenes-estado {
+	text-align: left;
+}
+.tablas .mis-ordenes-direccion {
+	width: 160px;
+	text-align: center;
+}
+.tablas .mis-ordenes-opciones {
+	width: 75px;
+	text-align: center;
 }
 #right-col.carrito-view{
 	padding:0 20px;
