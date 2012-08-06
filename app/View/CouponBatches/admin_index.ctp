@@ -13,7 +13,7 @@
 		<?php foreach ($couponBatches as $couponBatch):	?>
 		<tr>
 			<!--<td><?php echo h($couponBatch['CouponBatch']['id']); ?>&nbsp;</td>-->
-			<td><?php echo $this -> Html -> link($couponBatch['CouponType']['name'], array('controller' => 'coupon_types', 'action' => 'view', $couponBatch['CouponType']['id'])); ?></td>
+			<td><?php echo h($couponBatch['CouponType']['name']); ?>&nbsp;</td>
 			<td><?php echo h($couponBatch['CouponBatch']['name']); ?>&nbsp;</td>
 			<td>
 				<?php if($couponBatch['CouponBatch']['coupon_type_id'] == 2 || $couponBatch['CouponBatch']['coupon_type_id'] == 3) : ?>
