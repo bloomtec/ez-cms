@@ -12,7 +12,7 @@
 	<div id="right-col">
 		<div class='black-wrapper cat-description'>
 			<h3><?php echo $category['Category']['name']; ?></h3>
-			<p style="line-height: 20px;"><?php echo $category['Category']['description']; ?></p>
+			<p style="line-height: 17px;"><?php echo $category['Category']['description']; ?></p>
 		</div> 
 		
 		<?php echo $this -> element('listado-por-inventarios'); ?>
