@@ -329,10 +329,10 @@ a.rosa:hover{
 #pages #right-col{
 	padding:0px;
 	width:660px;
+	min-width:72.918%;
 }
 #pages #right-col > p {
-	margin:10px;
-	margin-left: 20px;
+	margin:10px 20px;
 	line-height: 20px;
 }
 #pages #right-col > h2 {
