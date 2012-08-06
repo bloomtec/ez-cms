@@ -9,9 +9,9 @@
 	<?php echo $this -> Form->create("Page",array("action"=>"contacto","controller"=>"pages"));?>
 	<fieldset>
 		<h1>
-			Formulario de contacto
+			Formulario De Contacto
 		</h1>
-		<p>
+		<p style="line-height: 20px;">
 			Hemos creado este espacio para que nuestros clientes nos aporten comentarios y sugerencias con respecto a nuestra página web. Todas sus palabras son valiosas para nuestra compañía, nuestro crecimiento, nuestro progreso. Buscamos mejorar nuestro servicio para darle al cliente lo que necesita. Gracias por tu tiempo.
 		</p>
 		<?php echo $this -> Form->input("nombre_contacto",array("label"=>"Escribe tu (s) Nombre (s):",'required'=>'required'));?>
