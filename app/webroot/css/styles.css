@@ -741,7 +741,7 @@ text-transform: uppercase;
 	padding:5px;
 	border: solid 1px white;
 	margin-bottom:20px;
-	height:70px;
+	/*height:70px;*/
 }
 .cat-description h3{
 	text-transform:uppercase;
