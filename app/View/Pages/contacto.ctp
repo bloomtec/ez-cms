@@ -11,7 +11,9 @@
 		<h1>
 			Formulario de contacto
 		</h1>
-		<p>Con el fin de conocer sus preguntas y opiniones sobre nuestros productos y servicios tanto en red como en nuestras tiendas, ponemos a su disposición esta sección en la cual podrá enviarnos sus comentarios y sugerencias, nuestro equipo de soporte estará atento para brindarle colaboración que usted necesite.</p>
+		<p>
+			Hemos creado este espacio para que nuestros clientes nos aporten comentarios y sugerencias con respecto a nuestra página web. Todas sus palabras son valiosas para nuestra compañía, nuestro crecimiento, nuestro progreso. Buscamos mejorar nuestro servicio para darle al cliente lo que necesita. Gracias por tu tiempo.
+		</p>
 		<?php echo $this -> Form->input("nombre_contacto",array("label"=>"Escribe tu (s) Nombre (s):",'required'=>'required'));?>
 		<?php echo $this -> Form->input("email",array("label"=>"Dirección E-mail:",'type'=>'email','required'=>'required'));?>
 		<?php echo $this -> Form->input("telefono",array('div' => ' input last',"label"=>"Teléfono:",'required'=>'required'));?>

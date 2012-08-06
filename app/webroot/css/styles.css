@@ -339,10 +339,13 @@ a.rosa:hover{
 	margin:10px;
 	margin-left: 20px;
 }
-#pages.contacto #right-col {
+div#contacto {
+	padding: 20px;
+}
+/*#pages.contacto #right-col {
 	padding: 20px;
 	width: 660px;
-}
+}*/
 .form{
 	padding:40px;
 }
