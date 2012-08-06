@@ -138,7 +138,8 @@
 			<div style="clear:both"></div>
 		</div>
 		<div style="clear:both"></div>
-		<?php	echo $this -> Form -> end('Proceder a pagar'); ?>
+		<?php //echo $this -> Form -> end('Proceder a pagar'); ?>
+		<div id="SubmitProcederAPagar" class="submit"><input type="submit" value="Proceder a pagar"></div>
 </div>
 
 <?php } else { ?>

@@ -1129,10 +1129,10 @@ table.tablaCarrito h3{
 	width:230px;
 	height:30px;
 	font-size:18px;
-	margin-top:10px;
+	margin-top:-112px;
+	margin-right:100px;
 	cursor:pointer;
-	background:url(../img/trama-nav.png) repeat-x;;
-
+	background:url(../img/trama-nav.png) repeat-x;
 }
 .datos-envio .input{
 	float:left;
