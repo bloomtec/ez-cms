@@ -2,7 +2,7 @@
 	<div class='wrapper'>
 		<div id="info-wrapper">
 			<div class="registrar">
-				<h2>Regístra tu correo</h2>
+				<h2>Registra tu correo</h2>
 				<?php echo $this -> Form -> create('User', array('action' => 'registerEmail')); ?>
 				<form id="mail" accept-charset="utf-8" method="post" controller="users" action="/user_control/users/registerEmail">
 					<div>
