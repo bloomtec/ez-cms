@@ -1064,6 +1064,13 @@ padding:2px 0;
 	text-align:center;
 	padding-left:10px;
 }
+.entryTableHeader th {
+	background: url(../img/trama-nav.png) repeat-x;
+	height:30px;
+	line-height:30px;
+	text-align:left;
+	padding-left:10px;
+}
 .tablas {
 	width:100%;
 	margin:0 auto;
