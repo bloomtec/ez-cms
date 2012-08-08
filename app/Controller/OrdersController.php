@@ -318,9 +318,9 @@ class OrdersController extends AppController {
 			$money_data['total'] .= '.00';
 		}
 		$money_data['tax'] = (string) $money_data['tax'];
-		if(!strstr($money_data['tax'], '.')) {
+		/*if(!strstr($money_data['tax'], '.')) {
 			$money_data['tax'] .= '.00';
-		}
+		}*/
 		$money_data['base'] = (string) $money_data['base'];
 		if(!strstr($money_data['base'], '.')) {
 			$money_data['base'] .= '.00';
