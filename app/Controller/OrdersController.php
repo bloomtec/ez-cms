@@ -311,6 +311,7 @@ class OrdersController extends AppController {
 		}
 		
 		// Info de precio del envío
+		$money_data['base'] += $order['Order']['shipment_cost'];
 		$money_data['total'] += $order['Order']['shipment_cost'];
 		
 		$money_data['total'] = (string) $money_data['total'];
