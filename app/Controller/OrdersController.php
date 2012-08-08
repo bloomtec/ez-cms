@@ -428,6 +428,33 @@ class OrdersController extends AppController {
 					$email -> subject('Orden Confirmada :: ' . $site_name);
 					$email -> template('order_confirmed');
 					// Procesar los ítems para reducir inventarios!
+					$this -> loadModel('Inventory');
+					$products_with_errors = "";
+					foreach($order['OrderItem'] as $key => $item) {
+						$inventory = $this -> Inventory -> find(
+							'first',
+							array(
+								'conditions' => array(
+									'Inventory.product_id' => $item['product_id'],
+									'Inventory.color_id' => $item['color_id'],
+									'Inventory.product_size_id' => $item['product_size_id']
+								)
+							)
+						);
+						if($inventory && ($item['quantity']) >= $inventory['Inventory']['quantity']) {
+							$inventory['Inventory']['quantity'] -= $item['quantity'];
+							if($this -> Inventory -> save($inventory)) {
+								// Todo bn!
+							} else {
+								$products_with_errors .= $inventory['Product']['reference'] . ' ';
+							}
+						} else {
+							$products_with_errors .= $inventory['Product']['reference'] . ' ';
+						}
+					}
+					if($products_with_errors) {
+						$this -> Session -> setFlash(__('Verificar cantidad de inventario para las siguientes referencias: ' . $products_with_errors), 'crud/error');
+					}
 				} elseif($this -> request -> data['Order']['order_state_id'] == 5) {
 					// Orden anulada
 					$email -> subject('Orden Rechazada :: ' . $site_name);
