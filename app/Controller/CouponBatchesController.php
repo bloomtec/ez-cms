@@ -134,8 +134,10 @@ class CouponBatchesController extends AppController {
 	public function internalDeactivateCoupon($code) {
 		$coupon = $this -> getInternalCouponInfo($code);
 		$this -> CouponBatch -> Coupon -> id = $coupon['Coupon']['id'];
-		$this -> CouponBatch -> Coupon -> saveField('is_active', false);
-		$this -> CouponBatch -> Coupon -> saveField('is_used', true);
+		if($coupon['CouponBatch']['coupon_type_id'] == 3) {
+			$this -> CouponBatch -> Coupon -> saveField('is_active', false);
+			$this -> CouponBatch -> Coupon -> saveField('is_used', true);
+		}
 	}
 	
 	/**

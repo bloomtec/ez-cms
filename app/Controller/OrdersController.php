@@ -427,6 +427,7 @@ class OrdersController extends AppController {
 					// Orden enviada
 					$email -> subject('Orden Confirmada :: ' . $site_name);
 					$email -> template('order_confirmed');
+					// Procesar los ítems para reducir inventarios!
 				} elseif($this -> request -> data['Order']['order_state_id'] == 5) {
 					// Orden anulada
 					$email -> subject('Orden Rechazada :: ' . $site_name);

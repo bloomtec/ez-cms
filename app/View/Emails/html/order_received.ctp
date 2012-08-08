@@ -78,13 +78,16 @@
 				<?php endforeach; ?>
 			</tbody>
 		</table>
+		<p>
+			El valor del envío para esta orden es de: <b><?php echo '$ ' . number_format($order['Order']['shipment_cost'], 2); ?></b>
+		</p>
 		<?php if(isset($order['Order']['coupon_code']) && !empty($order['Order']['coupon_code'])) { ?>
 		<p>
-			Se utiliz&oacute; el cup&oacute;n <b><?php echo $order['Order']['coupon_code']; ?></b> y el total de la compra es <b><?php echo '$ ' . number_format($subTotal, 2); ?></b>
+			Se utiliz&oacute; el cup&oacute;n <b><?php echo $order['Order']['coupon_code']; ?></b> y el total de la compra es <b><?php echo '$ ' . number_format($subTotal + $order['Order']['shipment_cost'], 2); ?></b>
 		</p>
 		<?php } else { ?>
 		<p>
-			El total de la compra es <b><?php echo '$ ' . number_format($subTotal, 2); ?></b>
+			El total de la compra es <b><?php echo '$ ' . number_format($subTotal + $order['Order']['shipment_cost'], 2); ?></b>
 		</p>
 		<?php } ?>
 		<p>
