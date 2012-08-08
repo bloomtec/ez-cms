@@ -9,7 +9,7 @@ class CouponBatchesController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('getCouponInfo', 'getInternalCouponInfo');
+		$this -> Auth -> allow('getCouponInfo', 'getInternalCouponInfo', 'internalDeactivateCoupon', 'internalActivateCoupon');
 	}
 
 	public function admin_deactivateCoupon($batch_id = null, $coupon_id = null) {
@@ -125,6 +125,28 @@ class CouponBatchesController extends AppController {
 			return $this -> CouponBatch -> Coupon -> findByCode($code);
 		} else {
 			return array();
+		}
+	}
+	
+	/**
+	 * Desactivar luego de proceso de interpagos
+	 */
+	public function internalDeactivateCoupon($code) {
+		$coupon = $this -> getInternalCouponInfo($code);
+		$this -> CouponBatch -> Coupon -> id = $coupon['Coupon']['id'];
+		$this -> CouponBatch -> Coupon -> saveField('is_active', false);
+		$this -> CouponBatch -> Coupon -> saveField('is_used', true);
+	}
+	
+	/**
+	 * Activar en otros procesos internos
+	 * @note ningun proceso por ahora
+	 */
+	public function internalActivateCoupon($code) {
+		$coupon = $this -> getInternalCouponInfo($code);
+		$this -> CouponBatch -> Coupon -> id = $coupon['Coupon']['id'];
+		if(!$coupon['Coupon']['is_used']) {
+			$this -> CouponBatch -> Coupon -> saveField('is_active', true);
 		}
 	}
 

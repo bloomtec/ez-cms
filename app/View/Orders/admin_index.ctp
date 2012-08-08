@@ -6,6 +6,7 @@
 			<th><?php echo $this -> Paginator -> sort('order_state_id', 'Estado'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('user_id', 'Usuario'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('coupon_code', 'Cupon'); ?></th>
+			<th><?php echo $this -> Paginator -> sort('shipment_cost', 'Costo De Envío'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('created', 'Creada'); ?></th>
 			<th><?php echo $this -> Paginator -> sort('updated', 'Modificada'); ?></th>
 			<th class="actions"><?php echo __('Acciones'); ?></th>
@@ -15,7 +16,8 @@
 			<td><?php echo h($order['Order']['code']); ?>&nbsp;</td>
 			<td><?php echo $order['OrderState']['name']; ?></td>
 			<td><?php echo $this -> Html -> link($order['User']['username'], array('plugin' => 'user_control','controller' => 'users', 'action' => 'view', $order['User']['id'])); ?></td>
-			<td><?php echo $order['Order']['coupon_code']; ?></td>
+			<td><?php echo $order['Order']['coupon_code']; ?>&nbsp;</td>
+			<td><?php echo $order['Order']['shipment_cost']; ?>&nbsp;</td>
 			<td><?php echo h($order['Order']['created']); ?>&nbsp;</td>
 			<td><?php echo h($order['Order']['updated']); ?>&nbsp;</td>
 			<td class="actions">

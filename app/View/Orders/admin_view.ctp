@@ -26,6 +26,11 @@
 			<?php echo h($order['Order']['coupon_code']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Costo De Envío'); ?></dt>
+		<dd>
+			<?php echo h('$ ' . number_format($order['Order']['shipment_cost'], 2)); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Usuario'); ?></dt>
 		<dd>
 			<?php echo $this -> Html -> link($order['User']['username'], array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'view', $order['User']['id'])); ?>
