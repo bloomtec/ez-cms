@@ -442,7 +442,7 @@ class OrdersController extends AppController {
 								)
 							)
 						);
-						if($inventory && ($item['quantity']) >= $inventory['Inventory']['quantity']) {
+						if($inventory && ($inventory['Inventory']['quantity'] >= $item['quantity'])) {
 							$inventory['Inventory']['quantity'] -= $item['quantity'];
 							if($this -> Inventory -> save($inventory)) {
 								// Todo bn!
