@@ -141,7 +141,8 @@ class OrdersController extends AppController {
 					'user_id' => $user_id,
 					'user_address_id' => $user_address_id,
 					'comments' => $order_comment,
-					'coupon_code' => $coupon_code
+					'coupon_code' => $coupon_code,
+					'shipment_cost' => $this -> requestAction('/configs/getShipmentCost')
 				)
 			);
 			
@@ -302,11 +303,15 @@ class OrdersController extends AppController {
 			'total' => 0
 		);
 		
+		// Info de precio de los items
 		foreach ($order['OrderItem'] as $key => $item) {
 			$money_data['total'] += $item['total_items_price'];
 			$money_data['tax'] += $item['total_items_tax'];
 			$money_data['base'] += $item['total_items_price'] - $item['total_items_tax'];
 		}
+		
+		// Info de precio del envío
+		$money_data['total'] += $order['Order']['shipment_cost'];
 		
 		$money_data['total'] = (string) $money_data['total'];
 		if(!strstr($money_data['total'], '.')) {

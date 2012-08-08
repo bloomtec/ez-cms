@@ -120,6 +120,9 @@ $(function() {
 							}
 						});
 						if(parseInt(subTotal) > 0 && parseInt($('#TotalCarrito').attr('rel')) > parseInt(subTotal)) {
+							if($('#CostoDeEnvio')) {
+								subTotal += parseInt(priceFormat($('#CostoDeEnvio').text()));
+							}
 							$('#CouponDiscount').text(numberFormat(subTotal));
 							$('#TotalCarrito').css('text-decoration', 'line-through');
 						} else {

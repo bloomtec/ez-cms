@@ -22,7 +22,7 @@
 	</form>
 	<script type="text/javascript">
 		$(function() {
-			$('#InterpagosForm').submit();
+			//$('#InterpagosForm').submit();
 		});
 	</script>
 </div>

@@ -3,11 +3,12 @@
 	echo $this -> Html -> script('coupons');
 	// Obtener el carrito
 	$shopping_cart = $this -> requestAction('/b_cart/ShoppingCarts/get');
+	$shipment_cost = $this -> requestAction('/configs/getShipmentCost');
 ?>
 <?php if(isset($shopping_cart['CartItem']) && !empty($shopping_cart['CartItem'])){?>
 <table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">
 		<?php
-			$subTotal=0;
+			$subTotal = 0;
 		?>
 		<tr class="entryTableHeader">
 			<th colspan="2" align="center">Producto</th>
@@ -61,11 +62,25 @@
 		<?php
 				}
 		?>
+		<?php if($shipment_cost > 0) : ?>
 		<tr class="total">
 			<th colspan="2"style="background: none;">
 				
 			</th>
-			<th colspan="1"style="text-align: center; background: none;">
+			<th colspan="1"style="padding-right: 10px; text-align: right; background: none;">
+				Costo De Envío
+			</th>
+			<th colspan="1"style="text-align:center; min-width: 180px;"></th>
+			<th id="CostoDeEnvio" rel="<?php echo $shipment_cost; ?>" style="text-align:center;">
+				<?php if (isset($shipment_cost)) echo "$ ".number_format($shipment_cost, 0, ' ', '.'); ?>
+			</th>
+		</tr>
+		<?php endif; ?>
+		<tr class="total">
+			<th colspan="2"style="background: none;">
+				
+			</th>
+			<th colspan="1"style="padding-right: 10px; text-align: right; background: none;">
 				Cupon
 			</th>
 			<th colspan="1"style="text-align:center; min-width: 180px;">
@@ -75,14 +90,15 @@
 			<th id="CouponDiscount" style="text-align:center;"></th>
 		</tr>
 		<tr class="total">
-			<th colspan="3"style="background:none;">
+			<th colspan="2"style="background: none;">
 				
 			</th>
-			<th colspan="1"style="text-align:right;">
+			<th colspan="1"style="padding-right: 10px; text-align: right; background: none;">
 				Total
 			</th>
+			<th colspan="1"style="text-align:center; min-width: 180px;"></th>
 			<th id="TotalCarrito" rel="<?php echo $subTotal; ?>" style="text-align:center;">
-				<?php if (isset($subTotal)) echo "$ ".number_format($subTotal, 0, ' ', '.'); ?>
+				<?php if (isset($subTotal)) echo "$ ".number_format($subTotal + $shipment_cost, 0, ' ', '.'); ?>
 			</th>
 		</tr>
 </table>
