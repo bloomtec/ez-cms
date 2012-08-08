@@ -67,7 +67,6 @@ class ProductsController extends AppController {
 	 * @return Array
 	 */
 	public function getNovelty() {
-		
 		$product = $this -> Product -> find(
 			'first',
 			array(
@@ -75,14 +74,7 @@ class ProductsController extends AppController {
 					'Product.is_novelty' => true,
 					'Product.id' => $this -> productsWithInventory()
 				),
-				'order' => 'RAND()',
-				'contain'=>array(
-					'Inventory'=>array(
-						'conditions' => array('Inventory.quantity >' => 0),
-						'order' => 'RAND()',
-						'limit'=>1
-					)
-				)
+				'order' => 'RAND()'
 			)
 		);
 		return $product;
@@ -94,7 +86,6 @@ class ProductsController extends AppController {
 	 * @return Array
 	 */
 	public function getTopSeller() {
-		$this -> Product -> recursive = -1;
 		$product = $this -> Product -> find(
 			'first',
 			array(
@@ -102,14 +93,26 @@ class ProductsController extends AppController {
 					'Product.is_top_seller' => true,
 					'Product.id' => $this -> productsWithInventory()
 				),
-				'order' => 'RAND()',
-				'contain'=>array(
-					'Inventory'=>array(
-						'conditions' => array('Inventory.quantity >' => 0),
-						'order' => 'RAND()',
-						'limit'=>1
-					)
-				)
+				'order' => 'RAND()'
+			)
+		);
+		return $product;
+	}
+	
+	/**
+	 * getTopSeller method
+	 *
+	 * @return Array
+	 */
+	public function getPromoted() {
+		$product = $this -> Product -> find(
+			'first',
+			array(
+				'conditions' => array(
+					'Product.is_promoted' => true,
+					'Product.id' => $this -> productsWithInventory()
+				),
+				'order' => 'RAND()'
 			)
 		);
 		return $product;
