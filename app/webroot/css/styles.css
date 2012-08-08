@@ -589,6 +589,7 @@ margin-left: 10px;
 /*PROFILE*/
 #profile-menu{
 	text-align:right;
+	margin-bottom: 20px;
 }
 #profile-menu li{
 	display: inline;
