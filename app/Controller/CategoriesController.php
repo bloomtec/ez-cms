@@ -44,13 +44,17 @@ class CategoriesController extends AppController {
 				)
 			)
 		);
+		
 		$this -> loadModel('Inventory');
 		$this -> Inventory -> recursive=-1;
+		
 		$this -> paginate = array(
 			'limit' => 9,
 			'contain' => array('Product'),
-			'group' => 'Inventory.gallery'
+			'group' => 'Inventory.gallery',
+			'order' => 'rand()'
 		);
+		
 		$inventories = $this -> paginate(
 			'Inventory',
 			array(
@@ -58,8 +62,23 @@ class CategoriesController extends AppController {
 				'quantity >' => 0
 			)
 		);
+		
 		$this -> Category -> recursive = -1;
-		$category = $this -> Category -> read(null, $id);
+		$category = null;
+		
+		if(
+			$this -> Session -> read("ViewedCategories.$id.id")
+			&& $this -> Session -> read("ViewedCategories.$id.inventories")
+		) {
+			$inventories = $this -> Session -> read("ViewedCategories.$id.inventories");
+		} else {
+			$category = $this -> Category -> read(null, $id);
+		}
+		
+		if(!$this -> Session -> write("ViewedCategories.$id.id", $id)) { debug('error al escribir el id a la sesión'); }
+		if(!$this -> Session -> write("ViewedCategories.$id.category", $category)) { debug('error al escribir la categoría a la sesión'); }
+		if(!$this -> Session -> write("ViewedCategories.$id.inventories", $inventories)) { debug('error al escribir los inventories a la sesión'); }
+		
 		$this -> set(compact('category','inventories'));
 	}
 
