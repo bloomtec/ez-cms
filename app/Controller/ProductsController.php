@@ -11,7 +11,7 @@ class ProductsController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('uploadify_add', 'view', 'getNovelty', 'getTopSeller');
+		$this -> Auth -> allow('uploadify_add', 'view', 'getNovelty', 'getTopSeller', 'search');
 	}
 
 	private function checkIfSizeExists() {
@@ -117,6 +117,33 @@ class ProductsController extends AppController {
 		);
 		return $product;
 	}
+	
+	public function search() {
+		if($this -> request -> is('post')) {
+			$products = $this -> Product -> find(
+				'all',
+				array(
+					'conditions' => array(
+						'Product.reference LIKE' => '%' . $this -> request -> data['Product']['search'] . '%',
+					)
+				)
+			);
+			
+			if(
+				count($products) == 1
+				&& count($products[0]['Inventory'] >= 1)
+			) {
+				$this -> redirect(array('action' => 'view', $products[0]['Product']['id'], $products[0]['Inventory'][0]['color_id']));
+			} else {
+				$product_ids = array();
+				foreach ($products as $key => $product) {
+					$product_ids[] = $product['Product']['id'];
+				}
+				$this -> paginate = array('conditions' => array('Product.id' => $product_ids));
+				$this -> set('products', $this -> paginate());
+			}
+		}
+	}
 
 	/**
 	 * index method
@@ -134,7 +161,7 @@ class ProductsController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	public function view($id = null,$color) {
+	public function view($id = null, $color) {
 		$this -> layout="product-view";
 		$this -> Product -> id = $id;
 		if (!$this -> Product -> exists()) {

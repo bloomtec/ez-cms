@@ -166,7 +166,7 @@ class Product extends AppModel {
 			'className' => 'Inventory',
 			'foreignKey' => 'product_id',
 			'dependent' => false,
-			'conditions' => '',
+			'conditions' => array('Inventory.quantity >' => 0),
 			'fields' => '',
 			'order' => '',
 			'limit' => '',
