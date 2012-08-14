@@ -48,11 +48,50 @@ class CategoriesController extends AppController {
 		$this -> loadModel('Inventory');
 		$this -> Inventory -> recursive=-1;
 		
+		$orders = array(
+			1 => array('Product.id' => 'ASC'),
+			2 => array('Product.id' => 'DESC'),
+			3 => array('Product.ref' => 'ASC'),
+			4 => array('Product.ref' => 'DESC'),
+			5 => array('Product.price' => 'ASC'),
+			6 => array('Product.price' => 'DESC'),
+		);
+		
+		$order = array();
+		if(
+			$this -> Session -> read('Categories.order')
+		) {
+			$order = $this -> Session -> read('Categories.order');
+		} else {
+			$cases = array(1 => 1, 2 => 2, 3 => 3);
+			do {
+				$index = rand(1, 3);
+				if(isset($cases[$index])) {
+					switch($index) {
+						case 1:
+							$option = rand(1, 2);
+							$order[key($orders[$option])] = $orders[$option][key($orders[$option])];			
+							break;
+						case 2:
+							$option = rand(3, 4);
+							$order[key($orders[$option])] = $orders[$option][key($orders[$option])];
+							break;
+						case 3:
+							$option = rand(5, 6);
+							$order[key($orders[$option])] = $orders[$option][key($orders[$option])];
+							break;
+					}
+					unset($cases[$index]);
+				}
+			} while(!empty($cases));
+			if(!$this -> Session -> write('Categories.order', $order)) { debug('no se pudo guardar en la sesión'); }
+		}
+		
 		$this -> paginate = array(
 			'limit' => 9,
 			'contain' => array('Product'),
 			'group' => 'Inventory.gallery',
-			//'order' => 'rand()'
+			'order' => $order
 		);
 		
 		$inventories = $this -> paginate(
@@ -65,19 +104,6 @@ class CategoriesController extends AppController {
 		
 		$this -> Category -> recursive = -1;
 		$category = $this -> Category -> read(null, $id);
-		
-		if(
-			$this -> Session -> read("ViewedCategories.$id.id")
-			&& $this -> Session -> read("ViewedCategories.$id.inventories")
-		) {
-			//$inventories = $this -> Session -> read("ViewedCategories.$id.inventories");
-		} else {
-			//$category = $this -> Category -> read(null, $id);
-		}
-		
-		//if(!$this -> Session -> write("ViewedCategories.$id.id", $id)) { debug('error al escribir el id a la sesión'); }
-		//if(!$this -> Session -> write("ViewedCategories.$id.category", $category)) { debug('error al escribir la categoría a la sesión'); }
-		//if(!$this -> Session -> write("ViewedCategories.$id.inventories", $inventories)) { debug('error al escribir los inventories a la sesión'); }
 		
 		$this -> set(compact('category','inventories'));
 	}
