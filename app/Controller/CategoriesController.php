@@ -52,7 +52,7 @@ class CategoriesController extends AppController {
 			'limit' => 9,
 			'contain' => array('Product'),
 			'group' => 'Inventory.gallery',
-			'order' => 'rand()'
+			//'order' => 'rand()'
 		);
 		
 		$inventories = $this -> paginate(
