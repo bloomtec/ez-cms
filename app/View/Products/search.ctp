@@ -1,5 +1,5 @@
 <div class="products index" style="margin:auto; padding:20px; width:720px;">
-	<h2><?php echo __('Resultado De La Busqueda'); ?></h2>
+	<h2><?php echo __('Resultado de la Búsqueda'); ?></h2>
 	<?php if(isset($products) && !empty($products)){?>
 	<ul class="catalogo-productos" style="padding: 20px;">
 		<?php $i=1;?>
@@ -45,7 +45,7 @@
 		<p>
 		<?php
 		echo $this->Paginator->counter(array(
-		'format' => __('La busqueda arrojó %count% resultados!')
+		'format' => __('Se encontraron %count% productos.')
 		));
 		?>	
 		</p>
@@ -62,7 +62,7 @@
 	</div>
 	<?php }else{?>
 		<p class='no-hay-productos'>
-			No hay resultados
+			No se encontraron productos con esa referencia.
 		</p>
 	<?php }?>
 </div>
