@@ -6,8 +6,6 @@ App::uses('AppModel', 'Model');
  * @property Inventory $Inventory
  */
 class Gallery extends AppModel {
-
-	public $actsAs = array('Ez.Auditable');
 	
 	/**
 	 * Display field

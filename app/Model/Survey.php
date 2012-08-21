@@ -1,7 +1,5 @@
 <?php
 class Survey extends AppModel {	
-	
-	public $actsAs = array('Ez.Auditable');
 
 	var $name = 'Survey';
 	var $displayField = 'titulo';
@@ -36,4 +34,3 @@ class Survey extends AppModel {
 	);
 
 }
-?>

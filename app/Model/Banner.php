@@ -6,7 +6,6 @@ App::uses('AppModel', 'Model');
  */
 class Banner extends AppModel {
 
-	public $actsAs = array('Ez.Auditable');
 /**
  * Display field
  *

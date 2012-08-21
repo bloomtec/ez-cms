@@ -1,0 +1,45 @@
+.pages .textarea, 
+.categories .textarea, 
+.categories .image-container{
+	float:left;
+	clear:none;
+	width:48%;
+}
+#ez .textarea.banner{
+	width:100%;
+}
+.to-right{
+	margin-right:0;
+	padding-right: 0;
+}
+.content, .left_content{
+	float:left;
+	clear:none;
+
+}
+.content{
+	min-width:660px;
+	width:66%;
+	margin-right:0;
+}
+.left_content{
+	min-width:330px;
+	width:28%;
+}
+.cke_button_myDialogCmd .cke_icon{
+	display: none !important;
+}		
+.cke_button_myDialogCmd .cke_label{
+	display: inline !important;
+}
+.categories .image-container .preview{
+	margin-bottom:0;
+	padding:0;
+	height:100px;
+}
+.categories .image-container .preview img{
+	height:100px;
+}
+.left_content .select{
+	float:left;
+}

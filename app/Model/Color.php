@@ -6,8 +6,7 @@ App::uses('AppModel', 'Model');
  * @property Inventory $Inventory
  */
 class Color extends AppModel {
-
-	public $actsAs = array('Ez.Auditable');
+	
 /**
  * Display field
  *

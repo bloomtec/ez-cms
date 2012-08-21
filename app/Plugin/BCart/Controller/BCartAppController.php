@@ -1,6 +1,4 @@
 <?php
 
-class BCartAppController extends AppController {
-	
-}
+class BCartAppController extends AppController { }
 

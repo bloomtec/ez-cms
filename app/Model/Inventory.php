@@ -8,7 +8,8 @@ App::uses('AppModel', 'Model');
  */
 class Inventory extends AppModel {
 
-	public $actsAs = array('Containable','Ez.Auditable');
+	//public $actsAs = array('Containable','Ez.Auditable');
+	public $actsAs = array('Containable');
 	
 	/**
 	 * Virtual Fields

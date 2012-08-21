@@ -1,8 +1,10 @@
 <?php
 class SurveyOption extends AppModel {
-	public $actsAs = array('Ez.Auditable');
+	
 	var $name = 'SurveyOption';
+	
 	var $displayField = 'name';
+	
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
@@ -15,6 +17,7 @@ class SurveyOption extends AppModel {
 			),
 		),
 	);
+	
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
@@ -27,4 +30,3 @@ class SurveyOption extends AppModel {
 		)
 	);
 }
-?>

@@ -6,8 +6,6 @@ App::uses('AppModel', 'Model');
  * @property MenuItem $MenuItem
  */
 class Menu extends AppModel {
-
-	public $actsAs = array('Ez.Auditable');
 	
 /**
  * Display field

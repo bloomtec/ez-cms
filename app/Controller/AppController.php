@@ -38,25 +38,31 @@ class AppController extends Controller {
 	private $identifier = '';
 
 	public $components = array('Auth', 'Acl', 'Session', 'Cookie');
-
+	
 	public function beforeFilter() {
-		$this -> beforeFilterAuthConfig();
-		$this -> beforeFilterCookieConfig();
-		$this -> setIdentifier();
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout = "Ez.default";
 		}
+		$this -> beforeFilterAuthConfig();
+		$this -> beforeFilterCookieConfig();
+		$this -> setIdentifier();
 		// Verificación ACL
-		$this -> aclVerification();
+		//$this -> aclVerification();
 	}
 
 	private function beforeFilterAuthConfig() {
 		$this -> Auth -> authorize = array('Actions' => array('actionPath' => 'controllers'));
 		$this -> Auth -> authenticate = array('Form' => array('scope' => array('is_active' => 1)));
-		$this -> Auth -> loginAction = array('controller' => 'users', 'action' => 'login', 'plugin' => 'user_control', 'admin' => false);
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
-		$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile');
-		$this -> Auth -> logoutRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login');
+		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
+			$this -> Auth -> loginAction = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => true);
+			$this -> Auth -> logoutRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => true);
+			$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'index', 'admin' => true);
+		} else {
+			$this -> Auth -> loginAction = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => false);
+			$this -> Auth -> logoutRedirect = '/';
+			$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'profile', 'admin' => false);
+		}
 	}
 
 	private function beforeFilterCookieConfig() {

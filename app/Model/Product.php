@@ -8,7 +8,8 @@ App::uses('AppModel', 'Model');
  */
 class Product extends AppModel {	
 
-	public $actsAs = array('Containable','Ez.Auditable');
+	//public $actsAs = array('Containable','Ez.Auditable');
+	public $actsAs = array('Containable');
 	
 	/**
 	 * Display field
