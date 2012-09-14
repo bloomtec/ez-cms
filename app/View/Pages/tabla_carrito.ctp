@@ -159,7 +159,7 @@
 </div>
 
 <?php } else { ?>
-		<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No tienes item en el carrito </p>
+		<p class="rosa" style="text-align:center; font-size:18px; margin-top:20px;">No tienes productos en el Carrito</p>
 <?php } ?>
 <?php if(isset($addresses)):?>
 	<script type="text/javascript">
