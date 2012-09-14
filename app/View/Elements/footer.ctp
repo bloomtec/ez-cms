@@ -31,7 +31,7 @@
 						</li>
 
 						<li>
-							<?php echo $this -> Html -> link("Ayuda", array("controller" => "pages", "action" => "view", 'plugin' => false, "ayuda")); ?>
+							<a href="/ayuda">Ayuda</a>
 						</li>
 					</ul>
 				</div>
