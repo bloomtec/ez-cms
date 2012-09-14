@@ -93,11 +93,11 @@
 						<?php echo $this -> Form->create('bcart');?>
 							<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','id'=>'product_id','value'=>$product['Product']['id']))?>
 							<?php echo $this -> Form -> hidden('color_id-'.$product['Product']['id'],array('class'=>'color_id','value'=>$this -> params['pass'][1]))?>
-							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'talla','class'=>'product_size_id','options'=>$productSizes))?>
+							<?php echo $this -> Form -> input('product_size_id-'.$product['Product']['id'],array('label'=>'Talla','class'=>'product_size_id','options'=>$productSizes))?>
 							<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'select','options'=>$options,'value'=>'1'))?>
 							<div class="actions">
-								<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">aceptar</a>
-								<a class="button cancelar">cancelar</a>
+								<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">Aceptar</a>
+								<a class="button cancelar">Cancelar</a>
 							</div>
 						<?php echo $this -> Form ->end();?>
 					<div class="add-cart">
