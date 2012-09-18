@@ -34,11 +34,11 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 	public $cacheAction = true;
-	
+
 	private $identifier = '';
 
 	public $components = array('Auth', 'Acl', 'Session', 'Cookie');
-	
+
 	public function beforeFilter() {
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout = "Ez.default";
@@ -67,56 +67,40 @@ class AppController extends Controller {
 	}
 
 	private function beforeFilterCookieConfig() {
-		if(isset($this -> Cookie -> name) && !empty($this -> Cookie -> name)) {
-			$this -> Cookie -> name = 'PriceShoes';
-		}
-		if(isset($this -> Cookie -> time) && !empty($this -> Cookie -> time)) {
-			$this -> Cookie -> time = 1800;  // 3600 = '1 hour'
-		}
-		if(isset($this -> Cookie -> path) && !empty($this -> Cookie -> path)) {
-			$this -> Cookie -> path = '/';
-		}
-		if(isset($this -> Cookie -> domain) && !empty($this -> Cookie -> domain)) {
-			$this -> Cookie -> domain = 'priceshoes.com.co';
-		}
-		if(isset($this -> Cookie -> secure) && !empty($this -> Cookie -> secure)) {
-			$this -> Cookie -> secure = true;  // i.e. only sent if using secure HTTPS
-		}
-		if(isset($this -> Cookie -> key) && !empty($this -> Cookie -> key)) {
-			$this -> Cookie -> key = 'qSI2Web32qs*&BlsXOoomw!';
-		}
-		if(isset($this -> Cookie -> httpOnly) && !empty($this -> Cookie -> httpOnly)) {
-			$this -> Cookie -> httpOnly = true;
-		}
+		$this -> Cookie -> key = 'qSI2Web32qs*&BlsXOoomw!';
+		$this -> Cookie -> name = 'PriceShoes';
+		$this -> Cookie -> time = 7200; // 3600 = '1 hour'
+		$this -> Cookie -> path = '/';
+		$this -> Cookie -> domain = 'localhost';
+		//$this -> Cookie -> domain = 'priceshoes.bloomweb.co';
+		//$this -> Cookie -> domain = 'priceshoes.com.co';
+		$this -> Cookie -> secure = false; // i.e. only sent if using secure HTTPS
+		$this -> Cookie -> httpOnly = true;
 	}
-	
+
 	protected function setIdentifier() {
-		if(!$this -> Cookie -> read('User.identifier')) {
-			$this -> loadModel('BCart.ShoppingCart');
-			$identifier = rand(100000000000, 999999999999);
-			if(!$this -> ShoppingCart -> findByIdentifier($identifier)) {
-				$this -> Cookie -> write('User.identifier', $identifier);
-			} else {
-				$this -> setIdentifier();
-			}
+		if (!$this -> Cookie -> read('User.identifier')) {
+			$this -> identifier = rand(100000000000, 999999999999);
+			$this -> Cookie -> write('User.identifier', $this -> identifier);
+		} else {
+			$this -> identifier = $this -> Cookie -> read('User.identifier');
 		}
-		$this -> identifier = $this -> Cookie -> read('User.identifier');
 	}
-	
+
 	public function getIdentifier() {
 		return $this -> identifier;
 	}
-	
+
 	protected function cleanImages() {
 		// Llamar los modelos que usan imagenes
 		$this -> loadModel('Category');
 		$this -> loadModel('Gallery');
 		$this -> loadModel('Image');
-		
+
 		$fileNames = array();
-		
+
 		$tmpFileNames = null;
-		
+
 		// Obtener nombres de archivos registrados en las diferentes tablas
 		$tmpFileNames = $this -> Category -> find('list', array('recursive' => -1, 'conditions' => array('Category.image NOT' => null), 'fields' => array('Category.image')));
 		foreach ($tmpFileNames as $index => $tmpFileName) {
@@ -130,39 +114,31 @@ class AppController extends Controller {
 		foreach ($tmpFileNames as $index => $tmpFileName) {
 			$fileNames[] = $tmpFileName;
 		}
-		
-		$directories = array(
-			0 => IMAGES . 'uploads',
-			1 => IMAGES . 'uploads/50x50',
-			2 => IMAGES . 'uploads/100x100',
-			3 => IMAGES . 'uploads/150x150',
-			4 => IMAGES . 'uploads/215x215',
-			5 => IMAGES . 'uploads/360x360',
-			6 => IMAGES . 'uploads/750x750',
-		);
-		
+
+		$directories = array(0 => IMAGES . 'uploads', 1 => IMAGES . 'uploads/50x50', 2 => IMAGES . 'uploads/100x100', 3 => IMAGES . 'uploads/150x150', 4 => IMAGES . 'uploads/215x215', 5 => IMAGES . 'uploads/360x360', 6 => IMAGES . 'uploads/750x750', );
+
 		foreach ($directories as $index => $directory) {
-			
+
 			if (is_dir($directory) && $directoryHandle = opendir($directory)) {
-				
+
 				$directoryFiles = array();
-				
+
 				while (false !== ($fileEntry = readdir($directoryHandle))) {
 					if ($fileEntry != 'empty' && is_file($directory . DS . $fileEntry))
 						$directoryFiles[] = $fileEntry;
 				}
 				closedir($directoryHandle);
-				
+
 				foreach ($directoryFiles as $index => $directoryFile) {
 					if (!in_array($directoryFile, $fileNames)) {
 						unlink($directory . DS . $directoryFile);
 					}
 				}
-				
+
 			}
-			
+
 		}
-		
+
 	}
 
 	/**
@@ -182,13 +158,7 @@ class AppController extends Controller {
 
 					// Negar acceso a los siguientes métodos administrativos
 					foreach ($this -> methods as $key => $method) {
-						if (
-							(!strstr($method, 'admin_')) &&
-							(!strstr($method, 'aclVerification')) &&
-							(!strstr($method, 'verifyUserAccess')) &&
-							(!strstr($method, 'getIdentifier')) &&
-							(!strstr($method, 'cleanImages'))
-						) {
+						if ((!strstr($method, 'admin_')) && (!strstr($method, 'aclVerification')) && (!strstr($method, 'verifyUserAccess')) && (!strstr($method, 'getIdentifier')) && (!strstr($method, 'cleanImages'))) {
 							if (!$this -> Acl -> check($role['Role']['role'], $this -> name . '/' . $method)) {
 								$this -> Acl -> deny($role['Role']['role'], $this -> name . '/' . $method);
 							}
