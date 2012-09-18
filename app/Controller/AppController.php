@@ -65,19 +65,10 @@ class AppController extends Controller {
 	}
 
 	private function beforeFilterCookieConfig() {
+		$this -> Cookie -> time = 3600;  // or '1 hour'
 		$this -> Cookie -> key = 'qS2574qs*&sXO!adre@34SasdfeAv!@*(X$%)asGb$@11~_+!@#HKis~#^';
 		$this -> Cookie -> name = 'PriceShoesData';
 		$this -> Cookie -> httpOnly = true;
-		$this -> Cookie -> time = 3600;
-		/*
-		$this -> Cookie -> key = 'qSI2Web32qs*&BlsXOoomw!';
-		$this -> Cookie -> path = '/';
-		$this -> Cookie -> domain = 'localhost';
-		//$this -> Cookie -> domain = 'priceshoes.bloomweb.co';
-		//$this -> Cookie -> domain = 'priceshoes.com.co';
-		$this -> Cookie -> secure = false; // i.e. only sent if using secure HTTPS
-		
-		*/
 	}
 
 	protected function setIdentifier() {
