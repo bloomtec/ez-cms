@@ -178,7 +178,9 @@ Configure::write('Routing.prefixes', array('admin'));
  *
  */
 	Configure::write('Session', array(
-		'defaults' => 'php'
+		'cookie' => 'PriceShoes',
+		'cookieTimeout' => '7200',
+		'defaults' => 'php',
 	));
 
 /**
