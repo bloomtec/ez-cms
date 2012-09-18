@@ -46,7 +46,7 @@ class AppController extends Controller {
 		$this -> setIdentifier();
 		// Verificación ACL
 		//$this -> aclVerification();
-		//debug($this -> getIdentifier());
+		debug($this -> getIdentifier());
 	}
 
 	private function beforeFilterAuthConfig() {
