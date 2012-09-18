@@ -1487,35 +1487,77 @@ class ValidationTest extends CakeTestCase {
 	}
 
 /**
- * testDecimal method
+ * Test numbers with any number of decimal places, including none.
  *
  * @return void
  */
-	public function testDecimal() {
-		$this->assertTrue(Validation::decimal('+1234.54321'));
-		$this->assertTrue(Validation::decimal('-1234.54321'));
-		$this->assertTrue(Validation::decimal('1234.54321'));
-		$this->assertTrue(Validation::decimal('+0123.45e6'));
-		$this->assertTrue(Validation::decimal('-0123.45e6'));
-		$this->assertTrue(Validation::decimal('0123.45e6'));
-		$this->assertTrue(Validation::decimal('1234'));
-		$this->assertTrue(Validation::decimal('-1234'));
-		$this->assertTrue(Validation::decimal('+1234'));
-		$this->assertTrue(Validation::decimal(1234.56));
-		$this->assertTrue(Validation::decimal(1234.00));
-		$this->assertTrue(Validation::decimal(.0));
-		$this->assertTrue(Validation::decimal(.00));
-		$this->assertTrue(Validation::decimal(.01));
+	public function testDecimalWithPlacesNull() {
+		$this->assertTrue(Validation::decimal('+1234.54321', null));
+		$this->assertTrue(Validation::decimal('-1234.54321', null));
+		$this->assertTrue(Validation::decimal('1234.54321', null));
+		$this->assertTrue(Validation::decimal('+0123.45e6', null));
+		$this->assertTrue(Validation::decimal('-0123.45e6', null));
+		$this->assertTrue(Validation::decimal('0123.45e6', null));
+		$this->assertTrue(Validation::decimal(1234.56, null));
+		$this->assertTrue(Validation::decimal(1234.00, null));
+		$this->assertTrue(Validation::decimal(1234., null));
+		$this->assertTrue(Validation::decimal('1234.00', null));
+		$this->assertTrue(Validation::decimal(.0, null));
+		$this->assertTrue(Validation::decimal(.00, null));
+		$this->assertTrue(Validation::decimal('.00', null));
+		$this->assertTrue(Validation::decimal(.01, null));
+		$this->assertTrue(Validation::decimal('.01', null));
+		$this->assertTrue(Validation::decimal('1234', null));
+		$this->assertTrue(Validation::decimal('-1234', null));
+		$this->assertTrue(Validation::decimal('+1234', null));
+		$this->assertTrue(Validation::decimal((float)1234, null));
+		$this->assertTrue(Validation::decimal((double)1234, null));
+		$this->assertTrue(Validation::decimal((int)1234, null));
 
-		$this->assertFalse(Validation::decimal('string'));
+		$this->assertFalse(Validation::decimal('', null));
+		$this->assertFalse(Validation::decimal('string', null));
+		$this->assertFalse(Validation::decimal('1234.', null));
 	}
 
 /**
- * testDecimalWithPlaces method
+ * Test numbers with any number of decimal places greater than 0, or a float|double.
  *
  * @return void
  */
-	public function testDecimalWithPlaces() {
+	public function testDecimalWithPlacesTrue() {
+		$this->assertTrue(Validation::decimal('+1234.54321', true));
+		$this->assertTrue(Validation::decimal('-1234.54321', true));
+		$this->assertTrue(Validation::decimal('1234.54321', true));
+		$this->assertTrue(Validation::decimal('+0123.45e6', true));
+		$this->assertTrue(Validation::decimal('-0123.45e6', true));
+		$this->assertTrue(Validation::decimal('0123.45e6', true));
+		$this->assertTrue(Validation::decimal(1234.56, true));
+		$this->assertTrue(Validation::decimal(1234.00, true));
+		$this->assertTrue(Validation::decimal(1234., true));
+		$this->assertTrue(Validation::decimal('1234.00', true));
+		$this->assertTrue(Validation::decimal(.0, true));
+		$this->assertTrue(Validation::decimal(.00, true));
+		$this->assertTrue(Validation::decimal('.00', true));
+		$this->assertTrue(Validation::decimal(.01, true));
+		$this->assertTrue(Validation::decimal('.01', true));
+		$this->assertTrue(Validation::decimal((float)1234, true));
+		$this->assertTrue(Validation::decimal((double)1234, true));
+
+		$this->assertFalse(Validation::decimal('', true));
+		$this->assertFalse(Validation::decimal('string', true));
+		$this->assertFalse(Validation::decimal('1234.', true));
+		$this->assertFalse(Validation::decimal((int)1234, true));
+		$this->assertFalse(Validation::decimal('1234', true));
+		$this->assertFalse(Validation::decimal('-1234', true));
+		$this->assertFalse(Validation::decimal('+1234', true));
+	}
+
+/**
+ * Test numbers with exactly that many number of decimal places.
+ *
+ * @return void
+ */
+	public function testDecimalWithPlacesNumeric() {
 		$this->assertTrue(Validation::decimal('.27', '2'));
 		$this->assertTrue(Validation::decimal(0.27, 2));
 		$this->assertTrue(Validation::decimal(-0.27, 2));
@@ -1528,10 +1570,34 @@ class ValidationTest extends CakeTestCase {
 		$this->assertTrue(Validation::decimal(1234.5678, 4));
 		$this->assertTrue(Validation::decimal(-1234.5678, 4));
 		$this->assertTrue(Validation::decimal(1234.5678, 4));
+		$this->assertTrue(Validation::decimal('.00', 2));
+		$this->assertTrue(Validation::decimal(.01, 2));
+		$this->assertTrue(Validation::decimal('.01', 2));
+
+		$this->assertFalse(Validation::decimal('', 1));
+		$this->assertFalse(Validation::decimal('string', 1));
+		$this->assertFalse(Validation::decimal(1234., 1));
+		$this->assertFalse(Validation::decimal('1234.', 1));
+		$this->assertFalse(Validation::decimal(.0, 1));
+		$this->assertFalse(Validation::decimal(.00, 2));
+		$this->assertFalse(Validation::decimal((float)1234, 1));
+		$this->assertFalse(Validation::decimal((double)1234, 1));
+		$this->assertFalse(Validation::decimal((int)1234, 1));
 		$this->assertFalse(Validation::decimal('1234.5678', '3'));
 		$this->assertFalse(Validation::decimal(1234.5678, 3));
 		$this->assertFalse(Validation::decimal(-1234.5678, 3));
 		$this->assertFalse(Validation::decimal(1234.5678, 3));
+	}
+
+/**
+ * Test decimal() with invalid places parameter.
+ *
+ * @return void
+ */
+	public function testDecimalWithInvalidPlaces() {
+		$this->assertFalse(Validation::decimal('.27', 'string'));
+		$this->assertFalse(Validation::decimal(1234.5678, (array)true));
+		$this->assertFalse(Validation::decimal(-1234.5678, (object)true));
 	}
 
 /**
@@ -1782,6 +1848,10 @@ class ValidationTest extends CakeTestCase {
 		$this->assertFalse(Validation::url('www.cakephp.org', true));
 		$this->assertTrue(Validation::url('http://www.cakephp.org', true));
 		$this->assertTrue(Validation::url('http://example.com/~userdir/'));
+		$this->assertTrue(Validation::url('http://underscore_subdomain.example.org'));
+		$this->assertTrue(Validation::url('http://_jabber._tcp.gmail.com'));
+		$this->assertFalse(Validation::url('http://www.underscore_domain.org'));
+		$this->assertFalse(Validation::url('http://_jabber._tcp.g_mail.com'));
 
 		$this->assertTrue(Validation::url('http://example.com/~userdir/subdir/index.html'));
 		$this->assertTrue(Validation::url('http://www.zwischenraume.de'));

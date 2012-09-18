@@ -4257,6 +4257,30 @@ class FormHelperTest extends CakeTestCase {
 	}
 
 /**
+ * When a select box has no options it should not be added to the fields list
+ * as it always fail post validation.
+ *
+ * @return void
+ */
+	public function testSelectNoSecureWithNoOptions() {
+		$this->Form->request['_Token'] = array('key' => 'testkey');
+		$this->assertEquals(array(), $this->Form->fields);
+
+		$this->Form->select(
+			'Model.select',
+			array()
+		);
+		$this->assertEquals(array(), $this->Form->fields);
+
+		$this->Form->select(
+			'Model.select',
+			array(),
+			array('empty' => true)
+		);
+		$this->assertEquals(array('Model.select'), $this->Form->fields);
+	}
+
+/**
  * testInputMultipleCheckboxes method
  *
  * test input() resulting in multi select elements being generated.
@@ -5122,6 +5146,45 @@ class FormHelperTest extends CakeTestCase {
 	public function testDateTimeWithBogusData() {
 		$result = $this->Form->dateTime('Contact.updated', 'DMY', '12', array('value' => 'CURRENT_TIMESTAMP'));
 		$this->assertNotRegExp('/selected="selected">\d/', $result);
+	}
+
+/**
+ * testDateTimeEmptyAsArray
+ *
+ * @return void
+ */
+	public function testDateTimeEmptyAsArray() {
+		$result = $this->Form->dateTime('Contact.date',
+			'DMY',
+			'12',
+			array(
+				'empty' => array('day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR',
+					'hour' => 'HOUR', 'minute' => 'MINUTE', 'meridian' => false
+				)
+			)
+		);
+
+		$this->assertRegExp('/<option value="">DAY<\/option>/', $result);
+		$this->assertRegExp('/<option value="">MONTH<\/option>/', $result);
+		$this->assertRegExp('/<option value="">YEAR<\/option>/', $result);
+		$this->assertRegExp('/<option value="">HOUR<\/option>/', $result);
+		$this->assertRegExp('/<option value="">MINUTE<\/option>/', $result);
+		$this->assertNotRegExp('/<option value=""><\/option>/', $result);
+
+		$result = $this->Form->dateTime('Contact.date',
+			'DMY',
+			'12',
+			array(
+				'empty' => array('day' => 'DAY', 'month' => 'MONTH', 'year' => 'YEAR')
+			)
+		);
+
+		$this->assertRegExp('/<option value="">DAY<\/option>/', $result);
+		$this->assertRegExp('/<option value="">MONTH<\/option>/', $result);
+		$this->assertRegExp('/<option value="">YEAR<\/option>/', $result);
+		$this->assertRegExp('/<select[^<>]+id="ContactDateHour">\s<option value=""><\/option>/', $result);
+		$this->assertRegExp('/<select[^<>]+id="ContactDateMin">\s<option value=""><\/option>/', $result);
+		$this->assertRegExp('/<select[^<>]+id="ContactDateMeridian">\s<option value=""><\/option>/', $result);
 	}
 
 /**
