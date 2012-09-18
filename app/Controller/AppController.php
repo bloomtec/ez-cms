@@ -35,8 +35,6 @@ class AppController extends Controller {
 
 	public $cacheAction = true;
 
-	private $identifier = '';
-
 	public $components = array('Auth', 'Acl', 'Session', 'Cookie');
 
 	public function beforeFilter() {
@@ -80,19 +78,19 @@ class AppController extends Controller {
 
 	protected function setIdentifier() {
 		if (!$this -> Cookie -> read('User.identifier')) {
-			$this -> identifier = rand(100000000000, 999999999999);
+			$this -> Session -> write('User.identifier', rand(100000000000, 999999999999));
 			$this -> Cookie -> write('User.identifier', $this -> getIdentifier());
-			$this -> loadModel('b_cart.ShoppingCart');
+			$this -> loadModel('BCart.ShoppingCart');
 			if($this -> ShoppingCart -> findByIdentifier($this -> getIdentifier())) {
 				$this -> setIdentifier();
 			}
 		} else {
-			$this -> identifier = $this -> Cookie -> read('User.identifier');
+			$this -> Session -> write('User.identifier', $this -> Cookie -> read('User.identifier'));
 		}
 	}
 
 	public function getIdentifier() {
-		return $this -> identifier;
+		return $this -> Session -> read('User.identifier');
 	}
 
 	protected function cleanImages() {
