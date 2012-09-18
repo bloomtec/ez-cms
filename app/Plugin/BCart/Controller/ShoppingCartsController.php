@@ -10,7 +10,15 @@ class ShoppingCartsController extends BCartAppController {
 		parent::beforeFilter();
 		$this -> ShoppingCart -> Behaviors -> attach('Containable');
 		$this -> ShoppingCart -> contain('CartItem', 'CartItem.Product', 'CartItem.ProductSize');
-		$this -> Auth -> Allow('get', 'assignUserToCart', 'emptyCart', 'addCartItem', 'removeCartItem', 'updateCartItem', 'borrarCarritos');
+		$this -> Auth -> Allow(
+			'get',
+			'assignUserToCart',
+			'emptyCart',
+			'addCartItem',
+			'removeCartItem',
+			'updateCartItem',
+			'borrarCarritos'
+		);
 	}
 	
 	public function borrarCarritos() {
