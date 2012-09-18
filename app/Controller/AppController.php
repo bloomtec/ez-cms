@@ -48,6 +48,7 @@ class AppController extends Controller {
 		$this -> setIdentifier();
 		// Verificación ACL
 		//$this -> aclVerification();
+		//debug($this -> getIdentifier());
 	}
 
 	private function beforeFilterAuthConfig() {
@@ -89,7 +90,7 @@ class AppController extends Controller {
 		}
 	}
 	
-	private function setIdentifier() {
+	protected function setIdentifier() {
 		if(!$this -> Cookie -> read('User.identifier')) {
 			$this -> loadModel('BCart.ShoppingCart');
 			$identifier = rand(100000000000, 999999999999);
