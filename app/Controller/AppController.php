@@ -41,15 +41,15 @@ class AppController extends Controller {
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout = "Ez.default";
 		}
-		$this -> beforeFilterAuthConfig();
-		$this -> beforeFilterCookieConfig();
+		$this -> authConfig();
+		$this -> cookieConfig();
 		$this -> setIdentifier();
 		// Verificación ACL
 		//$this -> aclVerification();
 		//debug($this -> getIdentifier());
 	}
 
-	private function beforeFilterAuthConfig() {
+	private function authConfig() {
 		$this -> Auth -> authorize = array('Actions' => array('actionPath' => 'controllers'));
 		$this -> Auth -> authenticate = array('Form' => array('scope' => array('is_active' => 1)));
 		$this -> Auth -> authError = __('No tiene permiso para ver esta sección', true);
@@ -64,17 +64,17 @@ class AppController extends Controller {
 		}
 	}
 
-	private function beforeFilterCookieConfig() {
-		$this -> Cookie -> time = 3600;  // or '1 hour'
+	private function cookieConfig() {
+		$this -> Cookie -> time = 7200;  // or '1 hour'
 		$this -> Cookie -> key = 'qS2574qs*&sXO!adre@34SasdfeAv!@*(X$%)asGb$@11~_+!@#HKis~#^';
 		$this -> Cookie -> name = 'PriceShoesData';
 		$this -> Cookie -> httpOnly = true;
 	}
 
-	private function setIdentifier() {
+	public function setIdentifier() {
 		if (!$this -> Cookie -> read('User.identifier')) {
 			$this -> Session -> write('User.identifier', substr(uniqid(), 0, 12));
-			$this -> Cookie -> write('User.identifier', $this -> getIdentifier());
+			$this -> Cookie -> write('User.identifier', $this -> getIdentifier(), false. 7200);
 			$this -> loadModel('BCart.ShoppingCart');
 			if($this -> ShoppingCart -> findByIdentifier($this -> getIdentifier())) {
 				$this -> setIdentifier();
