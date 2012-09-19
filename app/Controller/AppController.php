@@ -71,16 +71,19 @@ class AppController extends Controller {
 		$this -> Cookie -> httpOnly = true;
 	}
 
-	protected function setIdentifier() {
+	private function setIdentifier() {
 		if (!$this -> Cookie -> read('User.identifier')) {
 			$this -> Session -> write('User.identifier', substr(uniqid(), 0, 12));
 			$this -> Cookie -> write('User.identifier', $this -> getIdentifier());
 			$this -> loadModel('BCart.ShoppingCart');
 			if($this -> ShoppingCart -> findByIdentifier($this -> getIdentifier())) {
 				$this -> setIdentifier();
+			} else {
+				return;
 			}
 		} else {
 			$this -> Session -> write('User.identifier', $this -> Cookie -> read('User.identifier'));
+			return;
 		}
 	}
 

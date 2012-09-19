@@ -179,7 +179,7 @@ Configure::write('Routing.prefixes', array('admin'));
  */
 	Configure::write('Session', array(
 		'cookie' => 'PriceShoes',
-		'cookieTimeout' => '7200',
+		'cookieTimeout' => 0,
 		'defaults' => 'php',
 	));
 
