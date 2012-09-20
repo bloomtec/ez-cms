@@ -20,7 +20,6 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $banner['Banner']['id'])); ?>
 			<?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $banner['Banner']['id'])); ?>
-			<?php //echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $banner['Banner']['id']), null, __('Are you sure you want to delete # %s?', $banner['Banner']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -41,10 +40,4 @@
 		echo $this->Paginator->last(' >>', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Banner'), array('action' => 'add')); ?></li>
-	</ul>
 </div>

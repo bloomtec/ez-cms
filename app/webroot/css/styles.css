@@ -1144,8 +1144,11 @@ table.tablaCarrito h3{
 .tablaCarrito span{
 	display:block;
 }
-.tablaCarrito a{
+.tablaCarrito a {
 	color:#E62B7C;
+}
+.tablaCarrito a.cancelar {
+	color:white;
 }
 .tablaCarrito a:hover{
 	color:white;
@@ -1206,17 +1209,17 @@ table.tablaCarrito h3{
 	border-top: solid 1px 	#E62B7C;
 	border-bottom: solid 1px 	#E62B7C;	
 }
-.to-cart form{
+.to-cart form, .to-cart-favoritos form {
 	display:none;
 }
-.to-cart.open form{
+.to-cart.open form, .to-cart-favoritos.open form {
 	clear:both;
 	display:block;
 }
-.to-cart  .input{
+.to-cart .input, .to-cart-favoritos .input {
 	margin-top:5px;
 }
-.to-cart label{
+.to-cart label, .to-cart-favoritos label {
 	font-size:15px;
 	padding:5px 5px 5px 30px;
 	width:85px;
@@ -1224,11 +1227,11 @@ table.tablaCarrito h3{
 	float:left;
 	clear:left;	
 }
-.to-cart .input input{
+.to-cart .input input, .to-cart-favoritos .input input {
 	width:50px;
 	
 }
-.to-cart .actions{
+.to-cart .actions, .to-cart-favoritos .actions {
 	margin-left:30px;
 	clear: both;
 	margin-top:10px;
@@ -1237,21 +1240,24 @@ table.tablaCarrito h3{
 	padding:5px 5px;
 	margin-right:10px;
 }
-.to-cart form a.button:hover{
+.to-cart form a.button:hover, .to-cart-favoritos form a.button:hover {
 	color:white;
 	padding:5px 5px;
 }
-.to-cart.open{
+.to-cart.open {
 	height:120px;
 }
-.to-cart.open{
+.to-cart-favoritos.open {
+	height: 70px;
+}
+.to-cart.open, .to-cart-favoritos.open {
     background-color:#000;
     border:1px solid #fff;
     padding:10px 15px 10px 0;
     color:#fff;
     text-align:left;
     font-size:12px;
- 
+    padding:10px;
     /* outline radius for mozilla/firefox only */
     -moz-box-shadow:0 0 10px #000;
     -webkit-box-shadow:0 0 10px #000;

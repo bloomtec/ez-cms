@@ -83,10 +83,10 @@ class BannersController extends AppController {
 		}
 		if ($this -> request -> is('post') || $this -> request -> is('put')) {
 			if ($this -> Banner -> save($this -> request -> data)) {
-				$this -> Session -> setFlash(__('The banner has been saved'));
+				$this -> Session -> setFlash(__('Se ha modificado el banner'));
 				$this -> redirect(array('action' => 'index'));
 			} else {
-				$this -> Session -> setFlash(__('The banner could not be saved. Please, try again.'));
+				$this -> Session -> setFlash(__('No se ha podido guardar los cambios. Por favor, intente de nuevo.'));
 			}
 		} else {
 			$this -> request -> data = $this -> Banner -> read(null, $id);

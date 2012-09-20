@@ -119,8 +119,8 @@
 		</div>
 		<?php endif; ?>
 		<div>
-		<h2 class='rosa'>Dirección de envío</h2>
-		<p>Danos la dirección donde quieres que se envie tu pedido, esta dirección puede ser una de las que tienes registrada o puedes indicar una nueva</p>
+		<h2 class='rosa'>Dirección de Envío</h2>
+		<p>Si ya estas registrado, puedes seleccionar una de las direcciones que tienes en tu lista o puedes registrar una nueva.</p>
 		<?php if($this -> Session -> read('Auth.User.id')){  ?>
 			<?php $addresses=$this ->requestAction("/user_control/user_addresses/get"); $i=0; ?>
 			<ul class="direcciones">

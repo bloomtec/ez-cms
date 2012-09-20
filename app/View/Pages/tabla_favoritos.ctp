@@ -8,8 +8,7 @@
 			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="2" class="tablaCarrito">
 					<tr class="entryTableHeader">
 						<th colspan="2" align="center">Producto</th>
-						<th align="center">Descripción</td>
-						
+						<th align="center">Precio</td>
 					</tr>
 					<?php foreach($favoritos['FavoriteItem'] as $item) { ?>
 					<tr class="content">
@@ -32,9 +31,32 @@
 						</td>
 						<td class="description">
 							<p>
-								<?php echo $item['Product']['description'];?>
+								<?php echo "$ ".number_format($item['Product']['price'], 0, ' ', '.');?>
 							</p>
-								<?php echo $this -> Html->link('Quitar de mis favoritos', '/favorites/removeFavoriteItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeFavoriteItem rosa",'style'=>'float:right;'));?>
+							<ul class="botones-caracteristicas" style="float:right;width:180px;">								
+								<li class="to-cart-favoritos">
+									<?php $product = $item; //debug($product); ?>
+									<?php echo $this->Html->link("Añadir al carrito","#",array('class'=>'boton-carrito show-cart-options')); ?>
+									<?php echo $this -> Form->create('bcart');?>
+									<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','id'=>'product_id','value'=>$product['Product']['id'])); ?>
+									<?php echo $this -> Form -> hidden('color_id-'.$product['Product']['id'],array('class'=>'color_id','value'=>$product['color_id'])); ?>
+									<?php echo $this -> Form -> hidden('product_size_id-'.$product['Product']['id'],array('label'=>'Talla','class'=>'product_size_id', 'value'=>$product['product_size_id'])); ?>
+									<?php echo $this -> Form -> hidden('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity', 'value'=>'1')); ?>
+									<div class="actions">
+										<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">Aceptar</a>
+										<a class="button cancelar">Cancelar</a>
+									</div>
+									<?php echo $this -> Form ->end();?>
+									<div class="add-cart">
+										Producto añadido al Carrito <a href="/carrito">Ir a pagar</a>
+									</div>
+									<div style="clear:left"></div>
+									<?php echo $this -> Html -> script('bcart'); ?>
+							    </li>
+								<li>
+									<?php echo $this -> Html->link('Quitar de Mis Favoritos', '/favorites/removeFavoriteItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeFavoriteItem rosa"));?>
+								</li>
+							</ul>
 						</td>
 					
 					</tr>

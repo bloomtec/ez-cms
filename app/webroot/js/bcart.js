@@ -5,6 +5,7 @@ $(function() {
 		$('.to-cart.open').removeClass('open');
 		// funciona para
 	});
+	// Añadir desde product/view
 	$('.to-cart .addCartItem').click(function(e) {
 		e.preventDefault();
 		$that = $(this);
@@ -16,7 +17,31 @@ $(function() {
 				$('.add-cart').show();
 				setTimeout(function() {
 					$('.add-cart').hide();
-				}, 2000);
+				}, 6000);
+			} else {
+				alert(response.message);
+			}
+
+		});
+	});
+	
+	//Añadir desde favoritos
+	$('.to-cart-favoritos .cancelar').click(function() {
+		$('.to-cart-favoritos.open').removeClass('open');
+		// funciona para
+	});
+	$('.to-cart-favoritos .addCartItem').click(function(e) {
+		e.preventDefault();
+		$that = $(this);
+		$form = $that.parent().parent();
+		BJS.JSON($that.attr('href') + $form.find('input.id').val() + "/" + $form.find('input.color_id').val() + "/" + $form.find('input.product_size_id').val() + "/" + $form.find('input.quantity').val(), {}, function(response) {
+			if (response.success) {
+				$('.resumen-carrito').load('/pages/resumenCarrito');
+				$('.to-cart-favoritos.open').removeClass('open');
+				$('.add-cart').show();
+				setTimeout(function() {
+					$('.add-cart').hide();
+				}, 6000);
 			} else {
 				alert(response.message);
 			}
