@@ -27,7 +27,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<meta property="og:url" content="http://<?php echo Configure::read('site_domain').$this -> Html -> url() ?>" />
 	<meta property="og:image" content="http://<?php echo Configure::read('site_domain') ?>/img/uploads/100x100/<?php echo $product['Product']['image']?>" />
 	<meta property="og:site_name" content="PriceShoes" />
-	<meta property="og:description" content="<?php echo $product['Product']['description']?>"> 
+	<?php 
+		$description = !empty($product['Product']['description'])?$product['Product']['description']:$product['Category']['description'];
+	?>
+	<meta property="og:description" content="<?php echo $description ?>"> 
 	<meta property="fb:app_id" content="157362437721922" />
 	<title>
 		<?php echo 'PriceShoes'?> :: 
