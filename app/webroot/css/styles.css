@@ -1244,6 +1244,17 @@ table.tablaCarrito h3{
 	color:white;
 	padding:5px 5px;
 }
+.to-cart.open form a.button{
+	padding:2px;
+	margin-right:10px;
+	float:left;
+	display: block;
+	line-height: 22px;
+	height: 22px;
+}
+.to-cart.open form a.button:hover{
+	padding: 3px;
+}
 .to-cart.open {
 	height:120px;
 }

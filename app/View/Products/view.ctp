@@ -98,7 +98,7 @@
 					<?php echo $this -> Form -> input('quantity-'.$product['Product']['id'],array('label'=>'Cantidad','class'=>'quantity','type'=>'select','options'=>$options,'value'=>'1'))?>
 					<div class="actions">
 						<a class="button addCartItem" href="/b_cart/shopping_carts/addCartItem/">Aceptar</a>
-						<a class="button cancelar">Cancelar</a>
+						<a class="button cancelar" href="#">Cancelar</a>
 					</div>
 					<?php echo $this -> Form ->end();?>
 					<div class="add-cart">
