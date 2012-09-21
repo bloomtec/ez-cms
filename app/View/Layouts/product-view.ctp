@@ -24,7 +24,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<?php echo $this->Html->charset(); ?>
 	<meta property="og:title" content="<?php echo $product['Product']['name'] ?>" />
 	<meta property="og:type" content="company" />
-	<meta property="og:url" content="<?php echo Configure::read('site_domain').$this -> Html -> url() ?>" />
+	<meta property="og:url" content="http://<?php echo Configure::read('site_domain').$this -> Html -> url() ?>" />
 	<meta property="og:image" content="http://<?php echo Configure::read('site_domain') ?>/img/uploads/100x100/<?php echo $product['Product']['image']?>" />
 	<meta property="og:site_name" content="PriceShoes" />
 	<meta property="og:description" content="<?php echo $product['Product']['description']?>"> 
