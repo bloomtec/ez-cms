@@ -25,7 +25,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<meta property="og:title" content="<?php echo $product['Product']['name'] ?>" />
 	<meta property="og:type" content="company" />
 	<meta property="og:url" content="<?php echo Configure::read('site_domain').$this -> Html -> url() ?>" />
-	<meta property="og:image" content="http://<?php echo Configure::read('site_domain') ?>/img/logo.png" />
+	<meta property="og:image" content="http://priceshoes.bloomweb.co/img/uploads/215x215/4871343021347975782898301.jpg" />
 	<meta property="og:site_name" content="PriceShoes" />
 	<meta property="og:description" content="<?php echo $product['Product']['description']?>"> 
 	<meta property="fb:app_id" content="157362437721922" />
