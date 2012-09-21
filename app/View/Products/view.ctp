@@ -9,6 +9,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 <?php echo $this -> Html -> script('bcart');?>
 <?php echo $this -> Html -> script('jquery-ui.custom.min');?>
+<?php //debug($product);?>
 <div class="products view">
 	<div id="left-col">
 		<?php echo $this -> element('novedad'); ?>
