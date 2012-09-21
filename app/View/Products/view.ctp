@@ -116,7 +116,7 @@
 				 <?php endif;?>
 				<li class='social'>
 					<div class="tweet">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-text="Me encantan estos zapatos!!!" data-via="PriceShoesColom" data-lang="es"></a>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://priceshoes.com.co<?php echo $this -> Html -> url('');?>" data-text="Me encantan estos zapatos!!!" data-via="PriceShoesColom" data-lang="es"></a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 					</div>
 					<!--
@@ -134,7 +134,7 @@
 				<div class="fb-like" data-href="http://priceshoes.com.co/products/view/<?php echo $product['Product']['id']?>" data-send="false" data-width="280" data-show-faces="true"></div>
 					<div style="clear:left"></div>
 			    -->
-				<fb:like href="http://priceshoes.bloomweb.co/products/view/<?php echo $product['Product']['id']?>" width="200" height="80"/>
+				<fb:like href="http://priceshoes.com.co<?php echo $this -> Html -> url('');?>" width="200" height="80"/>
 				</li>
 				
 			</ul>
