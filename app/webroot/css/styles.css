@@ -186,11 +186,12 @@ a.rosa:hover{
 	width:149px;
 }
 #menu-categorias ul{
-
+	width: 420px;
+	margin:0 auto;
 }
 #menu-categorias ul li{
 	position:inherit;
-	width:120px;
+	width:140px;
 	text-align:left;
 	display:block;
 	float:left;

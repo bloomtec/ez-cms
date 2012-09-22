@@ -4,7 +4,7 @@ $product = $this->requestAction('/products/getTopSeller');
 ?>
 <div id="promocion" class="caja-producto-lateral">
 	<div class="titulo">
-		<h1>Mas vendidos</h1>
+		<h1>Más Vendidos</h1>
 	</div>
 	<?php if (!empty($product['Product'])):?>
 	<?php echo $this->Html->image('/img/uploads/215x215/'.$product["Inventory"][0]['image'])?>
