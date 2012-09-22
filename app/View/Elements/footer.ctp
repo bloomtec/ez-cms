@@ -13,6 +13,19 @@
 					<p>
 						Al registrar mi dirección de correo electrónico, certifico que la información que proporciono es correcta y que soy mayor de edad.
 					</p>
+					<div class="sociales">
+					<ul>
+						<li>
+							<a href="http://www.facebook.com/MercadeoPriceShoes" target="_blank"><img alt="facebook" src="/img/facebook2.png" ></a>			</li>
+						<li>
+							<a href="https://twitter.com/PriceShoesColom" target="_blank"><img alt="twitter" src="/img/twitter2.png"></a>			</li>
+						<li>
+							<a href="http://www.linkedin.com/" target="_blank"><img alt="linkedin" src="/img/linkedin.png"></a>			</li>
+						<li>
+							<h1>Síguenos!!</h1>
+						</li>
+					</ul>
+				</div>
 			</div>
 			<div class="paginas-inferior">
 				<h3>Priceshoes On-line</h3>
