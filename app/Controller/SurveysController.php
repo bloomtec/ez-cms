@@ -5,7 +5,7 @@ class SurveysController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('sondeo');
+		$this -> Auth -> allow('sondeo','voting');
 	}
 
 	function index() {
