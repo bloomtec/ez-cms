@@ -23,7 +23,7 @@
 			<li><span <?php if($i==0) echo "class='activo'"?> rel="<?php echo $option["id"];?>"></span> <?php echo $option["name"]?></li>
 		<?php endforeach;?>
 		</ul>
-		<div class="button">Votar</div>
+		<div class="button votar">Votar</div>
 		<div style="clear:both;"></div>
 		<?php }else{?>
 			<p style="text-align:center;">No hay sondeo disponibles </p>

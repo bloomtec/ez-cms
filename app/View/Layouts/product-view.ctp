@@ -29,6 +29,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	<meta property="og:site_name" content="PriceShoes" />
 	<?php 
 		$description = !empty($product['Product']['description'])?$product['Product']['description']:$product['Category']['description'];
+		$description = "En priceshoes.com.co encontrarás lo más reciente de la moda en calzado para mujer. Además podrás conocer las últimas tendencias que llegarán a nuestro continente. Price Shoes Fashion Store, la mejor opción para tus pies";
 	?>
 	<meta property="og:description" content="<?php echo $description ?>"> 
 	<meta property="fb:app_id" content="157362437721922" />

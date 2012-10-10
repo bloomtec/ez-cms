@@ -70,7 +70,7 @@ a.rosa:hover{
 	width:960px;
 }
 #header{
-	height: 200px;
+	height: 218px;
 	width:100%;
 }
 #header a{
@@ -83,10 +83,10 @@ a.rosa:hover{
 	margin-top: 23px;
 }
 #header h1.logo{
-	width:	389px;
+	width:	410px;
 }
 #header .left{
-	width:	571px;
+	width:	548px;
 	text-align:right;
 }
 #header #buscar{
@@ -98,10 +98,10 @@ a.rosa:hover{
 
 #header h1.logo a {
 	display: block;
-	width: 389px;
-	height: 89px;
+	width: 410px;
+	height: 125px;
 	text-indent: -9999px;
-	background: url("../img/logo.png") no-repeat;
+	background: url("../img/logo_tiendas.png") no-repeat;
 }
 #header .opciones{
 	text-transform: uppercase;
@@ -119,14 +119,14 @@ a.rosa:hover{
 #header .opciones a.cart{
 	background: url(../img/carrito.png);
 	background-repeat: no-repeat;
-	padding: 0 0 5px 30px;
+	padding: 0 0 10px 30px;
 }
 #main-nav{
 	background: url(../img/trama-nav.png) repeat-x;
 	width: 960px;
 	height: 33px;
 	float: left;
-	margin-top: 40px;
+	margin-top: 20px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
