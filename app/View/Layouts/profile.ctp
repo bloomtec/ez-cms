@@ -55,13 +55,16 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			<?php echo $this -> element('novedad');?>
 			<?php echo $this -> element('resumen-favoritos');?>
 			</div>
+
 			<div id="right-col">
+				<?php if(isset($mensaje)) echo "<span style='color:#E6DB30'>".$mensaje."</span>"; ?>
 				<ul id="profile-menu">
 					<li class='profile'> <a href="/user_control/users/profile">Mi Perfil</a></li>
 					<li class='edit'> <a href="/user_control/users/edit">Modificar Datos</a></li>
 					<li class='orders'> <a href="/user_control/users/orders">Mis Ordenes</a></li>
 				</ul>
 			<?php echo $this->Session->flash(); ?>
+
 			<?php echo $this->fetch('content'); ?>
 			</div>
 			<div style="clear:both;"> </div>
