@@ -17,9 +17,8 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		;
 		$('.resumen-favoritos .content').load('/pages/resumenFavoritos',function(){
-			$('.resumen-favoritos .actualizando').hide()
+			$('.resumen-favoritos .actualizando').hide();
 		});
 	});
 </script>

@@ -42,5 +42,5 @@
 </div>
 <?php endif;?>
 <?php if(empty($shopping_cart['CartItem'])):?>
-	<p>No tiene Items en el carrito</p>
+	<p>[ No hay productos en tu Carrito ]</p>
 <?php endif;?>

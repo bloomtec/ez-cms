@@ -110,13 +110,16 @@ class FavoritesController extends AppController {
 	
 	public function removeFavoriteItem($favorite_item_id = null) {
 		$this -> autoRender = false;
-		Configure::write('debug', 0);
+		//Configure::write('debug', 0);
 		if($favorite_item_id) {
 			$favorite = $this -> get();
 			if($favorite) {
 				/** carrito existe, verificar si el item es del carrito del usuario, borrar si sí **/
 				$this -> Favorite -> FavoriteItem -> recursive = -1;
 				$favorite_item = $this -> Favorite -> FavoriteItem -> read(null, $favorite_item_id);
+				debug($favorite['Favorite']['id']);
+				debug($favorite_item['FavoriteItem']['favorite_id']);
+				/*
 				if($favorite_item['FavoriteItem']['favorite_id'] == $favorite['Favorite']['id']) {
 					if($this -> Favorite -> FavoriteItem -> delete($favorite_item_id)) {
 						$favorite = $this -> get();
@@ -134,6 +137,7 @@ class FavoritesController extends AppController {
 					$favorite['message'] = 'No coincide el favoritos actual con el favorito del ítem';
 					echo json_encode($favorite);
 				}
+				*/
 			}
 		} else {
 			echo json_encode(array('success' => false, 'message' => 'No hay favorito asociado en el momento'));

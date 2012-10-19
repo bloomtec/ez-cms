@@ -31,5 +31,5 @@ $favoritos = $this -> requestAction('/favorites/get');
 	</div>
 <?php endif;?>
 <?php if(empty($favoritos['FavoriteItem'])):?>
-	<p>No tiene Items en tus favoritos</p>
+	<p>[ No hay productos en tus Favoritos ]</p>
 <?php endif;?>
