@@ -1308,9 +1308,12 @@ table.tablaCarrito h3{
 }
 #sondeo h3{
 	margin-bottom:20px;
+	text-align: center;
 }
 #sondeo  .mensaje{
 	display:none;
+	padding: 18px;
+    text-align: center;
 }
 #sondeo ul {
 	color:white;
@@ -1338,9 +1341,9 @@ table.tablaCarrito h3{
 	background: #E62B7C;
 	color:white;
 	font-size:110%;
-	float:right;
+	/*float:right;*/
 	padding:5px;
-	margin-right: 10px;
+	/*margin-right: 10px;*/
 	cursor: pointer;
 }
 /*END SONDEOS*/

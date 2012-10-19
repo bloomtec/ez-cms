@@ -31,7 +31,7 @@
 		
 	</div>	
 	<div class="mensaje">
-		Muchas gracias por participar en la encuesta
+		Gracias por participar de la encuesta. Tu opinión es muy valiosa para nosotros.
 	</div>	
 </div>
 <script type="">

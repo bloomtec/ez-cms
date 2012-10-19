@@ -125,9 +125,14 @@ class ProductsController extends AppController {
 				array(
 					'conditions' => array(
 						'Product.reference LIKE' => '%' . $this -> request -> data['Product']['search'] . '%',
+						'Product.is_active' => true
 					)
 				)
 			);
+			
+			foreach($products as $key => $value) {
+				if(empty($value['Inventory'])) unset($products[$key]);
+			}
 			
 			if(
 				count($products) == 1
@@ -143,16 +148,6 @@ class ProductsController extends AppController {
 				$this -> set('products', $this -> paginate());
 			}
 		}
-	}
-
-	/**
-	 * index method
-	 *
-	 * @return void
-	 */
-	public function index() {
-		$this -> Product -> recursive = 0;
-		$this -> set('products', $this -> paginate());
 	}
 
 	/**

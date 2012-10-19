@@ -3,17 +3,18 @@
 		<div id="info-wrapper">
 			<div class="registrar">
 				<h2>Registra tu correo</h2>
-				<?php echo $this -> Form -> create('User', array('action' => 'registerEmail')); ?>
+				<?php //echo $this -> Form -> create('User', array('plugin' => true, 'controller' => 'users', 'action' => 'registerEmail')); ?>
 				<form id="mail" accept-charset="utf-8" method="post" controller="users" action="/user_control/users/registerEmail">
 					<div>
 						<?php echo $this -> Form -> input('email', array('label' => false,'value'=>'')); ?>
 						<?php echo $this -> Form -> submit('Enviar'); ?>
 					</div>
-					<?php echo $this -> Form -> end(); ?>
-					<p>
-						Al registrar mi dirección de correo electrónico, certifico que la información que proporciono es correcta y que soy mayor de edad.
-					</p>
-					<div class="sociales">
+				<?php //echo $this -> Form -> end(); ?>
+				</form>
+				<p>
+					Al registrar mi dirección de correo electrónico, certifico que la información que proporciono es correcta y que soy mayor de edad.
+				</p>
+				<div class="sociales">
 					<ul>
 						<li>
 							<a href="http://www.facebook.com/priceshoes.co" target="_blank"><img alt="facebook" src="/img/facebook2.png" ></a>			</li>
@@ -32,8 +33,7 @@
 			</div>
 			<div class="paginas-inferior">
 				<h3>Priceshoes On-line</h3>
-				<?php echo $this -> element('menu-paginas-inferior')
-				?>
+				<?php echo $this -> element('menu-paginas-inferior'); ?>
 			</div>
 			<div class="menu-fijo">
 				<div class="cuenta">

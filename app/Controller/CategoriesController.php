@@ -40,7 +40,8 @@ class CategoriesController extends AppController {
 			array(
 				'fields' => array('id','id'),
 				'conditions' => array(
-					'Product.category_id' => $id
+					'Product.category_id' => $id,
+					'Product.is_active' => true
 				)
 			)
 		);
