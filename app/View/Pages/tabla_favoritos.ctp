@@ -51,7 +51,6 @@
 										Producto añadido al Carrito <a href="/carrito">Ir a pagar</a>
 									</div>
 									<div style="clear:left"></div>
-									<?php echo $this -> Html -> script('bcart'); ?>
 							    </li>
 								<li>
 									<?php echo $this -> Html->link('Quitar de Mis Favoritos', '/favorites/removeFavoriteItem/'.$item['id'],array("rel"=>$item['id'],"class"=>"removeFavoriteItem rosa"));?>
