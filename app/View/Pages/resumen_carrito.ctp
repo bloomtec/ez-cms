@@ -30,13 +30,13 @@
 				</td>
 			</tr>
 		<?php endforeach;?>
-		<tr>
-			<td align="right">Total</td>
-			<td width="30%" align="right"><?php echo   "$ ".number_format( $subTotal, 0, ' ', '.');?></td>
-			<td></td>
+		<tr id="TotalResumenCarrito">
+			<td class="resumen-total" align="right">Total</td>
+			<td class="resumen-total" width="30%" align="right"><?php echo   "$ ".number_format( $subTotal, 0, ' ', '.');?></td>
+			<td class="resumen-total"></td>
 		</tr>
-		<tr class="final">
-			<td colspan="2" align="center"><?php echo $this -> Html->link('Ir al carrito de compras','/carrito',array('class'=>'rosa'));?></td>
+		<tr id="FinalResumenCarrito" class="final">
+			<td class="resumen-final" colspan="2" align="center"><?php echo $this -> Html->link('Ir al carrito de compras','/carrito',array('class'=>'rosa'));?></td>
 		</tr>
 	</table>
 </div>

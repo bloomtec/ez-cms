@@ -685,6 +685,15 @@ margin-left: 10px;
 	height: 60px;
 	margin-bottom: 15px;
 }
+div#TituloResumenCarrito {
+	margin-bottom: 3px;
+}
+tr#TotalResumenCarrito td.resumen-total {
+	padding-top: 4px;
+}
+tr#FinalResumenCarrito td.resumen-final {
+	padding-top: 4px;
+}
 .caja-producto-lateral .titulo h1 {
 	line-height: 60px;
 	color: white;
