@@ -80,11 +80,6 @@ class Category extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
-
-	public function beforeSave() {
-
-	}
 	
 	public function afterSave($created) {
 		if($created) {

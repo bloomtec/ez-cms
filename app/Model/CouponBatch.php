@@ -85,7 +85,7 @@ class CouponBatch extends AppModel {
 		}
 	}
 	
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		if(isset($this -> data['CouponBatch']['discount']) && !empty($this -> data['CouponBatch']['discount'])) {
 			$discount = (double) $this -> data['CouponBatch']['discount'];
 			$discount = (double) ($discount / 100) * -1 + 1;

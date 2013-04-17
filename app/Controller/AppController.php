@@ -74,7 +74,7 @@ class AppController extends Controller {
 	public function setIdentifier() {
 		if (!$this -> Cookie -> read('User.identifier')) {
 			$this -> Session -> write('User.identifier', substr(uniqid(), 0, 12));
-			$this -> Cookie -> write('User.identifier', $this -> getIdentifier(), false. 7200);
+			$this -> Cookie -> write('User.identifier', $this -> getIdentifier(), false, 7200);
 			$this -> loadModel('BCart.ShoppingCart');
 			if($this -> ShoppingCart -> findByIdentifier($this -> getIdentifier())) {
 				$this -> setIdentifier();

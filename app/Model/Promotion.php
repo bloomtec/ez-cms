@@ -44,7 +44,7 @@ class Promotion extends AppModel {
 		)
 	);
 	
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		$tmp_data = $this -> data;
 		if(isset($this -> data['Promotion']['id'])) {
 			$this -> id = $this -> data['Promotion']['id'];

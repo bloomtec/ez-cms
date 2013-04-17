@@ -13,3 +13,5 @@
 .DS_Store
 /tags
 .project
+/.idea
+/.idea/*

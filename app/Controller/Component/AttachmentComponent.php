@@ -36,7 +36,7 @@ class AttachmentComponent extends Component {
 	 * @param $controller object
 	 * @param $config array
 	 */
-	function initialize(&$controller) {
+	function initialize(Controller $controller) {
 		$config = $this -> config;
 		$this -> controller = $controller;
 		$model_prefix = Inflector::tableize($controller -> modelClass);

@@ -139,7 +139,7 @@ class Product extends AppModel {
 		),
 	);
 	
-	public function beforeSave() {
+	public function beforeSave($options = array()) {
 		if(isset($this -> data['Product']['tax_base']) && !empty($this -> data['Product']['tax_base'])) {
 			// Ajustes de la base del IVA
 			$tax_base = $this -> data['Product']['tax_base'];
