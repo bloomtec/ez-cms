@@ -5,14 +5,14 @@ set :export, :remote_cache
 set :keep_releases, 5
 set :cakephp_app_path, "app"
 set :cakephp_core_path, "cake"
-#default_run_options[:pty] = true # Para pedir la contraseña de la llave publica de github via consola, sino sale error de llave publica.
+default_run_options[:pty] = true # Para pedir la contraseña de la llave publica de github via consola, sino sale error de llave publica.
 
 # DEPLOYMENT DIRECTORY STRUCTURE
 set :deploy_to, "/home/prices10/public_html"
 
 # USER & PASSWORD
-set :user, 'prices10'
-set :password, '4ALLmR2N4XJR'
+# set :user, 'prices10'
+# set :password, '4ALLmR2N4XJR'
 
 # ROLES
 role :app, "priceshoes.com.co"
