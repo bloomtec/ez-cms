@@ -11,8 +11,8 @@ default_run_options[:pty] = true # Para pedir la contraseña de la llave publica
 set :deploy_to, "/home/prices10/public_html"
 
 # USER & PASSWORD
-# set :user, 'prices10'
-# set :password, '4ALLmR2N4XJR'
+set :user, 'embalao'
+set :password, 'rr40r900343'
 
 # ROLES
 role :app, "priceshoes.com.co"
