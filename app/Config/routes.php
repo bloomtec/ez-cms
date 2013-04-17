@@ -27,7 +27,8 @@
  */
 Router::connect('/admin', array('controller' => 'users', 'action' => 'login', 'plugin' => 'UserControl', 'admin' => true));
 //Router::connect('/', array('controller' => 'options', 'action' => 'construccion','plugin'=>'Ez'));
-Router::connect('/', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 1));
+//Router::connect('/', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 1));
+Router::connect('/', array('controller' => 'pages', 'action' => 'expectativa', 'plugin' => false, 1));
 Router::connect('/registro', array('controller' => 'users', 'action' => 'register', 'plugin' => 'UserControl'));
 Router::connect('/carrito', array('controller' => 'pages', 'action' => 'carrito', 'plugin' => false));
 Router::connect('/tienda-virtual', array('controller' => 'categories', 'action' => 'index', 'plugin' => false));

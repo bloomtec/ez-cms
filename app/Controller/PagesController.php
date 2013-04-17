@@ -33,7 +33,7 @@ class PagesController extends AppController {
 
 	public function beforeFilter() {
 		parent::beforeFilter();
-		$this -> Auth -> allow('email', 'display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos','tablaFavoritos','resumenFavoritos');
+		$this -> Auth -> allow('email', 'display', 'home', 'construccion', 'view', 'contacto','carrito','tablaCarrito','registro','resumenCarrito','favoritos','tablaFavoritos','resumenFavoritos', 'expectativa');
 	}
 	
 	public function email() {
@@ -273,6 +273,15 @@ class PagesController extends AppController {
 		}
 		$this -> Session -> setFlash(__('Page was not deleted'));
 		$this -> redirect(array('action' => 'index'));
+	}
+
+	/**
+	 * expectativa method
+	 *
+	 * @return void
+	 */
+	public function expectativa() {
+		$this->layout=false;
 	}
 
 }
