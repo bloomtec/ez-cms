@@ -1,4 +1,5 @@
 # INITIAL CONFIGURATION
+set :port, 2222
 set :application, "priceshoes.com.co"
 set :export, :remote_cache
 set :keep_releases, 5
