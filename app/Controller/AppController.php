@@ -38,6 +38,7 @@ class AppController extends Controller {
 	public $components = array('Auth', 'Acl', 'Session', 'Cookie');
 
 	public function beforeFilter() {
+
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout = "Ez.default";
 		}
