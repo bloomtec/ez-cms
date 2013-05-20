@@ -269,5 +269,17 @@ class ImagesController extends AppController {
 			));
 		}
 	}
+    public function admin_deleteWysiwygImage(){
+        $this->autoRender = false;
+        Configure::write("debug", 0);
+        $filename=$filename=$_POST["path"];;
+        if (is_file(WWW_ROOT.$filename)) {
+            unlink(WWW_ROOT.$filename);
+            echo true;
+        }else{
+            echo false;
+        }
+        exit(0);
+    }
 
 }
