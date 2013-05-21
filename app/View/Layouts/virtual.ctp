@@ -21,7 +21,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 <head>	
 		<?php echo $this->Html->charset(); ?>
-		
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Expires" CONTENT="-1">
 		<title>
 			<?php __('Priceshoes Virtual'); ?>
 			<?php echo $title_for_layout; ?>

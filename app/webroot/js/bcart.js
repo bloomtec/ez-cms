@@ -12,12 +12,14 @@ $(function() {
 		$form = $that.parent().parent();
 		BJS.JSON($that.attr('href') + $form.find('input.id').val() + "/" + $form.find('input.color_id').val() + "/" + $form.find('select.product_size_id option:selected').val() + "/" + $form.find('select.quantity').val(), {}, function(response) {
 			if (response.success) {
-				$('.resumen-carrito').load('/pages/resumenCarrito');
+                var d = new Date();
+                var n = d.getMilliseconds();
+                $('.resumen-carrito').load('/pages/resumenCarrito?_t='+n);
 				$('.to-cart.open').removeClass('open');
 				$('.add-cart').show();
 				setTimeout(function() {
 					$('.add-cart').hide();
-				}, 6000);
+				}, 10000);
 			} else {
 				alert(response.message);
 			}
@@ -36,12 +38,15 @@ $(function() {
 		$form = $that.parent().parent();
 		BJS.JSON($that.attr('href') + $form.find('input.id').val() + "/" + $form.find('input.color_id').val() + "/" + $form.find('input.product_size_id').val() + "/" + $form.find('input.quantity').val(), {}, function(response) {
 			if (response.success) {
-				$('.resumen-carrito').load('/pages/resumenCarrito');
+                var d = new Date();
+                var n = d.getMilliseconds();
+                $('.resumen-carrito').load('/pages/resumenCarrito?_t='+n);
+
 				$('.to-cart-favoritos.open').removeClass('open');
 				$('.add-cart').show();
 				setTimeout(function() {
 					$('.add-cart').hide();
-				}, 6000);
+				}, 10000);
 			} else {
 				alert(response.message);
 			}
@@ -54,7 +59,9 @@ $(function() {
 		$that = $(this);
 		BJS.JSON($that.attr('href'), {}, function(response) {
 			if (response.success) {
-				$('.resumen-carrito').load('/pages/resumenCarrito');
+                var d = new Date();
+                var n = d.getMilliseconds();
+                $('.resumen-carrito').load('/pages/resumenCarrito?_t='+n);
 			} else {
 				alert('No se pudo actualizar el carrito, ¡intenta nuevamente!');
 			}
@@ -123,7 +130,9 @@ $(function() {
 		$that = $(this);
 		BJS.JSON($that.attr('href'), {}, function(response) {
 			if (response.success) {
-				$('.resumen-favoritos .content').load('/pages/resumenFavoritos');
+                var d = new Date();
+                var n = d.getMilliseconds();
+                $('.resumen-carrito').load('/pages/resumenCarrito?_t='+n);
 			} else {
 				alert(response.message);
 			}

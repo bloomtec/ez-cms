@@ -22,6 +22,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
 <head>
 	<?php echo $this->Html->charset(); ?>
+    <meta HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Expires" CONTENT="-1">
 	<meta property="og:title" content="<?php echo $product['Product']['name'] ?>" />
 	<meta property="og:type" content="company" />
 	<meta property="og:url" content="http://<?php echo Configure::read('site_domain').$this -> Html -> url() ?>" />

@@ -22,7 +22,10 @@
 </div>
 <script type="text/javascript">
 	$(function(){
-		$('.tabla-carrito .content').load('/pages/tablaCarrito',function(){
+        var d = new Date();
+        var n = d.getMilliseconds();
+		$('.tabla-carrito .content').load('/pages/tablaCarrito?_t='+n,function(){
+
 			rel=$(".direcciones li.selected").attr('rel');
 			updateAddressForm(rel);
 			$('#OrderTablaCarritoForm').validator({ lang: 'es', position:"bottom left"});
