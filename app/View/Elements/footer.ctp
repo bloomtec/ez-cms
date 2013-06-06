@@ -19,22 +19,18 @@
 						<li>
 							<a href="http://www.facebook.com/priceshoes.co" target="_blank"><img alt="facebook" src="/img/facebook2.png" ></a>			</li>
 						<li>
-							<a href="https://twitter.com/PriceShoesColom" target="_blank"><img alt="twitter" src="/img/twitter2.png"></a>			</li>
+							<a href="https://twitter.com/PriceShoesCO" target="_blank"><img alt="twitter" src="/img/twitter2.png"></a>			</li>
 						<?php /*
 						<li>
 							<a href="http://www.linkedin.com/" target="_blank"><img alt="linkedin" src="/img/linkedin.png"></a>			
 						</li>
 						*/?>
-						<li>
-							<h1>Síguenos!!</h1>
-						</li>
+						<h1>Síguenos!!</h1>
+						<div style="clear: both;"></div>
 					</ul>
 				</div>
 			</div>
-			<div class="paginas-inferior">
-				<h3>Priceshoes On-line</h3>
-				<?php echo $this -> element('menu-paginas-inferior'); ?>
-			</div>
+
 			<div class="menu-fijo">
 				<div class="cuenta">
 					<h3>Mi Cuenta</h3>
@@ -52,15 +48,20 @@
 					</ul>
 				</div>
 				<div class="favoritos">
-					<h3>Favoritos</h3>
+					<h3>Corporativo</h3>
 					<p>
-						Es fácil asignar etiquetas a tus favoritos.
+                        <a href="http://webmail.priceshoes.com.co" target="_blank"> Correo empresarial </a>
 					</p>
 				</div>
+				<div class="paginas-inferior">
+                    <h3>Priceshoes On-line</h3>
+                    <?php echo $this -> element('menu-paginas-inferior'); ?>
+                </div>
 				<div style='clear:both;'></div>
 				<div class="formas-de-pago">
 					<?php echo $this -> Html -> image('tarjetas.png'); ?>
 				</div>
+                
 			</div>
 
 			<div style='clear:both;'></div>
