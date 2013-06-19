@@ -1,15 +1,15 @@
 <div class="second_nav">
 <ul id="footer_links">
 	<li>
-		<?php echo $this -> Html->link("Acerca de",array("controller"=>"pages","action"=>"view","acerca-de"))
+		<?php echo $this -> Html->link("Acerca de","/acerca-de")
 		?>
 	</li>
 	<li>
-		<?php echo $this -> Html->link("Nuestras Tiendas",array("controller"=>"pages","action"=>"view","nuestras-tiendas"))
+		<?php echo $this -> Html->link("Nuestras Tiendas","/nuestras-tiendas")
 		?>
 	</li>
 	<li>
-		<?php echo $this -> Html->link("Tendencias",array("controller"=>"pages","action"=>"view","tendencias"))
+		<?php echo $this -> Html->link("Tendencias","/tendencias")
 		?>
 	</li>
 	<li>
