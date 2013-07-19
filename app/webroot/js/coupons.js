@@ -1,5 +1,5 @@
 $(function() {
-	
+
 	/**
 	 * Asignar cupon automaticamente cuando este sea de una promoción del sitio como tal.
 	 */
@@ -9,15 +9,14 @@ $(function() {
 			verifyCoupon(couponCode);
 		}
 	});
-	
 	/**
 	 * Solicitar obtener la información del cupon digitado
 	 */
 	$('#SetCoupon').click(function() {
 		var couponCode = $('#CouponCode').val();
-		verifyCoupon(couponCode);
+        verifyCoupon(couponCode);
 	});
-	
+
 	/**
 	 * Obtener la información de un cupon especifico
 	 */
@@ -29,11 +28,11 @@ $(function() {
 				if(couponInfo) {
 					// Asignar el cupon al formulario
 					$('#OrderCouponCode').val(couponCode);
-					
+
 					// Obtener el carrito y procesar la información
 					BJS.JSON('/b_cart/shopping_carts/get/1', {}, function(shoppingCartData) {
 						var subTotal = 0;
-						
+
 						/**
 						 * Proceso para cuando solo sea % de descuento en la compra
 						 */
@@ -92,7 +91,7 @@ $(function() {
 											// Encontrar el valor de descuento y asignar subTotal
 											itemPrice = parseInt(shoppingCartData.CartItem[pos].price);
 											discount = couponInfo.CouponBatch.discount;
-											priceWithDiscount = itemPrice * discount 
+											priceWithDiscount = itemPrice * discount
 											subTotal += priceWithDiscount;
 											shoppingCartData.CartItem[pos].displayPrice += priceWithDiscount;
 										}
@@ -130,7 +129,7 @@ $(function() {
 							$('#TotalCarrito').css('text-decoration', '');
 						}
 					});
-					
+
 				} else {
 					// Indicar error en el código del cupon y limpiar campos
 					alert('El código de cupon ' + couponCode + ' no parece ser válido. Por favor, intente de nuevo.');
@@ -146,7 +145,7 @@ $(function() {
 			});
 		}
 	}
-	
+
 	function getDiscountXPercentOfTotal(itemID, discountPercentage) {
 		var quantity = $('#CartItem-' + itemID + 'Quantity').val();
 		var price = $('#CartItem-' + itemID + 'Price').attr('rel');
@@ -168,7 +167,7 @@ $(function() {
 		}
 		return '$ ' + output;
 	}
-	
+
 	function priceFormat(str) {
 		var amount = new String(str);
 		amount = amount.split("").reverse();
@@ -180,5 +179,4 @@ $(function() {
 		}
 		return output;
 	}
-
 });

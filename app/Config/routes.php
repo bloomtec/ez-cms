@@ -32,7 +32,11 @@ Router::connect('/', array('controller' => 'pages', 'action' => 'view', 'plugin'
 Router::connect('/registro', array('controller' => 'users', 'action' => 'register', 'plugin' => 'UserControl'));
 Router::connect('/carrito', array('controller' => 'pages', 'action' => 'carrito', 'plugin' => false));
 Router::connect('/tienda-virtual', array('controller' => 'categories', 'action' => 'index', 'plugin' => false));
+Router::connect('/franquicias', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 23));
 Router::connect('/ayuda', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 24));
+Router::connect('/acerca-de', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 20));
+Router::connect('/nuestras-tiendas', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 21));
+Router::connect('/tendencias', array('controller' => 'pages', 'action' => 'view', 'plugin' => false, 22));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
