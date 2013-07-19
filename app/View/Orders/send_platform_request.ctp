@@ -17,7 +17,7 @@
 		<input name="ExtraData1" type="hidden" id="ExtraData1" value="<?php echo $user_id; ?>" />
 		<input name="ExtraData2" type="hidden" id="ExtraData2" value="<?php echo $order_id; ?>" />
 		<input name="ExtraData3" type="hidden" id="ExtraData3" value="<?php echo $user_address_id; ?>" />
-		<input name="Test" type="hidden" id="Test" value="1" />
+		<input name="Test" type="hidden" id="Test" value="0" />
 		<input name="Submit" type="submit" class="bot" id="button" value="Realizar Pago seguro"/>
 	</form>
 	<script type="text/javascript">

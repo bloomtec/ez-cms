@@ -579,7 +579,8 @@ margin-left: 10px;
 .captcha{
 	float:left;
 	margin:20px 0 0 33px;
-
+    height: 129px;
+    overflow: hidden;
 }
 .recaptchatable #recaptcha_response_field {
 	height:20px;
