@@ -42,11 +42,14 @@ class AppController extends Controller {
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> layout = "Ez.default";
 		}
+
 		$this -> authConfig();
 		$this -> cookieConfig();
 		$this -> setIdentifier();
+
 		// Verificación ACL
-		//$this -> aclVerification();
+		// $this -> aclVerification();
+
 		//debug($this -> getIdentifier());
 	}
 
@@ -57,7 +60,7 @@ class AppController extends Controller {
 		if (isset($this -> params["prefix"]) && $this -> params["prefix"] == "admin") {
 			$this -> Auth -> loginAction = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => true);
 			$this -> Auth -> logoutRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => true);
-			$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'index', 'admin' => true);
+			/*$this -> Auth -> loginRedirect = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'index', 'admin' => true);*/
 		} else {
 			$this -> Auth -> loginAction = array('plugin' => 'user_control', 'controller' => 'users', 'action' => 'login', 'admin' => false);
 			$this -> Auth -> logoutRedirect = '/';
