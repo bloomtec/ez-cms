@@ -25,7 +25,7 @@ p{
 	line-height: 20px;
 }
 body{
-	background: #fff;
+	background: url(../img/fondo-gris.png)#fff;
 	font-family:"HelveticaNeueLT LightExt",Helvetica,sans-serif;
 	color: rgb(100,100,100);
 	font-weight: normal;
@@ -59,6 +59,11 @@ a.rosa:hover{
 }
 
 /*ESTILOS DEL LAYOUT*/
+#page{
+    width: 960px;
+    margin: 0 auto;
+    background: white;
+}
 #container, 
 #header, 
 #content{
@@ -223,7 +228,7 @@ a.rosa:hover{
 	min-height:100px;
 }
 #footer h3{
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	min-height: 34px;
 	font-weight: bold;
 }
@@ -237,7 +242,9 @@ a.rosa:hover{
 	width:960px;
 	margin:0 auto;
 }
-
+#footer .sociales {
+    float:left;
+}
 #footer .sociales ul li {
     display: block;
     float: left;
@@ -255,7 +262,7 @@ a.rosa:hover{
     width: 24px;
 }
 #footer #info-wrapper{
-	padding-bottom:20px;
+
 }
 #footer .registrar,
 #footer .paginas-inferior,
@@ -279,14 +286,14 @@ a.rosa:hover{
 	width: 292px;
 }
 #footer .paginas-inferior{
-	width: 24%;
-	margin-right: 1%;
+	width: 36%;
+
 }
 #footer .menu-fijo{
 	width: 52%;
 }
 #footer .cuenta{
-	width: 31%;
+	width: 25%;
 	margin-right: 2%;
 }
 #footer #info-wrapper li{
@@ -299,9 +306,9 @@ a.rosa:hover{
 	color: rgb(100,100,100);
 }
 #footer .favoritos{
-	width: 37%;
+	width: 34%;
 	font-size: 13px;
-	margin-right: 5%;
+	margin-right: 3%;
 	float: left;
 }
 #footer .input{
@@ -334,7 +341,7 @@ a.rosa:hover{
 	padding-left: 21px;
 	padding-right: 20px;
 	font-size:13px;
-	border-left: 4px solid rgb(222,55,134);
+	border-left: 2px solid white;
 }
 #footer_links li:first-child{
 	border: none;
@@ -344,9 +351,11 @@ a.rosa:hover{
 	color: rgb(222,55,134);
 	text-align: center;
 	padding:20px 0;
+    color:white;
 }
 #footer .formas-de-pago{
-	margin-top:20px;
+
+    float: left;
 }
 #left-col, 
 #right-col{
@@ -409,8 +418,10 @@ div#contacto {
 }
 
 input{
-	border: medium none;
+
 }
+
+
 .form .input,
 .form .email,
 .form .text,
@@ -433,6 +444,7 @@ input{
 	margin-bottom: 10px;
 	height: 30px;
 	padding: 2px 5px;
+    border: 1px solid #9a9a9a;
 }
 .form textarea{
 	height:100px;
@@ -455,11 +467,20 @@ input.invalid{
 .error p{
 	display:inline;
 }
+input#CouponCode{
+    border: 1px solid #9a9a9a;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 6px;
+    float:left;
+    width: 80px;
+}
 .submit input, .button, #SetCoupon{
 	font-family:"HelveticaNeueLT LightExt",Helvetica,sans-serif;
 	font-weight: normal;
 	font-size: 12px;
-	width: 80px;
+	width: 87px;
 	height: 28px;
 	text-align:center;
 	margin-right: 5px;
@@ -481,6 +502,11 @@ input.invalid{
 	
 	-webkit-box-shadow:  1px 1px 3px 1px rgba(0, 0, 0, 0.2);
 	box-shadow:  1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+}
+#SetCoupon{
+    width:55px;
+    padding: 3px;
+    float:right;
 }
 #footer .submit input{
     color:white;
@@ -522,6 +548,11 @@ input.invalid{
 .cuadro-formularios .submit,
 .cuadro-formularios .button{
 	float:right;
+}
+.cuadro-formularios a.button{
+    height: 28px;
+    padding: 0;
+    line-height: 28px;
 }
 .form #contacto  .input{
 	float:left;
@@ -617,8 +648,10 @@ margin-left: 10px;
 	margin-left:40px;
 }
 .captcha{
-	float:left;
-	margin:20px 0 0 33px;
+    float: left;
+    margin: 20px 0 0 33px;
+    height: 130px;
+    overflow: hidden;
 
 }
 .recaptchatable #recaptcha_response_field {
@@ -976,12 +1009,13 @@ a.boton-favoritos {
 	padding-left: 37px;
 }
 a.boton-carrito {
-	background: url("../img/bcar.png") no-repeat;
+	background: url("../img/Carrito-02.png") no-repeat;
 	display: block;
 	float: left;
-	height: 32px;
-	line-height: 30px;
-	padding-left: 37px;
+	height: 42px;
+	line-height: 42px;
+    width: 184px;
+
 }
 a.boton-facebook {
 	background: url("../img/bface.png") no-repeat;
@@ -1405,7 +1439,7 @@ table.tablaCarrito h3{
 	color: #8a8888;
 }
 .second_nav{
-	background: #434242;
+	background: #FF0086;
 	padding-top: 15px;
 }
 #footer .second_nav a{

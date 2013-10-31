@@ -90,7 +90,7 @@
 			<ul class="botones-caracteristicas">
 				<?php //if($session->read("Auth.User.id")):?>			
 				<li class="to-cart">
-					<?php echo $this->Html->link("Añadir al carrito","#",array('class'=>'boton-carrito show-cart-options')); ?>
+					<?php echo $this->Html->link(" ","#",array('class'=>'boton-carrito show-cart-options')); ?>
 					<?php echo $this -> Form->create('bcart');?>
 					<?php echo $this -> Form -> hidden('product_id-'.$product['Product']['id'],array('class'=>'id','id'=>'product_id','value'=>$product['Product']['id']))?>
 					<?php echo $this -> Form -> hidden('color_id-'.$product['Product']['id'],array('class'=>'color_id','value'=>$this -> params['pass'][1]))?>

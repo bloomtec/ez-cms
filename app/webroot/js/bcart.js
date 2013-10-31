@@ -244,7 +244,7 @@ $(function() {
 			that.last_height = parseFloat($(".imagen-container img").height());
 			that.last_top = parseFloat($(".imagen-container img").css("top"));
 			that.last_left = parseFloat($(".imagen-container img").css("left"));
-		},
+		}
 	};
 
 	galeria.init();

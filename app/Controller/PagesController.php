@@ -173,7 +173,7 @@ class PagesController extends AppController {
 			App::uses('CakeEmail', 'Network/Email');
 			$email = new CakeEmail($gmail);
 			$email -> from(array($email_address => $site_name));
-			$email -> to($email_address);
+			$email -> to('servicioalcliente@priceshoes.com.co');
 			$email -> subject('Contacto :: ' . $site_name . ' :: ' . $this -> request -> data['Page']['nombre_contacto']);
 			$email -> send('' . '
 				' . 'Nombre: ' . $this -> request -> data['Page']['nombre_contacto'] . '

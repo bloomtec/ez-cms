@@ -48,9 +48,12 @@
 			<?php if($menu_item['MenuItem']['id'] < 20): ?>
 			<li>
 				<?php if($menu_item['MenuItem']['link'] != 'tienda-virtual') : ?>
-
-                    <?php echo $this -> Html ->link($menu_item['MenuItem']['name'],array("controller"=>'pages','action'=>'view',$menu_item['MenuItem']['link']));?>
-				<?php endif; ?>
+                    <?php if($menu_item['MenuItem']['link'] != 'contacto') : ?>
+                        <?php echo $this -> Html ->link($menu_item['MenuItem']['name'],array("controller"=>'pages','action'=>'view',$menu_item['MenuItem']['link']));?>
+				    <?php else: ?>
+                        <?php echo $this -> Html ->link($menu_item['MenuItem']['name'],"/pages/contacto");?>
+                     <?php endif;?>
+                 <?php endif; ?>
 				<?php if($menu_item['MenuItem']['link'] == 'tienda-virtual') : ?>
 					<a  href="/tienda-virtual"><?php echo $menu_item['MenuItem']['name']; ?></a>
 					<?php echo $this -> element('menu-categorias',array('menu_item'=>$menu_item)); ?>

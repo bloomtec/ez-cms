@@ -80,8 +80,8 @@
 			<th colspan="2"style="background: none;">
 				
 			</th>
-			<th colspan="1"style="padding-right: 10px; text-align: right; background: none;">
-				Cupon
+			<th colspan="1"style="padding-right: 10px; text-align: right; background: none; vertical-align: middle">
+				<span> Cupon </span>
 			</th>
 			<th colspan="1"style="text-align:center; min-width: 180px;">
 				<input id="CouponCode" type="text" style="text-align: center; width: 100px; float: left;" />
@@ -89,15 +89,16 @@
 			</th>
 			<th id="CouponDiscount" style="text-align:center;"></th>
 		</tr>
-		<tr class="total">
+		<tr class="total" >
 			<th colspan="2"style="background: none;">
 				
 			</th>
-			<th colspan="1"style="padding-right: 10px; text-align: right; background: none;">
-				Total
-			</th>
+
 			<th colspan="1"style="text-align:center; min-width: 180px;"></th>
-			<th id="TotalCarrito" rel="<?php echo $subTotal; ?>" style="text-align:center;">
+            <th colspan="1"style="padding-right: 10px; text-align: right; background: none; vertical-align: bottom; height: 30px;">
+                Total:
+            </th>
+			<th id="TotalCarrito" rel="<?php echo $subTotal; ?>" style="text-align:center; vertical-align: bottom; height: 30px;"">
 				<?php if (isset($subTotal)) echo "$ ".number_format($subTotal + $shipment_cost, 0, ' ', '.'); ?>
 			</th>
 		</tr>
