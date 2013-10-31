@@ -12,6 +12,7 @@
 <div id="right-col" class='black-wrapper'>
 	<?php echo $page['Page']['content'];?>
 </div>
+
 <?php endif; */?>
 
 
@@ -29,4 +30,18 @@
     <div id="right-col" class='black-wrapper'>
         <?php echo $page['Page']['content'];?>
     </div>
+<?php /*
+<script type="text/javascript">
+	$(function() {
+		if($.browser.msie)
+			alert(
+				'Estas usando Internet explorer ' + $.browser.version
+					+ "\nPara garantizar la correcta funcionalidad del sitio"
+					+ "\nutiliza la última versión de Chrome o Firefox"
+					+ "\n<< Versiones de Internet Explorer menores a la 9 contendrán errores >>"
+			);
+	});
+</script>
+  */?>
+
 <?php endif;?>
