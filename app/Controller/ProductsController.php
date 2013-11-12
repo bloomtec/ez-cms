@@ -378,11 +378,7 @@ class ProductsController extends AppController {
 	 * @param string $id
 	 * @return void
 	 */
-	/**
 	public function admin_delete($id = null) {
-		if (!$this -> request -> is('post')) {
-			throw new MethodNotAllowedException();
-		}
 		$this -> Product -> id = $id;
 		if (!$this -> Product -> exists()) {
 			throw new NotFoundException(__('Producto no válido'));
@@ -394,7 +390,6 @@ class ProductsController extends AppController {
 		$this -> Session -> setFlash(__('No se eliminó el producto'));
 		$this -> redirect(array('action' => 'index'));
 	}
-	 */
 
 	function uploadify_add() {
 		$this -> autoRender = false;

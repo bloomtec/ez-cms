@@ -94,7 +94,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('Ver'), array('action' => 'view', $product['Product']['id'])); ?>
 			<?php echo $this->Html->link(__('Modificar'), array('action' => 'edit', $product['Product']['id'])); ?>
-			<?php //echo $this->Form->postLink(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?>
+			<?php echo $this->Html->link(__('Eliminar'), array('action' => 'delete', $product['Product']['id']), null, __('¿Seguro desea eliminar %s?', $product['Product']['name'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
