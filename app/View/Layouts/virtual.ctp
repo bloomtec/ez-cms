@@ -39,6 +39,9 @@
 			//echo $this->Html->script("https://getfirebug.com/firebug-lite.js");
 			echo $scripts_for_layout;
 		?>
+    <!--[if IE]>
+    <link rel="stylesheet" type="text/css" href="/css/ie.css">
+    <![endif]-->
 		
 	</head>
 	<body>

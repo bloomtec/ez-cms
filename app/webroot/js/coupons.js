@@ -13,6 +13,7 @@ $(function() {
 	 * Solicitar obtener la información del cupon digitado
 	 */
 	$('#SetCoupon').click(function() {
+      //  alert("hola");
 		var couponCode = $('#CouponCode').val();
         verifyCoupon(couponCode);
 	});
@@ -39,7 +40,7 @@ $(function() {
 						if (couponInfo.CouponBatch.coupon_type_id == 3) {
 							$.each($('.cart-item'), function(i, val) {
 								subTotal += getDiscountXPercentOfTotal($(val).attr('rel'), couponInfo.CouponBatch.discount);
-							});
+							})
 						} else {
 							/**
 							 * Proceso para cuando se es pague uno lleve 2 o paque el 2do a un % de descuento
@@ -110,9 +111,11 @@ $(function() {
 								}
 							});
 						}
+
 						$.each(shoppingCartData.CartItem, function(i, item) {
 							priceBeforeCoupon = parseInt(priceFormat($('#CartItem-' + item.id + 'Total').text()));
-							priceAfterCoupon = item.displayPrice;
+							priceAfterCoupon = parseInt(item.displayPrice);
+
 							if(priceBeforeCoupon > priceAfterCoupon) {
 								$('#CartItem-' + item.id + 'Total').css('text-decoration', 'line-through');
 								$('#CartItem-' + item.id + 'Discount').text(numberFormat(priceAfterCoupon));

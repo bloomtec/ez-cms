@@ -14,21 +14,7 @@
 				<p>
 					Al registrar mi dirección de correo electrónico, certifico que la información que proporciono es correcta y que soy mayor de edad.
 				</p>
-				<div class="sociales">
-					<ul>
-						<li>
-							<a href="http://www.facebook.com/priceshoes.co" target="_blank"><img alt="facebook" src="/img/facebook2.png" ></a>			</li>
-						<li>
-							<a href="https://twitter.com/PriceShoesCO" target="_blank"><img alt="twitter" src="/img/twitter2.png"></a>			</li>
-						<?php /*
-						<li>
-							<a href="http://www.linkedin.com/" target="_blank"><img alt="linkedin" src="/img/linkedin.png"></a>			
-						</li>
-						*/?>
-						<h1>Síguenos!!</h1>
-						<div style="clear: both;"></div>
-					</ul>
-				</div>
+
 			</div>
 
 			<div class="menu-fijo">
@@ -48,20 +34,48 @@
 					</ul>
 				</div>
 				<div class="favoritos">
-					<h3>Corporativo</h3>
-					<p>
-                        <a href="http://webmail.priceshoes.com.co" target="_blank"> Correo empresarial </a>
-					</p>
+					<h3>Atención al cliente</h3>
+                    <ul>
+                        <li>
+                            <a href="/pages/contacto">Contacto</a>
+                        </li>
+
+                        <li>
+                            <a href="/pages/view/29">Quejas y Reclamos </a>
+                        </li>
+
+                        <li>
+                            <a href="/pages/view/27">Políticas de Devolución, Cambio o Garantía</a>
+                        </li>
+
+
+                    </ul>
+
 				</div>
 				<div class="paginas-inferior">
                     <h3>Priceshoes On-line</h3>
                     <?php echo $this -> element('menu-paginas-inferior'); ?>
                 </div>
 				<div style='clear:both;'></div>
+                <div class="sociales">
+                    <ul>
+                        <li>
+                            <a href="http://www.facebook.com/priceshoes.co" target="_blank"><img alt="facebook" src="/img/facebook2.png" ></a>			</li>
+                        <li>
+                            <a href="https://twitter.com/PriceShoesCO" target="_blank"><img alt="twitter" src="/img/twitter2.png"></a>			</li>
+                        <?php /*
+						<li>
+							<a href="http://www.linkedin.com/" target="_blank"><img alt="linkedin" src="/img/linkedin.png"></a>
+						</li>
+						*/?>
+                        <h1>Síguenos!!</h1>
+                        <div style="clear: both;"></div>
+                    </ul>
+                </div>
 				<div class="formas-de-pago">
 					<?php echo $this -> Html -> image('tarjetas.png'); ?>
 				</div>
-                
+
 			</div>
 
 			<div style='clear:both;'></div>
